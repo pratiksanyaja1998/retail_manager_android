@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.Calendar;
 import java.util.List;
 
 import retailmanager.spyhunter272.in.retailmanager.room.RetailDatabase;
@@ -51,10 +52,16 @@ public class InvoiceViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<Invoice>> getInvoiceForList(int limit, int offset ){
+    public LiveData<List<Invoice>> getInvoiceForList(int limit, int offset, Calendar calendar){
+
+        int mYear, mMonth, mDay;
+
+        mYear = calendar.get(Calendar.YEAR);
+        mMonth = calendar.get(Calendar.MONTH);
+        mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-            return invoiceProductDao.getInvoiceForList(limit,offset);
+        return invoiceProductDao.getInvoiceForList(limit,offset,mDay,mMonth,mYear);
 
 
     }

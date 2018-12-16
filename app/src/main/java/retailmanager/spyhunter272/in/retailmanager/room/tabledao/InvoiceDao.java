@@ -20,8 +20,8 @@ public interface InvoiceDao {
     @Delete
     void delete(Invoice invoice);
 
-    @Query("select * from invoice LIMIT :limits OFFSET :offsets ")
-    LiveData<List<Invoice>> getInvoiceForList(int limits,int offsets);
+    @Query("select * from invoice where dd = :dd and yyyy = :yyyy and mm = :mm LIMIT :limits OFFSET :offsets ")
+    LiveData<List<Invoice>> getInvoiceForList(int limits,int offsets, int dd,int mm,int yyyy);
 
 //    @Query("select * from invoice where name like :filterNameHsn LIMIT :limits OFFSET :offsets ")
 //    LiveData<List<Invoice>> getInvoiceForList(int limits,int offsets,String filterNameHsn);

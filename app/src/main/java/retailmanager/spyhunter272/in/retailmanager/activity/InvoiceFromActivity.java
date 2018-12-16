@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retailmanager.spyhunter272.in.retailmanager.dialog.CustProPickerDialog;
@@ -48,7 +49,7 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         super.onCreate(savedInstanceState);
 
         ActivityInvoiceFromBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
-        invoiceFromHolder = new InvoiceFromHolder();
+        invoiceFromHolder = new InvoiceFromHolder(this);
         binding.setInvoiceFromHolder(invoiceFromHolder);
 
         listView  = findViewById(R.id.listproductholder);
@@ -96,13 +97,23 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
 
     private void printInvoice(){
 
+        Customer customer =invoiceFromHolder.getCustomerObj();
         Invoice invoice = new Invoice();
+        invoice.setName(customer.getName());
 
-//        InvoiceDao invoiceDao = RetailDatabase.getInstance(this).invoiceDao();
-//
-//        long id =  invoiceDao.insert(invoice);
-//
-//        Log.e("idis",id+"");
+        int mYear, mMonth, mDay;
+        Calendar calendar = invoiceFromHolder.getCalendar();
+        mYear = calendar.get(Calendar.YEAR);
+        mMonth = calendar.get(Calendar.MONTH);
+        mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        invoice.setDd(mDay);
+        invoice.setMm(mMonth);
+        invoice.setYyyy(mYear);
+        invoice.setTotal(invoiceFromHolder.getTotalWithDiscount());
+        invoice.setDiscount(invoiceFromHolder.getDiscount());
+        invoice.setTprchage(invoiceFromHolder.isTprcharge());
+        invoice.setDesciption(invoiceFromHolder.getDescription());
+        invoice.setPaymentMethrd(invoiceFromHolder.getPaymethordString());
 
         new InsertInvoiceBgWorker(RetailDatabase.getInstance(this),invoice,listAdapter.proLists).execute();
 

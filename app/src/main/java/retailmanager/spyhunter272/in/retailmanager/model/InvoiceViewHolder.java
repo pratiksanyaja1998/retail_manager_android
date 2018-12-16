@@ -20,10 +20,21 @@ public class InvoiceViewHolder extends BaseObservable {
     private int offset;
     private Context context;
     private boolean isNoData=false;
+    private Calendar myCalendar = Calendar.getInstance();
 
 
     public InvoiceViewHolder(Context context) {
         this.context = context;
+
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        date =  sdf.format(myCalendar.getTime());
+
+    }
+
+    public Calendar getMyCalendar() {
+        return myCalendar;
     }
 
     public boolean isNoData() {
@@ -52,7 +63,6 @@ public class InvoiceViewHolder extends BaseObservable {
         this.offset = offset;
     }
 
-    private Calendar myCalendar = Calendar.getInstance();
 
     public void onClick(View v){
 

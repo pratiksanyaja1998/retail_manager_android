@@ -1,6 +1,7 @@
 package retailmanager.spyhunter272.in.retailmanager.model;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.databinding.BaseObservable;
 
 import java.util.Calendar;
@@ -17,19 +18,26 @@ public class InvoiceFromHolder extends BaseObservable {
     private boolean tprcharge,isUpdateCustomer;
 
     private double totalInvoice,totalWithDiscount;
-    private double discount;
+    private float discount;
+    private Calendar calendar = Calendar.getInstance();
 
-    public InvoiceFromHolder(){
-        Calendar c = Calendar.getInstance();
+    private Context context;
 
-        int mYear, mMonth, mDay, mHour, mMinute;
+    public InvoiceFromHolder(Context context){
+        this.context = context;
 
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
+        int mYear, mMonth, mDay;
+
+        mYear = calendar.get(Calendar.YEAR);
+        mMonth = calendar.get(Calendar.MONTH);
+        mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
         dateForShow = mDay + "-" + mMonth+ "-"+mYear ;
 
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
     }
 
     public void setUpdateCustomer(boolean updateCustomer) {
@@ -57,7 +65,7 @@ public class InvoiceFromHolder extends BaseObservable {
         return totalInvoice;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(float discount) {
         this.discount = discount;
         this.totalInvoice = totalInvoice;
         this.totalWithDiscount = totalInvoice - ((discount*totalInvoice)/100);
@@ -65,7 +73,7 @@ public class InvoiceFromHolder extends BaseObservable {
 
     }
 
-    public double getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 
@@ -76,9 +84,15 @@ public class InvoiceFromHolder extends BaseObservable {
     }
 
 
-
     public int getPaymethord() {
         return paymethord;
+    }
+
+    public String getPaymethordString(){
+        String[] ptype=  context.getResources().getStringArray(R.array.ptype);
+
+        return ptype[paymethord];
+
     }
 
     public boolean isTprcharge() {

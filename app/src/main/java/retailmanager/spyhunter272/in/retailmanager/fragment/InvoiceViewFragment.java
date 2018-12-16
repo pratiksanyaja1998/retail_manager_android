@@ -29,6 +29,8 @@ import retailmanager.spyhunter272.in.retailmanager.viewmodel.InvoiceViewModel;
 public class InvoiceViewFragment extends Fragment implements InvoiceActivity.SearchViewDataChangeListner {
 
 
+    private static int INVOICE_SHOW_LIMIT =10;
+
     public InvoiceViewFragment() {
 
     }
@@ -64,7 +66,7 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
 
     private void getInvoiceData(){
 
-        invoiceViewModel.getInvoiceForList(10,invoiceViewHolder.getOffset()).observe(this, new Observer<List<Invoice>>() {
+        invoiceViewModel.getInvoiceForList(INVOICE_SHOW_LIMIT,invoiceViewHolder.getOffset(),invoiceViewHolder.getMyCalendar()).observe(this, new Observer<List<Invoice>>() {
             @Override
             public void onChanged(@Nullable List<Invoice> invoices) {
                 if(invoices.size()<=0){
@@ -75,6 +77,16 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
                 }
             }
         });
+
+    }
+
+    private void deleteInvoice(Invoice invoice){
+
+        invoiceViewModel.delete(invoice);
+
+    }
+
+    private void showInvoice(Invoice invoice){
 
     }
 
@@ -92,6 +104,9 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
     public void searchCancel() {
 
     }
+
+
+
 
     class InvoiceListAdepter extends RecyclerView.Adapter<InvoiceListAdepter.InvoiceViewHolder>{
 
@@ -115,6 +130,19 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
         public void onBindViewHolder(@NonNull InvoiceViewHolder invoiceViewHolder, int i) {
 
             invoiceViewHolder.binding.setInvoiceHolder(invoiceList.get(i));
+            invoiceViewHolder.binding.ibtnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteInvoice(invoiceList.get(i));
+                }
+            });
+
+            invoiceViewHolder.binding.ibtnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showInvoice(invoiceList.get(i));
+                }
+            });
 
         }
 
