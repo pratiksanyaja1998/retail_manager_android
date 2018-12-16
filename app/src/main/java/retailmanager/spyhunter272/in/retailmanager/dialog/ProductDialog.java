@@ -1,5 +1,6 @@
 package retailmanager.spyhunter272.in.retailmanager.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -36,6 +37,7 @@ import retailmanager.spyhunter272.in.retailmanager.databinding.DialogProductBind
 //https://stackoverflow.com/questions/47718872/rowid-after-insert-in-room?rq=1
 //https://stackoverflow.com/questions/44364240/android-room-get-the-id-of-new-inserted-row-with-auto-generate
 
+@SuppressLint("ValidFragment")
 public class ProductDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private static int BARCODE_ACT_REQ_CODE = 55;
@@ -50,21 +52,44 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
     private ProductCategoryViewModel productCategoryViewModel;
 
     private ProdCateSpinnerBaseAdepter prodCateSpinnerBaseAdepter;
-    private boolean isUpdate = false;
+    private boolean isUpdate ;
     private SharedPreferences myPreference;
     private   ProductDialogHolder productDialogHolder;
+
+
+    public ProductDialog(Product product, boolean isUpdate) {
+        this.product = product;
+        this.isUpdate = isUpdate;
+
+        if(product.getGst()==0)
+            product.setGst(0);
+
+        else if(product.getGst()==5)
+            product.setGst(1);
+
+        else if(product.getGst()==12)
+            product.setGst(2);
+
+        else if(product.getGst()==18)
+            product.setGst(3);
+
+        else if(product.getGst()==28)
+            product.setGst(4);
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DialogProductBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_product,container,false);
 
-        product = new Product("","",0,0,1,0,"",0);
         dialogCustomerBinding.setProduct(product);
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
         productDialogHolder = new ProductDialogHolder(myPreference.getBoolean("hsn",true),myPreference.getBoolean("bprice",true),
                 myPreference.getBoolean("barcode",true),myPreference.getBoolean("productGst",true) );
+        productDialogHolder.setUpdate(isUpdate);
         dialogCustomerBinding.setProductDialogHolder(productDialogHolder);
+
 
         return dialogCustomerBinding.getRoot();
     }
@@ -81,7 +106,6 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
         tvBarcode = dialog.findViewById(R.id.tv_product_barcode);
         tvBarcode.setOnClickListener(this::onClick);
 
-
         spProductCategory = dialog.findViewById(R.id.spinner_product_category);
         prodCateSpinnerBaseAdepter = new ProdCateSpinnerBaseAdepter();
         spProductCategory.setAdapter(prodCateSpinnerBaseAdepter);
@@ -91,53 +115,8 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
         getProductCategory();
 
-        Bundle bundle=getArguments();
-
-        if(bundle!=null){
-
-            Product productUpdateble = Product.setProductFromBundle(bundle);
-            product.setName(productUpdateble.getName());
-            product.setGst(productUpdateble.getGst());
-            product.setBarcode(productUpdateble.getBarcode());
-            product.setIn_stock_qty(productUpdateble.getIn_stock_qty());
-            product.setCategory(productUpdateble.getCategory());
-            product.setId(productUpdateble.getId());
-            product.setS_price(productUpdateble.getS_price());
-            product.setB_price(productUpdateble.getB_price());
-            product.setHsn(productUpdateble.getHsn());
-
-            productDialogHolder.setUpdate(true);
-
-            if(product.getGst()==0)
-                product.setGst(0);
-
-            else if(product.getGst()==5)
-                product.setGst(1);
-
-            else if(product.getGst()==12)
-                product.setGst(2);
-
-            else if(product.getGst()==18)
-                product.setGst(3);
-
-            else if(product.getGst()==28)
-                product.setGst(4);
-
-            product.notifyChange();
-
-        }else {
-
-            productDialogHolder.setUpdate(false);
-
-        }
-
-        productDialogHolder.notifyChange();
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
-    }
-
-    public void setNewProducts(boolean newCustomer) {
-        isNewProducts = newCustomer;
     }
 
     private void getProductCategory() {
@@ -218,11 +197,7 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
                 Log.e("selected added" , " cate "+product.getCategory()+" gst "+product.getGst());
 
 
-                if(isNewProducts && productsLisner!=null){
 
-                    productsLisner.lisnProductsFromDialog(product);
-
-                }else {
 
                     if (productDialogHolder.isUpdate() && product.checkValidation()) {
 
@@ -234,7 +209,6 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
                     }
 
-                }
 
                 dismiss();
 

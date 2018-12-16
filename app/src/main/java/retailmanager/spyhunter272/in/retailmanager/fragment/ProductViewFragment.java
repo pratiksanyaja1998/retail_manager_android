@@ -207,7 +207,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
         switch (v.getId()){
             case R.id.fbtn_add:
-                new ProductDialog().show(getFragmentManager(),null);
+                new ProductDialog(new Product(),false).show(getFragmentManager(),null);
                 break;
 
             case R.id.ib_next:
@@ -229,8 +229,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
     //    recylerview
     public void editProduct(Product product) {
-       ProductDialog productDialog =  new ProductDialog();
-        productDialog.setArguments(product.getBundle());
+       ProductDialog productDialog =  new ProductDialog(product,true);
         productDialog.show(getFragmentManager(),null);
     }
 

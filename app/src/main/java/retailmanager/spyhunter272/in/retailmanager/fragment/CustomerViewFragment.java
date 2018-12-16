@@ -36,7 +36,6 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
     private int offSet = 0;
 
     private RecyclerView recyclerView;
-    private CustomerDialog customerDialog;
     private RcCustomerAdepter rcCustomerAdepter = new RcCustomerAdepter();
     private ImageView linearEmtyCustomer;
     private ImageButton iBtnNext,iBtnPrev;
@@ -97,7 +96,6 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        customerDialog = new CustomerDialog();
 
         customerViewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
 
@@ -132,7 +130,7 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
 
     private void editCustomer(Customer customer){
 
-        customerDialog.setArguments(customer.getBundle());
+        CustomerDialog customerDialog = new CustomerDialog(customer,true);
         customerDialog.show(getFragmentManager(),null);
 
     }
@@ -170,9 +168,8 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
 
         switch (v.getId()){
             case R.id.fbtn_add:
-                customerDialog.setArguments(null);
+                CustomerDialog customerDialog =new CustomerDialog(new Customer(),false);
                 customerDialog.show(getFragmentManager(),null);
-
                 break;
 
             case R.id.ib_next:

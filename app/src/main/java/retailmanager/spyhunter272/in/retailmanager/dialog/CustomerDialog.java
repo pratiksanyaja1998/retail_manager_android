@@ -1,5 +1,6 @@
 package retailmanager.spyhunter272.in.retailmanager.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -31,11 +32,20 @@ import retailmanager.spyhunter272.in.retailmanager.viewmodel.CustomerViewModel;
 
 import retailmanager.spyhunter272.in.retailmanager.databinding.DialogCustomerBinding;
 
+@SuppressLint("ValidFragment")
 public class CustomerDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
     private CustomerViewModel customerViewModel;
     private Customer customer;
+
+    private boolean isUpdate = false;
+
+
+    public CustomerDialog(Customer customer, boolean isUpdate) {
+        this.customer = customer;
+        this.isUpdate = isUpdate;
+    }
 
     @Nullable
     @Override
@@ -43,7 +53,6 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
 
         DialogCustomerBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_customer,container,false);
 
-        customer = new Customer("","","","",new Address("","","",""),false,new Address("","","",""));
         dialogCustomerBinding.setCustomer(customer);
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -54,15 +63,6 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
     }
 
 
-    private boolean isUpdate = false;
-
-    private boolean isNewCustomer = false;
-
-
-    public void setNewCustomer(boolean newCustomer) {
-        isNewCustomer = newCustomer;
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -72,33 +72,9 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
         ArrayAdapter arrayAdapter =  new ArrayAdapter(getContext(), android.R.layout.simple_dropdown_item_1line,
                 getResources().getStringArray(R.array.state_name));
 
-//      init view
         view.findViewById(R.id.btn_dialog_close).setOnClickListener(this);
         view.findViewById(R.id.btn_dialog_ok).setOnClickListener(this);
-        view.findViewById(R.id.ibtn_pic_contact).setOnClickListener(this::onClick);
-
-
-        Bundle bundle=getArguments();
-
-        if(bundle!=null){
-
-            Customer customerUpdateble  = Customer.setCustomerFromBundle(bundle);
-            customer.setName(customerUpdateble.getName());
-            customer.setEmail(customerUpdateble.getEmail());
-            customer.setBilling_address(customerUpdateble.getBilling_address());
-            customer.setShipping_address(customerUpdateble.getShipping_address());
-            customer.setGstin(customerUpdateble.getGstin());
-            customer.setMobile(customerUpdateble.getMobile());
-            customer.setId(customerUpdateble.getId());
-            customer.setIs_same_b_s(customerUpdateble.isIs_same_b_s());
-
-            isUpdate = true;
-
-        }else {
-
-            isUpdate = false;
-
-        }
+        view.findViewById(R.id.ibtn_pic_contact).setOnClickListener(this);
 
         customerViewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
 
@@ -112,13 +88,6 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
 
             case R.id.btn_dialog_ok:
 
-                if(isNewCustomer && customerLisner!=null){
-
-                    customerLisner.lisnCustomerFromDialog(customer);
-                    dismiss();
-                    return;
-
-                }else {
 
                     if (isUpdate) {
 
@@ -130,7 +99,6 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
                         customerViewModel.insert(customer);
                     }
 
-                }
                 dismiss();
                 break;
 

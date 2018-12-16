@@ -13,18 +13,24 @@ import android.support.annotation.NonNull;
 
 import retailmanager.spyhunter272.in.retailmanager.room.table.Address;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
+import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
+import retailmanager.spyhunter272.in.retailmanager.room.table.InvoiceProduct;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Product;
 import retailmanager.spyhunter272.in.retailmanager.room.table.ProductCategory;
 import retailmanager.spyhunter272.in.retailmanager.room.tabledao.CustomerDao;
+import retailmanager.spyhunter272.in.retailmanager.room.tabledao.InvoiceDao;
+import retailmanager.spyhunter272.in.retailmanager.room.tabledao.InvoiceProductDao;
 import retailmanager.spyhunter272.in.retailmanager.room.tabledao.ProductCategoryDao;
 import retailmanager.spyhunter272.in.retailmanager.room.tabledao.ProductDao;
 
 @Database(entities = {
         Product.class,
         ProductCategory.class,
-        Customer.class
+        Customer.class,
+        Invoice.class,
+        InvoiceProduct.class
 },
-        version = 4, exportSchema = false)
+ version = 1, exportSchema = false)
 
 public abstract class RetailDatabase extends RoomDatabase {
 
@@ -33,6 +39,10 @@ public abstract class RetailDatabase extends RoomDatabase {
     public abstract ProductDao productDao();
 
     public abstract CustomerDao customerDao();
+
+    public abstract InvoiceDao invoiceDao();
+
+    public abstract InvoiceProductDao invoiceProductDao();
 
     public abstract ProductCategoryDao productCategoryDao();
 

@@ -16,14 +16,12 @@ import retailmanager.spyhunter272.in.retailmanager.room.tabledao.ProductDao;
 public class ProductViewModel extends AndroidViewModel {
 
     private ProductDao productDao;
-    private LiveData<List<Product>> allProduct;
 
     public ProductViewModel(@NonNull Application application) {
         super(application);
 
         RetailDatabase retailDatabase = RetailDatabase.getInstance(application);
         productDao = retailDatabase.productDao();
-        allProduct = productDao.getAllProducts();
 
     }
 
@@ -65,8 +63,6 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Product>> getProductsForList(int limit,int offset ,int category,String filterNameHsn){
-//        int[] data = new int[]{limit,offset};
-//        return new BGWorkerGetProduct().execute(data);
 
         if(!filterNameHsn.equals("")) {
             String temp = filterNameHsn;

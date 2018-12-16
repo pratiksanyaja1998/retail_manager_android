@@ -46,6 +46,11 @@ public class Product extends BaseObservable {
     @Ignore
     private double total;
 
+
+    public Product(){
+
+    }
+
     public Product(String name, String hsn, double b_price, double s_price, int in_stock_qty, int category, String barcode,int gst) {
         this.name = name;
         this.hsn = hsn;
