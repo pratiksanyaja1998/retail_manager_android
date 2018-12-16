@@ -46,7 +46,7 @@ public class Product extends BaseObservable {
     @Ignore
     private double total;
 
-
+    @Ignore
     public Product(){
 
     }

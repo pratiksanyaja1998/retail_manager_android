@@ -26,7 +26,6 @@ import android.widget.ArrayAdapter;
 
 import retailmanager.spyhunter272.in.retailmanager.R;
 import retailmanager.spyhunter272.in.retailmanager.model.CustomerDialogHolder;
-import retailmanager.spyhunter272.in.retailmanager.room.table.Address;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
 import retailmanager.spyhunter272.in.retailmanager.viewmodel.CustomerViewModel;
 
@@ -39,7 +38,7 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
     private CustomerViewModel customerViewModel;
     private Customer customer;
 
-    private boolean isUpdate = false;
+    private boolean isUpdate;
 
 
     public CustomerDialog(Customer customer, boolean isUpdate) {
@@ -54,6 +53,7 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
         DialogCustomerBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_customer,container,false);
 
         dialogCustomerBinding.setCustomer(customer);
+
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
 
         dialogCustomerBinding.setCustomerDialogHolder(new CustomerDialogHolder(myPreference.getBoolean("mobile",true),myPreference.getBoolean("mobile",true),

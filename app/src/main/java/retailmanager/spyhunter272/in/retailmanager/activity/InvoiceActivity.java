@@ -36,6 +36,7 @@ public class InvoiceActivity extends AppCompatActivity  {
         getMenuInflater().inflate(R.menu.menu_settigns, menu);
         MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) myActionMenuItem.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -94,9 +95,6 @@ public class InvoiceActivity extends AppCompatActivity  {
         }
 
     }
-
-
-
 
     public interface SearchViewDataChangeListner {
 

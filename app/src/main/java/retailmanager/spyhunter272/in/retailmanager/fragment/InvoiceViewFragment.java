@@ -1,90 +1,82 @@
 package retailmanager.spyhunter272.in.retailmanager.fragment;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
+import java.util.ArrayList;
+import java.util.List;
 import retailmanager.spyhunter272.in.retailmanager.R;
 import retailmanager.spyhunter272.in.retailmanager.activity.InvoiceActivity;
-import retailmanager.spyhunter272.in.retailmanager.activity.InvoiceFromActivity;
+import retailmanager.spyhunter272.in.retailmanager.databinding.FragmentInvoiceViewBinding;
+import retailmanager.spyhunter272.in.retailmanager.databinding.RowInvoiceBinding;
+
+import retailmanager.spyhunter272.in.retailmanager.model.InvoiceViewHolder;
+import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
+import retailmanager.spyhunter272.in.retailmanager.viewmodel.InvoiceViewModel;
 
 
-public class InvoiceViewFragment extends Fragment implements InvoiceActivity.SearchViewDataChangeListner, View.OnClickListener {
+public class InvoiceViewFragment extends Fragment implements InvoiceActivity.SearchViewDataChangeListner {
 
 
     public InvoiceViewFragment() {
 
     }
 
-    private Calendar myCalendar = Calendar.getInstance();
-    private TextView tvShowDate;
+    private InvoiceViewHolder invoiceViewHolder ;
+    private  FragmentInvoiceViewBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_invoice_view, container, false);
+         binding  = DataBindingUtil.inflate(inflater,R.layout.fragment_invoice_view,container,false);
+        invoiceViewHolder=new InvoiceViewHolder(getContext());
+        binding.setInvoiceViewHolder(invoiceViewHolder);
+        return binding.getRoot();
     }
 
+    private InvoiceListAdepter invoiceListAdepter;
+
+    private InvoiceViewModel invoiceViewModel;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        view.findViewById(R.id.btn_open_dialog_date).setOnClickListener(this);
-        view.findViewById(R.id.fbtn_add).setOnClickListener(this::onClick);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerview.setHasFixedSize(true);
+        invoiceListAdepter = new InvoiceListAdepter();
+        binding.recyclerview.setAdapter(invoiceListAdepter);
 
-        tvShowDate = view.findViewById(R.id.tv_show_date);
-        updateLabel();
+        invoiceViewModel = ViewModelProviders.of(this).get(InvoiceViewModel.class);
+
+        getInvoiceData();
 
     }
 
+    private void getInvoiceData(){
 
+        invoiceViewModel.getInvoiceForList(10,invoiceViewHolder.getOffset()).observe(this, new Observer<List<Invoice>>() {
+            @Override
+            public void onChanged(@Nullable List<Invoice> invoices) {
+                if(invoices.size()<=0){
+                    invoiceViewHolder.setNoData(true);
+                }else {
+                    invoiceViewHolder.setNoData(false);
+                    invoiceListAdepter.setInvoiceList(invoices);
+                }
+            }
+        });
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_open_dialog_date:
-
-                new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        myCalendar.set(Calendar.YEAR, year);
-                        myCalendar.set(Calendar.MONTH, month);
-                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel();
-                    }
-                }, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-
-                break;
-
-            case R.id.fbtn_add:
-
-                startActivity(new Intent(getContext(),InvoiceFromActivity.class));
-
-                break;
-        }
     }
-
-    private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        tvShowDate.setText(sdf.format(myCalendar.getTime()));
-    }
-
 
     @Override
     public void searchOnQueryTextSubmit(String query) {
@@ -101,5 +93,47 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
 
     }
 
+    class InvoiceListAdepter extends RecyclerView.Adapter<InvoiceListAdepter.InvoiceViewHolder>{
+
+        List<Invoice> invoiceList = new ArrayList<>();
+
+        public void setInvoiceList(List<Invoice> invoiceList) {
+            this.invoiceList = invoiceList;
+            notifyDataSetChanged();
+        }
+
+        @NonNull
+        @Override
+        public InvoiceViewHolder  onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+            RowInvoiceBinding binding = DataBindingUtil.inflate(getLayoutInflater(),R.layout.row_invoice,viewGroup,false);
+
+            return new InvoiceViewHolder(binding);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull InvoiceViewHolder invoiceViewHolder, int i) {
+
+            invoiceViewHolder.binding.setInvoiceHolder(invoiceList.get(i));
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return invoiceList.size();
+        }
+
+        class InvoiceViewHolder extends RecyclerView.ViewHolder{
+
+            RowInvoiceBinding binding;
+            public InvoiceViewHolder(@NonNull RowInvoiceBinding  binding) {
+                super(binding.getRoot());
+                this.binding=binding;
+
+            }
+
+        }
+    }
 
 }

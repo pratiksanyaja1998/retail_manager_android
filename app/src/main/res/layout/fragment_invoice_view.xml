@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="invoiceViewHolder"
+            type="retailmanager.spyhunter272.in.retailmanager.model.InvoiceViewHolder" />
+
+    </data>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
                 android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/calender_ic" />
 
@@ -39,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:text="@{invoiceViewHolder.date}"
                 android:layout_weight="1" />
 
             <Space
@@ -94,22 +108,18 @@
         android:paddingTop="70dp"
         tools:listitem="@layout/row_invoice" />
 
-
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:id="@+id/linear_show_emty_list"
-
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:visibility="invisible"
+            android:visibility="@{invoiceViewHolder.noData ? View.VISIBLE:View.GONE}"
             android:src="@drawable/not_found_bg"
             />
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fbtn_add"
@@ -122,8 +132,11 @@
         android:tint="@color/colorWhite"
         android:backgroundTint="@color/colorPrimary"
         android:layout_marginRight="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_circle_black_24dp" />
-
+        android:onClick="@{(v)->invoiceViewHolder.onClick(v)}"
+        app:srcCompat="@drawable/ic_add_circle_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
 
 
 </android.support.constraint.ConstraintLayout>
+
+</layout>

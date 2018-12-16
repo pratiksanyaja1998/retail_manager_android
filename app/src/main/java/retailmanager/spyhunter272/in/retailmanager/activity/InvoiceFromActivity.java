@@ -1,6 +1,9 @@
 package retailmanager.spyhunter272.in.retailmanager.activity;
 
+import android.app.ProgressDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,10 +27,15 @@ import retailmanager.spyhunter272.in.retailmanager.dialog.CustomerInvoiceFormDia
 import retailmanager.spyhunter272.in.retailmanager.dialog.ProductDialog;
 import retailmanager.spyhunter272.in.retailmanager.dialog.ProductInvoiceFormDialog;
 import retailmanager.spyhunter272.in.retailmanager.model.InvoiceFromHolder;
+import retailmanager.spyhunter272.in.retailmanager.room.RetailDatabase;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
+import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
+import retailmanager.spyhunter272.in.retailmanager.room.table.InvoiceProduct;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Product;
 
 import retailmanager.spyhunter272.in.retailmanager.databinding.RowInvoiceFormProductBinding;
+import retailmanager.spyhunter272.in.retailmanager.room.tabledao.InvoiceDao;
+import retailmanager.spyhunter272.in.retailmanager.viewmodel.InvoiceViewModel;
 
 public class InvoiceFromActivity extends AppCompatActivity implements ProductInvoiceFormDialog.ProductsLisner,CustProPickerDialog.DialogSearchItemSelectLisner, CustomerInvoiceFormDialog.CustomerLisner {
 
@@ -88,8 +96,72 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
 
     private void printInvoice(){
 
+        Invoice invoice = new Invoice();
+
+//        InvoiceDao invoiceDao = RetailDatabase.getInstance(this).invoiceDao();
+//
+//        long id =  invoiceDao.insert(invoice);
+//
+//        Log.e("idis",id+"");
+
+        new InsertInvoiceBgWorker(RetailDatabase.getInstance(this),invoice,listAdapter.proLists).execute();
+
+    }
+
+    class InsertInvoiceBgWorker extends AsyncTask<Void,Void,Void>{
 
 
+        private RetailDatabase retailDatabase;
+        private Invoice invoice;
+        private List<Product> productList;
+        private ProgressDialog progressDialog;
+
+        public InsertInvoiceBgWorker(RetailDatabase retailDatabase, Invoice invoice, List<Product> productList) {
+            this.retailDatabase = retailDatabase;
+            this.invoice = invoice;
+            this.productList = productList;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(InvoiceFromActivity.this);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            long invoiceId = retailDatabase.invoiceDao().insert(invoice);
+            Log.e("idis",invoiceId+"");
+
+            List<InvoiceProduct>  invoiceProductList = new ArrayList<>();
+
+            for(int i=0;i<productList.size();i++){
+
+                invoiceProductList.add(new InvoiceProduct(
+                        productList.get(i).getName(),
+                        productList.get(i).getHsn(),
+                        productList.get(i).getBarcode(),
+                        productList.get(i).getS_price(),
+                        productList.get(i).getTotal(),
+                        productList.get(i).getIn_stock_qty(),
+                        invoiceId
+
+                ));
+
+            }
+
+            retailDatabase.invoiceProductDao().addAllInvoiceProduct(invoiceProductList);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            progressDialog.dismiss();
+
+        }
 
     }
 

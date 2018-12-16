@@ -2,16 +2,16 @@ package retailmanager.spyhunter272.in.retailmanager.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.List;
+
 import retailmanager.spyhunter272.in.retailmanager.room.RetailDatabase;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
-import retailmanager.spyhunter272.in.retailmanager.room.table.InvoiceProduct;
-import retailmanager.spyhunter272.in.retailmanager.room.table.Product;
 import retailmanager.spyhunter272.in.retailmanager.room.tabledao.InvoiceDao;
-import retailmanager.spyhunter272.in.retailmanager.room.tabledao.InvoiceProductDao;
 
 public class InvoiceViewModel extends AndroidViewModel {
 
@@ -26,18 +26,16 @@ public class InvoiceViewModel extends AndroidViewModel {
     }
 
     private static final int INSERT = 1;
-    private static final int UPDATE = 2;
     private static final int DELETE = 3;
 
     private Object[]  objects;
 
 
-    public void insert(Invoice product){
+    public void insert(Invoice invoice){
 
         objects=new Object[2];
         objects[0] = INSERT;
-        objects[1] = product;
-
+        objects[1] = invoice;
 
         new BGWorker().execute(objects);
 
@@ -53,22 +51,13 @@ public class InvoiceViewModel extends AndroidViewModel {
 
     }
 
-//    public LiveData<List<Product>> getProductsForList(int limit, int offset , int category, String filterNameHsn){
-
-//        if(!filterNameHsn.equals("")) {
-//            String temp = filterNameHsn;
-//            filterNameHsn = "%"+temp+"%";
-//            return invoiceProductDao.getInvoiceProductForList(limit, offset);
-//        }
-//
-//        if(category==0)
-//            return productDao.getProductsForList(limit,offset);
-//        else
-//            return productDao.getProductsForList(limit,offset,category);
-
-//    }
+    public LiveData<List<Invoice>> getInvoiceForList(int limit, int offset ){
 
 
+            return invoiceProductDao.getInvoiceForList(limit,offset);
+
+
+    }
 
     private class BGWorker extends AsyncTask<Object,Void,Void> {
 

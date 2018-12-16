@@ -2,13 +2,15 @@ package retailmanager.spyhunter272.in.retailmanager.room.table;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.databinding.BaseObservable;
 
 @Entity(tableName = "invoice")
-public class Invoice {
+public class Invoice extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int customer;
+    private String name;
     private int gsttype; //  for  0 None / 1 GST / 2 IGST
     private int gst; // 0 5 12 18 28
     private double total;
@@ -21,7 +23,13 @@ public class Invoice {
     private int yyyy;
 
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;

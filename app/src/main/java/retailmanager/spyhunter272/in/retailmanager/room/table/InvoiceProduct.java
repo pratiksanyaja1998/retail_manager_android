@@ -21,8 +21,17 @@ public class InvoiceProduct {
 
     private int qty;
 
-    private int invoiceId;
+    private long invoiceId;
 
+    public InvoiceProduct(String name, String hsn, String barcode, double price, double total, int qty, long invoiceId) {
+        this.name = name;
+        this.hsn = hsn;
+        this.barcode = barcode;
+        this.price = price;
+        this.total = total;
+        this.qty = qty;
+        this.invoiceId = invoiceId;
+    }
 
     public int getId() {
         return id;
@@ -52,7 +61,7 @@ public class InvoiceProduct {
         return qty;
     }
 
-    public int getInvoiceId() {
+    public long getInvoiceId() {
         return invoiceId;
     }
 

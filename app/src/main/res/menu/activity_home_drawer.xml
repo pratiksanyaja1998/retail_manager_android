@@ -28,15 +28,15 @@
                     android:icon="@drawable/invoice_ic"
                     android:title="@string/invoice" />
 
-                <item
-                    android:id="@+id/nav_income"
-                    android:icon="@drawable/income_ic"
-                    android:title="@string/Income" />
+                <!--<item-->
+                    <!--android:id="@+id/nav_income"-->
+                    <!--android:icon="@drawable/income_ic"-->
+                    <!--android:title="@string/Income" />-->
 
-                <item
-                    android:id="@+id/nav_expance"
-                    android:icon="@drawable/expanse_ic"
-                    android:title="@string/Expanse" />
+                <!--<item-->
+                    <!--android:id="@+id/nav_expance"-->
+                    <!--android:icon="@drawable/expanse_ic"-->
+                    <!--android:title="@string/Expanse" />-->
 
             <!--</menu>-->
 

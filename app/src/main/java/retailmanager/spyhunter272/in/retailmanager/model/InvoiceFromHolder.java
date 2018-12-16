@@ -10,14 +10,14 @@ import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
 
 public class InvoiceFromHolder extends BaseObservable {
 
-    String description , dateForShow ;
+    private String description , dateForShow ;
 
-    Customer customer;
-    int paymethord;
-    boolean tprcharge,isUpdateCustomer;
+    private Customer customer;
+    private int paymethord;
+    private boolean tprcharge,isUpdateCustomer;
 
-    double totalInvoice,totalWithDiscount;
-    double discount;
+    private double totalInvoice,totalWithDiscount;
+    private double discount;
 
     public InvoiceFromHolder(){
         Calendar c = Calendar.getInstance();

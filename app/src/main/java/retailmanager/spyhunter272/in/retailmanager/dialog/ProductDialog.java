@@ -196,9 +196,6 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
                 Log.e("selected added" , " cate "+product.getCategory()+" gst "+product.getGst());
 
-
-
-
                     if (productDialogHolder.isUpdate() && product.checkValidation()) {
 
                         productViewModel.update(product);

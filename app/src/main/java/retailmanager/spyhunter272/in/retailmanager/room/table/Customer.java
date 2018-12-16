@@ -2,6 +2,7 @@ package retailmanager.spyhunter272.in.retailmanager.room.table;
 
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BaseObservable;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class Customer extends BaseObservable {
         this.shipping_address = shipping_address;
     }
 
+    @Ignore
     public Customer(){
         this.billing_address = new Address("","","","");
         this.shipping_address = new Address("","","","");
