@@ -189,7 +189,7 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if(context instanceof CustomerDialog.CustomerLisner){
+        if(context instanceof DialogSearchItemSelectLisner){
             dialogSearchItemSelectLisner = (DialogSearchItemSelectLisner) context;
 
         }else {

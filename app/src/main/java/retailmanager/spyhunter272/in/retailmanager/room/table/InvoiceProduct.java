@@ -17,5 +17,6 @@ public class InvoiceProduct {
 
     private int qty;
 
+    private int invoiceId;
 
 }

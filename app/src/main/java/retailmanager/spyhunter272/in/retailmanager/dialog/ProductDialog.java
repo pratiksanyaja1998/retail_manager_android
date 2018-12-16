@@ -44,7 +44,6 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
     private ProductViewModel productViewModel;
 
-//    private EditText edProductName,edHsn,edBuyPrice,edSellPrice,edQty,edQtyAddStock;
     private TextView tvBarcode;
     private Spinner spProductCategory ;
     private Product product;
@@ -52,9 +51,8 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
     private ProdCateSpinnerBaseAdepter prodCateSpinnerBaseAdepter;
     private boolean isUpdate = false;
-//    private LinearLayout linearAddStock;
     private SharedPreferences myPreference;
-    ProductDialogHolder productDialogHolder;
+    private   ProductDialogHolder productDialogHolder;
 
     @Nullable
     @Override
@@ -169,7 +167,6 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
     }
 
-
     @Override
     public void onClick(View v) {
 
@@ -238,6 +235,7 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
                     }
 
                 }
+
                 dismiss();
 
             break;
@@ -246,12 +244,6 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
     }
 
-
-    @Override
-    public void dismiss() {
-        super.dismiss();
-//        setArguments(null);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -299,7 +291,7 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
     public interface ProductsLisner{
 
-        public void lisnProductsFromDialog(Product product);
+        void lisnProductsFromDialog(Product product);
 
     }
 

@@ -42,6 +42,12 @@ public class Customer extends BaseObservable {
         this.shipping_address = shipping_address;
     }
 
+    public Customer(){
+        this.billing_address = new Address("","","","");
+        this.shipping_address = new Address("","","","");
+
+    }
+
     public int getId() {
         return id;
     }

@@ -41,4 +41,6 @@ public class ProductDialogHolder extends BaseObservable {
     public boolean isProductGst() {
         return productGst;
     }
+
+
 }

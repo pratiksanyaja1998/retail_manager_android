@@ -20,14 +20,16 @@ import retailmanager.spyhunter272.in.retailmanager.dialog.CustomerDialog;
 import retailmanager.spyhunter272.in.retailmanager.R;
 import retailmanager.spyhunter272.in.retailmanager.customview.NestedListView;
 import retailmanager.spyhunter272.in.retailmanager.databinding.ActivityInvoiceFromBinding;
+import retailmanager.spyhunter272.in.retailmanager.dialog.CustomerInvoiceFormDialog;
 import retailmanager.spyhunter272.in.retailmanager.dialog.ProductDialog;
+import retailmanager.spyhunter272.in.retailmanager.dialog.ProductInvoiceFormDialog;
 import retailmanager.spyhunter272.in.retailmanager.model.InvoiceFromHolder;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Product;
 
 import retailmanager.spyhunter272.in.retailmanager.databinding.RowInvoiceFormProductBinding;
 
-public class InvoiceFromActivity extends AppCompatActivity implements ProductDialog.ProductsLisner,CustProPickerDialog.DialogSearchItemSelectLisner, CustomerDialog.CustomerLisner {
+public class InvoiceFromActivity extends AppCompatActivity implements ProductInvoiceFormDialog.ProductsLisner,CustProPickerDialog.DialogSearchItemSelectLisner, CustomerInvoiceFormDialog.CustomerLisner {
 
     private InvoiceFromHolder invoiceFromHolder;
     private NestedListView listView;
@@ -47,15 +49,13 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductDia
 
     }
 
-
     public void onClick(View view){
 
         switch (view.getId()){
 
             case R.id.btn_new_customer:
-                    CustomerDialog customerDialog = new CustomerDialog();
-                    customerDialog.setNewCustomer(true);
-                    customerDialog.show(getSupportFragmentManager(),null);
+                CustomerInvoiceFormDialog customerDialog = new CustomerInvoiceFormDialog();
+                customerDialog.show(getSupportFragmentManager(),null);
                 break;
 
             case R.id.btn_search_customer:
@@ -70,10 +70,16 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductDia
                 custProPickerDialog1.show(getSupportFragmentManager(),null);
                 break;
 
-            case R.id.btnaddnewpro:
-                ProductDialog productDialog = new ProductDialog();
-                productDialog.setNewProducts(true);
-                productDialog.show(getSupportFragmentManager(),null);
+//            case R.id.btnaddnewpro:
+//                ProductDialog productDialog = new ProductDialog();
+//                productDialog.setNewProducts(true);
+//                productDialog.show(getSupportFragmentManager(),null);
+//                break;
+
+            case R.id.btn_update_customer:
+                CustomerInvoiceFormDialog customerDialog2 = new CustomerInvoiceFormDialog();
+                customerDialog2.setArguments(invoiceFromHolder.getCustomerObj().getBundle());
+                customerDialog2.show(getSupportFragmentManager(),null);
                 break;
 
         }
@@ -105,12 +111,11 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductDia
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void lisnCustomerFromDialog(Customer customer) {
         invoiceFromHolder.setCustomer(customer);
+        invoiceFromHolder.setUpdateCustomer(true);
         invoiceFromHolder.notifyChange();
-
     }
 
     @Override
@@ -125,22 +130,24 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductDia
 
     @Override
     public void lisnProductsFromDialog(Product product) {
-        lisnProductFormSearchDialog(product);
+        listAdapter.updateProduct(product);
     }
 
-
     public void onListItemClick( int position) {
-        ProductDialog productDialog =  new ProductDialog();
+        ProductInvoiceFormDialog productDialog =  new ProductInvoiceFormDialog(listAdapter.proLists.get(position));
         Product product = listAdapter.proLists.get(position);
         productDialog.setArguments(product.getBundle());
-        productDialog.setNewProducts(true);
         productDialog.show(getSupportFragmentManager(),null);
     }
 
+    private void updateTotal(float total){
+        invoiceFromHolder.setTotalInvoice(total);
+    }
 
     class ListAdapter extends BaseAdapter {
 
         List<Product> proLists = new ArrayList<>();
+        float totalInvoice = 0;
 
         public void setProLists(List<Product> proLists) {
             this.proLists = proLists;
@@ -148,13 +155,42 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductDia
         }
 
         private void deleteProduct(int i){
+            totalInvoice-=proLists.get(i).getTotal();
+            updateTotal(totalInvoice);
             proLists.remove(i);
             notifyDataSetChanged();
         }
 
         public void addProduct(Product product) {
+            float total = (float) (product.getIn_stock_qty()*product.getS_price());
+            total =total+((total*product.getGst())/100);
+            totalInvoice+=total;
+            updateTotal(totalInvoice);
+            product.setTotal(total);
             proLists.add(product);
             notifyDataSetChanged();
+        }
+
+        public void updateProduct(Product product){
+
+            for (int i = 0;i<proLists.size();i++){
+
+                if(product.getId()==proLists.get(i).getId()){
+
+                    totalInvoice-=proLists.get(i).getTotal();
+
+                    float total = (float) (product.getIn_stock_qty()*product.getS_price());
+                    total =total + ((total*product.getGst())/100);
+                    totalInvoice+=total;
+
+                    updateTotal(totalInvoice);
+                    product.setTotal(total);
+                    proLists.set(i,product);
+                    notifyDataSetChanged();
+                }
+
+            }
+
         }
 
         @Override
@@ -176,30 +212,36 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductDia
         public View getView(int i, View view, ViewGroup viewGroup) {
 
             RowInvoiceFormProductBinding binding;
+
             if (view == null) {
+
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_invoice_form_product, null);
                 binding = DataBindingUtil.bind(view);
                 view.setTag(binding);
+
             } else {
+
                 binding = (RowInvoiceFormProductBinding) view.getTag();
+
             }
+
             binding.setProduct(proLists.get(i));
 
-            binding.getRoot().findViewById(R.id.row_ibtnprodelete).setOnClickListener(new View.OnClickListener() {
+            binding.rowIbtnprodelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     deleteProduct(i);
                 }
             });
 
-            binding.getRoot().findViewById(R.id.row_pname).setOnClickListener(new View.OnClickListener() {
+            binding.rowPname.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onListItemClick(i);
                 }
             });
 
-            binding.getRoot().findViewById(R.id.row_ptex).setOnClickListener(new View.OnClickListener() {
+            binding.rowPtex.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onListItemClick(i);
@@ -210,6 +252,7 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductDia
 
 
         }
+
     }
 
 }

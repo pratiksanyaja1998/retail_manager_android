@@ -14,7 +14,10 @@ public class InvoiceFromHolder extends BaseObservable {
 
     Customer customer;
     int paymethord;
-    boolean tprcharge;
+    boolean tprcharge,isUpdateCustomer;
+
+    double totalInvoice,totalWithDiscount;
+    double discount;
 
     public InvoiceFromHolder(){
         Calendar c = Calendar.getInstance();
@@ -27,12 +30,52 @@ public class InvoiceFromHolder extends BaseObservable {
 
         dateForShow = mDay + "-" + mMonth+ "-"+mYear ;
 
+    }
 
+    public void setUpdateCustomer(boolean updateCustomer) {
+        isUpdateCustomer = updateCustomer;
+    }
+
+    public boolean isUpdateCustomer() {
+        return isUpdateCustomer;
     }
 
     public String getDescription() {
         return description;
     }
+
+
+    public double getTotalWithDiscount() {
+        return totalWithDiscount;
+    }
+
+    public void setTotalWithDiscount(double totalWithDiscount) {
+        this.totalWithDiscount = totalWithDiscount;
+    }
+
+    public double getTotalInvoice() {
+        return totalInvoice;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+        this.totalInvoice = totalInvoice;
+        this.totalWithDiscount = totalInvoice - ((discount*totalInvoice)/100);
+        notifyChange();
+
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setTotalInvoice(double totalInvoice) {
+        this.totalInvoice = totalInvoice;
+        this.totalWithDiscount = totalInvoice - ((discount*totalInvoice)/100);
+        notifyChange();
+    }
+
+
 
     public int getPaymethord() {
         return paymethord;
@@ -42,13 +85,14 @@ public class InvoiceFromHolder extends BaseObservable {
         return tprcharge;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
+        notifyChange();
     }
 
     public void setDateForShow(String dateForShow) {
         this.dateForShow = dateForShow;
+        notifyChange();
     }
 
     public void setPaymethord(int paymethord) {
@@ -61,13 +105,21 @@ public class InvoiceFromHolder extends BaseObservable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+        notifyChange();
     }
 
     public String getCustomer() {
         if(customer!=null)
-        return customer.toString()+"";
+            return customer.toString();
         else
-            return "";
+            return new Customer().toString();
+    }
+
+    public Customer getCustomerObj(){
+        if(customer!=null)
+            return customer;
+        else
+            return new Customer();
     }
 
     public String getDateForShow() {

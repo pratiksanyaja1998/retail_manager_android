@@ -62,8 +62,6 @@ public class Product extends BaseObservable {
         return true;
     }
 
-
-
     public Bundle getBundle(){
         Bundle bundle = new Bundle();
         bundle.putInt("id",id);

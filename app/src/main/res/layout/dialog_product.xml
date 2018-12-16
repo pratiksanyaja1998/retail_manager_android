@@ -127,6 +127,7 @@
             android:background="@drawable/spinner_border"
             android:orientation="horizontal"
             android:layout_marginLeft="5dp"
+            android:layout_weight="1"
             android:visibility="@{productDialogHolder.productGst ? View.VISIBLE : View.GONE }"
             android:padding="5dp"
             >

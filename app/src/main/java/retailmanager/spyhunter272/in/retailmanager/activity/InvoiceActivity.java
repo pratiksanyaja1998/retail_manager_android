@@ -74,7 +74,7 @@ public class InvoiceActivity extends AppCompatActivity  {
 //                        R.animator.card_flip_left_in,
 //                        R.animator.card_flip_left_out)
 
-            setTitle("Customer Settings");
+            setTitle("Invoice Settings");
             menu.findItem(R.id.action_search).setVisible(false);
             item.setVisible(false);
 

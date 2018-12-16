@@ -17,8 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import io.fabric.sdk.android.Fabric;
 import retailmanager.spyhunter272.in.retailmanager.fragment.DashbordHomeFragment;
 import retailmanager.spyhunter272.in.retailmanager.R;
 
@@ -35,6 +37,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_home);
 
         Log.e("id is",FirebaseInstanceId.getInstance().getToken()+"");

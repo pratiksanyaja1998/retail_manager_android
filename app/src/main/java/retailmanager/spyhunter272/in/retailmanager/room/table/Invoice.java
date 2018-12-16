@@ -26,5 +26,4 @@ public class Invoice {
     private int mm;
     private int yyyy;
 
-
 }
