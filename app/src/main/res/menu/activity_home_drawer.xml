@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <!--<group android:checkableBehavior="single">-->
+
+        <item
+            android:id="@+id/nav_dashbord"
+            android:icon="@drawable/dashboard_ic"
+            android:title="Dashbord" />
+
+        <!--<item android:title="Action">-->
+
+            <!--<menu>-->
+                <item
+                    android:id="@+id/nav_customer"
+                    android:icon="@drawable/customer_ic"
+                    android:title="@string/customer" />
+                <item
+                    android:id="@+id/nav_product"
+                    android:icon="@drawable/product_ic"
+                    android:title="@string/products" />
+
+                <item
+                    android:id="@+id/nav_invoice"
+                    android:icon="@drawable/invoice_ic"
+                    android:title="@string/invoice" />
+
+                <item
+                    android:id="@+id/nav_income"
+                    android:icon="@drawable/income_ic"
+                    android:title="@string/Income" />
+
+                <item
+                    android:id="@+id/nav_expance"
+                    android:icon="@drawable/expanse_ic"
+                    android:title="@string/Expanse" />
+
+            <!--</menu>-->
+
+        <!--</item>-->
+
+        <!--<item android:title="Settings">-->
+
+            <!--<menu>-->
+
+                <item
+                    android:id="@+id/nav_store_info"
+                    android:icon="@drawable/retail_info_ic"
+                    android:title="Retail Information" />
+
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/setting_ic"
+                    android:title="Settings" />
+
+
+            <!--</menu>-->
+
+        <!--</item>-->
+
+
+        <!--<item android:title="Other">-->
+
+            <!--<menu>-->
+
+
+                <item
+                    android:id="@+id/action_about"
+                    android:icon="@drawable/about_ic"
+                    android:orderInCategory="100"
+                    android:title="@string/action_about" />
+
+                <item
+                    android:id="@+id/action_share"
+                    android:icon="@drawable/share_ic"
+                    android:orderInCategory="100"
+                    android:title="@string/action_share" />
+
+            <!--</menu>-->
+
+        <!--</item>-->
+
+    <!--</group>-->
+
+</menu>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#07a464</color>
+    <color name="colorPrimaryDark">#027d4c</color>
+    <color name="colorAccent">#8a8989</color>
+
+    <color name="actBackground">#f5f5f5</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBlackText">#292929</color>
+    
+    <color name="fontGray">#b8b8b8</color>
+    <color name="fontDark">#2a2826</color>
+    <color name="fontlight">#a5a5a4</color>
+    
+    <color name="colorTextGray">#ccc</color>
+        <!--componets color-->
+    <color name="colorBorderComponents">#bfbfbf</color>
+    <color name="colorBGComponents">#FFFFFF</color>
+
+    <color name="colorProductMinLeft">#bcead484</color>
+    <color name="colorProductStockOut">#c3e27756</color>
+    <color name="colorButtonCancel">#a3b9ab</color>
+
+</resources>

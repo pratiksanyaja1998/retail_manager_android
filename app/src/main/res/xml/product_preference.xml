@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:iconSpaceReserved="false">
+        <Preference app:iconSpaceReserved="false"
+            android:title="Manage Products Category"
+            android:summary="click hear for add remove products category"
+            android:key="btnProductCate"/>
+
+
+    <PreferenceCategory
+        android:title="Product View Settings">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="hsn"
+            app:iconSpaceReserved="false"
+            android:summary="remove or add hsn"
+            android:title="HSN Code" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="barcode"
+            android:summary="remove or add barcode "
+            app:iconSpaceReserved="false"
+            android:title="Barcode" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="bprice"
+            android:summary="remove or add buy price "
+            app:iconSpaceReserved="false"
+            android:title="Buy Price" />
+
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="productGst"
+            android:summary="remove or add GST"
+            app:iconSpaceReserved="false"
+            android:title="GST (%)" />
+
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

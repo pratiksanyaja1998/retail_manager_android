@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="mobile"
+            app:iconSpaceReserved="false"
+            android:summary="remove or add hsn from product database"
+            android:title="Mobile Number" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="email"
+            android:summary="remove or add barcode from product database"
+            app:iconSpaceReserved="false"
+            android:title="Email" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="baddr"
+            android:summary="remove or add buy price from product database"
+            app:iconSpaceReserved="false"
+            android:title="Billing Address" />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="saddr"
+        android:summary="remove or add buy price from product database"
+        app:iconSpaceReserved="false"
+        android:title="Shipping Address" />
+
+
+</PreferenceScreen>

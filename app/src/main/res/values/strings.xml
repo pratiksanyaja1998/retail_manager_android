@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">Retail Manager</string>
+
+    <string name="customer">Customer</string>
+    <string name="products">Products</string>
+    <string name="barcode_scanner">Barcode Scanner</string>
+    <string name="invoice">Invoice</string>
+    <string name="Income">Income</string>
+    <string name="Expanse">Expanse</string>
+    <string name="retail_info_label">Retail Information</string>
+
+    <string name="product_details">Products Details</string>
+    <string name="customer_details">Customer Details</string>
+
+    <string name="other_details">Other Details</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_share">Share</string>
+    <string name="action_about">About As</string>
+
+    <string name="default_notification_channel_id">Default_Channel</string>
+
+    <string name="invoice_form_label">New Invoice</string>
+
+    <string name="no_produts_message">Opps!, No product in this category.\n Please add products.</string>
+    <string name="no_customer_message">Opps!, No customer hear.\n Please add customer.</string>
+
+    <string name="label_customer_billing_addr">Billing Address</string>
+    <string name="label_customer_shipping_addr">Shipping Address</string>
+
+    <string-array name="textype">
+        <item>GST(%)</item>
+        <item>IGST(%)</item>
+    </string-array>
+
+    <array name="state_name">
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chattisgarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Lakshadweep Islands</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Odisha</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+        <!--https://www.zoho.com/in/books/kb/gst/valid-state-codes-list.html-->
+    </array>
+
+    <string-array name="gst_type">
+        <item>None</item>
+        <item>GST</item>
+        <item>IGST</item>
+    </string-array>
+
+    <string-array name="gst_integer">
+        <item>0 %</item>
+        <item>5 %</item>
+        <item>12 %</item>
+        <item>18 %</item>
+        <item>28 %</item>
+    </string-array>
+
+
+    <string-array name="ptype">
+        <item>Payment Method</item>
+        <item>Cash</item>
+        <item>Bank/Card/Cheque</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

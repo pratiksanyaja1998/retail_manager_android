@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/padding_root_layout_10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_category_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+       android:layout_marginBottom="@dimen/components_margin_bottom"
+        android:background="@drawable/border"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/ed_product_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textCapWords"
+            android:background="@android:color/transparent"
+            android:hint="Add Product Category"
+            android:padding="10dp"
+
+            />
+
+        <ImageButton
+            android:id="@+id/ib_save_cateroy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/ic_done_all_black_24dp" />
+
+    </LinearLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rc_product_category"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:listitem="@layout/row_product_category"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,60 @@
+
+Work Padding
+=================
+products first category remove spinner
+
+
+https://github.com/iammert/MaterialIntroView - for introduction
+
+
+
+1 > customer
+
+in customer view dialog when click customer list items
+
+create card
+make call
+send email
+whatsapp
+add contacts
+
+2 > products
+
+barcode scan
+
+3 > invoice
+
+    different type for invoice like gst non-gst
+    multiple templates to print invoice
+
+
+4 > expanse
+    manage expanse like elec bil, rent , emp salary
+
+
+5 > income
+
+    manage other income like commission or more extra services etc.
+
+6 > gst calculator
+
+7 > update notification government
+
+
+
+Expanse Manager
+
+    chart
+    report
+    income
+    expanse
+
+
+
+    Q
+
+    how to get rowid after insert data
+    ================================================
+    https://stackoverflow.com/questions/47718872/rowid-after-insert-in-room?rq=1
+    https://stackoverflow.com/questions/44364240/android-room-get-the-id-of-new-inserted-row-with-auto-generate
+

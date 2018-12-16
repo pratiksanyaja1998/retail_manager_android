@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.InvoiceViewFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative_spinner_view"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp"
+        android:layout_margin="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_marginHorizontal="10dp"
+            android:padding="@dimen/padding_root_layout_5"
+            >
+
+            <ImageButton
+                android:id="@+id/btn_open_dialog_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/calender_ic" />
+
+            <TextView
+                android:id="@+id/tv_show_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/ib_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/previews_iarrow_ic"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="Filter" />
+
+
+            <EditText
+                android:id="@+id/ed_offset"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:inputType="numberSigned"
+                android:textAlignment="center"
+                android:backgroundTint="@color/zxing_transparent"
+                android:focusedByDefault="false"
+                android:text="0"
+                />
+
+            <ImageButton
+                android:id="@+id/ib_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/next_arrow_ic"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="Filter" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        android:paddingTop="70dp"
+        tools:listitem="@layout/row_invoice" />
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:id="@+id/linear_show_emty_list"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="invisible"
+            android:src="@drawable/not_found_bg"
+            />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fbtn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:tint="@color/colorWhite"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginRight="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+
+
+
+</android.support.constraint.ConstraintLayout>
