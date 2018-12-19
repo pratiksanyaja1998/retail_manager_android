@@ -2,11 +2,18 @@ package retailmanager.spyhunter272.in.retailmanager.model;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+import android.view.View;
+import android.widget.DatePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import retailmanager.spyhunter272.in.retailmanager.R;
+import retailmanager.spyhunter272.in.retailmanager.activity.InvoiceFromActivity;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
 
 public class InvoiceFromHolder extends BaseObservable {
@@ -18,22 +25,46 @@ public class InvoiceFromHolder extends BaseObservable {
     private boolean tprcharge,isUpdateCustomer;
 
     private double totalInvoice,totalWithDiscount;
-    private float discount;
+    private int discount;
     private Calendar calendar = Calendar.getInstance();
 
     private Context context;
+    static final String myFormat = "MM/dd/yy"; //In which you need put here
+
 
     public InvoiceFromHolder(Context context){
         this.context = context;
 
-        int mYear, mMonth, mDay;
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        setDateForShow(sdf.format(calendar.getTime()));
 
-        mYear = calendar.get(Calendar.YEAR);
-        mMonth = calendar.get(Calendar.MONTH);
-        mDay = calendar.get(Calendar.DAY_OF_MONTH);
+    }
 
-        dateForShow = mDay + "-" + mMonth+ "-"+mYear ;
 
+    public void onClick(View v){
+
+        switch (v.getId()){
+
+            case R.id.btn_open_dialog_date:
+
+                new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                        setDateForShow(sdf.format(calendar.getTime()));
+
+                    }
+                }, calendar
+                        .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+                break;
+
+        }
     }
 
     public Calendar getCalendar() {
@@ -65,9 +96,8 @@ public class InvoiceFromHolder extends BaseObservable {
         return totalInvoice;
     }
 
-    public void setDiscount(float discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
-        this.totalInvoice = totalInvoice;
         this.totalWithDiscount = totalInvoice - ((discount*totalInvoice)/100);
         notifyChange();
 
@@ -83,6 +113,10 @@ public class InvoiceFromHolder extends BaseObservable {
         notifyChange();
     }
 
+
+    public void onChangeDiscount(){
+
+    }
 
     public int getPaymethord() {
         return paymethord;

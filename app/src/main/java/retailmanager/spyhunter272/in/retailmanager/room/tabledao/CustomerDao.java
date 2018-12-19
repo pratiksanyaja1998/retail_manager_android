@@ -16,7 +16,7 @@ import retailmanager.spyhunter272.in.retailmanager.room.table.Product;
 public interface CustomerDao {
 
     @Insert
-    void insert(Customer customer);
+    long insert(Customer customer);
 
     @Update
     void update(Customer customer);

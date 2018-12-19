@@ -5,6 +5,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import static retailmanager.spyhunter272.in.retailmanager.utils.Common.isEpty;
+
 public class Address {
     public String street;
     public String state;
@@ -79,22 +81,19 @@ public class Address {
     public String toString() {
         String data="";
 
-        if(isEpty(street))
+        if(!isEpty(street))
             data +=street+", ";
-        if(isEpty(city))
+        if(!isEpty(city))
             data +=city+", ";
-        if(isEpty(state))
+        if(!isEpty(state))
             data +=state+", ";
-        if(isEpty(postCode))
+        if(!isEpty(postCode))
             data +="-"+postCode;
 
 
         return data;
     }
 
-    private boolean isEpty(String s){
 
-        return (s==null || s.equals("")) ? true:false;
-    }
 
 }

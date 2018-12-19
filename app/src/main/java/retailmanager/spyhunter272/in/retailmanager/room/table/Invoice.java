@@ -1,15 +1,18 @@
 package retailmanager.spyhunter272.in.retailmanager.room.table;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BaseObservable;
+
+import java.util.List;
 
 @Entity(tableName = "invoice")
 public class Invoice extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
-    private int customer;
+    private long id;
+    private long customerId;
     private String name;
     private int gsttype; //  for  0 None / 1 GST / 2 IGST
     private int gst; // 0 5 12 18 28
@@ -22,6 +25,41 @@ public class Invoice extends BaseObservable {
     private int mm;
     private int yyyy;
 
+    @Ignore
+    private List<Product> productList;
+    @Ignore List<InvoiceProduct> invoiceProducts;
+
+    @Ignore
+
+    Customer customer;
+
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<InvoiceProduct> getInvoiceProducts() {
+        return invoiceProducts;
+    }
+
+
+
+    public void setInvoiceProducts(List<InvoiceProduct> invoiceProducts) {
+        this.invoiceProducts = invoiceProducts;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
 
     public String getName() {
         return name;
@@ -31,12 +69,12 @@ public class Invoice extends BaseObservable {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getCustomer() {
-        return customer;
+    public long getCustomerId() {
+        return customerId;
     }
 
     public int getGsttype() {
@@ -80,12 +118,12 @@ public class Invoice extends BaseObservable {
     }
 
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public void setCustomer(int customer) {
-        this.customer = customer;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public void setGsttype(int gsttype) {

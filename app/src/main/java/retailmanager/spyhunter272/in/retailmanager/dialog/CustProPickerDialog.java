@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -41,6 +43,8 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
     private SearchView searchView;
     private boolean isCustomerOrProduct ;
     private ListAdepter listAdepter;
+    private ProgressBar progressBar;
+    private ImageView imageViewDataNoFound;
 
     public void setCustomerOrProduct(boolean customerOrProduct) {
         isCustomerOrProduct = customerOrProduct;
@@ -51,6 +55,8 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
 
        listView = view.findViewById(R.id.listview_dialog);
        searchView = view.findViewById(R.id.search_view_dialog);
+       imageViewDataNoFound = view.findViewById(R.id.image_not_found);
+       progressBar = view.findViewById(R.id.progress_circular);
        searchView.onActionViewExpanded();
        searchView.setOnQueryTextListener(this);
 
@@ -73,7 +79,14 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
                 public void onChanged(@Nullable List<Customer> customers) {
                     if (customers.size() > 0) {
                         listAdepter.setCustomerList(customers);
+                        dataFound();
+
+                    }else{
+                        dataNotFound();
                     }
+
+
+
                 }
             });
 
@@ -81,12 +94,16 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
 
             ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
-
             productViewModel.getProductsForList(10,0,0,searchData).observe(this, new Observer<List<Product>>() {
                 @Override
                 public void onChanged(@Nullable List<Product> products) {
                    if (products.size()>0){
                        listAdepter.setProductList(products);
+                        dataNotFound();
+
+                   }else {
+
+                       dataNotFound();
                    }
                 }
             });
@@ -95,6 +112,21 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
         }
 
 
+    }
+
+
+    private void dataFound(){
+
+        progressBar.setVisibility(View.GONE);
+        imageViewDataNoFound.setVisibility(View.GONE);
+        listView.setVisibility(View.VISIBLE);
+    }
+
+    private void dataNotFound(){
+
+        listView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        imageViewDataNoFound.setVisibility(View.VISIBLE);
     }
 
     @Override

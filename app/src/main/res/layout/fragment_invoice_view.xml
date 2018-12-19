@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/previews_iarrow_ic"
+                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="Filter" />
 
@@ -79,7 +80,7 @@
                 android:textAlignment="center"
                 android:backgroundTint="@color/zxing_transparent"
                 android:focusedByDefault="false"
-                android:text="0"
+                android:text="@={invoiceViewHolder.offset+``}"
                 />
 
             <ImageButton
@@ -87,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
                 android:src="@drawable/next_arrow_ic"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="Filter" />
@@ -117,6 +119,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:translationZ="-10dp"
             android:visibility="@{invoiceViewHolder.noData ? View.VISIBLE:View.GONE}"
             android:src="@drawable/not_found_bg"
             />

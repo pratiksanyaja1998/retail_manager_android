@@ -30,7 +30,7 @@ import retailmanager.spyhunter272.in.retailmanager.room.tabledao.ProductDao;
         Invoice.class,
         InvoiceProduct.class
 },
- version = 3, exportSchema = false)
+ version = 4, exportSchema = false)
 
 public abstract class RetailDatabase extends RoomDatabase {
 

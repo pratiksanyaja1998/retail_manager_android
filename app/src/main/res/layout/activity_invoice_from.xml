@@ -53,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:onClick="@{(v) ->invoiceFromHolder.onClick(v)}"
                     android:background="?android:attr/selectableItemBackground"
                     app:srcCompat="@drawable/calender_ic" />
 
@@ -278,7 +279,7 @@
                                 android:textStyle="bold" />
 
                             <Spinner
-                                android:id="@+id/sp_texlable"
+                                android:id="@+id/sp_gsttype"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -346,28 +347,54 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
 
-                            android:layout_width="213dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:padding="8dp"
                             android:text="Discount (%) : "
                             android:textAlignment="textStart"
                             android:textSize="18sp"
+                                android:layout_weight="1"
                             tools:ignore="RtlCompat" />
 
-                        <EditText
-                            android:id="@+id/ed_descount"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:inputType="numberDecimal"
-                            android:selectAllOnFocus="true"
-                            android:text="@={invoiceFromHolder.discount+``}" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:padding="8dp"
+                                android:text="@{invoiceFromHolder.discount+``}"
+                                android:textAlignment="textStart"
+                                android:textSize="18sp"
+                                tools:ignore="RtlCompat" />
+
+
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/seekbar_descount"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:onProgressChanged="@{(seekbar, progress, fromUser)-> invoiceFromHolder.setDiscount(progress)}"
+                            android:paddingVertical="8dp"
+                            />
+                        <!--<EditText-->
+                            <!--android:id="@+id/ed_descount"-->
+                            <!--android:layout_width="50dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:ems="10"-->
+                            <!--android:inputType="numberDecimal"-->
+                            <!--android:selectAllOnFocus="true"-->
+                            <!--android:text="@={invoiceFromHolder.discount+``}" />-->
 
                     </LinearLayout>
 
@@ -459,7 +486,6 @@
                     android:entries="@array/ptype" />
 
 
-
                 <EditText
                     android:id="@+id/eddesc"
                     android:layout_width="match_parent"
@@ -468,7 +494,7 @@
                     android:layout_marginVertical="5dp"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:lines="3"
+                    android:lines="5"
                     android:background="@drawable/bg_edt_border"
                     android:hint="description ..."
                     android:textColor="@color/fontGray"
@@ -482,7 +508,6 @@
 
 
     </LinearLayout>
-
 
 </ScrollView>
 

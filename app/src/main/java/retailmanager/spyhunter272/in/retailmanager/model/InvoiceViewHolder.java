@@ -21,11 +21,14 @@ public class InvoiceViewHolder extends BaseObservable {
     private Context context;
     private boolean isNoData=false;
     private Calendar myCalendar = Calendar.getInstance();
+    public static int INVOICE_SHOW_LIMIT =10;
 
 
-    public InvoiceViewHolder(Context context) {
+    private InvoiceViewDataChangeLisn invoiceViewDataChangeLisn;
+
+    public InvoiceViewHolder(Context context,InvoiceViewDataChangeLisn invoiceViewDataChangeLisn) {
         this.context = context;
-
+        this.invoiceViewDataChangeLisn = invoiceViewDataChangeLisn;
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -56,13 +59,14 @@ public class InvoiceViewHolder extends BaseObservable {
 
     public void setDate(String date) {
         this.date = date;
+        invoiceViewDataChangeLisn.onFilterDataChage();
         notifyChange();
     }
 
     public void setOffset(int offset) {
         this.offset = offset;
+        notifyChange();
     }
-
 
     public void onClick(View v){
 
@@ -81,6 +85,7 @@ public class InvoiceViewHolder extends BaseObservable {
                         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
                         setDate(sdf.format(myCalendar.getTime()));
+
                     }
                 }, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -91,7 +96,21 @@ public class InvoiceViewHolder extends BaseObservable {
             case R.id.fbtn_add:
                 context.startActivity(new Intent(context,InvoiceFromActivity.class));
                 break;
+
+
+            case R.id.ib_next:
+                setOffset(offset+INVOICE_SHOW_LIMIT);
+                break;
+            case R.id.ib_prev:
+                setOffset(offset-INVOICE_SHOW_LIMIT);
+                break;
+
         }
+    }
+
+    public interface InvoiceViewDataChangeLisn{
+        public void onFilterDataChage();
+
     }
 
 }

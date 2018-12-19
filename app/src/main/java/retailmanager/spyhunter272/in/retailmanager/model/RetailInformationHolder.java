@@ -17,11 +17,11 @@ public class RetailInformationHolder extends BaseObservable {
 
     private SharedPreferences myPreference;
 
-    final String SP_KEY_FOR_RETAIL_INFO_NAME = "retailInfoName";
-    final String SP_KEY_FOR_RETAIL_INFO_ADDRESS = "retailInfoAddr";
-    final String SP_KEY_FOR_RETAIL_INFO_GSTIN = "retailInfoGstin";
-    final String SP_KEY_FOR_RETAIL_INFO_MOBILE = "retailInfoMobile";
-    final String SP_KEY_FOR_RETAIL_INFO_EMAIL = "retailInfoEmail";
+   public static   final String SP_KEY_FOR_RETAIL_INFO_NAME = "retailInfoName";
+    public static  final String SP_KEY_FOR_RETAIL_INFO_ADDRESS = "retailInfoAddr";
+    public static   final String SP_KEY_FOR_RETAIL_INFO_GSTIN = "retailInfoGstin";
+    public static   final String SP_KEY_FOR_RETAIL_INFO_MOBILE = "retailInfoMobile";
+    public static    final String SP_KEY_FOR_RETAIL_INFO_EMAIL = "retailInfoEmail";
 
     public RetailInformationHolder(Context context){
 

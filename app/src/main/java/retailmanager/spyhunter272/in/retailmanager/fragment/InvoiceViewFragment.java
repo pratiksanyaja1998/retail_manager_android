@@ -25,11 +25,12 @@ import retailmanager.spyhunter272.in.retailmanager.model.InvoiceViewHolder;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
 import retailmanager.spyhunter272.in.retailmanager.viewmodel.InvoiceViewModel;
 
+import static retailmanager.spyhunter272.in.retailmanager.model.InvoiceViewHolder.INVOICE_SHOW_LIMIT;
 
-public class InvoiceViewFragment extends Fragment implements InvoiceActivity.SearchViewDataChangeListner {
+
+public class InvoiceViewFragment extends Fragment implements InvoiceActivity.SearchViewDataChangeListner, InvoiceViewHolder.InvoiceViewDataChangeLisn {
 
 
-    private static int INVOICE_SHOW_LIMIT =10;
 
     public InvoiceViewFragment() {
 
@@ -41,7 +42,7 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          binding  = DataBindingUtil.inflate(inflater,R.layout.fragment_invoice_view,container,false);
-        invoiceViewHolder=new InvoiceViewHolder(getContext());
+        invoiceViewHolder=new InvoiceViewHolder(getContext(),this);
         binding.setInvoiceViewHolder(invoiceViewHolder);
         return binding.getRoot();
     }
@@ -73,8 +74,9 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
                     invoiceViewHolder.setNoData(true);
                 }else {
                     invoiceViewHolder.setNoData(false);
-                    invoiceListAdepter.setInvoiceList(invoices);
                 }
+                invoiceListAdepter.setInvoiceList(invoices);
+
             }
         });
 
@@ -105,7 +107,10 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
 
     }
 
-
+    @Override
+    public void onFilterDataChage() {
+        getInvoiceData();
+    }
 
 
     class InvoiceListAdepter extends RecyclerView.Adapter<InvoiceListAdepter.InvoiceViewHolder>{

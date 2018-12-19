@@ -19,41 +19,39 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import retailmanager.spyhunter272.in.retailmanager.adapter.InvoiceFormProductListAdapter;
+import retailmanager.spyhunter272.in.retailmanager.bgworker.SaveInvoiceBgWorker;
 import retailmanager.spyhunter272.in.retailmanager.dialog.CustProPickerDialog;
-import retailmanager.spyhunter272.in.retailmanager.dialog.CustomerDialog;
 import retailmanager.spyhunter272.in.retailmanager.R;
 import retailmanager.spyhunter272.in.retailmanager.customview.NestedListView;
 import retailmanager.spyhunter272.in.retailmanager.databinding.ActivityInvoiceFromBinding;
 import retailmanager.spyhunter272.in.retailmanager.dialog.CustomerInvoiceFormDialog;
-import retailmanager.spyhunter272.in.retailmanager.dialog.ProductDialog;
 import retailmanager.spyhunter272.in.retailmanager.dialog.ProductInvoiceFormDialog;
 import retailmanager.spyhunter272.in.retailmanager.model.InvoiceFromHolder;
-import retailmanager.spyhunter272.in.retailmanager.room.RetailDatabase;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
-import retailmanager.spyhunter272.in.retailmanager.room.table.InvoiceProduct;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Product;
 
-import retailmanager.spyhunter272.in.retailmanager.databinding.RowInvoiceFormProductBinding;
-import retailmanager.spyhunter272.in.retailmanager.room.tabledao.InvoiceDao;
-import retailmanager.spyhunter272.in.retailmanager.viewmodel.InvoiceViewModel;
-
-public class InvoiceFromActivity extends AppCompatActivity implements ProductInvoiceFormDialog.ProductsLisner,CustProPickerDialog.DialogSearchItemSelectLisner, CustomerInvoiceFormDialog.CustomerLisner {
+public class InvoiceFromActivity extends AppCompatActivity implements ProductInvoiceFormDialog.ProductsLisner,
+        CustProPickerDialog.DialogSearchItemSelectLisner,
+        CustomerInvoiceFormDialog.CustomerLisner,
+        InvoiceFormProductListAdapter.ProductListLiner {
 
     private InvoiceFromHolder invoiceFromHolder;
     private NestedListView listView;
-    private ListAdapter listAdapter;
+    private InvoiceFormProductListAdapter listAdapter;
+    private ActivityInvoiceFromBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityInvoiceFromBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
+         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
         invoiceFromHolder = new InvoiceFromHolder(this);
         binding.setInvoiceFromHolder(invoiceFromHolder);
 
         listView  = findViewById(R.id.listproductholder);
-        listAdapter = new ListAdapter();
+        listAdapter = new InvoiceFormProductListAdapter(this);
         listView.setAdapter(listAdapter);
 
     }
@@ -95,91 +93,38 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
 
     }
 
-    private void printInvoice(){
+
+    private void saveInvoice(){
 
         Customer customer =invoiceFromHolder.getCustomerObj();
         Invoice invoice = new Invoice();
+        invoice.setCustomer(customer);
         invoice.setName(customer.getName());
-
-        int mYear, mMonth, mDay;
         Calendar calendar = invoiceFromHolder.getCalendar();
-        mYear = calendar.get(Calendar.YEAR);
-        mMonth = calendar.get(Calendar.MONTH);
-        mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        invoice.setDd(mDay);
-        invoice.setMm(mMonth);
-        invoice.setYyyy(mYear);
+        invoice.setDd(calendar.get(Calendar.DAY_OF_MONTH));
+        invoice.setMm(calendar.get(Calendar.MONTH));
+        invoice.setYyyy(calendar.get(Calendar.YEAR));
         invoice.setTotal(invoiceFromHolder.getTotalWithDiscount());
         invoice.setDiscount(invoiceFromHolder.getDiscount());
+        invoice.setGsttype(binding.spGsttype.getSelectedItemPosition());
         invoice.setTprchage(invoiceFromHolder.isTprcharge());
         invoice.setDesciption(invoiceFromHolder.getDescription());
         invoice.setPaymentMethrd(invoiceFromHolder.getPaymethordString());
+        invoice.setProductList(listAdapter.getProLists());
 
-        new InsertInvoiceBgWorker(RetailDatabase.getInstance(this),invoice,listAdapter.proLists).execute();
-
-    }
-
-    class InsertInvoiceBgWorker extends AsyncTask<Void,Void,Void>{
-
-
-        private RetailDatabase retailDatabase;
-        private Invoice invoice;
-        private List<Product> productList;
-        private ProgressDialog progressDialog;
-
-        public InsertInvoiceBgWorker(RetailDatabase retailDatabase, Invoice invoice, List<Product> productList) {
-            this.retailDatabase = retailDatabase;
-            this.invoice = invoice;
-            this.productList = productList;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(InvoiceFromActivity.this);
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            long invoiceId = retailDatabase.invoiceDao().insert(invoice);
-            Log.e("idis",invoiceId+"");
-
-            List<InvoiceProduct>  invoiceProductList = new ArrayList<>();
-
-            for(int i=0;i<productList.size();i++){
-
-                invoiceProductList.add(new InvoiceProduct(
-                        productList.get(i).getName(),
-                        productList.get(i).getHsn(),
-                        productList.get(i).getBarcode(),
-                        productList.get(i).getS_price(),
-                        productList.get(i).getTotal(),
-                        productList.get(i).getIn_stock_qty(),
-                        invoiceId
-
-                ));
+        new SaveInvoiceBgWorker(this,invoice,new SaveInvoiceBgWorker.OnProgressCompliteLisn(){
+            @Override
+            public void onProgressComplited(Long invoiceId) {
 
             }
-
-            retailDatabase.invoiceProductDao().addAllInvoiceProduct(invoiceProductList);
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            progressDialog.dismiss();
-
-        }
+        }).execute();
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-         getMenuInflater().inflate(R.menu.invoice_form, menu);
+        getMenuInflater().inflate(R.menu.invoice_form, menu);
 
         return true;
     }
@@ -189,7 +134,7 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
 
         if (item.getItemId() == R.id.menu_print) {
 
-            printInvoice();
+            saveInvoice();
             return true;
         }
 
@@ -218,126 +163,15 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         listAdapter.updateProduct(product);
     }
 
-    public void onListItemClick( int position) {
-        ProductInvoiceFormDialog productDialog =  new ProductInvoiceFormDialog(listAdapter.proLists.get(position));
-        Product product = listAdapter.proLists.get(position);
-        productDialog.setArguments(product.getBundle());
+    @Override
+    public void openProduct(Product product) {
+        ProductInvoiceFormDialog productDialog =  new ProductInvoiceFormDialog(product);
         productDialog.show(getSupportFragmentManager(),null);
     }
 
-    private void updateTotal(float total){
+    @Override
+    public void updateTotal(double total) {
         invoiceFromHolder.setTotalInvoice(total);
-    }
-
-    class ListAdapter extends BaseAdapter {
-
-        List<Product> proLists = new ArrayList<>();
-        float totalInvoice = 0;
-
-        public void setProLists(List<Product> proLists) {
-            this.proLists = proLists;
-            notifyDataSetChanged();
-        }
-
-        private void deleteProduct(int i){
-            totalInvoice-=proLists.get(i).getTotal();
-            updateTotal(totalInvoice);
-            proLists.remove(i);
-            notifyDataSetChanged();
-        }
-
-        public void addProduct(Product product) {
-            float total = (float) (product.getIn_stock_qty()*product.getS_price());
-            total =total+((total*product.getGst())/100);
-            totalInvoice+=total;
-            updateTotal(totalInvoice);
-            product.setTotal(total);
-            proLists.add(product);
-            notifyDataSetChanged();
-        }
-
-        public void updateProduct(Product product){
-
-            for (int i = 0;i<proLists.size();i++){
-
-                if(product.getId()==proLists.get(i).getId()){
-
-                    totalInvoice-=proLists.get(i).getTotal();
-
-                    float total = (float) (product.getIn_stock_qty()*product.getS_price());
-                    total =total + ((total*product.getGst())/100);
-                    totalInvoice+=total;
-
-                    updateTotal(totalInvoice);
-                    product.setTotal(total);
-                    proLists.set(i,product);
-                    notifyDataSetChanged();
-                }
-
-            }
-
-        }
-
-        @Override
-        public int getCount() {
-            return proLists.size();
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return proLists.get(i);
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-
-            RowInvoiceFormProductBinding binding;
-
-            if (view == null) {
-
-                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_invoice_form_product, null);
-                binding = DataBindingUtil.bind(view);
-                view.setTag(binding);
-
-            } else {
-
-                binding = (RowInvoiceFormProductBinding) view.getTag();
-
-            }
-
-            binding.setProduct(proLists.get(i));
-
-            binding.rowIbtnprodelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteProduct(i);
-                }
-            });
-
-            binding.rowPname.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onListItemClick(i);
-                }
-            });
-
-            binding.rowPtex.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onListItemClick(i);
-                }
-            });
-
-            return binding.getRoot();
-
-
-        }
-
     }
 
 }

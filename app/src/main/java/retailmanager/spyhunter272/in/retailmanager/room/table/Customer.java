@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import static retailmanager.spyhunter272.in.retailmanager.utils.Common.isEpty;
+
 
 @Entity(tableName = "customer")
 public class Customer extends BaseObservable {
@@ -156,8 +158,9 @@ public class Customer extends BaseObservable {
     @Override
     public String toString() {
 
-        String data;
-        data = "Customer Name : "+name;
+        String data="";
+        if(!isEpty(name))
+        data += "Customer Name : "+name;
         if(!isEpty(mobile))
             data += "\nMobile : +91 "+mobile;
         if(!isEpty(gstin))
@@ -173,10 +176,6 @@ public class Customer extends BaseObservable {
         return data;
     }
 
-    private boolean isEpty(String s){
-
-        return (s==null || s.equals("")) ? true:false;
-    }
 
 
 }
