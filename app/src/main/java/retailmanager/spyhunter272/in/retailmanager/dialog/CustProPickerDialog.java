@@ -36,6 +36,7 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return inflater.inflate(R.layout.dialog_customer_product_picker,container);
     }
 

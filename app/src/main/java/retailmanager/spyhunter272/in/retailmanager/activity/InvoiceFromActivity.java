@@ -1,23 +1,13 @@
 package retailmanager.spyhunter272.in.retailmanager.activity;
 
-import android.app.ProgressDialog;
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import retailmanager.spyhunter272.in.retailmanager.adapter.InvoiceFormProductListAdapter;
 import retailmanager.spyhunter272.in.retailmanager.bgworker.SaveInvoiceBgWorker;
@@ -26,6 +16,7 @@ import retailmanager.spyhunter272.in.retailmanager.R;
 import retailmanager.spyhunter272.in.retailmanager.customview.NestedListView;
 import retailmanager.spyhunter272.in.retailmanager.databinding.ActivityInvoiceFromBinding;
 import retailmanager.spyhunter272.in.retailmanager.dialog.CustomerInvoiceFormDialog;
+import retailmanager.spyhunter272.in.retailmanager.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.in.retailmanager.dialog.ProductInvoiceFormDialog;
 import retailmanager.spyhunter272.in.retailmanager.model.InvoiceFromHolder;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Customer;
@@ -115,7 +106,9 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         new SaveInvoiceBgWorker(this,invoice,new SaveInvoiceBgWorker.OnProgressCompliteLisn(){
             @Override
             public void onProgressComplited(Long invoiceId) {
-
+                PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog(invoiceId);
+                if(!previewInvoiceDialog.isVisible())
+                    previewInvoiceDialog.show(getSupportFragmentManager(),null);
             }
         }).execute();
 

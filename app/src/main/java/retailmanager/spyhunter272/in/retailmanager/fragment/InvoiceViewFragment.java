@@ -21,6 +21,7 @@ import retailmanager.spyhunter272.in.retailmanager.activity.InvoiceActivity;
 import retailmanager.spyhunter272.in.retailmanager.databinding.FragmentInvoiceViewBinding;
 import retailmanager.spyhunter272.in.retailmanager.databinding.RowInvoiceBinding;
 
+import retailmanager.spyhunter272.in.retailmanager.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.in.retailmanager.model.InvoiceViewHolder;
 import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
 import retailmanager.spyhunter272.in.retailmanager.viewmodel.InvoiceViewModel;
@@ -89,6 +90,10 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
     }
 
     private void showInvoice(Invoice invoice){
+
+        PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog(invoice.getId());
+        if(!previewInvoiceDialog.isVisible())
+         previewInvoiceDialog.show(getFragmentManager(),null);
 
     }
 

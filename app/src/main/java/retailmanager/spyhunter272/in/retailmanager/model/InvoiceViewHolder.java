@@ -65,6 +65,7 @@ public class InvoiceViewHolder extends BaseObservable {
 
     public void setOffset(int offset) {
         this.offset = offset;
+        invoiceViewDataChangeLisn.onFilterDataChage();
         notifyChange();
     }
 

@@ -155,14 +155,14 @@
 
                     <ImageButton
                         android:id="@+id/btn_update_customer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
                         android:layout_gravity="center"
                         android:onClick="onClick"
-                        android:layout_marginRight="5dp"
-                        android:tint="@color/colorWhite"
+                        android:layout_margin="8dp"
+                        android:background="@android:color/transparent"
                         android:visibility="@{invoiceFromHolder.isUpdateCustomer ?  View.VISIBLE  : View.GONE }"
-                        android:src="@drawable/ic_edit_black_24dp"/>
+                        android:src="@drawable/edit_btn"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -482,25 +482,46 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
+                    android:spinnerMode="dialog"
+
                     android:selectedItemPosition="@={invoiceFromHolder.paymethord}"
                     android:entries="@array/ptype" />
 
 
-                <EditText
-                    android:id="@+id/eddesc"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="5dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:lines="5"
-                    android:background="@drawable/bg_edt_border"
-                    android:hint="description ..."
-                    android:textColor="@color/fontGray"
-                    android:text="@={invoiceFromHolder.description}"
-                    android:maxLength="150"
-                    android:inputType="textMultiLine" />
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/activity_horizontal_margin">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:ems="10"
+                        android:lines="3"
+                        android:focusable="false"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:text="@={invoiceFromHolder.description}"
+                        android:hint="Description" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+
+                <!--<EditText-->
+                    <!--android:id="@+id/eddesc"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginHorizontal="10dp"-->
+                    <!--android:layout_marginVertical="5dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:ems="10"-->
+                    <!--android:lines="5"-->
+                    <!--android:background="@drawable/bg_edt_border"-->
+                    <!--android:hint="description ..."-->
+                    <!--android:textColor="@color/fontGray"-->
+                    <!--android:text="@={invoiceFromHolder.description}"-->
+                    <!--android:maxLength="150"-->
+                    <!--android:inputType="textMultiLine" />-->
 
             </LinearLayout>
 

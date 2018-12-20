@@ -33,6 +33,10 @@
     <string name="label_customer_billing_addr">Billing Address</string>
     <string name="label_customer_shipping_addr">Shipping Address</string>
 
+    <string name="print_failed">Print Failed.</string>
+    <string name="print_complete">Invoice Print Complete.</string>
+
+
     <string-array name="textype">
         <item>GST(%)</item>
         <item>IGST(%)</item>
