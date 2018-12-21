@@ -244,17 +244,6 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
          getProducts();
     }
 
-    @Override
-    public void searchDoneByQuery() {
-
-    }
-
-    @Override
-    public void searchCancel() {
-
-    }
-
-
 
     class RcProductAdepter  extends RecyclerView.Adapter<RcProductAdepter.VHolder> {
 

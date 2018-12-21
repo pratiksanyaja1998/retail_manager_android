@@ -52,6 +52,7 @@ public class InvoiceActivity extends AppCompatActivity  {
                     invoiceViewFragment.searchOnQueryTextSubmit(s);
                 return true;
             }
+
         });
 
         this.menu = menu;
@@ -99,10 +100,6 @@ public class InvoiceActivity extends AppCompatActivity  {
     public interface SearchViewDataChangeListner {
 
         void searchOnQueryTextSubmit(String query);
-
-        void searchDoneByQuery();
-
-        void searchCancel();
 
     }
 

@@ -7,6 +7,14 @@
     android:layout_height="match_parent">
 
 
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        />
+
     <WebView
         android:id="@+id/webview_preview_invoice"
         android:layout_width="match_parent"
@@ -16,6 +24,7 @@
     </WebView>
 
     <LinearLayout
+        android:id="@+id/linear_action_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -28,7 +37,6 @@
             android:textColor="@color/colorWhite"
             android:background="@color/colorAccent"
             />
-
 
         <Button
             android:id="@+id/btn_print"

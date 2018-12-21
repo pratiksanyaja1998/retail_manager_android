@@ -14,6 +14,7 @@ public class Invoice extends BaseObservable {
     private long id;
     private long customerId;
     private String name;
+    private String mobile;
     private int gsttype; //  for  0 None / 1 GST / 2 IGST
     private int gst; // 0 5 12 18 28
     private double total;
@@ -47,7 +48,13 @@ public class Invoice extends BaseObservable {
         return invoiceProducts;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
 
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public void setInvoiceProducts(List<InvoiceProduct> invoiceProducts) {
         this.invoiceProducts = invoiceProducts;
@@ -165,4 +172,27 @@ public class Invoice extends BaseObservable {
     public void setYyyy(int yyyy) {
         this.yyyy = yyyy;
     }
+
+    public String getJsonData(){
+        StringBuffer stringBuffer = new StringBuffer();
+
+//        "{'name':'pratik','address':'203 opera','data':[{'saads':'asdf','saads':'asdf'},{'saads':'asdf'}]}"
+
+        stringBuffer.append("{");
+
+//      invoice info
+        stringBuffer.append("'id':'"+getId()+"',");
+        stringBuffer.append("'dd':'"+getDd()+"',");
+        stringBuffer.append("'mm':'"+getMm()+"',");
+        stringBuffer.append("'yyyy':'"+getYyyy()+"',");
+        stringBuffer.append("'tprchage':'"+isTprchage()+"',");
+
+//        customer
+        stringBuffer.append("'customer':"+customer.getJsonData()+",");
+
+        stringBuffer.append("}");
+
+        return stringBuffer.toString();
+    }
+
 }

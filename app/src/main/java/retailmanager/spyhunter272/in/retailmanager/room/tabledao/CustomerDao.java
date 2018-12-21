@@ -34,8 +34,10 @@ public interface CustomerDao {
     @Query("select * from customer LIMIT :limits OFFSET :offsets ")
     LiveData<List<Customer>> getCustomerForList(int limits,int offsets);
 
-    @Query("select * from customer where name like :filterNameHsn LIMIT :limits OFFSET :offsets ")
+    @Query("select * from customer where name like :filterNameHsn or mobile like :filterNameHsn LIMIT :limits OFFSET :offsets ")
     LiveData<List<Customer>> getCustomerForList(int limits,int offsets,String filterNameHsn);
 
+    @Query("select * from customer where id=:customerId")
+    Customer getInvoiceCustomer(long customerId);
 
 }

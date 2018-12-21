@@ -23,7 +23,7 @@ public interface InvoiceProductDao {
     @Delete
     void delete(InvoiceProduct invoiceProduct);
 
-    @Query("select * from invoiceProducts LIMIT :limits OFFSET :offsets ")
-    LiveData<List<InvoiceProduct>> getInvoiceProductForList(int limits, int offsets);
+    @Query("select * from invoiceProducts where invoiceId=:invoiceId ")
+    List<InvoiceProduct> getInvoiceProducts(long invoiceId);
 
 }

@@ -95,5 +95,22 @@ public class Address {
     }
 
 
+    public String getJsonData(){
+        StringBuffer stringBuffer = new StringBuffer();
+
+
+        stringBuffer.append("{");
+
+        stringBuffer.append("'street':'"+getStreet()+"',");
+        stringBuffer.append("'city':'"+getCity()+"',");
+        stringBuffer.append("'state':'"+getState()+"',");
+        stringBuffer.append("'pincode':'"+getPostCode()+"'");
+
+        stringBuffer.append("}");
+
+
+        return stringBuffer.toString();
+    }
+
 
 }

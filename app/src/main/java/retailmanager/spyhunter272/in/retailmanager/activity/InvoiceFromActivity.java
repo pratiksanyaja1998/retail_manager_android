@@ -37,7 +37,7 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
         invoiceFromHolder = new InvoiceFromHolder(this);
         binding.setInvoiceFromHolder(invoiceFromHolder);
 
@@ -84,13 +84,20 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
 
     }
 
+    private PreviewInvoiceDialog previewInvoiceDialog;
 
     private void saveInvoice(){
+
+        if(previewInvoiceDialog==null)
+            previewInvoiceDialog = new PreviewInvoiceDialog();
+
+        previewInvoiceDialog.show(getSupportFragmentManager(),null);
 
         Customer customer =invoiceFromHolder.getCustomerObj();
         Invoice invoice = new Invoice();
         invoice.setCustomer(customer);
         invoice.setName(customer.getName());
+        invoice.setMobile(customer.getMobile());
         Calendar calendar = invoiceFromHolder.getCalendar();
         invoice.setDd(calendar.get(Calendar.DAY_OF_MONTH));
         invoice.setMm(calendar.get(Calendar.MONTH));
@@ -106,13 +113,17 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         new SaveInvoiceBgWorker(this,invoice,new SaveInvoiceBgWorker.OnProgressCompliteLisn(){
             @Override
             public void onProgressComplited(Long invoiceId) {
-                PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog(invoiceId);
-                if(!previewInvoiceDialog.isVisible())
-                    previewInvoiceDialog.show(getSupportFragmentManager(),null);
+                if(previewInvoiceDialog!=null)
+                    previewInvoiceDialog.setInvoiceId(invoiceId);
             }
         }).execute();
 
     }
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

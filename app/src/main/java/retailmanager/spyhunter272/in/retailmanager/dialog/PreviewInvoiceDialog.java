@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -17,24 +18,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import retailmanager.spyhunter272.in.retailmanager.R;
+import retailmanager.spyhunter272.in.retailmanager.room.RetailDatabase;
+import retailmanager.spyhunter272.in.retailmanager.room.table.Invoice;
+import retailmanager.spyhunter272.in.retailmanager.room.tabledao.InvoiceDao;
 
-@SuppressLint("ValidFragment")
 public class PreviewInvoiceDialog extends DialogFragment implements View.OnClickListener {
 
 
-    private long invoiceId;
-
-    public PreviewInvoiceDialog(long invoiceId) {
-        this.invoiceId = invoiceId;
-    }
 
     private WebView webView;
+    private ProgressBar progressBar;
 
     @NonNull
     @Override
@@ -47,6 +47,7 @@ public class PreviewInvoiceDialog extends DialogFragment implements View.OnClick
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.findViewById(R.id.btn_cancel).setOnClickListener(this);
         dialog.findViewById(R.id.btn_print).setOnClickListener(this);
+        progressBar = dialog.findViewById(R.id.progress_circular);
         webView = dialog.findViewById(R.id.webview_preview_invoice);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
@@ -55,16 +56,63 @@ public class PreviewInvoiceDialog extends DialogFragment implements View.OnClick
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
-        String postData = null;
-        try {
-            postData = "username=" + URLEncoder.encode("{'name':'pratik','address':'203 opera','data':[{'saads':'asdf','saads':'asdf'},{'saads':'asdf'}]}", "UTF-8") + "&password=" + URLEncoder.encode("pratik", "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            postData = "message=false";
-        }
-        webView.postUrl("http://192.168.0.108/print.php",postData.getBytes());
+
+
+
 
         return dialog;
+    }
+
+
+    public void setInvoiceId(long invoiceId) {
+
+
+        RetailDatabase retailDatabase = RetailDatabase.getInstance(getContext());
+//        Invoice  invoice =  retailDatabase.invoiceDao().getInvoice(invoiceId);
+//        invoice.setInvoiceProducts(retailDatabase.invoiceProductDao().getInvoiceProducts(invoiceId));
+//        invoice.setCustomer(retailDatabase.customerDao().getInvoiceCustomer(invoice.getCustomerId()));
+
+        new GetInvoiceBgWorker(retailDatabase, invoiceId).execute();
+
+    }
+
+
+    class GetInvoiceBgWorker extends AsyncTask<Void,Void,Invoice>{
+
+        private RetailDatabase retailDatabase;
+        private long invoiceId;
+
+        public GetInvoiceBgWorker(RetailDatabase retailDatabase,long invoiceId) {
+            this.retailDatabase = retailDatabase;
+            this.invoiceId = invoiceId;
+        }
+
+        @Override
+        protected Invoice doInBackground(Void... voids) {
+
+            Invoice  invoice =  retailDatabase.invoiceDao().getInvoice(invoiceId);
+            invoice.setInvoiceProducts(retailDatabase.invoiceProductDao().getInvoiceProducts(invoiceId));
+            invoice.setCustomer(retailDatabase.customerDao().getInvoiceCustomer(invoice.getCustomerId()));
+
+            return invoice;
+        }
+
+        @Override
+        protected void onPostExecute(Invoice invoice) {
+            progressBar.setVisibility(View.GONE);
+
+            String postData = null;
+
+            try {
+                postData = "data=" + URLEncoder.encode(invoice.getJsonData(), "UTF-8") + "&message=" + URLEncoder.encode("true", "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                postData = "message=false";
+            }
+            webView.postUrl("http://192.168.0.108/print.php",postData.getBytes());
+
+        }
+
     }
 
 
@@ -104,4 +152,6 @@ public class PreviewInvoiceDialog extends DialogFragment implements View.OnClick
         }
         // Save the job object for later status checking
     }
+
+
 }

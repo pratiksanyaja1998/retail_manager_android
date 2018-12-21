@@ -62,13 +62,16 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
 
         invoiceViewModel = ViewModelProviders.of(this).get(InvoiceViewModel.class);
 
-        getInvoiceData();
+        getInvoices();
 
     }
 
-    private void getInvoiceData(){
+    private void getInvoices(){
 
-        invoiceViewModel.getInvoiceForList(INVOICE_SHOW_LIMIT,invoiceViewHolder.getOffset(),invoiceViewHolder.getMyCalendar()).observe(this, new Observer<List<Invoice>>() {
+        invoiceViewModel.getInvoiceForList(INVOICE_SHOW_LIMIT,
+                invoiceViewHolder.getOffset(),
+                invoiceViewHolder.getMyCalendar(),
+                invoiceViewHolder.getQuery()).observe(this, new Observer<List<Invoice>>() {
             @Override
             public void onChanged(@Nullable List<Invoice> invoices) {
                 if(invoices.size()<=0){
@@ -91,30 +94,23 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
 
     private void showInvoice(Invoice invoice){
 
-        PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog(invoice.getId());
+        PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog();
         if(!previewInvoiceDialog.isVisible())
          previewInvoiceDialog.show(getFragmentManager(),null);
+        previewInvoiceDialog.setInvoiceId(invoice.getId());
 
     }
 
     @Override
     public void searchOnQueryTextSubmit(String query) {
-
+        invoiceViewHolder.setQuery(query);
+        getInvoices();
     }
 
-    @Override
-    public void searchDoneByQuery() {
-
-    }
-
-    @Override
-    public void searchCancel() {
-
-    }
 
     @Override
     public void onFilterDataChage() {
-        getInvoiceData();
+        getInvoices();
     }
 
 

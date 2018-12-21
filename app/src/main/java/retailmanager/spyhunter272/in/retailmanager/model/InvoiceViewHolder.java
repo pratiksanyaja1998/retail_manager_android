@@ -22,6 +22,7 @@ public class InvoiceViewHolder extends BaseObservable {
     private boolean isNoData=false;
     private Calendar myCalendar = Calendar.getInstance();
     public static int INVOICE_SHOW_LIMIT =10;
+    private String query=null;
 
 
     private InvoiceViewDataChangeLisn invoiceViewDataChangeLisn;
@@ -34,6 +35,14 @@ public class InvoiceViewHolder extends BaseObservable {
 
         date =  sdf.format(myCalendar.getTime());
 
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public String getQuery() {
+        return query;
     }
 
     public Calendar getMyCalendar() {

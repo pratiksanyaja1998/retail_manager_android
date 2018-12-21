@@ -41,9 +41,9 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
 
     @Override
     protected void onPreExecute() {
-        progressDialog = new ProgressDialog(ctx);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(ctx);
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
     }
 
     @Override
@@ -83,7 +83,7 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
 
     @Override
     protected void onPostExecute(Long invoiceId) {
-        progressDialog.dismiss();
+//        progressDialog.dismiss();
         onProgressCompliteLisn.onProgressComplited(invoiceId);
 
     }

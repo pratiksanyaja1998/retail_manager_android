@@ -196,15 +196,7 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
             getCustomer();
     }
 
-    @Override
-    public void searchDoneByQuery() {
 
-    }
-
-    @Override
-    public void searchCancel() {
-
-    }
 
     class RcCustomerAdepter extends RecyclerView.Adapter<RcCustomerAdepter.VHolder> {
 

@@ -16,7 +16,7 @@ import static retailmanager.spyhunter272.in.retailmanager.utils.Common.isEpty;
 public class Customer extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     private String name;
 
@@ -52,7 +52,7 @@ public class Customer extends BaseObservable {
 
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -84,7 +84,7 @@ public class Customer extends BaseObservable {
         return shipping_address;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -118,7 +118,7 @@ public class Customer extends BaseObservable {
 
     public Bundle getBundle(){
         Bundle bundle = new Bundle();
-        bundle.putInt("id",id);
+        bundle.putLong("id",id);
         bundle.putString("name",name);
         bundle.putString("mobile",mobile);
         bundle.putString("gstin",gstin);
@@ -170,12 +170,31 @@ public class Customer extends BaseObservable {
 
         if(is_same_b_s)
             data += "\nShipping Address : "+billing_address.toString();
-        else if(isEpty(shipping_address.toString()))
+        else if(!isEpty(shipping_address.toString()))
             data += "\nShipping Address : "+shipping_address.toString();
 
         return data;
     }
 
+
+    public String getJsonData(){
+
+        StringBuffer stringBuffer = new StringBuffer();
+
+        stringBuffer.append("{");
+
+        stringBuffer.append("'id':'"+getId()+"',");
+        stringBuffer.append("'name':'"+getName()+"',");
+        stringBuffer.append("'same_b_s':'"+isIs_same_b_s()+"',");
+        stringBuffer.append("'b_adr':"+billing_address.getJsonData()+",");
+        stringBuffer.append("'s_adr':"+shipping_address.getJsonData()+"");
+
+
+        stringBuffer.append("}");
+
+
+       return   stringBuffer.toString();
+    }
 
 
 }

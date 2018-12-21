@@ -96,9 +96,7 @@ public class ProductActivity extends AppCompatActivity {
 
         void searchOnQueryTextSubmit(String query);
 
-        void searchDoneByQuery();
 
-        void searchCancel();
 
     }
 
