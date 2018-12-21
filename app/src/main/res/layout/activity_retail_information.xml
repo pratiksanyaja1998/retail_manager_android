@@ -10,7 +10,7 @@
 
         <variable
             name="retailInfo"
-            type="retailmanager.spyhunter272.in.retailmanager.model.RetailInformationHolder" />
+            type="retailmanager.spyhunter272.com.model.RetailInformationHolder" />
 
     </data>
 

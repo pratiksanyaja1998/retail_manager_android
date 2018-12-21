@@ -18,7 +18,7 @@ repositories {
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "retailmanager.spyhunter272.in.retailmanager"
+        applicationId "retailmanager.spyhunter272.com"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1

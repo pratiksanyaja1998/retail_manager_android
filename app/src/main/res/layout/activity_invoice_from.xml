@@ -11,7 +11,7 @@
 
         <variable
             name="invoiceFromHolder"
-            type="retailmanager.spyhunter272.in.retailmanager.model.InvoiceFromHolder" />
+            type="retailmanager.spyhunter272.com.model.InvoiceFromHolder" />
 
     </data>
 
@@ -311,14 +311,14 @@
                         </LinearLayout>
 
 
-                        <retailmanager.spyhunter272.in.retailmanager.customview.NestedListView
+                        <retailmanager.spyhunter272.com.customview.NestedListView
                             android:id="@+id/listproductholder"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
-                        </retailmanager.spyhunter272.in.retailmanager.customview.NestedListView>
+                        </retailmanager.spyhunter272.com.customview.NestedListView>
 
                         <!--<LinearLayout-->
                             <!--android:layout_width="match_parent"-->

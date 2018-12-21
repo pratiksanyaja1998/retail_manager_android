@@ -9,11 +9,11 @@
 
         <variable
             name="customer"
-            type="retailmanager.spyhunter272.in.retailmanager.room.table.Customer" />
+            type="retailmanager.spyhunter272.com.room.table.Customer" />
 
         <variable
             name="customerDialogHolder"
-            type="retailmanager.spyhunter272.in.retailmanager.model.CustomerDialogHolder" />
+            type="retailmanager.spyhunter272.com.model.CustomerDialogHolder" />
 
     </data>
 

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="product"
-            type="retailmanager.spyhunter272.in.retailmanager.room.table.Product"/>
+            type="retailmanager.spyhunter272.com.room.table.Product"/>
     </data>
 
 
@@ -78,8 +78,8 @@
         android:background="?android:attr/selectableItemBackground"
         android:padding="3dp"
 
-        app:srcCompat="@drawable/ic_delete_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
+        android:src="@drawable/ic_delete_black_24dp"
+         />
 
 </LinearLayout>
 

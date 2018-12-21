@@ -9,11 +9,11 @@
 
         <variable
             name="product"
-            type="retailmanager.spyhunter272.in.retailmanager.room.table.Product" />
+            type="retailmanager.spyhunter272.com.room.table.Product" />
 
         <variable
             name="productDialogHolder"
-            type="retailmanager.spyhunter272.in.retailmanager.model.ProductDialogHolder" />
+            type="retailmanager.spyhunter272.com.model.ProductDialogHolder" />
 
     </data>
 
