@@ -19,7 +19,7 @@ public class InvoiceActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice);
-
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
         invoiceViewFragment = new InvoiceViewFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -88,9 +88,10 @@ public class InvoiceActivity extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
         super.onBackPressed();
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof InvoiceViewFragment) {
-            setTitle(getResources().getString(R.string.customer));
+            setTitle(getResources().getString(R.string.invoice));
             menu.findItem(R.id.action_search).setVisible(true);
             menu.findItem(R.id.menu_settings).setVisible(true);
         }

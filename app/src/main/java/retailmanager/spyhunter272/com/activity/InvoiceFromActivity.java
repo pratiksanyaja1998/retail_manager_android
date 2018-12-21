@@ -36,8 +36,9 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+
         invoiceFromHolder = new InvoiceFromHolder(this);
         binding.setInvoiceFromHolder(invoiceFromHolder);
 
@@ -121,10 +122,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
     }
 
 
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -177,5 +174,13 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
     public void updateTotal(double total) {
         invoiceFromHolder.setTotalInvoice(total);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+    }
+
 
 }

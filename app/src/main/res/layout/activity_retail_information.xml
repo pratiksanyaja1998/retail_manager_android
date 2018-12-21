@@ -42,11 +42,13 @@
                 android:layout_height="120dp" />
 
             <ImageButton
+                android:id="@+id/btn_change_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/image_logo"
                 android:layout_alignEnd="@+id/image_logo"
                 android:background="?android:attr/selectableItemBackground"
+                android:onClick="onClick"
                 android:src="@drawable/edit_btn" />
         </RelativeLayout>
 

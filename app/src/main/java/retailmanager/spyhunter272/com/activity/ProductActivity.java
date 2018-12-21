@@ -20,6 +20,9 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+
+
 
         productViewFragment = new ProductViewFragment();
 
@@ -83,6 +86,8 @@ public class ProductActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+
         super.onBackPressed();
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof ProductViewFragment) {
             setTitle(getResources().getString(R.string.products));

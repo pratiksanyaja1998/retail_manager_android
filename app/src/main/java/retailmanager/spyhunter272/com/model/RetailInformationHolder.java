@@ -46,7 +46,6 @@ public class RetailInformationHolder extends BaseObservable {
 
     }
 
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -86,4 +85,5 @@ public class RetailInformationHolder extends BaseObservable {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

@@ -39,6 +39,7 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_home);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
         Log.e("id is",FirebaseInstanceId.getInstance().getToken()+"");
 
@@ -159,6 +160,7 @@ public class HomeActivity extends AppCompatActivity
 
         } else {
 
+            overridePendingTransition(R.anim.trans_left_out, R.anim.trans_left_in);
             super.onBackPressed();
 
         }

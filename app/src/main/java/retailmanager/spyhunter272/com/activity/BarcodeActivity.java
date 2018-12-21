@@ -39,6 +39,8 @@ public class BarcodeActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+
 
         barcodeImageView = findViewById(R.id.img_barcode_view);
         contentTxt = findViewById(R.id.tv_barcode_content);
@@ -158,4 +160,13 @@ public class BarcodeActivity extends AppCompatActivity implements View.OnClickLi
 
         return true;
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+    }
+
+
 }

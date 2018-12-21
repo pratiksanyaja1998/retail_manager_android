@@ -20,7 +20,7 @@ public class CustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
         customerViewFragment = new CustomerViewFragment();
 
@@ -89,6 +89,7 @@ public class CustomerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
         super.onBackPressed();
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof CustomerViewFragment) {
             setTitle(getResources().getString(R.string.customer));
