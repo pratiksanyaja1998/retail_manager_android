@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tint="@color/colorWhite"
-                android:backgroundTint="@color/colorButtonCancel"
+                android:backgroundTint="@color/colorPrimary"
                 android:src="@drawable/ic_person_add_black_24dp"
                 />
 
@@ -343,7 +343,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorAccent"
+                android:background="@color/colorPrimary"
                 android:padding="@dimen/button_padding"
                 android:text="save"
                 android:textColor="@color/colorWhite" />
@@ -354,8 +354,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/button_padding"
+                android:background="@color/colorAccent"
                 android:text="cancel"
-                android:backgroundTint="@color/colorButtonCancel"
                 android:textColor="@color/colorWhite" />
 
         </LinearLayout>

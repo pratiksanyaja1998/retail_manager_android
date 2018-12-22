@@ -117,6 +117,7 @@
                     android:layout_gravity="center"
                     android:tint="@color/colorWhite"
                     android:onClick="onClick"
+                    android:backgroundTint="@color/colorPrimary"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/ic_person_add_black_24dp"/>
 
@@ -127,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:onClick="onClick"
+                    android:backgroundTint="@color/colorPrimary"
                     android:src="@drawable/ic_search_black_24dp"/>
 
             </LinearLayout>
@@ -212,6 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onClick"
+                        android:backgroundTint="@color/colorPrimary"
                         android:src="@drawable/ic_search_black_24dp"/>
 
                 </LinearLayout>
@@ -241,7 +244,6 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#797c8180"
                             android:orientation="horizontal"
                             android:paddingBottom="8dp"
                             android:paddingStart="5dp"
@@ -255,7 +257,7 @@
                                 android:layout_weight="2"
                                 android:padding="3dp"
                                 android:text="PRODUCT NAME"
-                                android:textColor="#fff"
+                                android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -265,7 +267,7 @@
                                 android:layout_weight=".4"
                                 android:padding="3dp"
                                 android:text="QTY"
-                                android:textColor="#FFF"
+                                android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -275,7 +277,7 @@
                                 android:layout_weight=".8"
                                 android:padding="3dp"
                                 android:text="RATE"
-                                android:textColor="#fff"
+                                android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
                             <Spinner
@@ -295,7 +297,7 @@
                                 android:layout_weight=".4"
                                 android:padding="3dp"
                                 android:text="TOTAL"
-                                android:textColor="#FFF"
+                                android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
 
@@ -305,9 +307,8 @@
                                 android:background="@null"
                                 android:padding="3dp"
                                 android:textSize="18sp"
-                                android:tint="@color/colorWhite"
-                                app:srcCompat="@drawable/ic_delete_black_24dp"
-                                tools:ignore="VectorDrawableCompat" />
+                                android:src="@drawable/ic_delete_black_24dp"
+                                 />
                         </LinearLayout>
 
 
@@ -403,12 +404,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#797c8180"
                         android:gravity="end"
                         android:padding="8dp"
                         android:text="@={invoiceFromHolder.totalWithDiscount+``}"
                         android:textAlignment="textEnd"
-                        android:textColor="#FFF"
+                        android:textColor="@color/fontDark"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -491,15 +491,19 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/activity_horizontal_margin">
+                    android:focusable="true"
+                    android:layout_margin="8dp"
+                    android:focusableInTouchMode="true"
+                    >
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:ems="10"
                         android:lines="3"
-                        android:focusable="false"
                         android:layout_height="wrap_content"
                         android:inputType="textMultiLine"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:text="@={invoiceFromHolder.description}"
                         android:hint="Description" />
 

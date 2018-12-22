@@ -256,9 +256,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
             android:textColor="@color/colorWhite"
             android:padding="@dimen/button_padding"
+            android:background="@color/colorPrimary"
+
             android:text="save" />
 
         <Button
@@ -268,7 +269,8 @@
             android:layout_weight="1"
             android:textColor="@color/colorWhite"
             android:padding="@dimen/button_padding"
-            android:backgroundTint="@color/colorButtonCancel"
+            android:background="@color/colorAccent"
+
             android:text="cancel" />
 
     </LinearLayout>

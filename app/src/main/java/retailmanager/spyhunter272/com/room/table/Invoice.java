@@ -28,17 +28,16 @@ public class Invoice extends BaseObservable {
 
     @Ignore
     private List<Product> productList;
-    @Ignore List<InvoiceProduct> invoiceProducts;
 
     @Ignore
+    List<InvoiceProduct> invoiceProducts;
 
+    @Ignore
     Customer customer;
-
 
     public Customer getCustomer() {
         return customer;
     }
-
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -188,6 +187,7 @@ public class Invoice extends BaseObservable {
         stringBuffer.append("'tprchage':'"+isTprchage()+"',");
 
 //        customer
+        if(customer!=null)
         stringBuffer.append("'customer':"+customer.getJsonData()+",");
 
         stringBuffer.append("}");

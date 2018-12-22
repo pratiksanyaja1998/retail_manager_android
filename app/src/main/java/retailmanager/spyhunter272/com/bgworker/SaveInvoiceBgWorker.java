@@ -48,8 +48,11 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
     @Override
     protected Long doInBackground(Void... voids) {
 
-
-        long customerId= retailDatabase.customerDao().insert(invoice.getCustomer());
+        long customerId;
+        if(invoice.getCustomer().getId()==-1)
+            customerId= retailDatabase.customerDao().insert(invoice.getCustomer());
+        else
+            customerId=invoice.getCustomer().getId();
 
         invoice.setCustomerId(customerId);
 

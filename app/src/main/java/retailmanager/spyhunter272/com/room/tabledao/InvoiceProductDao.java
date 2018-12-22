@@ -16,7 +16,7 @@ public interface InvoiceProductDao {
     @Insert
     long insert(InvoiceProduct invoiceProduct);
 
-    @Insert(onConflict = OnConflictStrategy.FAIL)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     public long[] addAllInvoiceProduct(List<InvoiceProduct> list);
 
     @Delete

@@ -19,7 +19,7 @@ public class InvoiceActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice);
-        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
         invoiceViewFragment = new InvoiceViewFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

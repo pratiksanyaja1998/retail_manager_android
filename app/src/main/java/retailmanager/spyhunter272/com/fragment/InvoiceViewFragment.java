@@ -19,6 +19,7 @@ import retailmanager.spyhunter272.com.activity.InvoiceActivity;
 import retailmanager.spyhunter272.com.databinding.FragmentInvoiceViewBinding;
 import retailmanager.spyhunter272.com.databinding.RowInvoiceBinding;
 
+import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.model.InvoiceViewHolder;
 import retailmanager.spyhunter272.com.room.table.Invoice;
@@ -86,7 +87,20 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
 
     private void deleteInvoice(Invoice invoice){
 
-        invoiceViewModel.delete(invoice);
+        CustomAlertDialog.show(getContext(), new CustomAlertDialog.CustomAlertDialogEvent() {
+            @Override
+            public void eventCancel() {
+
+            }
+
+            @Override
+            public void eventDone() {
+                invoiceViewModel.delete(invoice);
+
+            }
+        });
+
+
 
     }
 

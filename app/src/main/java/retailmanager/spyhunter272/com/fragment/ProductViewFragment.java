@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retailmanager.spyhunter272.com.adapter.ProdCateSpinnerBaseAdepter;
+import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.dialog.ProductDialog;
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.activity.ProductActivity;
@@ -186,18 +187,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
             linearEmtyProduct.setVisibility(View.INVISIBLE);
         }
 
-//        if(listSize>=PRODUCT_SHOW_LIMIT){
-//            iBtnNext.setVisibility(View.VISIBLE);
-//        }else {
-//            iBtnNext.setVisibility(View.GONE);
-//            iBtnPrev.setVisibility(View.VISIBLE);
-//        }
-//
-//        if(offSet==0){
-//            iBtnPrev.setVisibility(View.GONE);
-//        }else {
-//            iBtnPrev.setVisibility(View.VISIBLE);
-//        }
+
 
     }
 
@@ -234,7 +224,22 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
     }
 
     public void deleteProduct(Product product) {
-        productViewModel.delete(product);
+
+
+        CustomAlertDialog.show(getContext(), new CustomAlertDialog.CustomAlertDialogEvent() {
+            @Override
+            public void eventCancel() {
+
+            }
+
+            @Override
+            public void eventDone() {
+                productViewModel.delete(product);
+
+
+            }
+        });
+
     }
 
 

@@ -36,6 +36,7 @@
     <string name="print_failed">Print Failed.</string>
     <string name="print_complete">Invoice Print Complete.</string>
 
+    <string name="alert">Alert !!!</string>
 
     <string-array name="textype">
         <item>GST(%)</item>
@@ -105,5 +106,6 @@
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alert_message">Do You Wont To Perform This Action Your Data May Be loss ?</string>
 
 </resources>

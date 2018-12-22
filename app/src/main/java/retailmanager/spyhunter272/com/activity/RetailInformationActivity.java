@@ -41,9 +41,9 @@ public class RetailInformationActivity extends AppCompatActivity {
        new Handler().post( new Runnable(){
 
            public void run() {
-               if(StaticInfoUtils.RETAIL_LOGO_FILE.exists()){
+               if(StaticInfoUtils.retailLogoFile(RetailInformationActivity.this).exists()){
 
-                   Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.RETAIL_LOGO_FILE.getAbsolutePath());
+                   Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(RetailInformationActivity.this).getAbsolutePath());
                    binding.imageLogo.setImageBitmap(myBitmap);
 
                }

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ import java.io.IOException;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
+
 
 public class SaveRetailLogoBgWorker extends AsyncTask<Uri,Void,Bitmap> {
 
@@ -42,7 +44,8 @@ public class SaveRetailLogoBgWorker extends AsyncTask<Uri,Void,Bitmap> {
         FileOutputStream fOut = null;
         try {
             bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uris[0]);
-            fOut = new FileOutputStream(StaticInfoUtils.RETAIL_LOGO_FILE);
+            fOut = new FileOutputStream(StaticInfoUtils.retailLogoFile(context));
+            Log.e("pratik",StaticInfoUtils.retailLogoFile(context).toString());
             bmp.compress(Bitmap.CompressFormat.PNG, 85, fOut);
             fOut.flush();
             fOut.close();

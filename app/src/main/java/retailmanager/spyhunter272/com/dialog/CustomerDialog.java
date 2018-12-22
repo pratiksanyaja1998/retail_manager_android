@@ -35,7 +35,6 @@ import retailmanager.spyhunter272.com.databinding.DialogCustomerBinding;
 public class CustomerDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
-    private CustomerViewModel customerViewModel;
     private Customer customer;
 
     private boolean isUpdate;
@@ -46,20 +45,22 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
         this.isUpdate = isUpdate;
     }
 
+    private  DialogCustomerBinding binding;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        DialogCustomerBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_customer,container,false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.dialog_customer,container,false);
 
-        dialogCustomerBinding.setCustomer(customer);
+        binding.setCustomer(customer);
 
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        dialogCustomerBinding.setCustomerDialogHolder(new CustomerDialogHolder(myPreference.getBoolean("mobile",true),myPreference.getBoolean("mobile",true),
+        binding.setCustomerDialogHolder(new CustomerDialogHolder(myPreference.getBoolean("mobile",true),myPreference.getBoolean("mobile",true),
                 myPreference.getBoolean("baddr",true),myPreference.getBoolean("saddr",true) ));
 
-        return dialogCustomerBinding.getRoot();
+        return binding.getRoot();
     }
 
 
@@ -72,11 +73,9 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
         ArrayAdapter arrayAdapter =  new ArrayAdapter(getContext(), android.R.layout.simple_dropdown_item_1line,
                 getResources().getStringArray(R.array.state_name));
 
-        view.findViewById(R.id.btn_dialog_close).setOnClickListener(this);
-        view.findViewById(R.id.btn_dialog_ok).setOnClickListener(this);
-        view.findViewById(R.id.ibtn_pic_contact).setOnClickListener(this);
-
-        customerViewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
+        binding.btnDialogClose.setOnClickListener(this);
+        binding.btnDialogOk.setOnClickListener(this);
+        binding.ibtnPicContact.setOnClickListener(this);
 
     }
 
@@ -91,12 +90,11 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
 
                     if (isUpdate) {
 
-                        customerViewModel.update(customer);
-                        setArguments(null);
+                        ViewModelProviders.of(this).get(CustomerViewModel.class).update(customer);
 
                     } else {
 
-                        customerViewModel.insert(customer);
+                        ViewModelProviders.of(this).get(CustomerViewModel.class).insert(customer);
                     }
 
                 dismiss();
@@ -140,7 +138,6 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
 
                 int nameColumnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
                 String name = cursor.getString(nameColumnIndex);
-
 
                 customer.setName(name);
                 customer.setMobile(number);

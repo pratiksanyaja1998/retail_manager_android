@@ -16,7 +16,7 @@ import static retailmanager.spyhunter272.com.utils.Common.isEpty;
 public class Customer extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    private long id=-1;
 
     private String name;
 

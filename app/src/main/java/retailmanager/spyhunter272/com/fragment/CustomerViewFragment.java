@@ -26,6 +26,7 @@ import java.util.List;
 
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.activity.CustomerActivity;
+import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.dialog.CustomerDialog;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
@@ -124,7 +125,20 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
 
     private void deleteCustomer(Customer customer){
 
-        customerViewModel.delete(customer);
+        CustomAlertDialog.show(getContext(), new CustomAlertDialog.CustomAlertDialogEvent() {
+            @Override
+            public void eventCancel() {
+
+            }
+
+            @Override
+            public void eventDone() {
+                customerViewModel.delete(customer);
+
+            }
+        });
+
+
 
     }
 
