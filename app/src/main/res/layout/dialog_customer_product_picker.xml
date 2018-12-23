@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="holder"
+            type="retailmanager.spyhunter272.com.holder.CustProPickerDialogHolder" />
+
+    </data>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +28,40 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:layout_height="wrap_content" />
 
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:visibility="@{holder.isLoding ? View.VISIBLE : View.GONE }"
+        />
+
+    <FrameLayout
+        android:id="@+id/relative_spinner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/components_margin_bottom"
+        android:background="@drawable/spinner_border"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:padding="5dp"
+        >
+
+        <Spinner
+            android:id="@+id/spinner_product_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            tools:listitem="@layout/row_simple_spinner_textview"
+            android:spinnerMode="dialog" />
+
+
+    </FrameLayout>
+
     <ListView
         android:id="@+id/listview_dialog"
         android:layout_width="match_parent"
@@ -26,16 +74,10 @@
 
     </ListView>
 
-    <ProgressBar
-        android:id="@+id/progress_circular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        />
+
 
     <ImageView
-        android:visibility="gone"
+        android:visibility="@{holder.isDataFound ? View.GONE : View.VISIBLE }"
         android:id="@+id/image_not_found"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
@@ -44,3 +86,5 @@
         android:src="@drawable/not_found_bg"/>
 
 </LinearLayout>
+
+</layout>

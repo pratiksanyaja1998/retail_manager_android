@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.model;
+package retailmanager.spyhunter272.com.holder;
 
 import android.databinding.BaseObservable;
 

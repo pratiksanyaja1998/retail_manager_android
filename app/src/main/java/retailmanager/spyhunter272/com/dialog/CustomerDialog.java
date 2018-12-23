@@ -25,7 +25,7 @@ import android.widget.ArrayAdapter;
 
 
 import retailmanager.spyhunter272.com.R;
-import retailmanager.spyhunter272.com.model.CustomerDialogHolder;
+import retailmanager.spyhunter272.com.holder.CustomerDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 

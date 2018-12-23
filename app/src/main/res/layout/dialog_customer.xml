@@ -13,7 +13,7 @@
 
         <variable
             name="customerDialogHolder"
-            type="retailmanager.spyhunter272.com.model.CustomerDialogHolder" />
+            type="retailmanager.spyhunter272.com.holder.CustomerDialogHolder" />
 
     </data>
 

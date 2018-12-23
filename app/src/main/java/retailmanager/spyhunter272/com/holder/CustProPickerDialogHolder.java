@@ -1,0 +1,37 @@
+package retailmanager.spyhunter272.com.holder;
+
+import android.databinding.BaseObservable;
+
+public class CustProPickerDialogHolder extends BaseObservable {
+
+    private boolean isCustomerOrProduct ,isDataFound=false ,isLoding = true;
+
+
+    public void setCustomerOrProduct(boolean customerOrProduct) {
+        isCustomerOrProduct = customerOrProduct;
+        notifyChange();
+    }
+
+    public boolean isCustomerOrProduct() {
+        return isCustomerOrProduct;
+    }
+
+    public boolean isDataFound() {
+        return isDataFound;
+    }
+
+    public void setDataFound(boolean dataFound) {
+        isDataFound = dataFound;
+        isLoding=false;
+        notifyChange();
+    }
+
+    public void setLoding(boolean loding) {
+        isLoding = loding;
+        notifyChange();
+    }
+
+    public boolean isLoding() {
+        return isLoding;
+    }
+}

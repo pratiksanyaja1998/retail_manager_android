@@ -21,11 +21,11 @@ import retailmanager.spyhunter272.com.databinding.RowInvoiceBinding;
 
 import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
-import retailmanager.spyhunter272.com.model.InvoiceViewHolder;
+import retailmanager.spyhunter272.com.holder.InvoiceViewHolder;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.viewmodel.InvoiceViewModel;
 
-import static retailmanager.spyhunter272.com.model.InvoiceViewHolder.INVOICE_SHOW_LIMIT;
+import static retailmanager.spyhunter272.com.holder.InvoiceViewHolder.INVOICE_SHOW_LIMIT;
 
 
 public class InvoiceViewFragment extends Fragment implements InvoiceActivity.SearchViewDataChangeListner, InvoiceViewHolder.InvoiceViewDataChangeLisn {

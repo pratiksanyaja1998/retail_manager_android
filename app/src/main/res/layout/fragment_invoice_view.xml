@@ -8,7 +8,7 @@
 
         <variable
             name="invoiceViewHolder"
-            type="retailmanager.spyhunter272.com.model.InvoiceViewHolder" />
+            type="retailmanager.spyhunter272.com.holder.InvoiceViewHolder" />
 
     </data>
 

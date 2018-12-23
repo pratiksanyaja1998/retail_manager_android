@@ -20,7 +20,7 @@ import android.widget.TextView;
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.activity.BarcodeActivity;
 import retailmanager.spyhunter272.com.databinding.DialogProductBinding;
-import retailmanager.spyhunter272.com.model.ProductDialogHolder;
+import retailmanager.spyhunter272.com.holder.ProductDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Product;
 
 @SuppressLint("ValidFragment")

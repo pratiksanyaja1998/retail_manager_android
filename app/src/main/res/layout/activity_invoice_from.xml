@@ -11,7 +11,7 @@
 
         <variable
             name="invoiceFromHolder"
-            type="retailmanager.spyhunter272.com.model.InvoiceFromHolder" />
+            type="retailmanager.spyhunter272.com.holder.InvoiceFromHolder" />
 
     </data>
 
@@ -406,7 +406,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="8dp"
-                        android:text="@={invoiceFromHolder.totalWithDiscount+``}"
+                        android:text="@={invoiceFromHolder.totalWithDiscount+``, default=Total}"
                         android:textAlignment="textEnd"
                         android:textColor="@color/fontDark"
                         android:textSize="18sp"

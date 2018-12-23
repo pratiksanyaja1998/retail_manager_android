@@ -20,7 +20,7 @@ import android.widget.ArrayAdapter;
 
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.databinding.DialogCustomerBinding;
-import retailmanager.spyhunter272.com.model.CustomerDialogHolder;
+import retailmanager.spyhunter272.com.holder.CustomerDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Address;
 import retailmanager.spyhunter272.com.room.table.Customer;
 

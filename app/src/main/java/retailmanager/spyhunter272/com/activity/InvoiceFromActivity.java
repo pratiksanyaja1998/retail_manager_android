@@ -18,7 +18,7 @@ import retailmanager.spyhunter272.com.databinding.ActivityInvoiceFromBinding;
 import retailmanager.spyhunter272.com.dialog.CustomerInvoiceFormDialog;
 import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.dialog.ProductInvoiceFormDialog;
-import retailmanager.spyhunter272.com.model.InvoiceFromHolder;
+import retailmanager.spyhunter272.com.holder.InvoiceFromHolder;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.room.table.Product;

@@ -25,7 +25,7 @@ import java.util.List;
 import retailmanager.spyhunter272.com.adapter.ProdCateSpinnerBaseAdepter;
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.activity.BarcodeActivity;
-import retailmanager.spyhunter272.com.model.ProductDialogHolder;
+import retailmanager.spyhunter272.com.holder.ProductDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Product;
 import retailmanager.spyhunter272.com.room.table.ProductCategory;
 import retailmanager.spyhunter272.com.viewmodel.ProductCategoryViewModel;
