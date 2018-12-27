@@ -1,5 +1,7 @@
 package retailmanager.spyhunter272.com.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +25,7 @@ import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.room.table.Product;
 
-public class InvoiceFromActivity extends AppCompatActivity implements ProductInvoiceFormDialog.ProductsLisner,
+public class InvoiceFromActivity extends AppCompatActivity implements PreviewInvoiceDialog.PreviewInvoiceDialogListener,ProductInvoiceFormDialog.ProductsLisner,
         CustProPickerDialog.DialogSearchItemSelectLisner,
         CustomerInvoiceFormDialog.CustomerLisner,
         InvoiceFormProductListAdapter.ProductListLiner {
@@ -89,11 +91,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
 
     private void saveInvoice(){
 
-        if(previewInvoiceDialog==null)
-            previewInvoiceDialog = new PreviewInvoiceDialog();
-
-        previewInvoiceDialog.show(getSupportFragmentManager(),null);
-
         Customer customer =invoiceFromHolder.getCustomerObj();
         Invoice invoice = new Invoice();
         invoice.setCustomer(customer);
@@ -114,8 +111,12 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         new SaveInvoiceBgWorker(this,invoice,new SaveInvoiceBgWorker.OnProgressCompliteLisn(){
             @Override
             public void onProgressComplited(Long invoiceId) {
-                if(previewInvoiceDialog!=null)
-                    previewInvoiceDialog.setInvoiceId(invoiceId);
+
+
+                    Intent intent = new Intent(InvoiceFromActivity.this,InvoiceShowActivity.class);
+                    intent.putExtra(InvoiceShowActivity.KEY_INVOICE_ID,invoiceId);
+                    startActivity(intent);
+
             }
         }).execute();
 
@@ -183,4 +184,8 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
     }
 
 
+    @Override
+    public Activity getActivityObj() {
+        return this;
+    }
 }

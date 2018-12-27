@@ -156,7 +156,7 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
                 Intent intent = new Intent(getActivity(),BarcodeActivity.class);
 
                 if(product!=null) {
-                    if (!product.getBarcode().equals("") && product.getBarcode() != null) {
+                    if ( product.getBarcode() != null) {
                         intent.putExtra(BarcodeActivity.KEY_INTENT_SEND_CONTENT, product.getBarcode());
                         intent.putExtra(BarcodeActivity.INTENT_KEY_FOR_SHOW, BarcodeActivity.FLAG_SHOW_BARCODE);
                     }

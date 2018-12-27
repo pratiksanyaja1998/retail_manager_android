@@ -2,6 +2,7 @@ package retailmanager.spyhunter272.com.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.activity.InvoiceActivity;
+import retailmanager.spyhunter272.com.activity.InvoiceFromActivity;
+import retailmanager.spyhunter272.com.activity.InvoiceShowActivity;
 import retailmanager.spyhunter272.com.databinding.FragmentInvoiceViewBinding;
 import retailmanager.spyhunter272.com.databinding.RowInvoiceBinding;
 
@@ -106,10 +109,14 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
 
     private void showInvoice(Invoice invoice){
 
-        PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog();
-        if(!previewInvoiceDialog.isVisible())
-         previewInvoiceDialog.show(getFragmentManager(),null);
-        previewInvoiceDialog.setInvoiceId(invoice.getId());
+//        PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog();
+//        if(!previewInvoiceDialog.isVisible())
+//         previewInvoiceDialog.show(getFragmentManager(),null);
+//        previewInvoiceDialog.setInvoiceId(invoice.getId());
+
+        Intent intent = new Intent(getContext(),InvoiceShowActivity.class);
+        intent.putExtra(InvoiceShowActivity.KEY_INVOICE_ID,invoice.getId());
+        startActivity(intent);
 
     }
 

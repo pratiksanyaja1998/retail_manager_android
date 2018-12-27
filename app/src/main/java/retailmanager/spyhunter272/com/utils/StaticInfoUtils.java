@@ -6,6 +6,8 @@ import android.os.Environment;
 import java.io.File;
 import java.io.FileWriter;
 
+import retailmanager.spyhunter272.com.room.table.Invoice;
+
 public class StaticInfoUtils {
 
 //    public static File RETAIL_LOGO_FILE = new File(Environment.getExternalStorageDirectory(), "retailLogo .png");
@@ -19,6 +21,25 @@ public class StaticInfoUtils {
         }
 
         return new File(dir,"retailLogo.png");
+    }
+
+    public static File getInvoiceDir(Context mcoContext, Invoice invoice){
+        File dir = new File(Environment.getExternalStorageDirectory(),"RetailManager/invoice/"+invoice.getYyyy()+"/"+invoice.getMm()+"/"+invoice.getDd());
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+
+        return dir;
+    }
+
+    public static File getInvoiceFile(Context mcoContext, Invoice invoice){
+
+        return new File(getInvoiceDir(mcoContext,invoice),getInvoiceFileName(mcoContext,invoice));
+    }
+
+    public static String getInvoiceFileName(Context mcoContext, Invoice invoice){
+
+        return "IN00"+invoice.getId()+".pdf";
     }
 
 

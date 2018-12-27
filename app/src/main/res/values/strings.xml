@@ -105,6 +105,13 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="templete_list">
+        <item>default</item>
+        <item>color</item>
+        <item>widthLogo</item>
+        <item>simple</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alert_message">Do You Wont To Perform This Action Your Data May Be loss ?</string>
 

@@ -1,10 +1,14 @@
 package retailmanager.spyhunter272.com.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -61,7 +65,35 @@ public class HomeActivity extends AppCompatActivity
         fragmentTransaction.add(R.id.fragment_root,dashbordHomeFragment);
         fragmentTransaction.commit();
 
+
     }
+
+    private void checkPermission(){
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+        }else if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+
+        }
+
+
+    }
+
+    private static  final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 3;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 4;
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -167,5 +199,34 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    checkPermission();
+                } else {
+
+                }
+                return;
+            }
+            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE:{
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    checkPermission();
+                } else {
+
+                }
+                return;
+
+            }
+
+
+        }
+    }
 
 }
