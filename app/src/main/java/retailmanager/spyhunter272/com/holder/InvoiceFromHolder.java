@@ -19,7 +19,7 @@ public class InvoiceFromHolder extends BaseObservable {
 
     private Customer customer;
     private int paymethord;
-    private boolean tprcharge,isUpdateCustomer;
+    private boolean tprcharge,isUpdateCustomer,isShowCustomer,isShowtprcharge,isSHowDescription;
 
     private double totalInvoice,totalWithDiscount;
     private int discount;
@@ -64,6 +64,30 @@ public class InvoiceFromHolder extends BaseObservable {
         }
     }
 
+    public boolean isShowCustomer() {
+        return isShowCustomer;
+    }
+
+    public void setShowCustomer(boolean showCustomer) {
+        isShowCustomer = showCustomer;
+    }
+
+    public boolean isShowtprcharge() {
+        return isShowtprcharge;
+    }
+
+    public void setShowtprcharge(boolean showtprcharge) {
+        isShowtprcharge = showtprcharge;
+    }
+
+    public boolean isSHowDescription() {
+        return isSHowDescription;
+    }
+
+    public void setSHowDescription(boolean SHowDescription) {
+        isSHowDescription = SHowDescription;
+    }
+
     public Calendar getCalendar() {
         return calendar;
     }
@@ -105,8 +129,8 @@ public class InvoiceFromHolder extends BaseObservable {
     }
 
     public void setTotalInvoice(double totalInvoice) {
-        this.totalInvoice = totalInvoice;
-        this.totalWithDiscount = totalInvoice - ((discount*totalInvoice)/100);
+        this.totalInvoice =Math.round( totalInvoice);
+        this.totalWithDiscount = Math.round(totalInvoice - ((discount*totalInvoice)/100));
         notifyChange();
     }
 

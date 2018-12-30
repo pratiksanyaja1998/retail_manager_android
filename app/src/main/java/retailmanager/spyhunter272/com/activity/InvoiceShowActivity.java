@@ -43,6 +43,8 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice_show);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+
 
         long id = getIntent().getLongExtra(KEY_INVOICE_ID,-1);
 
@@ -91,6 +93,13 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
 
         getMenuInflater().inflate(R.menu.activity_invoice_show,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 
 

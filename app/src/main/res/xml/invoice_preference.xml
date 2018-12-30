@@ -2,44 +2,44 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="mobile"
-        app:iconSpaceReserved="false"
-        android:summary="remove or add hsn from product database"
-        android:title="Mobile Number" />
+    <PreferenceCategory
+        android:title="Invoice List Settings">
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="email"
-        android:summary="remove or add barcode from product database"
-        app:iconSpaceReserved="false"
-        android:title="Email" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="mobile"
+            app:iconSpaceReserved="false"
+            android:summary="remove or add hsn from product database"
+            android:title="Mobile Number" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="email"
+            android:summary="remove or add barcode from product database"
+            app:iconSpaceReserved="false"
+            android:title="Email" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="Invoice Form Settings">
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="tprcharge"
+            android:key="customer"
             app:iconSpaceReserved="false"
-            android:summary="remove or add reverse charge"
-            android:title="Payment Method " />
+            android:summary="invoice customer"
+            android:title="Customer" />
 
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="tprcharge"
-            app:iconSpaceReserved="false"
-            android:summary="remove or add reverse charge"
-            android:title="Tax in reverse charge " />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="description"
-            android:summary="remove or add description "
+            android:key="tprcharge"
             app:iconSpaceReserved="false"
-            android:title="Description" />
+            android:summary="remove or add reverse charge"
+            android:title="Tax in reverse charge" />
+
 
 
     </PreferenceCategory>

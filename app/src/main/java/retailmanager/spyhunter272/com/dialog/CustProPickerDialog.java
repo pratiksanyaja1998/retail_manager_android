@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,14 @@ import java.util.List;
 
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.adapter.ListCustProPickerAdepter;
+import retailmanager.spyhunter272.com.adapter.ProdCateSpinnerBaseAdepter;
 import retailmanager.spyhunter272.com.databinding.DialogCustomerProductPickerBinding;
 import retailmanager.spyhunter272.com.holder.CustProPickerDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.room.table.Product;
+import retailmanager.spyhunter272.com.room.table.ProductCategory;
 import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
+import retailmanager.spyhunter272.com.viewmodel.ProductCategoryViewModel;
 import retailmanager.spyhunter272.com.viewmodel.ProductViewModel;
 
 public class CustProPickerDialog extends DialogFragment implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
@@ -73,6 +77,43 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
 
        getData("");
 
+       if(!holder.isCustomerOrProduct()){
+
+           prodCateSpinnerBaseAdepter = new ProdCateSpinnerBaseAdepter();
+           binding.spinnerProductCategory.setAdapter(prodCateSpinnerBaseAdepter);
+           binding.spinnerProductCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+               @Override
+               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                   holder.setProductCategoryId(prodCateSpinnerBaseAdepter.productCategories.get(position).getId());
+                   getData("");
+               }
+
+               @Override
+               public void onNothingSelected(AdapterView<?> parent) {
+
+               }
+           });
+
+           getProductCategory();
+
+       }
+
+    }
+
+    private ProdCateSpinnerBaseAdepter prodCateSpinnerBaseAdepter;
+
+    private void getProductCategory() {
+
+        ProductCategoryViewModel productCategoryViewModel= ViewModelProviders.of(this).get(ProductCategoryViewModel.class);
+
+        productCategoryViewModel.getAllProductCategory().observe(this, new Observer<List<ProductCategory>>() {
+            @Override
+            public void onChanged(@Nullable List<ProductCategory> productCategories) {
+
+                prodCateSpinnerBaseAdepter.setProductCategories(productCategories);
+            }
+        });
+
     }
 
     private void getData(String searchData) {
@@ -84,8 +125,9 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
             customerViewModel.getCustomerForList(10, 0, searchData).observe(this, new Observer<List<Customer>>() {
                 @Override
                 public void onChanged(@Nullable List<Customer> customers) {
+                    listAdepter.setCustomerList(customers);
+
                     if (customers.size() > 0) {
-                        listAdepter.setCustomerList(customers);
                         holder.setDataFound(true);
                     }else {
 
@@ -99,11 +141,12 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
 
             ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
-            productViewModel.getProductsForList(10,0,0,searchData).observe(this, new Observer<List<Product>>() {
+            productViewModel.getProductsForList(10,0,holder.getProductCategoryId(),searchData).observe(this, new Observer<List<Product>>() {
                 @Override
                 public void onChanged(@Nullable List<Product> products) {
-                   if (products.size()>0){
-                       listAdepter.setProductList(products);
+                    listAdepter.setProductList(products);
+
+                    if (products.size()>0){
                         holder.setDataFound(true);
                    }else {
 
@@ -168,6 +211,8 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
     }
 
     private DialogSearchItemSelectLisner dialogSearchItemSelectLisner;
+
+
 
     public interface DialogSearchItemSelectLisner{
 

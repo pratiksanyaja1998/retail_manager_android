@@ -37,6 +37,6 @@ public interface ProductDao {
 
 
     @Query("select * from product where category==:category LIMIT :limits OFFSET :offsets ")
-    LiveData<List<Product>> getProductsForList(int limits,int offsets,int category);
+    LiveData<List<Product>> getProductsForList(int limits,int offsets,long category);
 
 }

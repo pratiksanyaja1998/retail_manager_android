@@ -62,7 +62,7 @@ public class ProductViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<Product>> getProductsForList(int limit,int offset ,int category,String filterNameHsn){
+    public LiveData<List<Product>> getProductsForList(int limit,int offset ,long category,String filterNameHsn){
 
         if(!filterNameHsn.equals("")) {
             String temp = filterNameHsn;

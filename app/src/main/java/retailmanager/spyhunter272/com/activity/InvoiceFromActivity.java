@@ -2,9 +2,11 @@ package retailmanager.spyhunter272.com.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,7 +43,11 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
+        SharedPreferences myPreference =PreferenceManager.getDefaultSharedPreferences(this);
+
         invoiceFromHolder = new InvoiceFromHolder(this);
+        invoiceFromHolder.setShowtprcharge(myPreference.getBoolean("tprcharge",true));
+        invoiceFromHolder.setShowCustomer(myPreference.getBoolean("customer",true));
         binding.setInvoiceFromHolder(invoiceFromHolder);
 
         listView  = findViewById(R.id.listproductholder);
@@ -70,12 +76,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
                 custProPickerDialog1.setCustomerOrProduct(false);
                 custProPickerDialog1.show(getSupportFragmentManager(),null);
                 break;
-
-//            case R.id.btnaddnewpro:
-//                ProductDialog productDialog = new ProductDialog();
-//                productDialog.setNewProducts(true);
-//                productDialog.show(getSupportFragmentManager(),null);
-//                break;
 
             case R.id.btn_update_customer:
                 CustomerInvoiceFormDialog customerDialog2 = new CustomerInvoiceFormDialog();

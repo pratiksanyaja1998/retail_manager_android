@@ -88,9 +88,11 @@ public class InvoiceActivity extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-        super.onBackPressed();
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof InvoiceViewFragment) {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+
+        }else {
             setTitle(getResources().getString(R.string.invoice));
             menu.findItem(R.id.action_search).setVisible(true);
             menu.findItem(R.id.menu_settings).setVisible(true);

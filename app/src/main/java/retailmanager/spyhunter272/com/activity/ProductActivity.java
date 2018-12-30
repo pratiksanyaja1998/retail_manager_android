@@ -22,8 +22,6 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-
-
         productViewFragment = new ProductViewFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -86,10 +84,11 @@ public class ProductActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
 
-        super.onBackPressed();
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof ProductViewFragment) {
+            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+            super.onBackPressed();
+        }else {
             setTitle(getResources().getString(R.string.products));
             menu.findItem(R.id.action_search).setVisible(true);
             menu.findItem(R.id.menu_settings).setVisible(true);

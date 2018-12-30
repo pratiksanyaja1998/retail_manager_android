@@ -192,8 +192,10 @@ public class HomeActivity extends AppCompatActivity
 
         } else {
 
-            overridePendingTransition(R.anim.trans_left_out, R.anim.trans_left_in);
             super.onBackPressed();
+            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+
+
 
         }
 

@@ -45,6 +45,7 @@
         android:background="@drawable/spinner_border"
         android:orientation="horizontal"
         android:layout_margin="8dp"
+        android:visibility="@{holder.customerOrProduct?View.GONE:View.VISIBLE}"
         android:padding="5dp"
         >
 
@@ -57,7 +58,7 @@
             android:layout_marginLeft="5dp"
             android:gravity="center"
             tools:listitem="@layout/row_simple_spinner_textview"
-            android:spinnerMode="dialog" />
+             />
 
 
     </FrameLayout>
@@ -80,9 +81,9 @@
         android:visibility="@{holder.isDataFound ? View.GONE : View.VISIBLE }"
         android:id="@+id/image_not_found"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/not_found_bg"/>
 
 </LinearLayout>

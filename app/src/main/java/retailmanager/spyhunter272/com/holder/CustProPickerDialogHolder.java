@@ -5,6 +5,7 @@ import android.databinding.BaseObservable;
 public class CustProPickerDialogHolder extends BaseObservable {
 
     private boolean isCustomerOrProduct ,isDataFound=false ,isLoding = true;
+    private long productCategoryId;
 
 
     public void setCustomerOrProduct(boolean customerOrProduct) {
@@ -33,5 +34,13 @@ public class CustProPickerDialogHolder extends BaseObservable {
 
     public boolean isLoding() {
         return isLoding;
+    }
+
+    public long getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(long productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 }
