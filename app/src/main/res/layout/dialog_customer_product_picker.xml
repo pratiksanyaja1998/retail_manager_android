@@ -28,6 +28,32 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:layout_height="wrap_content" />
 
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/relative_spinner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spinner_border"
+        android:orientation="horizontal"
+        android:visibility="@{holder.customerOrProduct?View.GONE:View.VISIBLE}"
+        android:padding="5dp"
+        >
+
+        <Spinner
+            android:id="@+id/spinner_product_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            tools:listitem="@layout/row_simple_spinner_textview"
+             />
+
+
+    </android.support.v7.widget.CardView>
+
     <ProgressBar
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
@@ -37,53 +63,27 @@
         android:visibility="@{holder.isLoding ? View.VISIBLE : View.GONE }"
         />
 
-    <FrameLayout
-        android:id="@+id/relative_spinner_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/components_margin_bottom"
-        android:background="@drawable/spinner_border"
-        android:orientation="horizontal"
-        android:layout_margin="8dp"
-        android:visibility="@{holder.customerOrProduct?View.GONE:View.VISIBLE}"
-        android:padding="5dp"
-        >
-
-        <Spinner
-            android:id="@+id/spinner_product_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            tools:listitem="@layout/row_simple_spinner_textview"
-             />
-
-
-    </FrameLayout>
-
     <ListView
         android:id="@+id/listview_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/fontGray"
         android:dividerHeight="1dp"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="5dp"
+        android:visibility="@{holder.isDataFound ? View.VISIBLE : View.GONE }"
+
         tools:listitem="@layout/row_dialog_picker"
         >
 
     </ListView>
 
-
-
     <ImageView
         android:visibility="@{holder.isDataFound ? View.GONE : View.VISIBLE }"
         android:id="@+id/image_not_found"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/not_found_bg"/>
 
 </LinearLayout>

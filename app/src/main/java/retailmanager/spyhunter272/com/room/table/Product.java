@@ -29,11 +29,11 @@ public class Product extends BaseObservable {
 
     private String barcode;
 
-    private double b_price;
+    private double b_price=0;
 
     private int gst;
 
-    private double s_price;
+    private double s_price=0;
 
     private int in_stock_qty;
 
@@ -91,6 +91,19 @@ public class Product extends BaseObservable {
 
         return product;
 
+    }
+
+    public String isValied(){
+
+        if(name==null){
+            return  "Please Enter Product Name !";
+        }else if(name.equals("")){
+            return  "Please Enter Product Name !";
+        }
+
+
+
+        return null;
     }
 
 

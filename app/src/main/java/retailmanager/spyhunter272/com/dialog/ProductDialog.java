@@ -12,13 +12,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -38,7 +43,7 @@ import retailmanager.spyhunter272.com.databinding.DialogProductBinding;
 //https://stackoverflow.com/questions/44364240/android-room-get-the-id-of-new-inserted-row-with-auto-generate
 
 @SuppressLint("ValidFragment")
-public class ProductDialog extends BottomSheetDialogFragment implements View.OnClickListener {
+public class ProductDialog extends DialogFragment implements View.OnClickListener {
 
     private static int BARCODE_ACT_REQ_CODE = 55;
 
@@ -78,20 +83,25 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
     }
 
+
+    private DialogProductBinding binding;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        DialogProductBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_product,container,false);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-        dialogCustomerBinding.setProduct(product);
+        binding = DataBindingUtil.inflate(inflater,R.layout.dialog_product,container,false);
+
+        binding.setProduct(product);
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
         productDialogHolder = new ProductDialogHolder(myPreference.getBoolean("hsn",true),myPreference.getBoolean("bprice",true),
                 myPreference.getBoolean("barcode",true),myPreference.getBoolean("productGst",true) );
         productDialogHolder.setUpdate(isUpdate);
-        dialogCustomerBinding.setProductDialogHolder(productDialogHolder);
+        binding.setProductDialogHolder(productDialogHolder);
 
 
-        return dialogCustomerBinding.getRoot();
+        return binding.getRoot();
     }
 
     @Override
@@ -128,6 +138,7 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
                     int counter = 1;
                     for (ProductCategory item : productCategories) {
+
                         if (item.getId() == product.getCategory()) {
 
 //                            spProductCategory.setSelection(counter);
@@ -174,7 +185,14 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
             case R.id.btn_dialog_ok:
 
-                Log.e("selected" , " cate "+product.getCategory()+" gst "+product.getGst());
+                String error =product.isValied();
+                if(error!=null){
+                    Animation shake = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+                    binding.getRoot().startAnimation(shake);
+                    Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
 
                 product.setCategory( prodCateSpinnerBaseAdepter.productCategories.get(product.getCategory()).getId());
 
@@ -193,19 +211,10 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
                 else if(product.getGst()==4)
                     product.setGst(28);
 
-
-                Log.e("selected added" , " cate "+product.getCategory()+" gst "+product.getGst());
-
-                    if (productDialogHolder.isUpdate() && product.checkValidation()) {
-
-                        productViewModel.update(product);
-
-                    } else {
-
-                        productViewModel.insert(product);
-
-                    }
-
+                if (productDialogHolder.isUpdate() && product.checkValidation())
+                    productViewModel.update(product);
+                 else
+                    productViewModel.insert(product);
 
                 dismiss();
 

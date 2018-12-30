@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.bgworker.SaveRetailLogoBgWorker;
@@ -58,9 +59,8 @@ public class RetailInformationActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.menu_save){
-
             retailInformationHolder.saveInfo();
-
+            Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -100,7 +100,6 @@ public class RetailInformationActivity extends AppCompatActivity {
                             binding.imageLogo.setImageBitmap(bitmap);
                         }
                     }).execute(data.getData());
-
 
             }
 

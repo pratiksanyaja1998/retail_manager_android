@@ -195,4 +195,15 @@ public class Invoice extends BaseObservable {
         return stringBuffer.toString();
     }
 
+    public String isValied(){
+
+        if( productList==null){
+            return "One Product Must Require !";
+        }else if(productList.size()<=0){
+            return "One Product Must Require !";
+        }
+
+        return null;
+    }
+
 }

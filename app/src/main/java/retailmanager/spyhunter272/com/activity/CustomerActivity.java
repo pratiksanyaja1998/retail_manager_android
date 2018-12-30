@@ -67,7 +67,7 @@ public class CustomerActivity extends AppCompatActivity {
 
             if (!getSupportFragmentManager().popBackStackImmediate("settings", 0)) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.animator.fade_out, R.animator.fade_in).replace(R.id.fragment_root, new CustomerSettingPrefrenceFragment(), "settings");
+                fragmentTransaction.replace(R.id.fragment_root, new CustomerSettingPrefrenceFragment(), "settings");
                 fragmentTransaction.addToBackStack("settings");
                 fragmentTransaction.commit();
             }
@@ -90,14 +90,25 @@ public class CustomerActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof CustomerViewFragment) {
-            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+//        if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof CustomerViewFragment) {
+        setTitle(getResources().getString(R.string.customer));
+        menu.findItem(R.id.action_search).setVisible(true);
+        menu.findItem(R.id.menu_settings).setVisible(true);
+
             super.onBackPressed();
-        }else {
-            setTitle(getResources().getString(R.string.customer));
-            menu.findItem(R.id.action_search).setVisible(true);
-            menu.findItem(R.id.menu_settings).setVisible(true);
-        }
+            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+
+//        }else {
+
+
+
+//            if (!getSupportFragmentManager().popBackStackImmediate("view", 0)) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.setCustomAnimations(R.animator.fade_out, R.animator.fade_in).replace(R.id.fragment_root, new CustomerViewFragment(), "settings");
+//                fragmentTransaction.addToBackStack("view");
+//                fragmentTransaction.commit();
+//            }
+//        }
 
     }
 

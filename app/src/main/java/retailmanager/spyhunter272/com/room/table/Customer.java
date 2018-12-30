@@ -16,7 +16,7 @@ import static retailmanager.spyhunter272.com.utils.Common.isEpty;
 public class Customer extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
-    private long id=-1;
+    private long id;
 
     private String name;
 
@@ -34,6 +34,9 @@ public class Customer extends BaseObservable {
     @Embedded(prefix = "shipping_")
     private Address shipping_address;
 
+    @Ignore
+    private boolean isNew = false;
+
 
     public Customer(String name, String mobile, String gstin, String email, Address billing_address, boolean is_same_b_s, Address shipping_address) {
         this.name = name;
@@ -50,6 +53,25 @@ public class Customer extends BaseObservable {
         this.billing_address = new Address("","","","");
         this.shipping_address = new Address("","","","");
 
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
+    }
+
+    public String isValied(){
+
+        if( name==null){
+            return "Please Enter Customer Name !";
+        }else if(name.equals("")){
+            return "Please Enter Customer Name !";
+        }
+
+        return null;
     }
 
     public long getId() {
@@ -123,6 +145,7 @@ public class Customer extends BaseObservable {
         bundle.putString("mobile",mobile);
         bundle.putString("gstin",gstin);
         bundle.putString("email",email);
+        bundle.putBoolean("isNew",isNew);
         bundle.putBundle("baddr",billing_address.getBundle());
         bundle.putBundle("saddr",shipping_address.getBundle());
         bundle.putBoolean("same_b_a",is_same_b_s);
@@ -141,6 +164,7 @@ public class Customer extends BaseObservable {
                 Address.setAddressFromBundle(bundle.getBundle("saddr")));
 
         customer.id = bundle.getInt("id");
+        customer.setNew(bundle.getBoolean("isNew"));
 
         return customer;
 

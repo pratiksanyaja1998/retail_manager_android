@@ -79,7 +79,7 @@
             android:gravity="center"
             android:selectedItemPosition="@={product.category}"
             tools:listitem="@layout/row_simple_spinner_textview"
-            android:spinnerMode="dialog" />
+            android:spinnerMode="dropdown" />
 
 
     </FrameLayout>
@@ -258,7 +258,7 @@
             android:layout_weight="1"
             android:textColor="@color/colorWhite"
             android:padding="@dimen/button_padding"
-            android:background="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimary"
 
             android:text="save" />
 
@@ -269,7 +269,7 @@
             android:layout_weight="1"
             android:textColor="@color/colorWhite"
             android:padding="@dimen/button_padding"
-            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
 
             android:text="cancel" />
 

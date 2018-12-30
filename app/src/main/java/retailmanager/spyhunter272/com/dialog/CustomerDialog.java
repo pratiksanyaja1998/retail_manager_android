@@ -16,12 +16,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 
 import retailmanager.spyhunter272.com.R;
@@ -32,7 +37,7 @@ import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 import retailmanager.spyhunter272.com.databinding.DialogCustomerBinding;
 
 @SuppressLint("ValidFragment")
-public class CustomerDialog extends BottomSheetDialogFragment implements View.OnClickListener {
+public class CustomerDialog extends DialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
     private Customer customer;
@@ -50,7 +55,7 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         binding = DataBindingUtil.inflate(inflater,R.layout.dialog_customer,container,false);
 
         binding.setCustomer(customer);
@@ -70,8 +75,8 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
 
         myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        ArrayAdapter arrayAdapter =  new ArrayAdapter(getContext(), android.R.layout.simple_dropdown_item_1line,
-                getResources().getStringArray(R.array.state_name));
+//        ArrayAdapter arrayAdapter =  new ArrayAdapter(getContext(), android.R.layout.simple_dropdown_item_1line,
+//                getResources().getStringArray(R.array.state_name));
 
         binding.btnDialogClose.setOnClickListener(this);
         binding.btnDialogOk.setOnClickListener(this);
@@ -86,6 +91,15 @@ public class CustomerDialog extends BottomSheetDialogFragment implements View.On
         switch (v.getId()){
 
             case R.id.btn_dialog_ok:
+
+                    String error = customer.isValied();
+
+                    if(error!=null){
+                        Animation shake = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+                        binding.getRoot().startAnimation(shake);
+                        Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
 
                     if (isUpdate) {

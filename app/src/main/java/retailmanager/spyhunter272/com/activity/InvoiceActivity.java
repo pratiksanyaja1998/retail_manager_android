@@ -66,7 +66,7 @@ public class InvoiceActivity extends AppCompatActivity  {
 
             if (!getSupportFragmentManager().popBackStackImmediate("settings", 0)) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.animator.fade_out, R.animator.fade_in).replace(R.id.fragment_root, new InvoiceSettingPrefrenceFragment(), "settings");
+                fragmentTransaction.replace(R.id.fragment_root, new InvoiceSettingPrefrenceFragment(), "settings");
                 fragmentTransaction.addToBackStack("settings");
                 fragmentTransaction.commit();
             }
@@ -88,15 +88,17 @@ public class InvoiceActivity extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof InvoiceViewFragment) {
-            super.onBackPressed();
+
+        setTitle(getResources().getString(R.string.invoice));
+        menu.findItem(R.id.action_search).setVisible(true);
+        menu.findItem(R.id.menu_settings).setVisible(true);
+
+
+
+        super.onBackPressed();
             overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
 
-        }else {
-            setTitle(getResources().getString(R.string.invoice));
-            menu.findItem(R.id.action_search).setVisible(true);
-            menu.findItem(R.id.menu_settings).setVisible(true);
-        }
+
 
     }
 

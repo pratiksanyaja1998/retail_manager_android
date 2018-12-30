@@ -10,6 +10,9 @@ import android.support.v7.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -87,8 +90,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
 
     }
 
-    private PreviewInvoiceDialog previewInvoiceDialog;
-
     private void saveInvoice(){
 
         Customer customer =invoiceFromHolder.getCustomerObj();
@@ -107,6 +108,14 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
         invoice.setDesciption(invoiceFromHolder.getDescription());
         invoice.setPaymentMethrd(invoiceFromHolder.getPaymethordString());
         invoice.setProductList(listAdapter.getProLists());
+
+        String error = invoice.isValied();
+        if(error!=null){
+            Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+            binding.linearProductDetails.startAnimation(shake);
+            Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         new SaveInvoiceBgWorker(this,invoice,new SaveInvoiceBgWorker.OnProgressCompliteLisn(){
             @Override

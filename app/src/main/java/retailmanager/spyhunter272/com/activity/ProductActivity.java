@@ -7,6 +7,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import retailmanager.spyhunter272.com.fragment.InvoiceViewFragment;
 import retailmanager.spyhunter272.com.fragment.ProductSettingPrefrenceFragment;
 import retailmanager.spyhunter272.com.fragment.ProductViewFragment;
 import retailmanager.spyhunter272.com.R;
@@ -85,22 +86,29 @@ public class ProductActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof ProductViewFragment) {
+//        if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof ProductViewFragment) {
+
+        setTitle(getResources().getString(R.string.products));
+        menu.findItem(R.id.action_search).setVisible(true);
+        menu.findItem(R.id.menu_settings).setVisible(true);
+
+        super.onBackPressed();
             overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-            super.onBackPressed();
-        }else {
-            setTitle(getResources().getString(R.string.products));
-            menu.findItem(R.id.action_search).setVisible(true);
-            menu.findItem(R.id.menu_settings).setVisible(true);
-        }
+
+//        }else {
+
+//            if (!getSupportFragmentManager().popBackStackImmediate("view", 0)) {
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_root, new ProductViewFragment(), "view");
+//                fragmentTransaction.commit();
+//            }
+//        }
 
     }
 
     public interface SearchViewDataChangeListner {
 
         void searchOnQueryTextSubmit(String query);
-
-
 
     }
 

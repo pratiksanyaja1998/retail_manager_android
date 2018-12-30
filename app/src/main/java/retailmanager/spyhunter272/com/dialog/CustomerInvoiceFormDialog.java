@@ -73,10 +73,11 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
             customer.setMobile(customerUpdateble.getMobile());
             customer.setId(customerUpdateble.getId());
             customer.setIs_same_b_s(customerUpdateble.isIs_same_b_s());
-
+            customer.setNew(customerUpdateble.isNew());
 
         }else {
 
+            customer.setNew(true);
 
         }
 

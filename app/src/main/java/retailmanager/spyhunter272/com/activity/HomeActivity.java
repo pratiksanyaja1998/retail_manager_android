@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity
                     public void run() {
                         startActivity(new Intent(HomeActivity.this,CustomerActivity.class));
                     }
-                },400);
+                },200);
                 break;
             case R.id.nav_product:
                 new Handler().postDelayed(new Runnable() {
@@ -117,7 +117,7 @@ public class HomeActivity extends AppCompatActivity
                     public void run() {
                         startActivity(new Intent(HomeActivity.this,ProductActivity.class));
                     }
-                },400);
+                },200);
                 break;
             case R.id.nav_invoice:
                 new Handler().postDelayed(new Runnable() {
@@ -125,7 +125,7 @@ public class HomeActivity extends AppCompatActivity
                     public void run() {
                         startActivity(new Intent(HomeActivity.this,InvoiceActivity.class));
                     }
-                },400);
+                },200);
                 break;
 
             case R.id.nav_store_info:
@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity
                     public void run() {
                         startActivity(new Intent(HomeActivity.this,RetailInformationActivity.class));
                     }
-                },400);
+                },200);
                 break;
 
         }

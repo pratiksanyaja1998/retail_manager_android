@@ -10,10 +10,12 @@ import android.print.PrintJob;
 import android.print.PrintManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,13 +30,14 @@ import retailmanager.spyhunter272.com.bgworker.GetInvoiceBgWorker;
 import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.room.RetailDatabase;
 import retailmanager.spyhunter272.com.room.table.Invoice;
+import retailmanager.spyhunter272.com.template.DefaultTemplate;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 
-public class InvoiceShowActivity extends AppCompatActivity implements GetInvoiceBgWorker.GetInvoiceListener {
+public class InvoiceShowActivity extends AppCompatActivity implements GetInvoiceBgWorker.GetInvoiceListener, AdapterView.OnItemSelectedListener {
 
     private WebView webView;
     private ProgressBar progressBar;
-    private Spinner spinner;
+    private Spinner spinnerTemplate;
     private Invoice invoice=null;
 
     public static String KEY_INVOICE_ID = "invoiceId";
@@ -45,7 +48,6 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         setContentView(R.layout.activity_invoice_show);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-
         long id = getIntent().getLongExtra(KEY_INVOICE_ID,-1);
 
         if(id==-1){
@@ -55,6 +57,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
 
         progressBar = findViewById(R.id.progress_circular);
         webView = findViewById(R.id.webview_preview_invoice);
+        spinnerTemplate = findViewById(R.id.sp_select_templete);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
@@ -63,7 +66,6 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
         webView.getSettings().setAllowFileAccess(true);
-
 
         new GetInvoiceBgWorker(RetailDatabase.getInstance(this),id,this).execute();
 
@@ -75,17 +77,52 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         progressBar.setVisibility(View.GONE);
         this.invoice=invoice;
 
-        String postData = null;
+        spinnerTemplate.setOnItemSelectedListener(this);
 
-        try {
-            postData = "data=" + URLEncoder.encode(invoice.getJsonData(), "UTF-8") + "&message=" + URLEncoder.encode("true", "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            postData = "message=false";
+        webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
+
+
+//        send url data to server
+//        String postData = null;
+//
+//        try {
+//            postData = "data=" + URLEncoder.encode(invoice.getJsonData(), "UTF-8") + "&message=" + URLEncoder.encode("true", "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//            postData = "message=false";
+//        }
+//
+//        webView.postUrl("file:///android_asset/default.html",postData.getBytes());
+
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.e("pratik",position+"");
+        String data = null;
+        switch (position){
+            case 0:
+
+                break;
+
+            case 1:
+
+                break;
+
+            default:
+
+
+
         }
 
-        webView.postUrl("file:///android_asset/default.html",postData.getBytes());
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
 
 
     @Override
@@ -167,6 +204,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         });
 
     }
+
 
 
 }

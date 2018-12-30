@@ -8,25 +8,31 @@ import android.support.v7.preference.PreferenceManager;
 public class RetailInformationHolder extends BaseObservable {
 
 
-    private String gstin,retailName,mobile,email,address;
+    private String gstin,retailName,mobile,email,address,city,state,pincode;
 
     private SharedPreferences myPreference;
 
-   public static   final String SP_KEY_FOR_RETAIL_INFO_NAME = "retailInfoName";
+    public static   final String SP_KEY_FOR_RETAIL_INFO_NAME = "retailInfoName";
     public static  final String SP_KEY_FOR_RETAIL_INFO_ADDRESS = "retailInfoAddr";
-    public static   final String SP_KEY_FOR_RETAIL_INFO_GSTIN = "retailInfoGstin";
-    public static   final String SP_KEY_FOR_RETAIL_INFO_MOBILE = "retailInfoMobile";
-    public static    final String SP_KEY_FOR_RETAIL_INFO_EMAIL = "retailInfoEmail";
+    public static  final String SP_KEY_FOR_RETAIL_INFO_GSTIN = "retailInfoGstin";
+    public static  final String SP_KEY_FOR_RETAIL_INFO_MOBILE = "retailInfoMobile";
+    public static  final String SP_KEY_FOR_RETAIL_INFO_EMAIL = "retailInfoEmail";
+    public static  final String SP_KEY_FOR_RETAIL_INFO_CITY = "retailInfoCity";
+    public static  final String SP_KEY_FOR_RETAIL_INFO_PINCODE = "retailInfoPincode";
+    public static  final String SP_KEY_FOR_RETAIL_INFO_STATE = "retailInfoState";
 
     public RetailInformationHolder(Context context){
 
         myPreference =PreferenceManager.getDefaultSharedPreferences(context);
 
         retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
-        address = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
+        address = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_ADDRESS,"");
         gstin =myPreference.getString(SP_KEY_FOR_RETAIL_INFO_GSTIN,"");
         mobile = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_MOBILE,"");
         email = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
+        city =myPreference.getString(SP_KEY_FOR_RETAIL_INFO_CITY,"");
+        state = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_STATE,"");
+        pincode = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_PINCODE,"");
 
     }
 
@@ -40,10 +46,36 @@ public class RetailInformationHolder extends BaseObservable {
         editor.putString(SP_KEY_FOR_RETAIL_INFO_MOBILE,mobile);
         editor.putString(SP_KEY_FOR_RETAIL_INFO_GSTIN,gstin);
         editor.putString(SP_KEY_FOR_RETAIL_INFO_ADDRESS,address);
+        editor.putString(SP_KEY_FOR_RETAIL_INFO_STATE,state);
+        editor.putString(SP_KEY_FOR_RETAIL_INFO_CITY,city);
+        editor.putString(SP_KEY_FOR_RETAIL_INFO_PINCODE,pincode);
 
         editor.commit();
-        editor.clear();
 
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
 
     public void setAddress(String address) {

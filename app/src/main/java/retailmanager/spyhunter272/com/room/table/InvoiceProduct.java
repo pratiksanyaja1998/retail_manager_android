@@ -21,16 +21,27 @@ public class InvoiceProduct {
 
     private int qty;
 
+    private int gst;
+
     private long invoiceId;
 
-    public InvoiceProduct(String name, String hsn, String barcode, double price, double total, int qty, long invoiceId) {
+    public InvoiceProduct(String name, String hsn, String barcode, double price, double total, int qty,int gst, long invoiceId) {
         this.name = name;
         this.hsn = hsn;
         this.barcode = barcode;
         this.price = price;
         this.total = total;
         this.qty = qty;
+        this.gst = gst;
         this.invoiceId = invoiceId;
+    }
+
+    public int getGst() {
+        return gst;
+    }
+
+    public void setGst(int gst) {
+        this.gst = gst;
     }
 
     public int getId() {

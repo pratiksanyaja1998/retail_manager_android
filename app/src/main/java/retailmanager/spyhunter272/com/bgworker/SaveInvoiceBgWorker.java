@@ -49,7 +49,7 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
     protected Long doInBackground(Void... voids) {
 
         long customerId;
-        if(invoice.getCustomer().getId()==-1)
+        if(invoice.getCustomer().isNew())
             customerId= retailDatabase.customerDao().insert(invoice.getCustomer());
         else
             customerId=invoice.getCustomer().getId();
@@ -71,6 +71,7 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
                     productList.get(i).getS_price(),
                     productList.get(i).getTotal(),
                     productList.get(i).getIn_stock_qty(),
+                    productList.get(i).getGst(),
                     invoiceId));
 
         }
@@ -90,40 +91,40 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
 
     }
 
-    public File saveInvoiceFile(Invoice invoice){
-
-        String root = Environment.getExternalStorageDirectory().toString();
-
-        File myDir =new File(root,"/RetailManager/"+invoice.getYyyy()+"/"+invoice.getMm()+"/"+invoice.getDd());
-        if(!myDir.exists())myDir.mkdirs();
-
-        String fname = "SN00"+invoice.getId()+".html";
-
-        File file = new File (myDir, fname);
-        if (file.exists ())
-            file.delete ();
-
-        try {
-
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write("");
-
-            header(bufferedWriter);
-            brandDetails(ctx,bufferedWriter);
-            customer(bufferedWriter);
-            products(bufferedWriter);
-            footer(bufferedWriter);
-
-            bufferedWriter.flush();
-            bufferedWriter.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return file;
-
-    }
+//    public File saveInvoiceFile(Invoice invoice){
+//
+//        String root = Environment.getExternalStorageDirectory().toString();
+//
+//        File myDir =new File(root,"/RetailManager/"+invoice.getYyyy()+"/"+invoice.getMm()+"/"+invoice.getDd());
+//        if(!myDir.exists())myDir.mkdirs();
+//
+//        String fname = "SN00"+invoice.getId()+".html";
+//
+//        File file = new File (myDir, fname);
+//        if (file.exists ())
+//            file.delete ();
+//
+//        try {
+//
+//            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+//            bufferedWriter.write("");
+//
+//            header(bufferedWriter);
+//            brandDetails(ctx,bufferedWriter);
+//            customer(bufferedWriter);
+//            products(bufferedWriter);
+//            footer(bufferedWriter);
+//
+//            bufferedWriter.flush();
+//            bufferedWriter.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return file;
+//
+//    }
 
     public interface OnProgressCompliteLisn{
         void onProgressComplited(Long invoiceId);
