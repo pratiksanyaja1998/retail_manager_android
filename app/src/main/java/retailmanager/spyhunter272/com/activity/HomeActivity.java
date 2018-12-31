@@ -3,6 +3,7 @@ package retailmanager.spyhunter272.com.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -111,6 +112,7 @@ public class HomeActivity extends AppCompatActivity
                     }
                 },200);
                 break;
+
             case R.id.nav_product:
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -119,6 +121,7 @@ public class HomeActivity extends AppCompatActivity
                     }
                 },200);
                 break;
+
             case R.id.nav_invoice:
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -135,6 +138,36 @@ public class HomeActivity extends AppCompatActivity
                         startActivity(new Intent(HomeActivity.this,RetailInformationActivity.class));
                     }
                 },200);
+                break;
+
+            case  R.id.nav_settings:
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(HomeActivity.this,SettingsActivity.class));
+                    }
+                },200);
+                break;
+
+            case R.id.nav_share:
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Retail Manager");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, "Hi Friends, I am finding the retail manager app to create invoice and manage retail store. Why don’t you try it out on your phone  https://play.google.com/store/apps/details?id="+getPackageName() );
+                startActivity(Intent.createChooser(sharingIntent, "Share Apps Using"));
+                break;
+
+            case R.id.nav_about:
+                Uri uri = Uri.parse("http://www.spyhunter272.in");
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                break;
+
+            case R.id.nav_feedback:
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{getResources().getString(R.string.email)});
+                email.putExtra(Intent.EXTRA_SUBJECT, "About Retail Manager");
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
                 break;
 
         }

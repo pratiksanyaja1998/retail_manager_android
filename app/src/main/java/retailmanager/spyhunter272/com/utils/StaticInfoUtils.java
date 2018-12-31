@@ -24,13 +24,23 @@ public class StaticInfoUtils {
     }
 
     public static File getInvoiceDir(Context mcoContext, Invoice invoice){
-        File dir = new File(Environment.getExternalStorageDirectory(),"RetailManager/invoice/"+invoice.getYyyy()+"/"+invoice.getMm()+"/"+invoice.getDd());
+        File dir = new File(getRtManagerRootFolder(),"/invoice/"+invoice.getYyyy()+"/"+invoice.getMm()+"/"+invoice.getDd());
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+
+        return dir;
+    }
+
+    public static File getRtManagerRootFolder(){
+        File dir = new File(Environment.getExternalStorageDirectory(),"RetailManager");
         if(!dir.exists()){
             dir.mkdir();
         }
 
         return dir;
     }
+
 
     public static File getInvoiceFile(Context mcoContext, Invoice invoice){
 

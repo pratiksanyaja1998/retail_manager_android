@@ -10,6 +10,7 @@ import java.util.List;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.room.table.InvoiceProduct;
+import retailmanager.spyhunter272.com.utils.NumberToWord;
 
 import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_ADDRESS;
 import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_CITY;
@@ -134,8 +135,8 @@ public class DefaultTemplate {
 
 
         bf.append("<tr class=\"bgcolor\"><td colspan=\""+i1+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td>\t\t\t\n" +
-                "</tr><tr class=\"bgcolor\"><td colspan=\""+i1+"\">TOTAL</td><td>Rs. "+(invoice.getTotal()-amt)+" /-</td></tr>\n" +
-                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+i2+"\"></td></tr>\n" +
+                "</tr><tr class=\"bgcolor\"><td colspan=\""+i1+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()-amt))+" /-</td></tr>\n" +
+                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+i2+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal()-amt)) +"</td></tr>\n" +
                 "</table>\n<br>");
 
         return bf.toString();

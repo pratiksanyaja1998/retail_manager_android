@@ -8,14 +8,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,12 +34,13 @@ public class ProductCategoryManageDialog extends BottomSheetDialogFragment imple
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+        bottomSheetDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         bottomSheetDialog.setContentView(R.layout.dialog_category_manage);
         edProductCategory = bottomSheetDialog.findViewById(R.id.ed_product_category);
         rcViewCategory = bottomSheetDialog.findViewById(R.id.rc_product_category);
         ibSaveCategory = bottomSheetDialog.findViewById(R.id.ib_save_cateroy);
         ibSaveCategory.setOnClickListener(this);
-
+        ivNotFound = bottomSheetDialog.findViewById(R.id.iv_not_found);
         rcProductCategoryAdepter = new RcProductCategoryAdepter();
         rcViewCategory.setLayoutManager(new LinearLayoutManager(getContext()));
         rcViewCategory.setHasFixedSize(true);
@@ -49,6 +53,7 @@ public class ProductCategoryManageDialog extends BottomSheetDialogFragment imple
     private RecyclerView rcViewCategory;
     private EditText edProductCategory;
     private ImageButton ibSaveCategory;
+    private ImageView ivNotFound;
 
     private RcProductCategoryAdepter rcProductCategoryAdepter;
     private ProductCategoryViewModel productCategoryViewModel;
@@ -60,13 +65,21 @@ public class ProductCategoryManageDialog extends BottomSheetDialogFragment imple
             @Override
             public void onChanged(@Nullable List<ProductCategory> productCategories) {
 
+                if(productCategories.size()<=0){
+
+                    ivNotFound.setVisibility(View.VISIBLE);
+                    rcViewCategory.setVisibility(View.GONE);
+                }else {
+                    ivNotFound.setVisibility(View.GONE);
+                    rcViewCategory.setVisibility(View.VISIBLE);
+                }
+
                 rcProductCategoryAdepter.setProductCategories(productCategories);
 
             }
         });
 
     }
-
 
 
     @Override

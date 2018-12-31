@@ -38,7 +38,7 @@
                 android:id="@+id/image_logo"
                 android:layout_width="match_parent"
                 android:layout_centerInParent="true"
-                android:src="@drawable/calender_ic"
+                android:src="@mipmap/ic_launcher"
                 android:layout_height="120dp" />
 
             <ImageButton

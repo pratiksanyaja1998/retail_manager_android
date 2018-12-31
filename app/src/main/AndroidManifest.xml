@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.package.name.fileprovider"
@@ -27,11 +28,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/edit_btn" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
@@ -49,36 +48,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.CustomerActivity"
             android:label="@string/customer"
             android:parentActivityName=".activity.HomeActivity"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".activity.ProductActivity"
             android:label="@string/products"
             android:parentActivityName=".activity.HomeActivity"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".activity.BarcodeActivity"
             android:label="@string/barcode_scanner"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".activity.CaptureActivityPortrait"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".activity.InvoiceActivity"
             android:label="@string/invoice"
             android:parentActivityName=".activity.HomeActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".activity.InvoiceFromActivity"
             android:label="@string/invoice_form_label"
             android:parentActivityName=".activity.InvoiceActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".activity.RetailInformationActivity"
             android:label="@string/retail_info_label"
@@ -99,6 +105,8 @@
             android:name=".activity.InvoiceShowActivity"
             android:parentActivityName=".activity.InvoiceActivity" />
 
+        <activity android:name=".activity.SettingsActivity"
+            android:parentActivityName=".activity.HomeActivity" />
 
     </application>
 

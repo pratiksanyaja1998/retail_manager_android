@@ -106,13 +106,22 @@
     </string-array>
 
     <string-array name="templete_list">
-        <item>default</item>
-        <item>color</item>
-        <item>widthLogo</item>
-        <item>simple</item>
+        <item>Default</item>
+        <item>Responsive</item>
+        <item>BackgroundColor</item>
+        <item>RetailLogo</item>
+        <item>Background</item>
     </string-array>
+
+    <string name="email">spyhunter272help@gmail.com</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alert_message">Do You Wont To Perform This Action Your Data May Be loss ?</string>
+    <string name="notification_settings">Notification</string>
+    <string name="database_settings">Databse</string>
 
+    <string name="import_db">import</string>
+
+    <string name="export_db">export</string>
+    <string name="action_feedback">feedback</string>
 </resources>

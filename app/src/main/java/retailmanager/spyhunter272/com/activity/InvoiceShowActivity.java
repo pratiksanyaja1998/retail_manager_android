@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.webviewtopdf.PdfView;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -31,6 +32,7 @@ import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.room.RetailDatabase;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.template.DefaultTemplate;
+import retailmanager.spyhunter272.com.template.ResponsiveTemplate;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 
 public class InvoiceShowActivity extends AppCompatActivity implements GetInvoiceBgWorker.GetInvoiceListener, AdapterView.OnItemSelectedListener {
@@ -79,20 +81,9 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
 
         spinnerTemplate.setOnItemSelectedListener(this);
 
-        webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
+//        webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
 
-
-//        send url data to server
-//        String postData = null;
-//
-//        try {
-//            postData = "data=" + URLEncoder.encode(invoice.getJsonData(), "UTF-8") + "&message=" + URLEncoder.encode("true", "UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//            postData = "message=false";
-//        }
-//
-//        webView.postUrl("file:///android_asset/default.html",postData.getBytes());
+        webView.loadUrl("file:///android_asset/widthLogo.html");
 
     }
 
@@ -101,18 +92,31 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Log.e("pratik",position+"");
         String data = null;
+
         switch (position){
             case 0:
+                webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
 
+//                webView.loadUrl("file:///android_asset/default.html");
+//                webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
                 break;
 
             case 1:
-
+                webView.loadData(ResponsiveTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
+//                webView.loadUrl("file:///android_asset/withImage.html");
+//                webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
+                break;
+            case  2:
+//                webView.loadUrl("file:///android_asset/color.html");
+                break;
+            case 3:
+//                webView.loadUrl("file:///android_asset/widthLogo.html");
+                break;
+            case 4:
+//                webView.loadUrl("file:///android_asset/simple.html");
                 break;
 
             default:
-
-
 
         }
 
@@ -186,6 +190,12 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         progressDialog.setMessage("Please wait");
         progressDialog.show();
 
+        File invoiceFile = StaticInfoUtils.getInvoiceFile(this,invoice);
+
+        if(invoiceFile.exists()){
+            invoiceFile.delete();
+        }
+
         PdfView.createWebPrintJob(this, webView, StaticInfoUtils.getInvoiceDir(this,invoice), StaticInfoUtils.getInvoiceFileName(this,invoice), new PdfView.Callback() {
 
             @Override
@@ -193,7 +203,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
                 progressDialog.dismiss();
                 Toast.makeText(InvoiceShowActivity.this,"Invoice Saved Successfully",Toast.LENGTH_SHORT).show();
 //                PdfView.openPdfFile(getContext(),getString(R.string.app_name),"Do you want to open the pdf file?"+fileName,path);
-                startActivity(new Intent(Intent.ACTION_VIEW).setDataAndType(Uri.fromFile(StaticInfoUtils.getInvoiceFile(InvoiceShowActivity.this,invoice)), "application/pdf"));
+                startActivity(new Intent(Intent.ACTION_SEND).setDataAndType(Uri.fromFile(StaticInfoUtils.getInvoiceFile(InvoiceShowActivity.this,invoice)), "application/pdf"));
             }
 
             @Override

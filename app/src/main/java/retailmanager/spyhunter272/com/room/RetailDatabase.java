@@ -30,6 +30,8 @@ import retailmanager.spyhunter272.com.room.tabledao.ProductDao;
 
 public abstract class RetailDatabase extends RoomDatabase {
 
+    public static final String RT_DATABASE_NAME = "retailDatabase";
+
     private  static  RetailDatabase instance;
 
     public abstract ProductDao productDao();
@@ -46,7 +48,7 @@ public abstract class RetailDatabase extends RoomDatabase {
         if(instance == null){
 
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    RetailDatabase.class,"retailDatabase")
+                    RetailDatabase.class,RT_DATABASE_NAME)
                     .addCallback(roomCallback)
                     .fallbackToDestructiveMigration()
                     .build();
