@@ -59,6 +59,7 @@ dependencies {
     implementation "android.arch.lifecycle:common-java8:$lifecycle_version"
 
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:gridlayout-v7:28.+'
 
 //    view spinner
 //    implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'

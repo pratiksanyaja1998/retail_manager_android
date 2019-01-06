@@ -23,6 +23,9 @@ public interface InvoiceDao {
     @Query("select * from invoice where id=:invoiceId")
     Invoice getInvoice(long invoiceId);
 
+    @Query("SELECT COUNT() FROM invoice")
+    LiveData<Integer> getInvoiceCount();
+
     @Query("select * from invoice where dd = :dd and yyyy = :yyyy and mm = :mm LIMIT :limits OFFSET :offsets ")
     LiveData<List<Invoice>> getInvoiceForList(int limits,int offsets, int dd,int mm,int yyyy);
 

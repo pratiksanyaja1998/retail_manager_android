@@ -2,7 +2,10 @@ package retailmanager.spyhunter272.com.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,11 +18,14 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -28,21 +34,30 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import io.fabric.sdk.android.Fabric;
 import retailmanager.spyhunter272.com.fragment.DashbordHomeFragment;
 import retailmanager.spyhunter272.com.R;
+import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
+
+import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_EMAIL;
+import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_NAME;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private static  final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 3;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 4;
+
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private TextView textCartItemCount;
     private int mCartItemCount = 10;
-    private DashbordHomeFragment dashbordHomeFragment;
+//    private DashbordHomeFragment dashbordHomeFragment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_home);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
@@ -59,12 +74,66 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
 
-        dashbordHomeFragment = new DashbordHomeFragment();
-        FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_root,dashbordHomeFragment);
-        fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setRetailInfo( navigationView.getHeaderView(0));
+    }
+
+    private void setRetailInfo(View v){
+
+        if(v.getId()==R.id.btn_set_info){
+
+            drawer.closeDrawers();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(HomeActivity.this,RetailInformationActivity.class));
+                }
+            },200);
+
+        }
+
+        SharedPreferences myPreference;
+        myPreference =PreferenceManager.getDefaultSharedPreferences(this);
+
+        String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
+       String  email = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
+        TextView nameTv = (TextView) v.findViewById(R.id.tv_retail_name);
+        TextView emailTv = v.findViewById(R.id.tv_email);
+        ImageView imageView  = v.findViewById(R.id.iv_retail_logo);
+
+
+        if(!retailName.equals("")){
+            new Handler().post( new Runnable(){
+
+                public void run() {
+                    if(StaticInfoUtils.retailLogoFile(HomeActivity.this).exists()){
+
+                        Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(HomeActivity.this).getAbsolutePath());
+                        imageView.setImageBitmap(myBitmap);
+                        imageView.setVisibility(View.VISIBLE);
+
+                    }
+                }
+            });
+
+           emailTv.setText(email);
+           nameTv.setText(retailName);
+
+       }else {
+            v.findViewById(R.id.btn_set_info).setVisibility(View.VISIBLE);
+
+           v.findViewById(R.id.btn_set_info).setOnClickListener(this::setRetailInfo);
+
+        }
+
+
 
 
     }
@@ -92,9 +161,6 @@ public class HomeActivity extends AppCompatActivity
 
 
     }
-
-    private static  final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 3;
-    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 4;
 
 
     @SuppressWarnings("StatementWithEmptyBody")

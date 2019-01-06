@@ -31,6 +31,9 @@ public interface CustomerDao {
     LiveData<List<Customer>> getAllCustomer();
 
 
+    @Query("SELECT COUNT() FROM customer")
+    LiveData<Integer> getCustomerCount();
+
     @Query("select * from customer LIMIT :limits OFFSET :offsets ")
     LiveData<List<Customer>> getCustomerForList(int limits,int offsets);
 

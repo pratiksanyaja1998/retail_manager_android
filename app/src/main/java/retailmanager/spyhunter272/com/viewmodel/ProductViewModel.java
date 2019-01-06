@@ -62,6 +62,12 @@ public class ProductViewModel extends AndroidViewModel {
 
     }
 
+    public LiveData<Integer> getProductCount(){
+
+        return productDao.getProductCount();
+    }
+
+
     public LiveData<List<Product>> getProductsForList(int limit,int offset ,long category,String filterNameHsn){
 
         if(!filterNameHsn.equals("")) {

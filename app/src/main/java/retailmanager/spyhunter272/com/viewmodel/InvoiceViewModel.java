@@ -52,6 +52,12 @@ public class InvoiceViewModel extends AndroidViewModel {
 
     }
 
+    public LiveData<Integer> getInvoiceCount(){
+
+        return invoiceProductDao.getInvoiceCount();
+    }
+
+
     public LiveData<List<Invoice>> getInvoiceForList(int limit, int offset, Calendar calendar,String query){
 
         int mYear, mMonth, mDay;

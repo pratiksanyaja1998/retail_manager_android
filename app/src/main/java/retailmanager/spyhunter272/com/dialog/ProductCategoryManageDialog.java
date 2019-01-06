@@ -53,7 +53,7 @@ public class ProductCategoryManageDialog extends BottomSheetDialogFragment imple
     private RecyclerView rcViewCategory;
     private EditText edProductCategory;
     private ImageButton ibSaveCategory;
-    private ImageView ivNotFound;
+    private TextView ivNotFound;
 
     private RcProductCategoryAdepter rcProductCategoryAdepter;
     private ProductCategoryViewModel productCategoryViewModel;

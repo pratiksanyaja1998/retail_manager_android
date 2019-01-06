@@ -26,6 +26,9 @@ public interface ProductDao {
     @Query("DELETE FROM product")
     void deleteAll();
 
+    @Query("SELECT COUNT() FROM product")
+    LiveData<Integer> getProductCount();
+
     @Query("SELECT * from product order by category desc")
     LiveData<List<Product>> getAllProducts();
 

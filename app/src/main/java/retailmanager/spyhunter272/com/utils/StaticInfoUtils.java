@@ -13,7 +13,6 @@ public class StaticInfoUtils {
 //    public static File RETAIL_LOGO_FILE = new File(Environment.getExternalStorageDirectory(), "retailLogo .png");
 
 
-
     public static File retailLogoFile(Context mcoContext){
         File dir = new File(mcoContext.getFilesDir(),"retailInfo");
         if(!dir.exists()){
@@ -51,6 +50,10 @@ public class StaticInfoUtils {
 
         return "IN00"+invoice.getId()+".pdf";
     }
+
+
+    public static final String[] MONTH_LIST = new String[]{"Jan","Feb","Mar","Apr","May","June","July",
+            "Aug","Sep","Oct","Nov","Dec"};
 
 
 }

@@ -89,9 +89,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Area"
                 android:layout_marginTop="10dp"
-                />
+                android:text="AREA" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -116,9 +115,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="City"
                         android:layout_marginTop="10dp"
-                        />
+                        android:text="CITY" />
 
                     <EditText
                         android:layout_width="match_parent"
@@ -141,9 +139,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="State"
                         android:layout_marginTop="10dp"
-                        />
+                        android:text="STATE" />
 
                     <EditText
                         android:layout_width="match_parent"
@@ -160,9 +157,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pincode"
                 android:layout_marginTop="10dp"
-                />
+                android:text="PINCODE" />
 
             <EditText
                 android:layout_width="match_parent"

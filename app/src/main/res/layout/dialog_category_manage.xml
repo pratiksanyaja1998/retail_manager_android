@@ -43,8 +43,6 @@
 
     </LinearLayout>
 
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_product_category"
         android:layout_width="match_parent"
@@ -53,11 +51,15 @@
         tools:listitem="@layout/row_product_category"
         />
 
-    <ImageView
+    <TextView
         android:id="@+id/iv_not_found"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/not_found_bg"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:text="Category Not Found! \n Please Add Category"
+        android:scaleType="fitXY"
         android:visibility="gone"
         />
 

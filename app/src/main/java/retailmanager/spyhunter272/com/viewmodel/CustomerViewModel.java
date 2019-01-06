@@ -73,6 +73,11 @@ public class CustomerViewModel extends AndroidViewModel {
 
     }
 
+    public LiveData<Integer> getCustomerCount(){
+
+        return customerDao.getCustomerCount();
+    }
+
 
     private class BGWorker extends AsyncTask<Object,Void,Void> {
 

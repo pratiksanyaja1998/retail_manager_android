@@ -103,9 +103,11 @@
 
         <activity
             android:name=".activity.InvoiceShowActivity"
+            android:label="@string/invoice_print"
             android:parentActivityName=".activity.InvoiceActivity" />
 
         <activity android:name=".activity.SettingsActivity"
+            android:label="@string/settings"
             android:parentActivityName=".activity.HomeActivity" />
 
     </application>
