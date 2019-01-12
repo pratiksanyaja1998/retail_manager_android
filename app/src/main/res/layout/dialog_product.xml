@@ -205,6 +205,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_edt_border"
             android:ems="10"
+            android:text="@={productDialogHolder.updateQty+``}"
             android:hint="Add Stock"
             android:inputType="number"
             android:padding="@dimen/ed_padding" />

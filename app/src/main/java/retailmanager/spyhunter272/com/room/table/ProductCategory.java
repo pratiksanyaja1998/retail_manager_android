@@ -5,12 +5,14 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "productCate" ,indices = {@Index("id")})
+@Entity(tableName = "productCate" ,indices = {@Index(value = {"name"},
+        unique = true)})
 public class ProductCategory {
 
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     private int id;
+
 
     private String name;
 

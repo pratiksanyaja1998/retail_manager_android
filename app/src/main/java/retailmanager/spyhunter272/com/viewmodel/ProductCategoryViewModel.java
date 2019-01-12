@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.List;
 
@@ -62,7 +63,8 @@ public class ProductCategoryViewModel extends AndroidViewModel {
 
             switch (flag){
                 case INSERT:
-                    productCategoryDao.insert(productCategory);
+                    long result=  productCategoryDao.insert(productCategory);
+                    Log.e("post","resutl insrt category "+result);
                     break;
 
                 case DELETE:

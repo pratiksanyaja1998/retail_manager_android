@@ -99,6 +99,8 @@ public class Product extends BaseObservable {
             return  "Please Enter Product Name !";
         }else if(name.equals("")){
             return  "Please Enter Product Name !";
+        }else  if(category==0){
+            return "Please Select Category !";
         }
 
 

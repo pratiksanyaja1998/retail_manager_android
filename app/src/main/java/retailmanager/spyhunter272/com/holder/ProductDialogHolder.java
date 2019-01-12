@@ -9,6 +9,15 @@ public class ProductDialogHolder extends BaseObservable {
     boolean barcode;
     boolean productGst;
     boolean isUpdate;
+    private int updateQty;
+
+    public int getUpdateQty() {
+        return updateQty;
+    }
+
+    public void setUpdateQty(int updateQty) {
+        this.updateQty = updateQty;
+    }
 
     public ProductDialogHolder(boolean hsn, boolean bprice, boolean barcode, boolean productGst) {
         this.hsn = hsn;

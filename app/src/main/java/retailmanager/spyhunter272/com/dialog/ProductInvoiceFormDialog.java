@@ -55,19 +55,19 @@ public class ProductInvoiceFormDialog extends BottomSheetDialogFragment implemen
             product.setGst(0);
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DialogProductBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_product,container,false);
 
         dialogCustomerBinding.setProduct(product);
+        productDialogHolder = new ProductDialogHolder(true,true,true,true);
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
         productDialogHolder = new ProductDialogHolder(myPreference.getBoolean("hsn",true),false,
                 false,myPreference.getBoolean("productGst",true) );
         dialogCustomerBinding.setProductDialogHolder(productDialogHolder);
-        dialogCustomerBinding.edQtyAdd.setVisibility(View.GONE);
-        dialogCustomerBinding.tvProductBarcode.setVisibility(View.GONE);
-        dialogCustomerBinding.relativeSpinnerView.setVisibility(View.GONE);
+        productDialogHolder.setUpdate(true);
 
         return dialogCustomerBinding.getRoot();
     }
@@ -131,6 +131,8 @@ public class ProductInvoiceFormDialog extends BottomSheetDialogFragment implemen
 
                 else if(product.getGst()==4)
                     product.setGst(28);
+
+                    product.setIn_stock_qty(product.getIn_stock_qty()+productDialogHolder.getUpdateQty());
 
 
                 Log.e("selected added" , " cate "+product.getCategory()+" gst "+product.getGst());

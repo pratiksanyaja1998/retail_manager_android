@@ -125,12 +125,12 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
                     Intent intent = new Intent(InvoiceFromActivity.this,InvoiceShowActivity.class);
                     intent.putExtra(InvoiceShowActivity.KEY_INVOICE_ID,invoiceId);
                     startActivity(intent);
+                    InvoiceFromActivity.this.finish();
 
             }
         }).execute();
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -166,7 +166,9 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
 
     @Override
     public void lisnProductFormSearchDialog(Product product) {
-        listAdapter.addProduct(product);
+         if(!listAdapter.addProduct(product)){
+             Toast.makeText(this,getResources().getText(R.string.product_duplicate_error),Toast.LENGTH_SHORT).show();
+         }
     }
 
     @Override
@@ -197,4 +199,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
     public Activity getActivityObj() {
         return this;
     }
+
+
 }

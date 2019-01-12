@@ -53,7 +53,7 @@ public class InvoiceProduct {
     }
 
     public String getHsn() {
-        return hsn;
+        return hsn+"";
     }
 
     public String getBarcode() {

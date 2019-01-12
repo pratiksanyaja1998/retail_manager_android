@@ -9,6 +9,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -17,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
+import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.room.RetailDatabase;
 
 import static android.app.Activity.RESULT_OK;
@@ -121,7 +125,14 @@ public class Common {
 
 
 
+    public static void formErrorAnimation(Context context, View view,String error){
 
+        Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);
+        view.startAnimation(shake);
+        if(error!=null)
+            Toast.makeText(context,error,Toast.LENGTH_SHORT).show();
+
+    }
 
 
 

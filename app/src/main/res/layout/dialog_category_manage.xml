@@ -28,7 +28,7 @@
             android:background="@android:color/transparent"
             android:hint="Add Product Category"
             android:padding="10dp"
-
+            android:imeOptions="actionDone"
             />
 
         <ImageButton

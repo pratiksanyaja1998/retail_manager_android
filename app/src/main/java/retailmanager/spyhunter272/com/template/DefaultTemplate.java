@@ -39,8 +39,8 @@ public class DefaultTemplate {
         //this block const
        return  "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><meta charset=\"UTF-8\"><style type=\"text/css\" media=\"all\">\n" +
                 "    \ttd{padding: 5px;}table{width: 100%;}.bgcolor{background-color: #dbdde0 !important;}.tcenter{text-align: center;}\n" +
-                "    \tbody{-webkit-print-color-adjust:exact;}@page {size: auto;margin: 0; }.btnprint{margin: 10px;padding: 10px;}.border{border: 1px solid #a6a7a8;}.ucase {text-transform: uppercase;}</style>\n" +
-                "    <style type=\"text/css\" media=\"print\">.btnprint{display: none;}</style><script type=\"text/javascript\">function printPage(obj){window.print();}</script>\n" +
+                "    \tbody{-webkit-print-color-adjust:exact;}@page {size: auto;margin: 0; }.error{color: red;}.btnprint{margin: 10px;padding: 10px;}.border{border: 1px solid #a6a7a8;}.ucase {text-transform: uppercase;}</style>\n" +
+                "    <style type=\"text/css\" media=\"print\"></style><script type=\"text/javascript\">function printPage(obj){window.print();}</script>\n" +
                 "</head><body style=\"width:95%\">";
         //btn print
         // bf.append("<div id=\"hide\"><input class=\"btnprint\" name=\"\" value=\"PRINT\" onclick=\"printPage(this)\" type=\"button\"></div>");
@@ -61,10 +61,21 @@ public class DefaultTemplate {
         String pincode = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_PINCODE,"");
 
 
+        if(!gstin.equals("")){
+
+            gstin =  "Gstin Number : "+gstin+"</small>";
+        }
+
+        if(retailName.equals("")){
+            retailName ="<span class=\"error\">GOTO - Retail Information tab into home page and add retail detail.</span>";
+        }
+
 
         return  "<table class=\"border bgcolor\">\n" +
                 "\t<tr><td width=\"70%\" align=\"center\"><span class=\"ucase\"><b><h1 style=\"margin-bottom:-10px \">"+retailName+"</h1></b></span><small><br>"+address+
-                ",&nbsp;"+city+",&nbsp;"+state+"&nbsp;-&nbsp;"+pincode+"<br>Gstin Number : "+gstin+"</small></td></tr>\n" +
+                ",&nbsp;"+city+",&nbsp;"+state+"&nbsp;-&nbsp;"+pincode+"<br>" +
+                 gstin +
+                "</td></tr>\n" +
 
                 "</table>\n" +
                 "<table class=\"border\">\n" +

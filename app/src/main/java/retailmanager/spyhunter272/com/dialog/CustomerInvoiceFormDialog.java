@@ -1,6 +1,7 @@
 package retailmanager.spyhunter272.com.dialog;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import retailmanager.spyhunter272.com.databinding.DialogCustomerBinding;
 import retailmanager.spyhunter272.com.holder.CustomerDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Address;
 import retailmanager.spyhunter272.com.room.table.Customer;
+import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 
 public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
@@ -51,8 +54,8 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
 
         myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        ArrayAdapter arrayAdapter =  new ArrayAdapter(getContext(), android.R.layout.simple_dropdown_item_1line,
-                getResources().getStringArray(R.array.state_name));
+//        ArrayAdapter arrayAdapter =  new ArrayAdapter(getContext(), android.R.layout.simple_dropdown_item_1line,
+//                getResources().getStringArray(R.array.state_name));
 
 //      init view
         view.findViewById(R.id.btn_dialog_close).setOnClickListener(this);
@@ -93,6 +96,14 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
             case R.id.btn_dialog_ok:
 
                 if( customerLisner!=null){
+
+                    if(customer.isNew()){
+                        Log.e("post","new customer id +"+customer.getId());
+                        ViewModelProviders.of(this).get(CustomerViewModel.class).update(customer);
+                    }else {
+                        Log.e("post","new customer id else +"+customer.getId() );
+
+                    }
 
                     customerLisner.lisnCustomerFromDialog(customer);
                     dismiss();

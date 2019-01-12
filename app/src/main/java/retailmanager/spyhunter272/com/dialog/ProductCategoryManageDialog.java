@@ -26,6 +26,7 @@ import java.util.List;
 
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.room.table.ProductCategory;
+import retailmanager.spyhunter272.com.utils.Common;
 import retailmanager.spyhunter272.com.viewmodel.ProductCategoryViewModel;
 
 public class ProductCategoryManageDialog extends BottomSheetDialogFragment implements View.OnClickListener {
@@ -86,8 +87,16 @@ public class ProductCategoryManageDialog extends BottomSheetDialogFragment imple
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ib_save_cateroy:
+                String category = edProductCategory.getText().toString().trim()+"";
 
-                productCategoryViewModel.insert(new ProductCategory(edProductCategory.getText().toString()+"",""));
+                if(category.equals("")){
+
+                    Common.formErrorAnimation(getContext(),getDialog().findViewById(R.id.linear_category_add),getString(R.string.category_error));
+
+                    return;
+                }
+
+                productCategoryViewModel.insert(new ProductCategory(category,""));
                 Log.e("Saved item",edProductCategory.getText().toString()+"");
                 break;
 
@@ -95,7 +104,20 @@ public class ProductCategoryManageDialog extends BottomSheetDialogFragment imple
     }
 
     private void deleteProductCategory(ProductCategory productCategory){
-        productCategoryViewModel.delete(productCategory);
+
+        CustomAlertDialog.show(getContext(), new CustomAlertDialog.CustomAlertDialogEvent() {
+            @Override
+            public void eventCancel() {
+
+            }
+
+            @Override
+            public void eventDone() {
+                productCategoryViewModel.delete(productCategory);
+
+            }
+        });
+
     }
 
 

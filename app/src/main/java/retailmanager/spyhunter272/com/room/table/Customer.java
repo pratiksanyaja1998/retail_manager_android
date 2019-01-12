@@ -69,6 +69,10 @@ public class Customer extends BaseObservable {
             return "Please Enter Customer Name !";
         }else if(name.equals("")){
             return "Please Enter Customer Name !";
+        }else  if (!mobile.equals("") && mobile.length()!=10){
+            return  "Please Enter Vaild Mobile Number Must 10 Number ?";
+        }else if(gstin.length()!=15){
+            return "Please Enter Vaild Gstin !";
         }
 
         return null;

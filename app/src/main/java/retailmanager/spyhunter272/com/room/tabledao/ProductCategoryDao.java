@@ -15,7 +15,7 @@ import retailmanager.spyhunter272.com.room.table.ProductCategory;
 public interface ProductCategoryDao {
 
     @Insert
-    void insert(ProductCategory productCategory);
+    long insert(ProductCategory productCategory);
 
     @Update
     void update(ProductCategory productCategory);

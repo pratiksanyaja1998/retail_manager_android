@@ -24,11 +24,10 @@
         android:id="@+id/search_view_dialog"
         android:layout_width="match_parent"
         android:queryHint="search hear .."
+        android:focusable="false"
         android:background="@color/colorPrimaryDark"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:layout_height="wrap_content" />
-
-
 
     <android.support.v7.widget.CardView
         android:id="@+id/relative_spinner_view"
@@ -66,19 +65,18 @@
     <ListView
         android:id="@+id/listview_dialog"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:divider="@color/fontGray"
         android:dividerHeight="1dp"
         android:layout_marginHorizontal="5dp"
         android:visibility="@{holder.isDataFound ? View.VISIBLE : View.GONE }"
-
         tools:listitem="@layout/row_dialog_picker"
         >
 
     </ListView>
 
     <ImageView
-        android:visibility="@{holder.isDataFound ? View.GONE : View.VISIBLE }"
+        android:visibility="@{holder.isDataFound ? View.GONE : View.VISIBLE}"
         android:id="@+id/image_not_found"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

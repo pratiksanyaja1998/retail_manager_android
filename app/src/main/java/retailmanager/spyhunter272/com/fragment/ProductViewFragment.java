@@ -1,5 +1,6 @@
 package retailmanager.spyhunter272.com.fragment;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import retailmanager.spyhunter272.com.adapter.ProdCateSpinnerBaseAdepter;
 import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
+import retailmanager.spyhunter272.com.dialog.ProductCategoryManageDialog;
 import retailmanager.spyhunter272.com.dialog.ProductDialog;
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.activity.ProductActivity;
@@ -159,10 +161,32 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
         productCategoryViewModel.getAllProductCategory().observe(this, new Observer<List<ProductCategory>>() {
             @Override
             public void onChanged(@Nullable List<ProductCategory> productCategories) {
+                if(productCategories.size()==0)
+                    showAlertForAddProduct();
 
                 prodCateSpinnerBaseAdepter.setProductCategories(productCategories);
             }
         });
+
+    }
+
+    private void showAlertForAddProduct(){
+
+
+        CustomAlertDialog.showMessage(getContext(), getResources().getString(R.string.message_empty_category),new CustomAlertDialog.CustomAlertDialogEvent() {
+            @Override
+            public void eventCancel() {
+                new ProductCategoryManageDialog().show(getFragmentManager(),null);
+            }
+
+            @Override
+            public void eventDone() {
+                new ProductCategoryManageDialog().show(getFragmentManager(),null);
+            }
+
+        });
+
+
 
     }
 

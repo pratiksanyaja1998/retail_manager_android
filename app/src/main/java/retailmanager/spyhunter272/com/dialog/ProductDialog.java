@@ -33,6 +33,7 @@ import retailmanager.spyhunter272.com.activity.BarcodeActivity;
 import retailmanager.spyhunter272.com.holder.ProductDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Product;
 import retailmanager.spyhunter272.com.room.table.ProductCategory;
+import retailmanager.spyhunter272.com.utils.Common;
 import retailmanager.spyhunter272.com.viewmodel.ProductCategoryViewModel;
 import retailmanager.spyhunter272.com.viewmodel.ProductViewModel;
 
@@ -51,8 +52,6 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
     private ProductViewModel productViewModel;
 
-    private TextView tvBarcode;
-    private Spinner spProductCategory ;
     private Product product;
     private ProductCategoryViewModel productCategoryViewModel;
 
@@ -113,12 +112,10 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
         dialog.findViewById(R.id.btn_dialog_close).setOnClickListener(this);
         dialog.findViewById(R.id.btn_dialog_ok).setOnClickListener(this);
 
-        tvBarcode = dialog.findViewById(R.id.tv_product_barcode);
-        tvBarcode.setOnClickListener(this::onClick);
+        binding.tvProductBarcode.setOnClickListener(this::onClick);
 
-        spProductCategory = dialog.findViewById(R.id.spinner_product_category);
         prodCateSpinnerBaseAdepter = new ProdCateSpinnerBaseAdepter();
-        spProductCategory.setAdapter(prodCateSpinnerBaseAdepter);
+        binding.spinnerProductCategory.setAdapter(prodCateSpinnerBaseAdepter);
 
 //      setup object
         productCategoryViewModel = ViewModelProviders.of(this).get(ProductCategoryViewModel.class);
@@ -184,17 +181,14 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
             break;
 
             case R.id.btn_dialog_ok:
+                product.setCategory( prodCateSpinnerBaseAdepter.productCategories.get(product.getCategory()).getId());
 
                 String error =product.isValied();
                 if(error!=null){
-                    Animation shake = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
-                    binding.getRoot().startAnimation(shake);
-                    Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+                    Common.formErrorAnimation(getContext(),binding.getRoot(),error);
                     return;
 
                 }
-
-                product.setCategory( prodCateSpinnerBaseAdepter.productCategories.get(product.getCategory()).getId());
 
                 if(product.getGst()==0)
                     product.setGst(0);

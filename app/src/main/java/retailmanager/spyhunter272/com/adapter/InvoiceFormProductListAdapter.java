@@ -40,7 +40,16 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void addProduct(Product product) {
+    public boolean addProduct(Product product) {
+
+
+        for(int i = 0;i<proLists.size();i++){
+            if(proLists.get(i).getId()==product.getId()){
+                return false;
+            }
+        }
+
+        product.setIn_stock_qty(1);
         float total = (float) (product.getIn_stock_qty()*product.getS_price());
         total =total+((total*product.getGst())/100);
         totalInvoice+=total;
@@ -48,6 +57,7 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         product.setTotal(total);
         proLists.add(product);
         notifyDataSetChanged();
+        return true;
     }
 
     public void updateProduct(Product product){

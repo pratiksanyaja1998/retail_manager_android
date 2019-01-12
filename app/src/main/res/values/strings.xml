@@ -130,4 +130,8 @@
 
     <string name="export_db">export</string>
     <string name="action_feedback">feedback</string>
+
+    <string name="category_error">Category Is Require!</string>
+    <string name="message_empty_category">Product category is not found Please add product category Goto:- product setting menu and add product category ...</string>
+    <string name="product_duplicate_error">Product Already Exists !</string>
 </resources>
