@@ -29,11 +29,11 @@ public class Product extends BaseObservable {
 
     private String barcode;
 
-    private double b_price=0;
+    private double b_price;
 
     private int gst;
 
-    private double s_price=0;
+    private double s_price;
 
     private int in_stock_qty;
 

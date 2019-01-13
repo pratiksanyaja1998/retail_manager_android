@@ -205,10 +205,13 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
                 else if(product.getGst()==4)
                     product.setGst(28);
 
-                if (productDialogHolder.isUpdate() && product.checkValidation())
+                if (productDialogHolder.isUpdate() && product.checkValidation()) {
+                    product.setIn_stock_qty(product.getIn_stock_qty() + productDialogHolder.getUpdateQty());
                     productViewModel.update(product);
-                 else
+                }
+                 else{
                     productViewModel.insert(product);
+                }
 
                 dismiss();
 

@@ -108,9 +108,9 @@
     <string-array name="templete_list">
         <item>Default</item>
         <item>Responsive</item>
-        <item>BackgroundColor</item>
-        <item>RetailLogo</item>
-        <item>Background</item>
+        <!--<item>BackgroundColor</item>-->
+        <!--<item>RetailLogo</item>-->
+        <!--<item>Background</item>-->
     </string-array>
 
     <string name="ok">ok</string>
@@ -134,4 +134,7 @@
     <string name="category_error">Category Is Require!</string>
     <string name="message_empty_category">Product category is not found Please add product category Goto:- product setting menu and add product category ...</string>
     <string name="product_duplicate_error">Product Already Exists !</string>
+    <string name="retail_info_message">Are you sure wont to leave this page make sure you save your information by click save button otherwise your data may be loss ..!</string>
+    <string name="save">save</string>
+    <string name="more_info"><u>more</u></string>
 </resources>

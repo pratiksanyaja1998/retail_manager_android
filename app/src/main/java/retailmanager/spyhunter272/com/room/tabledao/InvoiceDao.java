@@ -9,6 +9,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import retailmanager.spyhunter272.com.room.model.InvoiceOverview;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 
 @Dao
@@ -31,6 +32,9 @@ public interface InvoiceDao {
 
     @Query("select * from invoice where ( dd = :dd and yyyy = :yyyy and mm = :mm) and (name like :q or mobile like :q) LIMIT :limits OFFSET :offsets ")
     LiveData<List<Invoice>> getInvoiceForList(int limits,int offsets, int dd,int mm,int yyyy,String q);
+
+    @Query("select SUM(total) as total from invoice where yyyy = :yyyy and mm = :mm ")
+    LiveData<InvoiceOverview> getInvoiceOverview(int yyyy,int mm);
 
 //    @Query("select * from invoice where name like :filterNameHsn LIMIT :limits OFFSET :offsets ")
 //    LiveData<List<Invoice>> getInvoiceForList(int limits,int offsets,String filterNameHsn);

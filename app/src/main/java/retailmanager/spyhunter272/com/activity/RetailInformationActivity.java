@@ -10,15 +10,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.bgworker.SaveRetailLogoBgWorker;
 import retailmanager.spyhunter272.com.databinding.ActivityRetailInformationBinding;
+import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.holder.RetailInformationHolder;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 
-public class RetailInformationActivity extends AppCompatActivity {
+public class RetailInformationActivity extends AppCompatActivity implements CustomAlertDialog.CustomAlertDialogEvent {
 
 
     private RetailInformationHolder retailInformationHolder;
@@ -47,20 +50,24 @@ public class RetailInformationActivity extends AppCompatActivity {
            }
        });
 
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_retail_info_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.activity_retail_info_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
-    @Override
+//    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.menu_save){
-            retailInformationHolder.saveInfo();
-            Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
+//        if(item.getItemId()==R.id.menu_save){
+//            retailInformationHolder.saveInfo();
+//            Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
+//        }
+
+        if(item.getItemId()==android.R.id.home){
+            onBackPressed();
+            return false;
         }
 
         return super.onOptionsItemSelected(item);
@@ -79,6 +86,21 @@ public class RetailInformationActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
                 startActivityForResult(Intent.createChooser(intent,
                         "Select Picture"), SELECT_PICTURE);
+
+                break;
+
+            case R.id.btn_save:
+
+                String error = retailInformationHolder.saveInfo();
+                 if(!error.equals("")){
+                     Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
+                     Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+                     binding.root.startAnimation(shake);
+                 }else {
+                     Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
+                     super.onBackPressed();
+                     overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+                 }
 
                 break;
         }
@@ -106,13 +128,21 @@ public class RetailInformationActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
     @Override
     public void onBackPressed() {
+
+        CustomAlertDialog.showMessage(this, getResources().getString(R.string.retail_info_message),this);
+
+    }
+
+    @Override
+    public void eventCancel() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+    }
+
+    @Override
+    public void eventDone() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }

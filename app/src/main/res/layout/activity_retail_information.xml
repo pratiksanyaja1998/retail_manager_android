@@ -24,52 +24,40 @@
     tools:context=".activity.RetailInformationActivity">
 
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_margin="15dp"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:padding="20dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/image_logo"
-                android:layout_width="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@mipmap/ic_launcher"
-                android:layout_height="120dp" />
-
-            <ImageButton
-                android:id="@+id/btn_change_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/image_logo"
-                android:layout_alignEnd="@+id/image_logo"
-                android:background="?android:attr/selectableItemBackground"
-                android:onClick="onClick"
-                android:src="@drawable/edit_btn" />
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/root"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:padding="10dp"
             android:layout_margin="10dp"
             android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="20dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_logo"
+                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_height="120dp" />
+
+                <ImageButton
+                    android:id="@+id/btn_change_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/image_logo"
+                    android:layout_alignEnd="@+id/image_logo"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onClick"
+                    android:src="@drawable/edit_btn" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -220,8 +208,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.email}"
-
                 android:layout_marginTop="5dp"
+                />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/save"
+                android:layout_marginTop="@dimen/padding_root_layout_5"
+                android:onClick="onClick"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
                 />
 
 
@@ -229,8 +227,6 @@
         </LinearLayout>
 
         </ScrollView>
-
-    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

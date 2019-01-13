@@ -3,27 +3,44 @@ package retailmanager.spyhunter272.com.fragment;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
 import retailmanager.spyhunter272.com.R;
+import retailmanager.spyhunter272.com.activity.CustomerActivity;
+import retailmanager.spyhunter272.com.activity.HomeActivity;
+import retailmanager.spyhunter272.com.activity.InvoiceActivity;
+import retailmanager.spyhunter272.com.activity.ProductActivity;
+import retailmanager.spyhunter272.com.activity.RetailInformationActivity;
 import retailmanager.spyhunter272.com.customview.MonthYearPickerDialog;
 import retailmanager.spyhunter272.com.databinding.FragmentDashbordHomeBinding;
 import retailmanager.spyhunter272.com.holder.DashbrodHolder;
+import retailmanager.spyhunter272.com.room.model.InvoiceOverview;
+import retailmanager.spyhunter272.com.room.table.Invoice;
+import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 import retailmanager.spyhunter272.com.viewmodel.InvoiceViewModel;
 import retailmanager.spyhunter272.com.viewmodel.ProductViewModel;
 
+import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_EMAIL;
+import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_NAME;
 import static retailmanager.spyhunter272.com.utils.StaticInfoUtils.MONTH_LIST;
 
 
@@ -53,16 +70,20 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         binding.btnOpenDialogDate.setOnClickListener(this);
+        binding.retailMoreText.setOnClickListener(this::onClick);
+        binding.cardCustomer.setOnClickListener(this::onClick);
+        binding.cardInvoice.setOnClickListener(this::onClick);
+        binding.cardProduct.setOnClickListener(this::onClick);
 
         initView();
     }
 
-    private void initView(){
+    private void initView() {
 
         ViewModelProviders.of(this).get(InvoiceViewModel.class).getInvoiceCount().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
-                if(integer!=null) {
+                if (integer != null) {
                     dashbrodHolder.setInvoiceCount(integer.toString());
                 }
             }
@@ -72,7 +93,7 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
         ViewModelProviders.of(this).get(ProductViewModel.class).getProductCount().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
-                if(integer!=null ) {
+                if (integer != null) {
                     dashbrodHolder.setProductCount(integer.toString());
                 }
             }
@@ -81,39 +102,74 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
         ViewModelProviders.of(this).get(CustomerViewModel.class).getCustomerCount().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
-                if(integer!=null) {
+                if (integer != null) {
                     dashbrodHolder.setCustomerCount(integer.toString());
                 }
             }
         });
 
 
+        getInvoiceTotal(dashbrodHolder.getmMonth(), dashbrodHolder.getmYear());
+
+        setRetailInfo();
+
     }
 
 
+    private void setRetailInfo(){
 
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//
-//
-////        datePickerDialog = new DatePickerDialog(getContext(),
-////                new DatePickerDialog.OnDateSetListener() {
-////
-////                    @Override
-////                    public void onDateSet(DatePicker view, int year,
-////                                          int monthOfYear, int dayOfMonth) {
-////                        mYear = year;
-////                        mMonth = monthOfYear;
-////                        mDay = dayOfMonth;
-////
-////                        tvDateShow.setText(mDay + "-" + mMonth+ "-"+mYear );
-////                    }
-////
-////                }, mYear, mMonth, mDay);
-//
-//    }
+
+        SharedPreferences myPreference;
+        myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME, "");
+
+        dashbrodHolder.setRetailName(retailName);
+
+        if (!retailName.equals("")) {
+            new Handler().post(new Runnable() {
+
+                public void run() {
+                    if (StaticInfoUtils.retailLogoFile(getContext()).exists()) {
+
+                        Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(getContext()).getAbsolutePath());
+                        binding.retailLogo.setImageBitmap(myBitmap);
+
+                    }
+                }
+            });
+
+        }else {
+
+            startActivity(new Intent(getContext(),RetailInformationActivity.class));
+
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        setRetailInfo();
+
+    }
+
+    private void getInvoiceTotal(int mm, int yyyy){
+
+         ViewModelProviders.of(this).get(InvoiceViewModel.class).getInvoiceOverview(mm,yyyy).observe(this, new Observer<InvoiceOverview>() {
+
+             @Override
+             public void onChanged(@Nullable InvoiceOverview invoiceOverview) {
+                 if(invoiceOverview!=null){
+                     dashbrodHolder.setTotalIncome(invoiceOverview.getTotal());
+                 }
+
+             }
+
+         });
+
+    }
 
     @Override
     public void onClick(View v) {
@@ -125,18 +181,38 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
 
                 pd.setListener(new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                         dashbrodHolder.setMonthYear(monthOfYear,year);
-
+                        getInvoiceTotal(monthOfYear,year);
                     }
                 });
+
                 pd.show(getFragmentManager(), "MonthYearPickerDialog");
 
                 break;
 
+            case R.id.retail_more_text:
+
+                startActivity(new Intent(getContext(),RetailInformationActivity.class));
+                break;
+
+            case R.id.card_customer:
+
+                startActivity(new Intent(getContext(),CustomerActivity.class));
+                break;
+
+            case R.id.card_invoice:
+                startActivity(new Intent(getContext(),InvoiceActivity.class));
+                break;
+
+            case R.id.card_product:
+                startActivity(new Intent(getContext(),ProductActivity.class));
+                break;
 
         }
     }
+
+
+
 }

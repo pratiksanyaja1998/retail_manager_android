@@ -18,13 +18,13 @@ public class Customer extends BaseObservable {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-    private String name;
+    private String name="";
 
-    private String mobile;
+    private String mobile="";
 
-    private String gstin;
+    private String gstin="";
 
-    private String email;
+    private String email="";
 
     @Embedded(prefix = "billing_")
     private Address billing_address;
@@ -71,7 +71,7 @@ public class Customer extends BaseObservable {
             return "Please Enter Customer Name !";
         }else  if (!mobile.equals("") && mobile.length()!=10){
             return  "Please Enter Vaild Mobile Number Must 10 Number ?";
-        }else if(gstin.length()!=15){
+        }else if(gstin.length()!=15 && !gstin.equals("")){
             return "Please Enter Vaild Gstin !";
         }
 

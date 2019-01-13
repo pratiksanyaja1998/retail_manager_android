@@ -37,7 +37,21 @@ public class RetailInformationHolder extends BaseObservable {
     }
 
 
-    public void saveInfo(){
+    public String saveInfo(){
+
+        if(retailName.equals("")){
+
+
+            return "Retail name must require !";
+        }else if(gstin.length()!=15 && !gstin.equals("")){
+
+
+            return "Enter vaild GSTIN";
+        }else if(mobile.length()!=10){
+
+            return "Enter vaild Mobile Number";
+        }
+
 
         SharedPreferences.Editor editor = myPreference.edit();
 
@@ -51,6 +65,8 @@ public class RetailInformationHolder extends BaseObservable {
         editor.putString(SP_KEY_FOR_RETAIL_INFO_PINCODE,pincode);
 
         editor.commit();
+
+        return "";
 
     }
 

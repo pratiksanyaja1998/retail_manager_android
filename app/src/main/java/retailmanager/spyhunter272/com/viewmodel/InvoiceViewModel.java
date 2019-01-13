@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import retailmanager.spyhunter272.com.room.RetailDatabase;
+import retailmanager.spyhunter272.com.room.model.InvoiceOverview;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.room.tabledao.InvoiceDao;
 
@@ -55,6 +56,13 @@ public class InvoiceViewModel extends AndroidViewModel {
     public LiveData<Integer> getInvoiceCount(){
 
         return invoiceProductDao.getInvoiceCount();
+    }
+
+
+    public LiveData<InvoiceOverview> getInvoiceOverview(int mm,int yyyy){
+
+        return invoiceProductDao.getInvoiceOverview(yyyy,mm);
+
     }
 
 

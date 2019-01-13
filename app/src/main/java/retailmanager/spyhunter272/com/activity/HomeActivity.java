@@ -103,7 +103,7 @@ public class HomeActivity extends AppCompatActivity
         myPreference =PreferenceManager.getDefaultSharedPreferences(this);
 
         String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
-       String  email = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
+        String  email = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
         TextView nameTv = (TextView) v.findViewById(R.id.tv_retail_name);
         TextView emailTv = v.findViewById(R.id.tv_email);
         ImageView imageView  = v.findViewById(R.id.iv_retail_logo);

@@ -12,16 +12,37 @@ public class DashbrodHolder extends BaseObservable {
     private String productCount;
     private String invoiceCount;
     private String customerCount;
-    int mYear, mMonth, mDay;
+    int mYear, mMonth;
+    private String retailName;
+
+private float totalIncome;
 
 
     public DashbrodHolder(){
         Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
 
         dateString =  MONTH_LIST[mMonth] + " "+mYear;
+    }
+
+
+    public String getRetailName() {
+        return retailName;
+    }
+
+    public void setRetailName(String retailName) {
+        this.retailName = retailName;
+        notifyChange();
+    }
+
+    public float getTotalIncome() {
+        return totalIncome;
+    }
+
+    public void setTotalIncome(float totalIncome) {
+        this.totalIncome = totalIncome;
+        notifyChange();
     }
 
     public int getmYear() {

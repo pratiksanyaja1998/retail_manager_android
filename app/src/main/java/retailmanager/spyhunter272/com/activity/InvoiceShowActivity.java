@@ -3,6 +3,7 @@ package retailmanager.spyhunter272.com.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -69,6 +71,20 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         webView.getSettings().setDisplayZoomControls(false);
         webView.getSettings().setAllowFileAccess(true);
 
+        webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                // do your stuff here
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+
         new GetInvoiceBgWorker(RetailDatabase.getInstance(this),id,this).execute();
 
     }
@@ -80,18 +96,12 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         this.invoice=invoice;
 
         spinnerTemplate.setOnItemSelectedListener(this);
-
-//        webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
-
-        webView.loadUrl("file:///android_asset/widthLogo.html");
-
+        webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("pratik",position+"");
-        String data = null;
 
         switch (position){
             case 0:
@@ -106,17 +116,17 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
 //                webView.loadUrl("file:///android_asset/withImage.html");
 //                webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
                 break;
-            case  2:
-//                webView.loadUrl("file:///android_asset/color.html");
-                break;
-            case 3:
-//                webView.loadUrl("file:///android_asset/widthLogo.html");
-                break;
-            case 4:
-//                webView.loadUrl("file:///android_asset/simple.html");
-                break;
+//            case  2:
+////                webView.loadUrl("file:///android_asset/color.html");
+//                break;
+//            case 3:
+////                webView.loadUrl("file:///android_asset/widthLogo.html");
+//                break;
+//            case 4:
+////                webView.loadUrl("file:///android_asset/simple.html");
+//                break;
 
-            default:
+//            default:
 
         }
 
@@ -165,8 +175,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
 
 
     public  void createWebPagePrint(WebView webView) {
-		/*if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-            return;*/
+
         PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
         String jobName = getString(R.string.app_name) + " Document";
@@ -180,7 +189,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         else if(printJob.isFailed()){
             Toast.makeText(this, R.string.print_failed, Toast.LENGTH_LONG).show();
         }
-        // Save the job object for later status checking
+
     }
 
 
