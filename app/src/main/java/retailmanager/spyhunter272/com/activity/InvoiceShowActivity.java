@@ -9,6 +9,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintManager;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -165,7 +166,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
                 break;
 
             case R.id.menu_share:
-                savePdf(invoice);
+                sharePdf(invoice);
                 break;
 
         }
@@ -193,7 +194,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
     }
 
 
-    private void savePdf(Invoice invoice){
+    private void sharePdf(Invoice invoice){
 
         final ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Please wait");
@@ -209,11 +210,37 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
 
             @Override
             public void success(String path) {
+
+                Log.e("post","path "+path );
+
                 progressDialog.dismiss();
-                Toast.makeText(InvoiceShowActivity.this,"Invoice Saved Successfully",Toast.LENGTH_SHORT).show();
+
+//                Toast.makeText(InvoiceShowActivity.this,"Invoice Saved Successfully",Toast.LENGTH_SHORT).show();
 //                PdfView.openPdfFile(getContext(),getString(R.string.app_name),"Do you want to open the pdf file?"+fileName,path);
-                startActivity(new Intent(Intent.ACTION_SEND).setDataAndType(Uri.fromFile(StaticInfoUtils.getInvoiceFile(InvoiceShowActivity.this,invoice)), "application/pdf"));
+//                startActivity(new Intent(Intent.ACTION_SEND).setDataAndType(Uri.fromFile(StaticInfoUtils.getInvoiceFile(InvoiceShowActivity.this,invoice)), "application/pdf"));
+
+
+
+//                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                File fileWithinMyDir = new File(path);
+//
+//                if(fileWithinMyDir.exists()) {
+//                    intentShareFile.setType("application/pdf");
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(fileWithinMyDir));
+//                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sharing File...");
+//                    intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+//
+//                    startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//
+//                }else {
+//                    Toast.makeText(InvoiceShowActivity.this,"Something Wrong ! Try Again !",Toast.LENGTH_SHORT).show();
+//                }
+
+                shareFile(path);
+
             }
+
+//            /storage/emulated/0/RetailManager/invoice/2019/0/13/IN002.pdf
 
             @Override
             public void failure() {
@@ -222,6 +249,31 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
             }
         });
 
+    }
+
+    private void shareFile(String filePath) {
+
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        File fileWithinMyDir = new File(filePath);
+
+        if (fileWithinMyDir.exists()) {
+            intentShareFile.setType("text/*");
+
+           Uri  photoURI = FileProvider.getUriForFile(InvoiceShowActivity.this,
+                    getString(R.string.file_provider_authority),
+                   fileWithinMyDir);
+
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "invoice");
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_string_email));
+
+            this.startActivity(Intent.createChooser(intentShareFile, fileWithinMyDir.getName()));
+
+        }else {
+
+            Toast.makeText(InvoiceShowActivity.this,"Something Wrong ! Try Again !",Toast.LENGTH_SHORT).show();
+        }
     }
 
 
