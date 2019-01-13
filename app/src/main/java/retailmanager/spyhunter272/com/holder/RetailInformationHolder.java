@@ -47,7 +47,7 @@ public class RetailInformationHolder extends BaseObservable {
 
 
             return "Enter vaild GSTIN";
-        }else if(mobile.length()!=10){
+        }else if(mobile.length()!=10 && !mobile.equals("")){
 
             return "Enter vaild Mobile Number";
         }

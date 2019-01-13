@@ -52,25 +52,17 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_retail_info_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
 
 //    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        if(item.getItemId()==R.id.menu_save){
-//            retailInformationHolder.saveInfo();
-//            Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
-//        }
+
 
         if(item.getItemId()==android.R.id.home){
             onBackPressed();
-            return false;
+            return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
 
@@ -84,8 +76,7 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
                 String[] mimeTypes = {"image/png"};
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-                startActivityForResult(Intent.createChooser(intent,
-                        "Select Picture"), SELECT_PICTURE);
+                startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_PICTURE);
 
                 break;
 
@@ -98,8 +89,7 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
                      binding.root.startAnimation(shake);
                  }else {
                      Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
-                     super.onBackPressed();
-                     overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+                     onBackPressed();
                  }
 
                 break;
@@ -139,12 +129,15 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
     public void eventCancel() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+        startActivity(new Intent(this,HomeActivity.class));
     }
 
     @Override
     public void eventDone() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+        startActivity(new Intent(this,HomeActivity.class));
+
     }
 
 }

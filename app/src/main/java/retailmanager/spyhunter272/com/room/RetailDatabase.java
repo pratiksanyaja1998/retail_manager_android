@@ -26,7 +26,7 @@ import retailmanager.spyhunter272.com.room.tabledao.ProductDao;
         Invoice.class,
         InvoiceProduct.class
 },
- version = 6, exportSchema = false)
+ version = 1, exportSchema = false)
 
 public abstract class RetailDatabase extends RoomDatabase {
 
@@ -63,40 +63,40 @@ public abstract class RetailDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDbAsyncTask(instance).execute();
+//            new PopulateDbAsyncTask(instance).execute();
         }
     };
 
-    private static class PopulateDbAsyncTask extends AsyncTask<Void,Void,Void> {
-
-        private ProductDao productDao;
-        private CustomerDao customerDao;
-        private ProductCategoryDao productCategoryDao;
-
-        private PopulateDbAsyncTask(RetailDatabase db) {
-            this.productDao = db.productDao();
-            this.customerDao = db.customerDao();
-            this.productCategoryDao = db.productCategoryDao();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-//                productCategoryDao.insert(new ProductCategory("Select Category",""));
-
-//                productDao.insert(new Product("test Pro","234234",500,600,10,1));
+//    private static class PopulateDbAsyncTask extends AsyncTask<Void,Void,Void> {
 //
-//                customerDao.insert(
-//                        new Customer("customer one","9099228842","AAAA22SSWWAA23A","pratiksanyaja1998@gmail.com",
-//                        new Address("203 XXX XXXXX","Surat","Gujrat",365241),
-//                        false,
-//                        new Address("204 XXX XXXXX","Surat","Gujrat",365221)
-//                        )
-//                );
-
-            return null;
-        }
-    }
+//        private ProductDao productDao;
+//        private CustomerDao customerDao;
+//        private ProductCategoryDao productCategoryDao;
+//
+//        private PopulateDbAsyncTask(RetailDatabase db) {
+//            this.productDao = db.productDao();
+//            this.customerDao = db.customerDao();
+//            this.productCategoryDao = db.productCategoryDao();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//
+////                productCategoryDao.insert(new ProductCategory("Select Category",""));
+//
+////                productDao.insert(new Product("test Pro","234234",500,600,10,1));
+////
+////                customerDao.insert(
+////                        new Customer("customer one","9099228842","AAAA22SSWWAA23A","pratiksanyaja1998@gmail.com",
+////                        new Address("203 XXX XXXXX","Surat","Gujrat",365241),
+////                        false,
+////                        new Address("204 XXX XXXXX","Surat","Gujrat",365221)
+////                        )
+////                );
+//
+//            return null;
+//        }
+//    }
 
 
 }

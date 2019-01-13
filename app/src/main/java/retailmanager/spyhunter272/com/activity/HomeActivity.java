@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_home);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
@@ -79,64 +79,60 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setRetailInfo( navigationView.getHeaderView(0));
-    }
-
-    private void setRetailInfo(View v){
-
-        if(v.getId()==R.id.btn_set_info){
-
-            drawer.closeDrawers();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(HomeActivity.this,RetailInformationActivity.class));
-                }
-            },200);
-
-        }
-
-        SharedPreferences myPreference;
-        myPreference =PreferenceManager.getDefaultSharedPreferences(this);
-
-        String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
-        String  email = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
-        TextView nameTv = (TextView) v.findViewById(R.id.tv_retail_name);
-        TextView emailTv = v.findViewById(R.id.tv_email);
-        ImageView imageView  = v.findViewById(R.id.iv_retail_logo);
 
 
-        if(!retailName.equals("")){
-            new Handler().post( new Runnable(){
-
-                public void run() {
-                    if(StaticInfoUtils.retailLogoFile(HomeActivity.this).exists()){
-
-                        Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(HomeActivity.this).getAbsolutePath());
-                        imageView.setImageBitmap(myBitmap);
-                        imageView.setVisibility(View.VISIBLE);
-
-                    }
-                }
-            });
-
-           emailTv.setText(email);
-           nameTv.setText(retailName);
-
-       }else {
-            v.findViewById(R.id.btn_set_info).setVisibility(View.VISIBLE);
-
-           v.findViewById(R.id.btn_set_info).setOnClickListener(this::setRetailInfo);
-
-        }
-
-
-
-
-    }
+//    private void setRetailInfo(View v){
+//
+//        if(v.getId()==R.id.btn_set_info){
+//
+//            drawer.closeDrawers();
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    startActivity(new Intent(HomeActivity.this,RetailInformationActivity.class));
+//                }
+//            },200);
+//
+//        }
+//
+//        SharedPreferences myPreference;
+//        myPreference =PreferenceManager.getDefaultSharedPreferences(this);
+//
+//        String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
+//        String  email = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
+//        TextView nameTv = (TextView) v.findViewById(R.id.tv_retail_name);
+//        TextView emailTv = v.findViewById(R.id.tv_email);
+//        ImageView imageView  = v.findViewById(R.id.iv_retail_logo);
+//
+//
+//        if(!retailName.equals("")){
+//            new Handler().post( new Runnable(){
+//
+//                public void run() {
+//                    if(StaticInfoUtils.retailLogoFile(HomeActivity.this).exists()){
+//
+//                        Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(HomeActivity.this).getAbsolutePath());
+//                        imageView.setImageBitmap(myBitmap);
+//                        imageView.setVisibility(View.VISIBLE);
+//
+//                    }
+//                }
+//            });
+//
+//           emailTv.setText(email);
+//           nameTv.setText(retailName);
+//
+//       }else {
+//            v.findViewById(R.id.btn_set_info).setVisibility(View.VISIBLE);
+//
+//           v.findViewById(R.id.btn_set_info).setOnClickListener(this::setRetailInfo);
+//
+//        }
+//
+//
+//
+//
+//    }
 
     private void checkPermission(){
 
@@ -202,6 +198,7 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     public void run() {
                         startActivity(new Intent(HomeActivity.this,RetailInformationActivity.class));
+                        finish();
                     }
                 },200);
                 break;
@@ -243,26 +240,26 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-
-        final MenuItem menuItem = menu.findItem(R.id.menu_notification);
-
-        View actionView = MenuItemCompat.getActionView(menuItem);
-        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
-
-        setupBadge();
-
-        actionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onOptionsItemSelected(menuItem);
-            }
-        });
-
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.home, menu);
+//
+//        final MenuItem menuItem = menu.findItem(R.id.menu_notification);
+//
+//        View actionView = MenuItemCompat.getActionView(menuItem);
+//        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+//
+//        setupBadge();
+//
+//        actionView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onOptionsItemSelected(menuItem);
+//            }
+//        });
+//
+//        return true;
+//    }
 
 
     private void setupBadge() {

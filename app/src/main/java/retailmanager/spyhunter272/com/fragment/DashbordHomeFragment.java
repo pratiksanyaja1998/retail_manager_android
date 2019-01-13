@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -118,7 +119,6 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
 
     private void setRetailInfo(){
 
-
         SharedPreferences myPreference;
         myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -141,19 +141,15 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
 
         }else {
 
+            Toast.makeText(getContext(),getResources().getString(R.string.retail_not_set),Toast.LENGTH_SHORT).show();
+
             startActivity(new Intent(getContext(),RetailInformationActivity.class));
+            getActivity().finish();
 
         }
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        setRetailInfo();
-
-    }
 
     private void getInvoiceTotal(int mm, int yyyy){
 
@@ -195,6 +191,7 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
             case R.id.retail_more_text:
 
                 startActivity(new Intent(getContext(),RetailInformationActivity.class));
+                getActivity().finish();
                 break;
 
             case R.id.card_customer:

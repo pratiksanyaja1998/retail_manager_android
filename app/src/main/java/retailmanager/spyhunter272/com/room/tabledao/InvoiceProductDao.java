@@ -13,7 +13,7 @@ import retailmanager.spyhunter272.com.room.table.InvoiceProduct;
 @Dao
 public interface InvoiceProductDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(InvoiceProduct invoiceProduct);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

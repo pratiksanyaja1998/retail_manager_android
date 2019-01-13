@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    >
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -15,7 +14,7 @@
     </data>
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -26,7 +25,13 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintBottom_toTopOf="@id/btn_save"
+            >
 
         <LinearLayout
             android:id="@+id/root"
@@ -34,7 +39,7 @@
             android:orientation="vertical"
             android:padding="10dp"
             android:layout_margin="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -154,6 +159,7 @@
                 android:text="@={retailInfo.pincode}"
                 android:layout_marginTop="5dp"
                 android:inputType="number"
+                android:maxLength="6"
                 />
 
 
@@ -168,14 +174,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.gstin}"
-
                 android:layout_marginTop="5dp"
+                android:maxLength="15"
+                android:inputType="textCapCharacters"
                 />
-
-
-
-
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -188,13 +190,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.mobile}"
-
+                android:inputType="phone"
+                android:maxLength="10"
                 android:layout_marginTop="5dp"
                 />
-
-
-
-
 
 
             <TextView
@@ -209,27 +208,30 @@
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.email}"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 />
-
-            <Button
-                android:id="@+id/btn_save"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/save"
-                android:layout_marginTop="@dimen/padding_root_layout_5"
-                android:onClick="onClick"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/colorWhite"
-                />
-
-
 
         </LinearLayout>
 
         </ScrollView>
 
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/save"
+        android:layout_marginTop="@dimen/padding_root_layout_5"
+        android:onClick="onClick"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
-</LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
 
 
 </layout>

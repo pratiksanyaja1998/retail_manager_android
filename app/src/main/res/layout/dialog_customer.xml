@@ -97,8 +97,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:maxLength="10"
             android:hint="Customer Mobile Number"
-            android:inputType="number"
+            android:inputType="phone"
             android:layout_weight="1"
             android:text="@={customer.mobile}"
             android:background="#00000000"
@@ -124,6 +125,7 @@
             android:ems="10"
             android:text="@={customer.gstin}"
             android:hint="GSTIN"
+            android:maxLength="15"
             android:inputType="textCapCharacters"
             android:padding="@dimen/ed_padding" />
 
