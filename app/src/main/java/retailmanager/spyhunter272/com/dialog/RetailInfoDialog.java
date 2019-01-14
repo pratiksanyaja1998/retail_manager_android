@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 public class RetailInfoDialog extends BottomSheetDialogFragment {
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

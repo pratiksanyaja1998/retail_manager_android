@@ -13,6 +13,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ import retailmanager.spyhunter272.com.room.table.Address;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 
-public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment implements View.OnClickListener {
+public class CustomerInvoiceFormDialog extends DialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
     private Customer customer;

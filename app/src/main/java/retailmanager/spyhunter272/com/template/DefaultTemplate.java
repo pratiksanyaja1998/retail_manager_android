@@ -113,6 +113,11 @@ public class DefaultTemplate {
             if ( !customer.getShipping_address().isEmpty())
                 bf.append("\t<tr><td>Shipping Address :&nbsp;&nbsp;&nbsp;&nbsp;" + customer.getShipping_address().getStreet() + "," + customer.getShipping_address().getCity() + ", " + customer.getShipping_address().getState() + "-" + customer.getShipping_address().getPostCode() + "</td> </tr>\n");
 
+        }else {
+
+            bf.append("\t<tr><td>Shipping Address :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getBilling_address().getStreet()+","+customer.getBilling_address().getCity()+", "+customer.getBilling_address().getState()+"-"+customer.getBilling_address().getPostCode()+"</td> </tr>\n");
+
+
         }
 
         if(customer.getGstin()!=null && !customer.getGstin().equals(""))bf.append("\t<tr><td>GSTIN Number :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getGstin()+"</td></tr>\n" );

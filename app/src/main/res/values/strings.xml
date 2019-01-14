@@ -142,4 +142,12 @@
 
     <string name="file_provider_authority" translatable="false">retailmanager.spyhunter272.com.fileprovider</string>
     <string name="retail_not_set">Please set retail information</string>
+    <string name="label_product_name">Product Name</string>
+    <string name="label_tex">GST(%)</string>
+    <string name="label_qty">Quantity</string>
+    <string name="label_hsn_code">HSN Code</string>
+    <string name="label_barcode">Barcode</string>
+    <string name="label_gst">GST(%)</string>
+    <string name="label_sell_price">Sell Price</string>
+    <string name="label_buy_price">Buy Price</string>
 </resources>

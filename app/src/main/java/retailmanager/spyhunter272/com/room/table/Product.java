@@ -6,6 +6,9 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BaseObservable;
 import android.os.Bundle;
+import android.view.View;
+
+import retailmanager.spyhunter272.com.R;
 
 @Entity(tableName = "product"
 //        foreignKeys= {
@@ -60,6 +63,21 @@ public class Product extends BaseObservable {
     public boolean checkValidation(){
 
         return true;
+    }
+
+
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.ibtn_qty_add:
+                in_stock_qty +=1;
+                break;
+            case R.id.ibtn_qty_remove:
+                in_stock_qty-=1;
+                break;
+
+        }
+
+        notifyChange();
     }
 
     public Bundle getBundle(){

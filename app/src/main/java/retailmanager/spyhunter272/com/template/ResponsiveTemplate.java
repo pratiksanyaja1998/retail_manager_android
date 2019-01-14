@@ -262,7 +262,7 @@ public class ResponsiveTemplate {
                 "        </div>");
 
 
-        if(!customer.getBilling_address().isEmpty() || !customer.getShipping_address().isEmpty())
+        if(!customer.getBilling_address().isEmpty())
             bf.append("        <div class=\" \" style=\"width: 47%;display: inline-block;\" >\n" +
                     "            <div class=\"w3-custom-gray w3-padding w3-margin-top\">\n" +
                     "                <b>Billing Address</b>\n" +
@@ -271,19 +271,34 @@ public class ResponsiveTemplate {
                     "                "+customer.getBilling_address().getStreet()+", "+ customer.getBilling_address().getCity()+","+customer.getBilling_address().getCity() +""+customer.getBilling_address().getPostCode() +"\n" +
                     "\n" +
                     "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
-                    "        <div class=\"   \" style=\"width: 2%;display: inline-block;\"></div>\n" +
+                    "        </div>\n");
+
+        if(customer.isIs_same_b_s()){
+            bf.append("        <div class=\"   \" style=\"width: 2%;display: inline-block;\"></div>\n" +
                     "\n" +
                     "        <div class=\"  w3-right\" style=\"width: 48%;display: inline-block;\" >\n" +
                     "            <div class=\"w3-custom-gray w3-padding w3-margin-top\">\n" +
                     "                <b>Delivery Address</b>\n" +
                     "            </div>\n" +
                     "            <div class=\"w3-padding\" style=\"padding-top: 5px;padding-left: 5px\">\n" +
-                    "                "+customer.getShipping_address().getStreet()+", "+ customer.getShipping_address().getCity()+","+customer.getShipping_address().getCity() +""+customer.getShipping_address().getPostCode() +"\n" +
+                    "                " + customer.getBilling_address().getStreet() + ", " + customer.getBilling_address().getCity() + "," + customer.getBilling_address().getCity() + "" + customer.getBilling_address().getPostCode() + "\n" +
                     "\n" +
                     "            </div>\n" +
-                    "        </div>\n" );
+                    "        </div>\n");
+
+        }else if(!customer.getBilling_address().isEmpty()) {
+            bf.append("        <div class=\"   \" style=\"width: 2%;display: inline-block;\"></div>\n" +
+                    "\n" +
+                    "        <div class=\"  w3-right\" style=\"width: 48%;display: inline-block;\" >\n" +
+                    "            <div class=\"w3-custom-gray w3-padding w3-margin-top\">\n" +
+                    "                <b>Delivery Address</b>\n" +
+                    "            </div>\n" +
+                    "            <div class=\"w3-padding\" style=\"padding-top: 5px;padding-left: 5px\">\n" +
+                    "                " + customer.getShipping_address().getStreet() + ", " + customer.getShipping_address().getCity() + "," + customer.getShipping_address().getCity() + "" + customer.getShipping_address().getPostCode() + "\n" +
+                    "\n" +
+                    "            </div>\n" +
+                    "        </div>\n");
+        }
 
 
         bf.append("    </div>");

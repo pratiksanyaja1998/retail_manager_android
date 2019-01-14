@@ -63,21 +63,21 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
         this.product = product;
         this.isUpdate = isUpdate;
 
-        product.setGstFromNumber();
-//        if(product.getGst()==0)
-//            product.setGst(0);
-//
-//        else if(product.getGst()==5)
-//            product.setGst(1);
-//
-//        else if(product.getGst()==12)
-//            product.setGst(2);
-//
-//        else if(product.getGst()==18)
-//            product.setGst(3);
-//
-//        else if(product.getGst()==28)
-//            product.setGst(4);
+//        product.setGstFromNumber();
+        if(product.getGst()==0)
+            product.setGst(0);
+
+        else if(product.getGst()==5)
+            product.setGst(1);
+
+        else if(product.getGst()==12)
+            product.setGst(2);
+
+        else if(product.getGst()==18)
+            product.setGst(3);
+
+        else if(product.getGst()==28)
+            product.setGst(4);
 
     }
 
@@ -187,24 +187,24 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
                 }
 
-                product.setGstFromNumber();
-//                if(product.getGst()==0)
-//                    product.setGst(0);
-//
-//                else if(product.getGst()==1)
-//                    product.setGst(5);
-//
-//                else if(product.getGst()==2)
-//                    product.setGst(12);
-//
-//                else if(product.getGst()==3)
-//                    product.setGst(18);
-//
-//                else if(product.getGst()==4)
-//                    product.setGst(28);
+//                product.setGstFromNumber();
+                if(product.getGst()==0)
+                    product.setGst(0);
+
+                else if(product.getGst()==1)
+                    product.setGst(5);
+
+                else if(product.getGst()==2)
+                    product.setGst(12);
+
+                else if(product.getGst()==3)
+                    product.setGst(18);
+
+                else if(product.getGst()==4)
+                    product.setGst(28);
 
                 if (productDialogHolder.isUpdate() && product.checkValidation()) {
-                    product.setIn_stock_qty(product.getIn_stock_qty() + productDialogHolder.getUpdateQty());
+
                     productViewModel.update(product);
                 }
                  else{
