@@ -124,7 +124,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alert_message">Do You Wont To Perform This Action Your Data May Be loss ?</string>
     <string name="notification_settings">Notification</string>
-    <string name="database_settings">Databse</string>
+    <string name="database_settings">Database</string>
 
     <string name="import_db">import</string>
 

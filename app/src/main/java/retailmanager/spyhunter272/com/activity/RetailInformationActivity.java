@@ -21,8 +21,7 @@ import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.holder.RetailInformationHolder;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 
-public class RetailInformationActivity extends AppCompatActivity implements CustomAlertDialog.CustomAlertDialogEvent {
-
+public class RetailInformationActivity extends AppCompatActivity  {
 
     private RetailInformationHolder retailInformationHolder;
     private  ActivityRetailInformationBinding binding;
@@ -31,12 +30,11 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         binding = DataBindingUtil.setContentView(this,R.layout.activity_retail_information);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_retail_information);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
         retailInformationHolder = new RetailInformationHolder(this);
         binding.setRetailInfo(retailInformationHolder);
-
 
        new Handler().post( new Runnable(){
 
@@ -53,9 +51,7 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
     }
 
 
-//    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
 
         if(item.getItemId()==android.R.id.home){
             onBackPressed();
@@ -67,6 +63,7 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
 
 
     public void onClick(View v){
+
         switch (v.getId()){
 
             case R.id.btn_change_logo:
@@ -89,16 +86,20 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
                      binding.root.startAnimation(shake);
                  }else {
                      Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
-                     onBackPressed();
+                     overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+                     startActivity(new Intent(this,HomeActivity.class));
+                     finish();
                  }
 
                 break;
         }
+
     }
 
     private static int SELECT_PICTURE =4;
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (resultCode == RESULT_OK) {
 
             if (requestCode == SELECT_PICTURE) {
@@ -111,33 +112,16 @@ public class RetailInformationActivity extends AppCompatActivity implements Cust
 
                             binding.imageLogo.setImageBitmap(bitmap);
                         }
+
                     }).execute(data.getData());
 
             }
 
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        CustomAlertDialog.showMessage(this, getResources().getString(R.string.retail_info_message),this);
 
     }
 
-    @Override
-    public void eventCancel() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-        startActivity(new Intent(this,HomeActivity.class));
-    }
 
-    @Override
-    public void eventDone() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-        startActivity(new Intent(this,HomeActivity.class));
 
-    }
 
 }

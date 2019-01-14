@@ -65,6 +65,7 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
         dashbrodHolder = new DashbrodHolder();
         binding.setHolder(dashbrodHolder);
         return  binding.getRoot();
+
     }
 
     @Override
@@ -119,25 +120,20 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
 
     private void setRetailInfo(){
 
-        SharedPreferences myPreference;
-        myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences  myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME, "");
 
         dashbrodHolder.setRetailName(retailName);
 
         if (!retailName.equals("")) {
-            new Handler().post(new Runnable() {
 
-                public void run() {
-                    if (StaticInfoUtils.retailLogoFile(getContext()).exists()) {
+            if (StaticInfoUtils.retailLogoFile(getContext()).exists()) {
 
-                        Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(getContext()).getAbsolutePath());
-                        binding.retailLogo.setImageBitmap(myBitmap);
+                Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(getContext()).getAbsolutePath());
+                binding.retailLogo.setImageBitmap(myBitmap);
 
-                    }
-                }
-            });
+            }
 
         }else {
 

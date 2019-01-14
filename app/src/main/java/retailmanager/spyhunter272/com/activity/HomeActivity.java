@@ -49,9 +49,8 @@ public class HomeActivity extends AppCompatActivity
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
-    private TextView textCartItemCount;
-    private int mCartItemCount = 10;
-//    private DashbordHomeFragment dashbordHomeFragment;
+//    private TextView textCartItemCount;
+//    private int mCartItemCount = 10;
 
 
     @Override
@@ -60,8 +59,6 @@ public class HomeActivity extends AppCompatActivity
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_home);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-
-        Log.e("id is",FirebaseInstanceId.getInstance().getToken()+"");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,60 +77,6 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-
-//    private void setRetailInfo(View v){
-//
-//        if(v.getId()==R.id.btn_set_info){
-//
-//            drawer.closeDrawers();
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    startActivity(new Intent(HomeActivity.this,RetailInformationActivity.class));
-//                }
-//            },200);
-//
-//        }
-//
-//        SharedPreferences myPreference;
-//        myPreference =PreferenceManager.getDefaultSharedPreferences(this);
-//
-//        String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
-//        String  email = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_EMAIL,"");
-//        TextView nameTv = (TextView) v.findViewById(R.id.tv_retail_name);
-//        TextView emailTv = v.findViewById(R.id.tv_email);
-//        ImageView imageView  = v.findViewById(R.id.iv_retail_logo);
-//
-//
-//        if(!retailName.equals("")){
-//            new Handler().post( new Runnable(){
-//
-//                public void run() {
-//                    if(StaticInfoUtils.retailLogoFile(HomeActivity.this).exists()){
-//
-//                        Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(HomeActivity.this).getAbsolutePath());
-//                        imageView.setImageBitmap(myBitmap);
-//                        imageView.setVisibility(View.VISIBLE);
-//
-//                    }
-//                }
-//            });
-//
-//           emailTv.setText(email);
-//           nameTv.setText(retailName);
-//
-//       }else {
-//            v.findViewById(R.id.btn_set_info).setVisibility(View.VISIBLE);
-//
-//           v.findViewById(R.id.btn_set_info).setOnClickListener(this::setRetailInfo);
-//
-//        }
-//
-//
-//
-//
-//    }
-
     private void checkPermission(){
 
         if (ContextCompat.checkSelfPermission(this,
@@ -147,7 +90,6 @@ public class HomeActivity extends AppCompatActivity
         }else if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED){
-
 
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -262,21 +204,21 @@ public class HomeActivity extends AppCompatActivity
 //    }
 
 
-    private void setupBadge() {
-
-        if (textCartItemCount != null) {
-            if (mCartItemCount == 0) {
-                if (textCartItemCount.getVisibility() != View.GONE) {
-                    textCartItemCount.setVisibility(View.GONE);
-                }
-            } else {
-                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
-                if (textCartItemCount.getVisibility() != View.VISIBLE) {
-                    textCartItemCount.setVisibility(View.VISIBLE);
-                }
-            }
-        }
-    }
+//    private void setupBadge() {
+//
+//        if (textCartItemCount != null) {
+//            if (mCartItemCount == 0) {
+//                if (textCartItemCount.getVisibility() != View.GONE) {
+//                    textCartItemCount.setVisibility(View.GONE);
+//                }
+//            } else {
+//                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+//                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+//                    textCartItemCount.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        }
+//    }
 
 
     @Override
@@ -299,15 +241,12 @@ public class HomeActivity extends AppCompatActivity
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     checkPermission();
-                } else {
-
                 }
                 return;
             }
@@ -315,15 +254,13 @@ public class HomeActivity extends AppCompatActivity
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     checkPermission();
-                } else {
-
                 }
                 return;
 
             }
 
-
         }
+
     }
 
 }

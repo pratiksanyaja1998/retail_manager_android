@@ -2,6 +2,7 @@ package retailmanager.spyhunter272.com.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -11,7 +12,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.File;
 
@@ -21,6 +26,7 @@ import retailmanager.spyhunter272.com.utils.Common;
 public class SettingsActivity extends AppCompatActivity {
 
 
+    private Switch notificationSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +44,24 @@ public class SettingsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        notificationSwitch = findViewById(R.id.switch_notification);
+
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        boolean notification = sharedPreferences.getBoolean(KEY_SP_NOTIFICATION, true);
+
+        notificationSwitch.setChecked(notification);
+
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                changeNotificationStatus(isChecked);
+            }
+        });
+
     }
 
     public void onClick(View view) {
+
         switch (view.getId()){
 
             case R.id.btn_export_db:
@@ -56,8 +77,24 @@ public class SettingsActivity extends AppCompatActivity {
                 intent = Intent.createChooser(chooseFile, "Choose a databse");
                 startActivityForResult(intent, SELECT_DB_FILE);
                 break;
+        }
+
+    }
+
+    private SharedPreferences sharedPreferences;
+    public static final String KEY_SP_NOTIFICATION = "notification";
+
+    private void changeNotificationStatus(boolean isChecked) {
+        if (isChecked) {
+
+            FirebaseMessaging.getInstance().subscribeToTopic("news");
+
+        } else {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("news");
 
         }
+
+        sharedPreferences.edit().putBoolean(KEY_SP_NOTIFICATION, isChecked).commit();
 
     }
 

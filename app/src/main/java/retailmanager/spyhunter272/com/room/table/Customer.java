@@ -35,7 +35,9 @@ public class Customer extends BaseObservable {
     private Address shipping_address;
 
     @Ignore
-    private boolean isNew = false;
+    private boolean isNew = false,isUpdate  =false;
+
+
 
 
     public Customer(String name, String mobile, String gstin, String email, Address billing_address, boolean is_same_b_s, Address shipping_address) {
@@ -53,6 +55,14 @@ public class Customer extends BaseObservable {
         this.billing_address = new Address("","","","");
         this.shipping_address = new Address("","","","");
 
+    }
+
+    public boolean isUpdate() {
+        return isUpdate;
+    }
+
+    public void setUpdate(boolean update) {
+        isUpdate = update;
     }
 
     public boolean isNew() {
@@ -150,6 +160,7 @@ public class Customer extends BaseObservable {
         bundle.putString("gstin",gstin);
         bundle.putString("email",email);
         bundle.putBoolean("isNew",isNew);
+        bundle.putBoolean("isUpdate",isUpdate);
         bundle.putBundle("baddr",billing_address.getBundle());
         bundle.putBundle("saddr",shipping_address.getBundle());
         bundle.putBoolean("same_b_a",is_same_b_s);
@@ -167,8 +178,9 @@ public class Customer extends BaseObservable {
                 bundle.getBoolean("same_b_a"),
                 Address.setAddressFromBundle(bundle.getBundle("saddr")));
 
-        customer.id = bundle.getInt("id");
-        customer.setNew(bundle.getBoolean("isNew"));
+        customer.id = bundle.getLong("id");
+        customer.isUpdate  = bundle.getBoolean("isUpdate");
+        customer.isNew = (bundle.getBoolean("isNew"));
 
         return customer;
 

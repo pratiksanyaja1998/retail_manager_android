@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retailmanager.spyhunter272.com.room.RetailDatabase;
+import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.room.table.InvoiceProduct;
 import retailmanager.spyhunter272.com.room.table.Product;
@@ -27,37 +28,53 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
 
     private RetailDatabase retailDatabase;
     private Invoice invoice;
-    private ProgressDialog progressDialog;
-    private Context ctx;
     private OnProgressCompliteLisn onProgressCompliteLisn;
 
     public SaveInvoiceBgWorker(Context context, Invoice invoice,OnProgressCompliteLisn onProgressCompliteLisn) {
         this.retailDatabase = RetailDatabase.getInstance(context);
         this.invoice = invoice;
-        this.ctx = context;
         this.onProgressCompliteLisn = onProgressCompliteLisn;
-    }
-
-    @Override
-    protected void onPreExecute() {
-//        progressDialog = new ProgressDialog(ctx);
-//        progressDialog.setCancelable(false);
-//        progressDialog.show();
     }
 
     @Override
     protected Long doInBackground(Void... voids) {
 
-        long customerId;
-        if(invoice.getCustomer().isNew())
-            customerId= retailDatabase.customerDao().insert(invoice.getCustomer());
-        else
-            customerId=invoice.getCustomer().getId();
+        Customer customer =invoice.getCustomer();
 
-        invoice.setCustomerId(customerId);
+        if(customer.isNew()) {
+
+//            if(customer.isUpdate()) {
+//
+//                Log.e("post", "update customer +"+customer.getId());
+//
+//                retailDatabase.customerDao().update(customer);
+//                invoice.setCustomerId(customer.getId());
+//
+//            }else {
+
+                Log.e("post", "new customer");
+                invoice.setCustomerId(retailDatabase.customerDao().insert(customer));
+
+//            }
+        }else if(customer.isUpdate()){
+
+            Log.e("post","update customer ++ " +customer.getId());
+
+            retailDatabase.customerDao().update(customer);
+            invoice.setCustomerId(customer.getId());
+
+        }else {
+
+            Log.e("post","normal customer");
+
+            invoice.setCustomerId(customer.getId());
+
+        }
+
+
 
         long invoiceId = retailDatabase.invoiceDao().insert(invoice);
-        Log.e("idis",invoiceId+"");
+        Log.e("post",invoiceId+" invoice id");
 
         List<InvoiceProduct>  invoiceProductList = new ArrayList<>();
         List<Product> productList = invoice.getProductList();
@@ -86,9 +103,7 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
 
     @Override
     protected void onPostExecute(Long invoiceId) {
-//        progressDialog.dismiss();
         onProgressCompliteLisn.onProgressComplited(invoiceId);
-
     }
 
 //    public File saveInvoiceFile(Invoice invoice){

@@ -32,13 +32,44 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
     private SharedPreferences myPreference;
     private Customer customer;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle=getArguments();
+
+        if(bundle!=null){
+
+            customer = Customer.setCustomerFromBundle(bundle);
+
+            Log.e("post","open dialgo update +"+customer.isUpdate());
+//            Customer customerUpdateble  = Customer.setCustomerFromBundle(bundle);
+//            customer.setName(customerUpdateble.getName());
+//            customer.setEmail(customerUpdateble.getEmail());
+//            customer.setBilling_address(customerUpdateble.getBilling_address());
+//            customer.setShipping_address(customerUpdateble.getShipping_address());
+//            customer.setGstin(customerUpdateble.getGstin());
+//            customer.setMobile(customerUpdateble.getMobile());
+//            customer.setId(customerUpdateble.getId());
+//            customer.setIs_same_b_s(customerUpdateble.isIs_same_b_s());
+//            customer.setNew(customerUpdateble.isNew());
+
+        }else {
+
+            customer = new Customer();
+            customer.setNew(true);
+
+        }
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         DialogCustomerBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_customer,container,false);
 
-        customer = new Customer("","","","",new Address("","","",""),false,new Address("","","",""));
         dialogCustomerBinding.setCustomer(customer);
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -62,29 +93,6 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
         view.findViewById(R.id.btn_dialog_ok).setOnClickListener(this);
         view.findViewById(R.id.ibtn_pic_contact).setOnClickListener(this::onClick);
 
-
-        Bundle bundle=getArguments();
-
-        if(bundle!=null){
-
-            Customer customerUpdateble  = Customer.setCustomerFromBundle(bundle);
-            customer.setName(customerUpdateble.getName());
-            customer.setEmail(customerUpdateble.getEmail());
-            customer.setBilling_address(customerUpdateble.getBilling_address());
-            customer.setShipping_address(customerUpdateble.getShipping_address());
-            customer.setGstin(customerUpdateble.getGstin());
-            customer.setMobile(customerUpdateble.getMobile());
-            customer.setId(customerUpdateble.getId());
-            customer.setIs_same_b_s(customerUpdateble.isIs_same_b_s());
-            customer.setNew(customerUpdateble.isNew());
-
-        }else {
-
-            customer.setNew(true);
-
-        }
-
-
     }
 
 
@@ -97,14 +105,7 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
 
                 if( customerLisner!=null){
 
-                    if(customer.isNew()){
-                        Log.e("post","new customer id +"+customer.getId());
-                        ViewModelProviders.of(this).get(CustomerViewModel.class).update(customer);
-                    }else {
-                        Log.e("post","new customer id else +"+customer.getId() );
-
-                    }
-
+                    Log.e("post","dialgo finish id +"+customer.getId());
                     customerLisner.lisnCustomerFromDialog(customer);
                     dismiss();
                     return;

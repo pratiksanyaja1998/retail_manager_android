@@ -48,8 +48,6 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
     private static int BARCODE_ACT_REQ_CODE = 55;
 
-    private boolean isNewProducts = false ;
-
     private ProductViewModel productViewModel;
 
     private Product product;
@@ -138,9 +136,7 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
                         if (item.getId() == product.getCategory()) {
 
-//                            spProductCategory.setSelection(counter);
-                                product.setCategory(counter);
-                            Log.e("category added",product.getCategory()+"");
+                            product.setCategory(counter);
 
                             product.notifyChange();
                             continue;
@@ -225,13 +221,11 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-//            Log.e("barcode","data recived");
 
             if(requestCode==BARCODE_ACT_REQ_CODE){
 
                 if(resultCode==Activity.RESULT_OK){
 
-//                    Log.e("barcode","data recived");
 
                     product.setBarcode(data.getStringExtra(BarcodeActivity.BARCODE_RESULT_BACK_ACT));
                     product.notifyChange();
@@ -242,34 +236,34 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
     }
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if(context instanceof ProductsLisner){
-            productsLisner = (ProductsLisner) context;
-
-        }else {
-            productsLisner = null;
-        }
-
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        productsLisner = null;
-    }
-
-    private ProductsLisner productsLisner;
-
-
-    public interface ProductsLisner{
-
-        void lisnProductsFromDialog(Product product);
-
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//
+//        if(context instanceof ProductsLisner){
+//            productsLisner = (ProductsLisner) context;
+//
+//        }else {
+//            productsLisner = null;
+//        }
+//
+//    }
+//
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//
+//        productsLisner = null;
+//    }
+//
+//    private ProductsLisner productsLisner;
+//
+//
+//    public interface ProductsLisner{
+//
+//        void lisnProductsFromDialog(Product product);
+//
+//    }
 
 }

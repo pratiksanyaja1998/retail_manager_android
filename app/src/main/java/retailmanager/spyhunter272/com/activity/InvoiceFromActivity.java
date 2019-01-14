@@ -81,8 +81,10 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
                 break;
 
             case R.id.btn_update_customer:
+                Customer customer= invoiceFromHolder.getCustomerObj();
+                customer.setUpdate(true);
                 CustomerInvoiceFormDialog customerDialog2 = new CustomerInvoiceFormDialog();
-                customerDialog2.setArguments(invoiceFromHolder.getCustomerObj().getBundle());
+                customerDialog2.setArguments(customer.getBundle());
                 customerDialog2.show(getSupportFragmentManager(),null);
                 break;
 
@@ -120,7 +122,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
         new SaveInvoiceBgWorker(this,invoice,new SaveInvoiceBgWorker.OnProgressCompliteLisn(){
             @Override
             public void onProgressComplited(Long invoiceId) {
-
 
                     Intent intent = new Intent(InvoiceFromActivity.this,InvoiceShowActivity.class);
                     intent.putExtra(InvoiceShowActivity.KEY_INVOICE_ID,invoiceId);

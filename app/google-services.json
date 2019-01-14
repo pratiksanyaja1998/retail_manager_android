@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:708375241952:android:132ad352bd3eaec8",
+        "mobilesdk_app_id": "1:708375241952:android:03f0d129f0899ec7",
         "android_client_info": {
           "package_name": "retailmanager.spyhunter272.com"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "708375241952-14rg8mafvmuv663p8sn61bemldds4hmi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "retailmanager.spyhunter272.com",
+            "certificate_hash": "7911646b6549270b025f9fe54c41e43b635277f7"
+          }
+        },
         {
           "client_id": "708375241952-r98a98prcuun80qsrotvvfscavnr4mjj.apps.googleusercontent.com",
           "client_type": 3
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708375241952-r98a98prcuun80qsrotvvfscavnr4mjj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

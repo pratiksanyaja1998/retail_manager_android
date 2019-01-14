@@ -35,6 +35,8 @@
             android:layout_margin="5dp"
             app:cardCornerRadius="2dp"
             app:cardElevation="2dp"
+            android:onClick="@{(v) ->invoiceFromHolder.onClick(v)}"
+            android:id="@+id/btn_open_dialog_date"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -49,11 +51,9 @@
                 >
 
                 <ImageButton
-                    android:id="@+id/btn_open_dialog_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:onClick="@{(v) ->invoiceFromHolder.onClick(v)}"
                     android:background="?android:attr/selectableItemBackground"
                     app:srcCompat="@drawable/calender_ic" />
 
