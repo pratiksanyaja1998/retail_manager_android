@@ -94,6 +94,18 @@ public class Address {
         return data;
     }
 
+    public boolean isEmpty(){
+
+        if(isEpty(street))
+            if(isEpty(city))
+                if(isEpty(state))
+                    if(isEpty(postCode))
+                        return true;
+
+        return false;
+
+    }
+
 
     public String getJsonData(){
         StringBuffer stringBuffer = new StringBuffer();

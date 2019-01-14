@@ -259,31 +259,34 @@ public class ResponsiveTemplate {
                 "                <b>&nbsp;&nbsp;&nbsp;Customer GSTIN :-</b> "+customer.getGstin()+"\n" +
                 "\n" +
                 "            </span>\n" +
-                "        </div>\n" +
-                "\n" +
-                "        <div class=\" \" style=\"width: 47%;display: inline-block;\" >\n" +
-                "            <div class=\"w3-custom-gray w3-padding w3-margin-top\">\n" +
-                "                <b>Billing Address</b>\n" +
-                "            </div>\n" +
-                "            <div class=\"w3-padding\" style=\"padding-top: 5px;padding-left: 5px\">\n" +
-                "                "+customer.getBilling_address().getStreet()+", "+ customer.getBilling_address().getCity()+","+customer.getBilling_address().getCity() +""+customer.getBilling_address().getPostCode() +"\n" +
-                "\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "\n" +
-                "        <div class=\"   \" style=\"width: 2%;display: inline-block;\"></div>\n" +
-                "\n" +
-                "        <div class=\"  w3-right\" style=\"width: 48%;display: inline-block;\" >\n" +
-                "            <div class=\"w3-custom-gray w3-padding w3-margin-top\">\n" +
-                "                <b>Delivery Address</b>\n" +
-                "            </div>\n" +
-                "            <div class=\"w3-padding\" style=\"padding-top: 5px;padding-left: 5px\">\n" +
-                "                "+customer.getShipping_address().getStreet()+", "+ customer.getShipping_address().getCity()+","+customer.getShipping_address().getCity() +""+customer.getShipping_address().getPostCode() +"\n" +
-                "\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "\n" +
-                "    </div>");
+                "        </div>");
+
+
+        if(!customer.getBilling_address().isEmpty() || !customer.getShipping_address().isEmpty())
+            bf.append("        <div class=\" \" style=\"width: 47%;display: inline-block;\" >\n" +
+                    "            <div class=\"w3-custom-gray w3-padding w3-margin-top\">\n" +
+                    "                <b>Billing Address</b>\n" +
+                    "            </div>\n" +
+                    "            <div class=\"w3-padding\" style=\"padding-top: 5px;padding-left: 5px\">\n" +
+                    "                "+customer.getBilling_address().getStreet()+", "+ customer.getBilling_address().getCity()+","+customer.getBilling_address().getCity() +""+customer.getBilling_address().getPostCode() +"\n" +
+                    "\n" +
+                    "            </div>\n" +
+                    "        </div>\n" +
+                    "\n" +
+                    "        <div class=\"   \" style=\"width: 2%;display: inline-block;\"></div>\n" +
+                    "\n" +
+                    "        <div class=\"  w3-right\" style=\"width: 48%;display: inline-block;\" >\n" +
+                    "            <div class=\"w3-custom-gray w3-padding w3-margin-top\">\n" +
+                    "                <b>Delivery Address</b>\n" +
+                    "            </div>\n" +
+                    "            <div class=\"w3-padding\" style=\"padding-top: 5px;padding-left: 5px\">\n" +
+                    "                "+customer.getShipping_address().getStreet()+", "+ customer.getShipping_address().getCity()+","+customer.getShipping_address().getCity() +""+customer.getShipping_address().getPostCode() +"\n" +
+                    "\n" +
+                    "            </div>\n" +
+                    "        </div>\n" );
+
+
+        bf.append("    </div>");
 
 
         return bf.toString();
@@ -312,9 +315,14 @@ public class ResponsiveTemplate {
 
         for (int i=0;i<proLists.size();i++) {
 
+            String hsn = proLists.get(i).getHsn(),
+                    name= proLists.get(i).getName();
+            double price = proLists.get(i).getPrice();
 
+            if(hsn==null)
+                hsn="";
 
-            bf.append("<tr class=\"w3-custom-gray-text\" ><td>"+(i+1)+"</td><td>"+proLists.get(i).getName()+"</td><td>"+proLists.get(i).getHsn()+"</td><td>"+proLists.get(i).getPrice()+"</td><td>"+proLists.get(i).getQty()+"</td>");
+            bf.append("<tr class=\"w3-custom-gray-text\" ><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
 
             if(invoice.getGsttype()==0)bf.append("<td>"+(proLists.get(i).getGst()/2)+"</td><td>"+(proLists.get(i).getGst()/2)+"</td>");
             else

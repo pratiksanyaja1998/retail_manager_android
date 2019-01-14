@@ -3,6 +3,7 @@ package retailmanager.spyhunter272.com.template;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.util.List;
@@ -101,7 +102,19 @@ public class DefaultTemplate {
                 "\t<tr><td>Name: &nbsp;&nbsp;&nbsp;&nbsp;"+customer.getName()+"</td></tr>\n");
 
         if(customer.getMobile()!=null && !customer.getMobile().equals(""))bf.append("\t<tr><td>Mobile Number :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getMobile()+"</td></tr>\n");
-        if(customer.getBilling_address()!=null && !customer.getBilling_address().equals(""))bf.append("\t<tr><td>Address :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getBilling_address().getStreet()+","+customer.getBilling_address().getCity()+", "+customer.getBilling_address().getState()+"-"+customer.getBilling_address().getPostCode()+"</td> </tr>\n");
+
+
+        if( !customer.getBilling_address().isEmpty())
+            bf.append("\t<tr><td>Billing Address :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getBilling_address().getStreet()+","+customer.getBilling_address().getCity()+", "+customer.getBilling_address().getState()+"-"+customer.getBilling_address().getPostCode()+"</td> </tr>\n");
+
+
+        if(!customer.isIs_same_b_s()) {
+
+            if ( !customer.getShipping_address().isEmpty())
+                bf.append("\t<tr><td>Shipping Address :&nbsp;&nbsp;&nbsp;&nbsp;" + customer.getShipping_address().getStreet() + "," + customer.getShipping_address().getCity() + ", " + customer.getShipping_address().getState() + "-" + customer.getShipping_address().getPostCode() + "</td> </tr>\n");
+
+        }
+
         if(customer.getGstin()!=null && !customer.getGstin().equals(""))bf.append("\t<tr><td>GSTIN Number :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getGstin()+"</td></tr>\n" );
 
         bf.append("\t</table></td></tr>\n" +
@@ -126,7 +139,17 @@ public class DefaultTemplate {
 
         for (int i=0;i<proLists.size();i++) {
             //body var
-            bf.append("<tr><td>"+(i+1)+"</td><td>"+proLists.get(i).getName()+"</td><td>"+proLists.get(i).getHsn()+"</td><td>"+proLists.get(i).getPrice()+"</td><td>"+proLists.get(i).getQty()+"</td>");
+            String hsn = proLists.get(i).getHsn(),
+                    name= proLists.get(i).getName();
+            double price = proLists.get(i).getPrice();
+
+            if(hsn==null)
+                hsn="";
+            else if(hsn.equals(""))
+                Log.e("post","hsn  empt "+hsn);
+
+
+            bf.append("<tr><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
 
             if(invoice.getGsttype()==0)bf.append("<td>"+(proLists.get(i).getGst()/2)+"</td><td>"+(proLists.get(i).getGst()/2)+"</td>");
             else

@@ -20,7 +20,6 @@ import android.os.Bundle;
 public class Product extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
     private int id;
 
     private String name;
@@ -37,7 +36,6 @@ public class Product extends BaseObservable {
 
     private int in_stock_qty;
 
-    @ColumnInfo(name = "category")
     private int category;
 
     @Ignore
@@ -152,6 +150,27 @@ public class Product extends BaseObservable {
     public int getGst() {
         return gst;
     }
+
+    public void setGstFromNumber(){
+
+        int number = getGst();
+        if(number==0)
+            setGst(0);
+
+        else if(number==1)
+            setGst(5);
+
+        else if(number==2)
+            setGst(12);
+
+        else if(number==3)
+            setGst(18);
+
+        else if(number==4)
+            setGst(28);
+
+    }
+
 
     public void setGst(int gst) {
         this.gst = gst;

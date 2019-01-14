@@ -43,19 +43,9 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
 
         if(customer.isNew()) {
 
-//            if(customer.isUpdate()) {
-//
-//                Log.e("post", "update customer +"+customer.getId());
-//
-//                retailDatabase.customerDao().update(customer);
-//                invoice.setCustomerId(customer.getId());
-//
-//            }else {
-
                 Log.e("post", "new customer");
                 invoice.setCustomerId(retailDatabase.customerDao().insert(customer));
 
-//            }
         }else if(customer.isUpdate()){
 
             Log.e("post","update customer ++ " +customer.getId());
@@ -70,8 +60,6 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
             invoice.setCustomerId(customer.getId());
 
         }
-
-
 
         long invoiceId = retailDatabase.invoiceDao().insert(invoice);
         Log.e("post",invoiceId+" invoice id");
@@ -93,10 +81,7 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
 
         }
 
-
         retailDatabase.invoiceProductDao().addAllInvoiceProduct(invoiceProductList);
-        invoice.setId(invoiceId);
-        invoice.setInvoiceProducts(invoiceProductList);
 
         return invoiceId;
     }
@@ -106,40 +91,6 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
         onProgressCompliteLisn.onProgressComplited(invoiceId);
     }
 
-//    public File saveInvoiceFile(Invoice invoice){
-//
-//        String root = Environment.getExternalStorageDirectory().toString();
-//
-//        File myDir =new File(root,"/RetailManager/"+invoice.getYyyy()+"/"+invoice.getMm()+"/"+invoice.getDd());
-//        if(!myDir.exists())myDir.mkdirs();
-//
-//        String fname = "SN00"+invoice.getId()+".html";
-//
-//        File file = new File (myDir, fname);
-//        if (file.exists ())
-//            file.delete ();
-//
-//        try {
-//
-//            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-//            bufferedWriter.write("");
-//
-//            header(bufferedWriter);
-//            brandDetails(ctx,bufferedWriter);
-//            customer(bufferedWriter);
-//            products(bufferedWriter);
-//            footer(bufferedWriter);
-//
-//            bufferedWriter.flush();
-//            bufferedWriter.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return file;
-//
-//    }
 
     public interface OnProgressCompliteLisn{
         void onProgressComplited(Long invoiceId);

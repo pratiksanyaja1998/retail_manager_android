@@ -154,7 +154,6 @@
         android:layout_marginBottom="@dimen/components_margin_bottom"
         >
 
-
         <EditText
             android:id="@+id/ed_hsn"
             android:layout_width="wrap_content"
@@ -183,16 +182,16 @@
             android:inputType="numberDecimal"
             android:padding="@dimen/ed_padding" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/components_margin_left_right"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edt_border"
-            android:visibility="@{productDialogHolder.update ? View.VISIBLE:View.GONE}"
-            android:text="@={product.in_stock_qty+``,default=``}"
-            android:padding="@dimen/ed_padding"
-            android:ems="10" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/components_margin_left_right"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/bg_edt_border"-->
+            <!--android:visibility="@{productDialogHolder.update ? View.VISIBLE:View.GONE}"-->
+            <!--android:text="@={product.in_stock_qty+``,default=``}"-->
+            <!--android:padding="@dimen/ed_padding"-->
+            <!--android:ems="10" />-->
 
         <LinearLayout
             android:id="@+id/linear_add_stock"
@@ -209,18 +208,18 @@
             android:textSize="18sp"
             />
 
-        <EditText
-            android:id="@+id/ed_qty_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/components_margin_left_right"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edt_border"
-            android:ems="10"
-            android:text="@={productDialogHolder.updateQty+``,default=``}"
-            android:hint="Add Stock"
-            android:inputType="number"
-            android:padding="@dimen/ed_padding" />
+        <!--<EditText-->
+            <!--android:id="@+id/ed_qty_add"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/components_margin_left_right"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/bg_edt_border"-->
+            <!--android:ems="10"-->
+            <!--android:text="@={productDialogHolder.updateQty+``,default=``}"-->
+            <!--android:hint="Add Stock"-->
+            <!--android:inputType="number"-->
+            <!--android:padding="@dimen/ed_padding" />-->
         </LinearLayout>
 
     </LinearLayout>

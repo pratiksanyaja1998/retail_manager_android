@@ -63,20 +63,21 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
         this.product = product;
         this.isUpdate = isUpdate;
 
-        if(product.getGst()==0)
-            product.setGst(0);
-
-        else if(product.getGst()==5)
-            product.setGst(1);
-
-        else if(product.getGst()==12)
-            product.setGst(2);
-
-        else if(product.getGst()==18)
-            product.setGst(3);
-
-        else if(product.getGst()==28)
-            product.setGst(4);
+        product.setGstFromNumber();
+//        if(product.getGst()==0)
+//            product.setGst(0);
+//
+//        else if(product.getGst()==5)
+//            product.setGst(1);
+//
+//        else if(product.getGst()==12)
+//            product.setGst(2);
+//
+//        else if(product.getGst()==18)
+//            product.setGst(3);
+//
+//        else if(product.getGst()==28)
+//            product.setGst(4);
 
     }
 
@@ -96,7 +97,6 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
                 myPreference.getBoolean("barcode",true),myPreference.getBoolean("productGst",true) );
         productDialogHolder.setUpdate(isUpdate);
         binding.setProductDialogHolder(productDialogHolder);
-
 
         return binding.getRoot();
     }
@@ -131,19 +131,20 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
             public void onChanged(@Nullable List<ProductCategory> productCategories) {
                 prodCateSpinnerBaseAdepter.setProductCategories(productCategories);
 
-                    int counter = 1;
-                    for (ProductCategory item : productCategories) {
+                int counter = 1;
 
-                        if (item.getId() == product.getCategory()) {
+                for (ProductCategory item : productCategories) {
 
-                            product.setCategory(counter);
+                    if (item.getId() == product.getCategory()) {
 
-                            product.notifyChange();
-                            continue;
-                        }
-                        counter++;
+                        product.setCategory(counter);
 
+                        product.notifyChange();
+                        continue;
                     }
+                    counter++;
+
+                }
 
             }
         });
@@ -186,20 +187,21 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
                 }
 
-                if(product.getGst()==0)
-                    product.setGst(0);
-
-                else if(product.getGst()==1)
-                    product.setGst(5);
-
-                else if(product.getGst()==2)
-                    product.setGst(12);
-
-                else if(product.getGst()==3)
-                    product.setGst(18);
-
-                else if(product.getGst()==4)
-                    product.setGst(28);
+                product.setGstFromNumber();
+//                if(product.getGst()==0)
+//                    product.setGst(0);
+//
+//                else if(product.getGst()==1)
+//                    product.setGst(5);
+//
+//                else if(product.getGst()==2)
+//                    product.setGst(12);
+//
+//                else if(product.getGst()==3)
+//                    product.setGst(18);
+//
+//                else if(product.getGst()==4)
+//                    product.setGst(28);
 
                 if (productDialogHolder.isUpdate() && product.checkValidation()) {
                     product.setIn_stock_qty(product.getIn_stock_qty() + productDialogHolder.getUpdateQty());
