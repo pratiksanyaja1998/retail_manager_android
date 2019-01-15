@@ -114,17 +114,18 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
 //                webView.loadUrl("file:///android_asset/withImage.html");
 //                webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
                 break;
-//            case  2:
-////                webView.loadUrl("file:///android_asset/color.html");
-//                break;
-//            case 3:
-////                webView.loadUrl("file:///android_asset/widthLogo.html");
-//                break;
-//            case 4:
-////                webView.loadUrl("file:///android_asset/simple.html");
-//                break;
 
-//            default:
+            case  2:
+                webView.loadUrl("file:///android_asset/color.html");
+                break;
+
+            case 3:
+                webView.loadUrl("file:///android_asset/widthLogo.html");
+                break;
+
+            case 4:
+                webView.loadUrl("file:///android_asset/simple.html");
+                break;
 
         }
 
@@ -178,7 +179,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
         String jobName = getString(R.string.app_name) + " Document";
         PrintAttributes.Builder builder = new PrintAttributes.Builder();
-        builder.setMediaSize(PrintAttributes.MediaSize.ISO_A5);
+        builder.setMediaSize(PrintAttributes.MediaSize.ISO_A4);
         PrintJob printJob = printManager.print(jobName, printAdapter, builder.build());
 
         if(printJob.isCompleted()){

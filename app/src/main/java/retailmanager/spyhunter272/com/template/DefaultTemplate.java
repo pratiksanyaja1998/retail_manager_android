@@ -41,7 +41,6 @@ public class DefaultTemplate {
        return  "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><meta charset=\"UTF-8\"><style type=\"text/css\" media=\"all\">\n" +
                 "    \ttd{padding: 5px;}table{width: 100%;}.bgcolor{background-color: #dbdde0 !important;}.tcenter{text-align: center;}\n" +
                 "    \tbody{-webkit-print-color-adjust:exact;}@page {size: auto;margin: 0; }.error{color: red;}.btnprint{margin: 10px;padding: 10px;}.border{border: 1px solid #a6a7a8;}.ucase {text-transform: uppercase;}</style>\n" +
-                "    <style type=\"text/css\" media=\"print\"></style><script type=\"text/javascript\">function printPage(obj){window.print();}</script>\n" +
                 "</head><body style=\"width:95%\">";
         //btn print
         // bf.append("<div id=\"hide\"><input class=\"btnprint\" name=\"\" value=\"PRINT\" onclick=\"printPage(this)\" type=\"button\"></div>");
