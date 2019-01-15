@@ -71,7 +71,7 @@ public class InvoiceViewModel extends AndroidViewModel {
         int mYear, mMonth, mDay;
 
         mYear = calendar.get(Calendar.YEAR);
-        mMonth = calendar.get(Calendar.MONTH);
+        mMonth = calendar.get(Calendar.MONTH)+1;
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
 

@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 
 import retailmanager.spyhunter272.com.R;
@@ -38,23 +39,12 @@ public class CustomerInvoiceFormDialog extends DialogFragment implements View.On
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         Bundle bundle=getArguments();
 
         if(bundle!=null){
 
             customer = Customer.setCustomerFromBundle(bundle);
-
-            Log.e("post","open dialgo update +"+customer.isUpdate());
-//            Customer customerUpdateble  = Customer.setCustomerFromBundle(bundle);
-//            customer.setName(customerUpdateble.getName());
-//            customer.setEmail(customerUpdateble.getEmail());
-//            customer.setBilling_address(customerUpdateble.getBilling_address());
-//            customer.setShipping_address(customerUpdateble.getShipping_address());
-//            customer.setGstin(customerUpdateble.getGstin());
-//            customer.setMobile(customerUpdateble.getMobile());
-//            customer.setId(customerUpdateble.getId());
-//            customer.setIs_same_b_s(customerUpdateble.isIs_same_b_s());
-//            customer.setNew(customerUpdateble.isNew());
 
         }else {
 
@@ -68,6 +58,7 @@ public class CustomerInvoiceFormDialog extends DialogFragment implements View.On
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         DialogCustomerBinding dialogCustomerBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_customer,container,false);
 

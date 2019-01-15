@@ -148,6 +148,10 @@ public class DefaultTemplate {
                     name= proLists.get(i).getName();
             double price = Math.round(proLists.get(i).getPrice());
 
+            Log.e("post",proLists.get(i).getGst()+" gst get ");
+
+            float gst = proLists.get(i).getGst();
+
             if(hsn==null)
                 hsn="";
 
@@ -155,7 +159,7 @@ public class DefaultTemplate {
             bf.append("<tr><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
 
             if(invoice.getGsttype()==0)
-                bf.append("<td>"+(proLists.get(i).getGst()/2)+"%</td><td>"+(proLists.get(i).getGst()/2)+"%</td>");
+                bf.append("<td>"+gst/2+"%</td><td>"+gst/2+"%</td>");
             else
                 bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
 
