@@ -49,6 +49,9 @@ public class CustProPickerDialog extends DialogFragment implements AdapterView.O
     private DialogCustomerProductPickerBinding binding;
     private CustProPickerDialogHolder holder;
 
+    public CustProPickerDialog(){
+
+    }
 
     @NonNull
     @Override

@@ -144,7 +144,8 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
 
     private void editCustomer(Customer customer){
 
-        CustomerDialog customerDialog = new CustomerDialog(customer,true);
+        CustomerDialog customerDialog = new CustomerDialog();
+        customerDialog.setArguments(customer.getBundle());
         customerDialog.show(getFragmentManager(),null);
 
     }
@@ -182,8 +183,7 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
 
         switch (v.getId()){
             case R.id.fbtn_add:
-                CustomerDialog customerDialog =new CustomerDialog(new Customer(),false);
-                customerDialog.show(getFragmentManager(),null);
+                new CustomerDialog().show(getFragmentManager(),null);
                 break;
 
             case R.id.ib_next:

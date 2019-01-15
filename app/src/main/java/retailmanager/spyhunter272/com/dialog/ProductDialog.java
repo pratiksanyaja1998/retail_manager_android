@@ -59,30 +59,48 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
     private   ProductDialogHolder productDialogHolder;
 
 
-    public ProductDialog(Product product, boolean isUpdate) {
-        this.product = product;
-        this.isUpdate = isUpdate;
-
-//        product.setGstFromNumber();
-        if(product.getGst()==0)
-            product.setGst(0);
-
-        else if(product.getGst()==5)
-            product.setGst(1);
-
-        else if(product.getGst()==12)
-            product.setGst(2);
-
-        else if(product.getGst()==18)
-            product.setGst(3);
-
-        else if(product.getGst()==28)
-            product.setGst(4);
-
-    }
+//    public ProductDialog(Product product, boolean isUpdate) {
+//        this.product = product;
+//        this.isUpdate = isUpdate;
+//
+//        product.setGstNumberToGst();
+////        if(product.getGst()==0)
+////            product.setGst(0);
+////
+////        else if(product.getGst()==5)
+////            product.setGst(1);
+////
+////        else if(product.getGst()==12)
+////            product.setGst(2);
+////
+////        else if(product.getGst()==18)
+////            product.setGst(3);
+////
+////        else if(product.getGst()==28)
+////            product.setGst(4);
+//
+//    }
 
 
     private DialogProductBinding binding;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            product = Product.getProductFromBundle(bundle);
+            isUpdate = true;
+        }else {
+            product = new Product();
+        }
+
+        product.setGstNumberToGst();
+
+
+    }
 
     @Nullable
     @Override
@@ -187,28 +205,30 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
                 }
 
-//                product.setGstFromNumber();
-                if(product.getGst()==0)
-                    product.setGst(0);
-
-                else if(product.getGst()==1)
-                    product.setGst(5);
-
-                else if(product.getGst()==2)
-                    product.setGst(12);
-
-                else if(product.getGst()==3)
-                    product.setGst(18);
-
-                else if(product.getGst()==4)
-                    product.setGst(28);
+                product.setGstFromNumber();
+//                if(product.getGst()==0)
+//                    product.setGst(0);
+//
+//                else if(product.getGst()==1)
+//                    product.setGst(5);
+//
+//                else if(product.getGst()==2)
+//                    product.setGst(12);
+//
+//                else if(product.getGst()==3)
+//                    product.setGst(18);
+//
+//                else if(product.getGst()==4)
+//                    product.setGst(28);
 
                 if (productDialogHolder.isUpdate() && product.checkValidation()) {
 
                     productViewModel.update(product);
-                }
-                 else{
+
+                }else{
+
                     productViewModel.insert(product);
+
                 }
 
                 dismiss();

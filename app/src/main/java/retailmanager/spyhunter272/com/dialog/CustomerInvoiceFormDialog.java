@@ -44,7 +44,7 @@ public class CustomerInvoiceFormDialog extends DialogFragment implements View.On
 
         if(bundle!=null){
 
-            customer = Customer.setCustomerFromBundle(bundle);
+            customer = Customer.getCustomerFromBundle(bundle);
 
         }else {
 

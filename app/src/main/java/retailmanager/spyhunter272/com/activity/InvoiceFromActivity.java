@@ -1,13 +1,11 @@
 package retailmanager.spyhunter272.com.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,14 +22,13 @@ import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.customview.NestedListView;
 import retailmanager.spyhunter272.com.databinding.ActivityInvoiceFromBinding;
 import retailmanager.spyhunter272.com.dialog.CustomerInvoiceFormDialog;
-import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.dialog.ProductInvoiceFormDialog;
 import retailmanager.spyhunter272.com.holder.InvoiceFromHolder;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.room.table.Product;
 
-public class InvoiceFromActivity extends AppCompatActivity implements PreviewInvoiceDialog.PreviewInvoiceDialogListener,ProductInvoiceFormDialog.ProductsLisner,
+public class InvoiceFromActivity extends AppCompatActivity implements ProductInvoiceFormDialog.ProductsLisner,
         CustProPickerDialog.DialogSearchItemSelectLisner,
         CustomerInvoiceFormDialog.CustomerLisner,
         InvoiceFormProductListAdapter.ProductListLiner {
@@ -180,7 +177,8 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
 
     @Override
     public void openProduct(Product product) {
-        ProductInvoiceFormDialog productDialog =  new ProductInvoiceFormDialog(product);
+        ProductInvoiceFormDialog productDialog =  new ProductInvoiceFormDialog();
+        productDialog.setArguments(product.getBundle());
         productDialog.show(getSupportFragmentManager(),null);
     }
 
@@ -194,12 +192,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-    }
-
-
-    @Override
-    public Activity getActivityObj() {
-        return this;
     }
 
 

@@ -26,12 +26,9 @@ import android.widget.Toast;
 import com.webviewtopdf.PdfView;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.bgworker.GetInvoiceBgWorker;
-import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.room.RetailDatabase;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.template.DefaultTemplate;

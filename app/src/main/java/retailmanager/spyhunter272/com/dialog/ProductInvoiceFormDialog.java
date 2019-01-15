@@ -30,33 +30,50 @@ import retailmanager.spyhunter272.com.room.table.Product;
 public class ProductInvoiceFormDialog extends DialogFragment implements View.OnClickListener {
 
 
-    private TextView tvBarcode;
     private Product product;
 
     private SharedPreferences myPreference;
     private ProductDialogHolder productDialogHolder;
 
-    public ProductInvoiceFormDialog(Product product) {
+//    public ProductInvoiceFormDialog(Product product) {
+//
+//        this.product = product;
+//        product.setGstNumberToGst();
+////        if(product.getGst()==0)
+////            product.setGst(0);
+////
+////        else if(product.getGst()==5)
+////            product.setGst(1);
+////
+////        else if(product.getGst()==12)
+////            product.setGst(2);
+////
+////        else if(product.getGst()==18)
+////            product.setGst(3);
+////
+////        else if(product.getGst()==28)
+////            product.setGst(4);
+//
+//    }
 
-        this.product = product;
-//        product.setGstFromNumber();
-        if(product.getGst()==0)
-            product.setGst(0);
-
-        else if(product.getGst()==5)
-            product.setGst(1);
-
-        else if(product.getGst()==12)
-            product.setGst(2);
-
-        else if(product.getGst()==18)
-            product.setGst(3);
-
-        else if(product.getGst()==28)
-            product.setGst(4);
+    public ProductInvoiceFormDialog(){
 
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            product = Product.getProductFromBundle(bundle);
+        }else {
+            product = new Product();
+        }
+
+        product.setGstNumberToGst();
+
+    }
 
     @Nullable
     @Override
@@ -80,11 +97,8 @@ public class ProductInvoiceFormDialog extends DialogFragment implements View.OnC
 
         myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-//      init view
         dialog.findViewById(R.id.btn_dialog_close).setOnClickListener(this);
         dialog.findViewById(R.id.btn_dialog_ok).setOnClickListener(this);
-
-
 
     }
 
@@ -102,21 +116,21 @@ public class ProductInvoiceFormDialog extends DialogFragment implements View.OnC
 
             case R.id.btn_dialog_ok:
 
-//              product.setGstFromNumber();
-                if(product.getGst()==0)
-                    product.setGst(0);
-
-                else if(product.getGst()==1)
-                    product.setGst(5);
-
-                else if(product.getGst()==2)
-                    product.setGst(12);
-
-                else if(product.getGst()==3)
-                    product.setGst(18);
-
-                else if(product.getGst()==4)
-                    product.setGst(28);
+              product.setGstFromNumber();
+//                if(product.getGst()==0)
+//                    product.setGst(0);
+//
+//                else if(product.getGst()==1)
+//                    product.setGst(5);
+//
+//                else if(product.getGst()==2)
+//                    product.setGst(12);
+//
+//                else if(product.getGst()==3)
+//                    product.setGst(18);
+//
+//                else if(product.getGst()==4)
+//                    product.setGst(28);
 
                 if( productsLisner!=null){
 

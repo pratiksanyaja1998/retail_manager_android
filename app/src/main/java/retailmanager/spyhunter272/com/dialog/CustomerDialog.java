@@ -36,7 +36,6 @@ import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 
 import retailmanager.spyhunter272.com.databinding.DialogCustomerBinding;
 
-@SuppressLint("ValidFragment")
 public class CustomerDialog extends DialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
@@ -45,12 +44,33 @@ public class CustomerDialog extends DialogFragment implements View.OnClickListen
     private boolean isUpdate;
 
 
-    public CustomerDialog(Customer customer, boolean isUpdate) {
-        this.customer = customer;
-        this.isUpdate = isUpdate;
+//    public CustomerDialog(Customer customer, boolean isUpdate) {
+//        this.customer = customer;
+//        this.isUpdate = isUpdate;
+//    }
+
+    public CustomerDialog(){
+
     }
 
+
     private  DialogCustomerBinding binding;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+           customer =  Customer.getCustomerFromBundle(bundle);
+           isUpdate = true;
+        }else {
+            customer = new Customer();
+            isUpdate = false;
+        }
+
+    }
 
     @Nullable
     @Override
@@ -76,7 +96,7 @@ public class CustomerDialog extends DialogFragment implements View.OnClickListen
         myPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
 
 //        ArrayAdapter arrayAdapter =  new ArrayAdapter(getContext(), android.R.layout.simple_dropdown_item_1line,
-//                getResources().getStringArray(R.array.state_name));
+//        getResources().getStringArray(R.array.state_name));
 
         binding.btnDialogClose.setOnClickListener(this);
         binding.btnDialogOk.setOnClickListener(this);

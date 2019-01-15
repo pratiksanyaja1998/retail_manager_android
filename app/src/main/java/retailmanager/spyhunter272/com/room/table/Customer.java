@@ -167,7 +167,7 @@ public class Customer extends BaseObservable {
         return bundle;
     }
 
-    static public Customer setCustomerFromBundle(Bundle bundle){
+    static public Customer getCustomerFromBundle(Bundle bundle){
 
         Customer customer=  new Customer(
                 bundle.getString("name"),

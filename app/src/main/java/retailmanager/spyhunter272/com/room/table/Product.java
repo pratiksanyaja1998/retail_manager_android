@@ -94,7 +94,7 @@ public class Product extends BaseObservable {
         return bundle;
     }
 
-    static public Product setProductFromBundle(Bundle bundle){
+    static public Product getProductFromBundle(Bundle bundle){
         Product product=  new Product(
         bundle.getString("name"),
          bundle.getString("hsn"),
@@ -186,6 +186,28 @@ public class Product extends BaseObservable {
 
         else if(number==4)
             setGst(28);
+
+    }
+
+    public void setGstNumberToGst(){
+
+
+        int number = getGst();
+
+        if(number==0)
+            setGst(0);
+
+        else if(number==5)
+            setGst(1);
+
+        else if(number==12)
+            setGst(2);
+
+        else if(number==18)
+            setGst(3);
+
+        else if(number==28)
+            setGst(4);
 
     }
 

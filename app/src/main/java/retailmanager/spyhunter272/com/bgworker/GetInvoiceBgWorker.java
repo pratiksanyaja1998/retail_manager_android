@@ -1,12 +1,7 @@
 package retailmanager.spyhunter272.com.bgworker;
 
 import android.os.AsyncTask;
-import android.view.View;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.room.RetailDatabase;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 
@@ -36,7 +31,6 @@ public class GetInvoiceBgWorker extends AsyncTask<Void,Void,Invoice> {
     protected void onPostExecute(Invoice invoice) {
         getInvoiceListener.InvoiceGetSuccess(invoice);
 //        progressBar.setVisibility(View.GONE);
-//        PreviewInvoiceDialog.this.invoice=invoice;
 //
 //        String postData = null;
 //

@@ -17,13 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.activity.InvoiceActivity;
-import retailmanager.spyhunter272.com.activity.InvoiceFromActivity;
 import retailmanager.spyhunter272.com.activity.InvoiceShowActivity;
 import retailmanager.spyhunter272.com.databinding.FragmentInvoiceViewBinding;
 import retailmanager.spyhunter272.com.databinding.RowInvoiceBinding;
 
 import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
-import retailmanager.spyhunter272.com.dialog.PreviewInvoiceDialog;
 import retailmanager.spyhunter272.com.holder.InvoiceViewHolder;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.viewmodel.InvoiceViewModel;
@@ -108,11 +106,6 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
     }
 
     private void showInvoice(Invoice invoice){
-
-//        PreviewInvoiceDialog previewInvoiceDialog = new PreviewInvoiceDialog();
-//        if(!previewInvoiceDialog.isVisible())
-//         previewInvoiceDialog.show(getFragmentManager(),null);
-//        previewInvoiceDialog.setInvoiceId(invoice.getId());
 
         Intent intent = new Intent(getContext(),InvoiceShowActivity.class);
         intent.putExtra(InvoiceShowActivity.KEY_INVOICE_ID,invoice.getId());

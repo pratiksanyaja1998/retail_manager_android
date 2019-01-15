@@ -1,6 +1,5 @@
 package retailmanager.spyhunter272.com.fragment;
 
-import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -42,7 +41,6 @@ import retailmanager.spyhunter272.com.room.table.ProductCategory;
 import retailmanager.spyhunter272.com.viewmodel.ProductCategoryViewModel;
 import retailmanager.spyhunter272.com.viewmodel.ProductViewModel;
 
-//9913577510 mama khakhariya
 public class ProductViewFragment extends Fragment implements View.OnClickListener,ProductActivity.SearchViewDataChangeListner{
 
     private ProductViewModel productViewModel;
@@ -221,7 +219,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
         switch (v.getId()){
             case R.id.fbtn_add:
-                new ProductDialog(new Product(),false).show(getFragmentManager(),null);
+                new ProductDialog().show(getFragmentManager(),null);
                 break;
 
             case R.id.ib_next:
@@ -241,14 +239,13 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
     }
 
-    //    recylerview
     public void editProduct(Product product) {
-       ProductDialog productDialog =  new ProductDialog(product,true);
+       ProductDialog productDialog =  new ProductDialog();
+       productDialog.setArguments(product.getBundle());
         productDialog.show(getFragmentManager(),null);
     }
 
     public void deleteProduct(Product product) {
-
 
         CustomAlertDialog.show(getContext(), new CustomAlertDialog.CustomAlertDialogEvent() {
             @Override
@@ -259,7 +256,6 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
             @Override
             public void eventDone() {
                 productViewModel.delete(product);
-
 
             }
         });
