@@ -186,6 +186,7 @@ public class ResponsiveTemplate {
         String city =myPreference.getString(SP_KEY_FOR_RETAIL_INFO_CITY,"");
         String state = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_STATE,"");
         String pincode = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_PINCODE,"");
+        String prefix = myPreference.getString("invoicePre","SNOO");
 
 
 
@@ -212,7 +213,7 @@ public class ResponsiveTemplate {
                 "\n" +
                 "        <div class=\"w3-left w3-col s4 m4 l4\">\n" +
                 "            <span class=\"w3-left\">\n" +
-                "                <b>INVOICE NO :-</b> "+invoice.getId()+"\n" +
+                "                <b>INVOICE NO :-</b> "+prefix+invoice.getId()+"\n" +
                 "            </span>\n" +
                 "        </div>\n" +
                 "\n" +

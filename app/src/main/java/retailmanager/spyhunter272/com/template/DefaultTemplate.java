@@ -62,6 +62,8 @@ public class DefaultTemplate {
         String pincode = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_PINCODE,"");
 
 
+        String prefix = myPreference.getString("invoicePre","SNOO");
+
         if(!gstin.equals("")){
 
             gstin =  "Gstin Number : "+gstin+"</small>";
@@ -81,7 +83,7 @@ public class DefaultTemplate {
                 "</table>\n" +
                 "<table class=\"border\">\n" +
                 "\t<tr><td>Mobile Number : "+mobile+"</td><td align=\"right\">Invoice Date : "+invoice.getDd()+"-"+invoice.getMm()+"-"+invoice.getYyyy()+"</td></tr>\n" +
-                "\t<tr><td>Invoice Serial Number: "+invoice.getId()+"</td><td align=\"right\">Tax Is Payable On Reverse Charge: "+((invoice.isTprchage())?"Yes" : "No") +"</td></tr>\n" +
+                "\t<tr><td>Invoice Serial Number: "+prefix+invoice.getId()+"</td><td align=\"right\">Tax Is Payable On Reverse Charge: "+((invoice.isTprchage())?"Yes" : "No") +"</td></tr>\n" +
                 "</table><br>";
     }
 
