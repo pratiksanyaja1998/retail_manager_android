@@ -332,16 +332,17 @@ public class ResponsiveTemplate {
 
             String hsn = proLists.get(i).getHsn(),
                     name= proLists.get(i).getName();
-            double price = proLists.get(i).getPrice();
+            double price = Math.round(proLists.get(i).getPrice());
 
             if(hsn==null)
                 hsn="";
 
             bf.append("<tr class=\"w3-custom-gray-text\" ><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
 
-            if(invoice.getGsttype()==0)bf.append("<td>"+(proLists.get(i).getGst()/2)+"</td><td>"+(proLists.get(i).getGst()/2)+"</td>");
+            if(invoice.getGsttype()==0)
+                bf.append("<td>"+(proLists.get(i).getGst()/2)+"%</td><td>"+(proLists.get(i).getGst()/2)+"%</td>");
             else
-                bf.append("<td>"+(proLists.get(i).getGst())+"</td>");
+                bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
 
             bf.append("<td>"+(proLists.get(i).getTotal())+"</td></tr>");
         }
@@ -395,9 +396,10 @@ public class ResponsiveTemplate {
 
     public static String footer(Invoice invoice,Context context) {
 
-        SharedPreferences myPreference =PreferenceManager.getDefaultSharedPreferences(context);
-
-        String   retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
+        String description = invoice.getDesciption();
+        if(description==null){
+            description="";
+        }
 
        return "    <div class=\"w3-col font-15 w3-margin-top\" >\n" +
                "        <div class=\"w3-custom-gray w3-padding \">\n" +
@@ -411,7 +413,7 @@ public class ResponsiveTemplate {
                "                <b>Tax In Reverse Change :-</b> "+invoice.isTprchage()+"</span>\n" +
                "\n" +
                "            <span >\n" +
-               "                <br/><b>Desciption :-</b>"+invoice.getDesciption()+"</span>\n" +
+               "                <br/><b>Desciption :-</b>"+description+"</span>\n" +
                "\n" +
                "        </div>\n" +
                "    </div>\n" +

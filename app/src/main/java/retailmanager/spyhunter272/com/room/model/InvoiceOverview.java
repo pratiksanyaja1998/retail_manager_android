@@ -4,6 +4,16 @@ public class InvoiceOverview {
 
     private float total;
 
+    private int count;
+
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public InvoiceOverview(float total) {
         this.total = total;

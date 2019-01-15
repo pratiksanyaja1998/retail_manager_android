@@ -53,10 +53,10 @@ public class InvoiceViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<Integer> getInvoiceCount(){
-
-        return invoiceProductDao.getInvoiceCount();
-    }
+//    public LiveData<Integer> getInvoiceCount(){
+//
+//        return invoiceProductDao.getInvoiceCount();
+//    }
 
 
     public LiveData<InvoiceOverview> getInvoiceOverview(int mm,int yyyy){

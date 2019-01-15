@@ -3,6 +3,7 @@ package retailmanager.spyhunter272.com.holder;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.databinding.BaseObservable;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 
@@ -145,6 +146,10 @@ public class InvoiceFromHolder extends BaseObservable {
 
     public String getPaymethordString(){
         String[] ptype=  context.getResources().getStringArray(R.array.ptype);
+
+        if(paymethord==0){
+            return  "";
+        }
 
         return ptype[paymethord];
 

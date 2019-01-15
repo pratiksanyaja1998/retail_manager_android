@@ -1,6 +1,7 @@
 package retailmanager.spyhunter272.com.holder;
 
 import android.databinding.BaseObservable;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -21,9 +22,11 @@ private float totalIncome;
     public DashbrodHolder(){
         Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
+        mMonth = c.get(Calendar.MONTH)+1;
 
-        dateString =  MONTH_LIST[mMonth] + " "+mYear;
+        Log.e("post","dashbord "+mMonth);
+
+        dateString =  MONTH_LIST[mMonth-1] + " "+mYear;
     }
 
 

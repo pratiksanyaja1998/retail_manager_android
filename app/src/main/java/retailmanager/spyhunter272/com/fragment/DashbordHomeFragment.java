@@ -57,9 +57,7 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
     private DashbrodHolder dashbrodHolder;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment 7043046758
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_dashbord_home,container,false);
         dashbrodHolder = new DashbrodHolder();
@@ -72,44 +70,28 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         binding.btnOpenDialogDate.setOnClickListener(this);
-        binding.retailMoreText.setOnClickListener(this::onClick);
-        binding.cardCustomer.setOnClickListener(this::onClick);
-        binding.cardInvoice.setOnClickListener(this::onClick);
-        binding.cardProduct.setOnClickListener(this::onClick);
+        binding.retailMoreText.setOnClickListener(this);
+        binding.cardCustomer.setOnClickListener(this);
+        binding.cardInvoice.setOnClickListener(this);
+        binding.cardProduct.setOnClickListener(this);
 
         initView();
     }
 
     private void initView() {
 
-        ViewModelProviders.of(this).get(InvoiceViewModel.class).getInvoiceCount().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
-                if (integer != null) {
-                    dashbrodHolder.setInvoiceCount(integer.toString());
-                }
+
+        ViewModelProviders.of(this).get(ProductViewModel.class).getProductCount().observe(this, integer -> {
+            if (integer != null) {
+                dashbrodHolder.setProductCount(integer.toString());
             }
         });
 
-
-        ViewModelProviders.of(this).get(ProductViewModel.class).getProductCount().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
-                if (integer != null) {
-                    dashbrodHolder.setProductCount(integer.toString());
-                }
+        ViewModelProviders.of(this).get(CustomerViewModel.class).getCustomerCount().observe(this, integer -> {
+            if (integer != null) {
+                dashbrodHolder.setCustomerCount(integer.toString());
             }
         });
-
-        ViewModelProviders.of(this).get(CustomerViewModel.class).getCustomerCount().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
-                if (integer != null) {
-                    dashbrodHolder.setCustomerCount(integer.toString());
-                }
-            }
-        });
-
 
         getInvoiceTotal(dashbrodHolder.getmMonth(), dashbrodHolder.getmYear());
 
@@ -149,14 +131,10 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
 
     private void getInvoiceTotal(int mm, int yyyy){
 
-         ViewModelProviders.of(this).get(InvoiceViewModel.class).getInvoiceOverview(mm,yyyy).observe(this, new Observer<InvoiceOverview>() {
-
-             @Override
-             public void onChanged(@Nullable InvoiceOverview invoiceOverview) {
-                 if(invoiceOverview!=null){
-                     dashbrodHolder.setTotalIncome(invoiceOverview.getTotal());
-                 }
-
+         ViewModelProviders.of(this).get(InvoiceViewModel.class).getInvoiceOverview(mm,yyyy).observe(this, invoiceOverview -> {
+             if(invoiceOverview!=null){
+                 dashbrodHolder.setTotalIncome(invoiceOverview.getTotal());
+                 dashbrodHolder.setInvoiceCount(String.valueOf(invoiceOverview.getCount()));
              }
 
          });
@@ -171,13 +149,10 @@ public class DashbordHomeFragment extends Fragment implements View.OnClickListen
                 MonthYearPickerDialog pd = MonthYearPickerDialog.newInstance(dashbrodHolder.getmMonth(),
                         1,dashbrodHolder.getmYear());
 
-                pd.setListener(new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                pd.setListener((view, year, monthOfYear, dayOfMonth) -> {
 
-                        dashbrodHolder.setMonthYear(monthOfYear,year);
-                        getInvoiceTotal(monthOfYear,year);
-                    }
+                    dashbrodHolder.setMonthYear(monthOfYear,year);
+                    getInvoiceTotal(monthOfYear,year);
                 });
 
                 pd.show(getFragmentManager(), "MonthYearPickerDialog");

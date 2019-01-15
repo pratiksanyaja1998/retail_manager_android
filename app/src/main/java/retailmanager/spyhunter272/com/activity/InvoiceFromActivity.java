@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,7 +102,7 @@ public class InvoiceFromActivity extends AppCompatActivity implements PreviewInv
         invoice.setMobile(customer.getMobile());
         Calendar calendar = invoiceFromHolder.getCalendar();
         invoice.setDd(calendar.get(Calendar.DAY_OF_MONTH));
-        invoice.setMm(calendar.get(Calendar.MONTH));
+        invoice.setMm(calendar.get(Calendar.MONTH)+1);
         invoice.setYyyy(calendar.get(Calendar.YEAR));
         invoice.setTotal(invoiceFromHolder.getTotalWithDiscount());
         invoice.setDiscount(invoiceFromHolder.getDiscount());

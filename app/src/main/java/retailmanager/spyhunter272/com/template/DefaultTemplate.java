@@ -146,19 +146,18 @@ public class DefaultTemplate {
             //body var
             String hsn = proLists.get(i).getHsn(),
                     name= proLists.get(i).getName();
-            double price = proLists.get(i).getPrice();
+            double price = Math.round(proLists.get(i).getPrice());
 
             if(hsn==null)
                 hsn="";
-            else if(hsn.equals(""))
-                Log.e("post","hsn  empt "+hsn);
 
 
             bf.append("<tr><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
 
-            if(invoice.getGsttype()==0)bf.append("<td>"+(proLists.get(i).getGst()/2)+"</td><td>"+(proLists.get(i).getGst()/2)+"</td>");
+            if(invoice.getGsttype()==0)
+                bf.append("<td>"+(proLists.get(i).getGst()/2)+"%</td><td>"+(proLists.get(i).getGst()/2)+"%</td>");
             else
-                bf.append("<td>"+(proLists.get(i).getGst())+"</td>");
+                bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
 
             bf.append("<td>"+(proLists.get(i).getTotal())+"</td></tr>");
         }
