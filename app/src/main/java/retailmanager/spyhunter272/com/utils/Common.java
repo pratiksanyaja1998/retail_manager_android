@@ -94,7 +94,6 @@ public class Common {
     //exporting database
     public static void exportDB(Context ctx) {
 
-
         try {
             File sd = Environment.getExternalStorageDirectory();
             File data = Environment.getDataDirectory();

@@ -1,6 +1,7 @@
 package retailmanager.spyhunter272.com.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,12 +15,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.bgworker.SaveRetailLogoBgWorker;
 import retailmanager.spyhunter272.com.databinding.ActivityRetailInformationBinding;
 import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.holder.RetailInformationHolder;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
+
+import static retailmanager.spyhunter272.com.activity.SettingsActivity.KEY_SP_NOTIFICATION;
 
 public class RetailInformationActivity extends AppCompatActivity  {
 
@@ -44,6 +49,12 @@ public class RetailInformationActivity extends AppCompatActivity  {
 
            }
        });
+
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        boolean notification = sharedPreferences.getBoolean(KEY_SP_NOTIFICATION, true);
+        if(notification){
+            FirebaseMessaging.getInstance().subscribeToTopic("news");
+        }
 
     }
 

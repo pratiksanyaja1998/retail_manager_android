@@ -66,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent intent;
                 chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
                 chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
-                chooseFile.setType("file/*");
+                chooseFile.setType("*/*");
                 intent = Intent.createChooser(chooseFile, "Choose a databse");
                 startActivityForResult(intent, SELECT_DB_FILE);
                 break;
@@ -115,7 +115,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 String FilePath = Common.getRealPathFromURI(uri, this);
 
-                if(FilePath!=null) {
+                if(FilePath!=null && FilePath.contains(".db")) {
                     Common.importDB(this, new File(FilePath));
                 }else {
                     Toast.makeText(this,getResources().getString(R.string.file_select_error),Toast.LENGTH_SHORT).show();
