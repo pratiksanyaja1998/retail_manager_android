@@ -324,19 +324,9 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
             vHolder.s_price.setText( "Sell :"+product.getS_price());
             vHolder.b_price.setText("Buy :"+product.getS_price());
             vHolder.qty.setText(""+product.getIn_stock_qty());
-            vHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteProduct(product);
-                }
-            });
+            vHolder.btnDelete.setOnClickListener(v -> deleteProduct(product));
 
-            vHolder.btnEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    editProduct(product);
-                }
-            });
+            vHolder.btnEdit.setOnClickListener(v -> editProduct(product));
 
             setFadeAnimation(vHolder.itemView);
         }

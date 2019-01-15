@@ -4,11 +4,13 @@
 
 
     <PreferenceCategory
+        android:iconSpaceReserved="false"
         android:title="Invoice Form Settings">
 
         <EditTextPreference
             android:defaultValue="SNOO"
             android:key="invoicePre"
+            app:iconSpaceReserved="false"
             android:summary="Invoice Serial Number Prefix"
             android:title="Invoice Number Prefix" />
 

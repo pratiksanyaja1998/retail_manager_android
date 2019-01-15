@@ -71,18 +71,15 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
         invoiceViewModel.getInvoiceForList(INVOICE_SHOW_LIMIT,
                 invoiceViewHolder.getOffset(),
                 invoiceViewHolder.getMyCalendar(),
-                invoiceViewHolder.getQuery()).observe(this, new Observer<List<Invoice>>() {
-            @Override
-            public void onChanged(@Nullable List<Invoice> invoices) {
-                if(invoices.size()<=0){
-                    invoiceViewHolder.setNoData(true);
-                }else {
-                    invoiceViewHolder.setNoData(false);
-                }
-                invoiceListAdepter.setInvoiceList(invoices);
+                invoiceViewHolder.getQuery()).observe(this, invoices -> {
+                    if(invoices.size()<=0){
+                        invoiceViewHolder.setNoData(true);
+                    }else {
+                        invoiceViewHolder.setNoData(false);
+                    }
+                    invoiceListAdepter.setInvoiceList(invoices);
 
-            }
-        });
+                });
 
     }
 
@@ -148,19 +145,9 @@ public class InvoiceViewFragment extends Fragment implements InvoiceActivity.Sea
         public void onBindViewHolder(@NonNull InvoiceViewHolder invoiceViewHolder, int i) {
 
             invoiceViewHolder.binding.setInvoiceHolder(invoiceList.get(i));
-            invoiceViewHolder.binding.ibtnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteInvoice(invoiceList.get(i));
-                }
-            });
+            invoiceViewHolder.binding.ibtnDelete.setOnClickListener(v -> deleteInvoice(invoiceList.get(i)));
 
-            invoiceViewHolder.binding.ibtnEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showInvoice(invoiceList.get(i));
-                }
-            });
+            invoiceViewHolder.binding.ibtnEdit.setOnClickListener(v -> showInvoice(invoiceList.get(i)));
 
         }
 

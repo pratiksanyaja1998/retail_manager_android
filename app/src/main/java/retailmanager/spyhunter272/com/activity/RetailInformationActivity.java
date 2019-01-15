@@ -36,15 +36,12 @@ public class RetailInformationActivity extends AppCompatActivity  {
         retailInformationHolder = new RetailInformationHolder(this);
         binding.setRetailInfo(retailInformationHolder);
 
-       new Handler().post( new Runnable(){
+       new Handler().post(() -> {
+           if(StaticInfoUtils.retailLogoFile(RetailInformationActivity.this).exists()){
 
-           public void run() {
-               if(StaticInfoUtils.retailLogoFile(RetailInformationActivity.this).exists()){
+               Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(RetailInformationActivity.this).getAbsolutePath());
+               binding.imageLogo.setImageBitmap(myBitmap);
 
-                   Bitmap myBitmap = BitmapFactory.decodeFile(StaticInfoUtils.retailLogoFile(RetailInformationActivity.this).getAbsolutePath());
-                   binding.imageLogo.setImageBitmap(myBitmap);
-
-               }
            }
        });
 
@@ -105,15 +102,7 @@ public class RetailInformationActivity extends AppCompatActivity  {
             if (requestCode == SELECT_PICTURE) {
 
                 if(data.getData()!=null)
-                    new SaveRetailLogoBgWorker(this,new SaveRetailLogoBgWorker.LisnOnSaveComplite(){
-
-                        @Override
-                        public void onSaveComplite(Bitmap bitmap) {
-
-                            binding.imageLogo.setImageBitmap(bitmap);
-                        }
-
-                    }).execute(data.getData());
+                    new SaveRetailLogoBgWorker(this, bitmap -> binding.imageLogo.setImageBitmap(bitmap)).execute(data.getData());
 
             }
 

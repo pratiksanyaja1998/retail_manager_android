@@ -24,12 +24,9 @@ public class ProductSettingPrefrenceFragment extends PreferenceFragmentCompat {
 
         Preference button = (Preference)getPreferenceManager().findPreference("btnProductCate");
         if (button != null) {
-            button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference arg0) {
-                    productCategoryManageDialog.show(getFragmentManager(),null);
-                    return true;
-                }
+            button.setOnPreferenceClickListener(arg0 -> {
+                productCategoryManageDialog.show(getFragmentManager(),null);
+                return true;
             });
         }
 

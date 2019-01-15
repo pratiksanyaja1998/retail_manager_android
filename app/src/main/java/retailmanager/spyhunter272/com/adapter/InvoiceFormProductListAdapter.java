@@ -116,27 +116,11 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
 
         binding.setProduct(proLists.get(i));
 
-        binding.rowIbtnprodelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteProduct(i);
-            }
-        });
+        binding.rowIbtnprodelete.setOnClickListener(v -> deleteProduct(i));
 
-        binding.rowPname.setOnClickListener(new View.OnClickListener() {
+        binding.rowPname.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
 
-            @Override
-            public void onClick(View v) {
-                productListLiner.openProduct(proLists.get(i));
-            }
-        });
-
-        binding.rowPtex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                productListLiner.openProduct(proLists.get(i));
-            }
-        });
+        binding.rowPtex.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
 
         return binding.getRoot();
 

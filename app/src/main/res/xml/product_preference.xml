@@ -9,6 +9,7 @@
 
 
     <PreferenceCategory
+        android:iconSpaceReserved="false"
         android:title="Product View Settings">
 
         <CheckBoxPreference

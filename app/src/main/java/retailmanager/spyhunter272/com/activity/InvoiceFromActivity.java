@@ -117,16 +117,13 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
             return;
         }
 
-        new SaveInvoiceBgWorker(this,invoice,new SaveInvoiceBgWorker.OnProgressCompliteLisn(){
-            @Override
-            public void onProgressComplited(Long invoiceId) {
+        new SaveInvoiceBgWorker(this,invoice, invoiceId -> {
 
-                    Intent intent = new Intent(InvoiceFromActivity.this,InvoiceShowActivity.class);
-                    intent.putExtra(InvoiceShowActivity.KEY_INVOICE_ID,invoiceId);
-                    startActivity(intent);
-                    InvoiceFromActivity.this.finish();
+                Intent intent = new Intent(InvoiceFromActivity.this,InvoiceShowActivity.class);
+                intent.putExtra(InvoiceShowActivity.KEY_INVOICE_ID,invoiceId);
+                startActivity(intent);
+                InvoiceFromActivity.this.finish();
 
-            }
         }).execute();
 
     }

@@ -75,17 +75,14 @@ public class CustomerViewFragment extends Fragment  implements  CustomerActivity
                 .findViewById(R.id.ed_offset);
 
 
-        edOffset.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    setOffSet( Integer.parseInt("0"+edOffset.getText().toString()));
-                    getCustomer();
-                    return false;
-                }
-
-                return true;
+        edOffset.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                setOffSet( Integer.parseInt("0"+edOffset.getText().toString()));
+                getCustomer();
+                return false;
             }
+
+            return true;
         });
 
 

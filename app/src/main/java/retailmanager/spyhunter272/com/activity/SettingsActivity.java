@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -25,8 +26,6 @@ import retailmanager.spyhunter272.com.utils.Common;
 
 public class SettingsActivity extends AppCompatActivity {
 
-
-    private Switch notificationSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +43,20 @@ public class SettingsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        notificationSwitch = findViewById(R.id.switch_notification);
+        Switch notificationSwitch = findViewById(R.id.switch_notification);
 
         sharedPreferences = getPreferences(MODE_PRIVATE);
         boolean notification = sharedPreferences.getBoolean(KEY_SP_NOTIFICATION, true);
 
         notificationSwitch.setChecked(notification);
 
-        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                changeNotificationStatus(isChecked);
-            }
-        });
+        notificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> changeNotificationStatus(isChecked));
 
     }
 
     public void onClick(View view) {
 
         switch (view.getId()){
-
             case R.id.btn_export_db:
                 Common.exportDB(this);
                 break;
@@ -85,16 +78,18 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String KEY_SP_NOTIFICATION = "notification";
 
     private void changeNotificationStatus(boolean isChecked) {
+
         if (isChecked) {
 
             FirebaseMessaging.getInstance().subscribeToTopic("news");
 
         } else {
+
             FirebaseMessaging.getInstance().unsubscribeFromTopic("news");
 
         }
 
-        sharedPreferences.edit().putBoolean(KEY_SP_NOTIFICATION, isChecked).commit();
+        sharedPreferences.edit().putBoolean(KEY_SP_NOTIFICATION, isChecked).apply();
 
     }
 
@@ -114,13 +109,21 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(requestCode ==SELECT_DB_FILE)
         {
-            Uri uri = data.getData();
-            String FilePath = Common.getRealPathFromURI(uri,this);
-            Common.importDB(this,new File(FilePath));
+            if(data.getData()!=null) {
+
+                Uri uri = data.getData();
+
+                String FilePath = Common.getRealPathFromURI(uri, this);
+
+                if(FilePath!=null) {
+                    Common.importDB(this, new File(FilePath));
+                }else {
+                    Toast.makeText(this,getResources().getString(R.string.file_select_error),Toast.LENGTH_SHORT).show();
+                }
+
+            }
         }
 
     }
-
-
 
 }
