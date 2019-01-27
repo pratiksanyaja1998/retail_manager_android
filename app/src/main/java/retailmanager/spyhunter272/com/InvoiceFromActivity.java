@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.activity;
+package retailmanager.spyhunter272.com;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +18,6 @@ import java.util.Calendar;
 import retailmanager.spyhunter272.com.adapter.InvoiceFormProductListAdapter;
 import retailmanager.spyhunter272.com.bgworker.SaveInvoiceBgWorker;
 import retailmanager.spyhunter272.com.dialog.CustProPickerDialog;
-import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.customview.NestedListView;
 import retailmanager.spyhunter272.com.databinding.ActivityInvoiceFromBinding;
 import retailmanager.spyhunter272.com.dialog.CustomerInvoiceFormDialog;
@@ -101,6 +100,7 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         invoice.setDd(calendar.get(Calendar.DAY_OF_MONTH));
         invoice.setMm(calendar.get(Calendar.MONTH)+1);
         invoice.setYyyy(calendar.get(Calendar.YEAR));
+        invoice.setGst(invoiceFromHolder.getGst());
         invoice.setTotal(invoiceFromHolder.getTotalWithDiscount());
         invoice.setDiscount(invoiceFromHolder.getDiscount());
         invoice.setGsttype(binding.spGsttype.getSelectedItemPosition());
@@ -190,6 +190,5 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         super.onBackPressed();
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
-
 
 }

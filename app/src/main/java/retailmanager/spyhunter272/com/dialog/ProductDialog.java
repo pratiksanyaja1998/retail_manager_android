@@ -4,32 +4,24 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import retailmanager.spyhunter272.com.adapter.ProdCateSpinnerBaseAdepter;
 import retailmanager.spyhunter272.com.R;
-import retailmanager.spyhunter272.com.activity.BarcodeActivity;
+import retailmanager.spyhunter272.com.BarcodeActivity;
 import retailmanager.spyhunter272.com.holder.ProductDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Product;
 import retailmanager.spyhunter272.com.room.table.ProductCategory;
@@ -58,30 +50,6 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
     private SharedPreferences myPreference;
     private   ProductDialogHolder productDialogHolder;
 
-
-//    public ProductDialog(Product product, boolean isUpdate) {
-//        this.product = product;
-//        this.isUpdate = isUpdate;
-//
-//        product.setGstNumberToGst();
-////        if(product.getGst()==0)
-////            product.setGst(0);
-////
-////        else if(product.getGst()==5)
-////            product.setGst(1);
-////
-////        else if(product.getGst()==12)
-////            product.setGst(2);
-////
-////        else if(product.getGst()==18)
-////            product.setGst(3);
-////
-////        else if(product.getGst()==28)
-////            product.setGst(4);
-//
-//    }
-
-
     private DialogProductBinding binding;
 
 
@@ -97,7 +65,6 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
             product = new Product();
         }
 
-        product.setGstNumberToGst();
 
 
     }
@@ -205,21 +172,6 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
                 }
 
-                product.setGstFromNumber();
-//                if(product.getGst()==0)
-//                    product.setGst(0);
-//
-//                else if(product.getGst()==1)
-//                    product.setGst(5);
-//
-//                else if(product.getGst()==2)
-//                    product.setGst(12);
-//
-//                else if(product.getGst()==3)
-//                    product.setGst(18);
-//
-//                else if(product.getGst()==4)
-//                    product.setGst(28);
 
                 if (productDialogHolder.isUpdate() && product.checkValidation()) {
 

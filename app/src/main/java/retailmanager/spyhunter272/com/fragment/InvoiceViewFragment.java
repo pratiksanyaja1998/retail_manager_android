@@ -1,6 +1,5 @@
 package retailmanager.spyhunter272.com.fragment;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -16,8 +15,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 import retailmanager.spyhunter272.com.R;
-import retailmanager.spyhunter272.com.activity.InvoiceActivity;
-import retailmanager.spyhunter272.com.activity.InvoiceShowActivity;
+import retailmanager.spyhunter272.com.InvoiceActivity;
+import retailmanager.spyhunter272.com.InvoiceShowActivity;
 import retailmanager.spyhunter272.com.databinding.FragmentInvoiceViewBinding;
 import retailmanager.spyhunter272.com.databinding.RowInvoiceBinding;
 

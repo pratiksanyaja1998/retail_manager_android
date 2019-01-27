@@ -35,7 +35,7 @@ import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.dialog.ProductCategoryManageDialog;
 import retailmanager.spyhunter272.com.dialog.ProductDialog;
 import retailmanager.spyhunter272.com.R;
-import retailmanager.spyhunter272.com.activity.ProductActivity;
+import retailmanager.spyhunter272.com.ProductActivity;
 import retailmanager.spyhunter272.com.room.table.Product;
 import retailmanager.spyhunter272.com.room.table.ProductCategory;
 import retailmanager.spyhunter272.com.viewmodel.ProductCategoryViewModel;
@@ -68,11 +68,8 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_product_view, container, false);
-
     }
 
 
@@ -297,13 +294,6 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
             if(!myPreference.getBoolean("hsn",true))
                 vHolder.hsn.setVisibility(View.GONE);
 
-            if(!myPreference.getBoolean("bprice",true)){
-                vHolder.b_price.setVisibility(View.GONE);
-            }
-
-            Log.e("pref",myPreference.getBoolean("hsn",true)+"");
-            Log.e("pref",myPreference.getBoolean("bprice",true)+"");
-
             return vHolder;
         }
 
@@ -321,8 +311,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
             vHolder.p_name.setText(product.getName());
             vHolder.hsn.setText(product.getHsn());
-            vHolder.s_price.setText( "Sell :"+product.getS_price());
-            vHolder.b_price.setText("Buy :"+product.getS_price());
+            vHolder.s_price.setText( "Price: "+product.getS_price());
             vHolder.qty.setText(""+product.getIn_stock_qty());
             vHolder.btnDelete.setOnClickListener(v -> deleteProduct(product));
 
@@ -337,14 +326,6 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
             view.startAnimation(anim);
         }
 
-//       https://stackoverflow.com/questions/26724964/how-to-animate-recyclerview-items-when-they-appear
-
-        private void setScaleAnimation(View view) {
-            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setDuration(1000);
-            view.startAnimation(anim);
-        }
-
         @Override
         public int getItemCount() {
             return products.size();
@@ -352,7 +333,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
         class VHolder extends RecyclerView.ViewHolder{
 
-            TextView p_name,hsn,b_price,s_price,qty;
+            TextView p_name,hsn,s_price,qty;
             ImageButton btnEdit,btnDelete;
 
             public VHolder(@NonNull View itemView) {
@@ -360,7 +341,6 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
                 p_name  = itemView.findViewById(R.id.tv_product_name);
                 hsn = itemView.findViewById(R.id.tv_hsn);
                 s_price = itemView.findViewById(R.id.tv_s_price);
-                b_price = itemView.findViewById(R.id.tv_b_price);
                 qty = itemView.findViewById(R.id.tv_qty);
                 btnEdit = itemView.findViewById(R.id.ibtn_edit);
                 btnDelete  =itemView.findViewById(R.id.ibtn_delete);

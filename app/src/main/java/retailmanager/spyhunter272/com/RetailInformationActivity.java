@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.activity;
+package retailmanager.spyhunter272.com;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,14 +16,12 @@ import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.bgworker.SaveRetailLogoBgWorker;
 import retailmanager.spyhunter272.com.databinding.ActivityRetailInformationBinding;
-import retailmanager.spyhunter272.com.dialog.CustomAlertDialog;
 import retailmanager.spyhunter272.com.holder.RetailInformationHolder;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 
-import static retailmanager.spyhunter272.com.activity.SettingsActivity.KEY_SP_NOTIFICATION;
+import static retailmanager.spyhunter272.com.SettingsActivity.KEY_SP_NOTIFICATION;
 
 public class RetailInformationActivity extends AppCompatActivity  {
 
@@ -95,7 +92,7 @@ public class RetailInformationActivity extends AppCompatActivity  {
                  }else {
                      Toast.makeText(this,"Information save successfully",Toast.LENGTH_SHORT).show();
                      overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-                     startActivity(new Intent(this,HomeActivity.class));
+                     startActivity(new Intent(this, HomeActivity.class));
                      finish();
                  }
 

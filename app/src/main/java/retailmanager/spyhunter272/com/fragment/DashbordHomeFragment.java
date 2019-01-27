@@ -1,7 +1,5 @@
 package retailmanager.spyhunter272.com.fragment;
 
-import android.app.DatePickerDialog;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +7,6 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,32 +14,22 @@ import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
-
 import retailmanager.spyhunter272.com.R;
-import retailmanager.spyhunter272.com.activity.CustomerActivity;
-import retailmanager.spyhunter272.com.activity.HomeActivity;
-import retailmanager.spyhunter272.com.activity.InvoiceActivity;
-import retailmanager.spyhunter272.com.activity.ProductActivity;
-import retailmanager.spyhunter272.com.activity.RetailInformationActivity;
+import retailmanager.spyhunter272.com.CustomerActivity;
+import retailmanager.spyhunter272.com.InvoiceActivity;
+import retailmanager.spyhunter272.com.ProductActivity;
+import retailmanager.spyhunter272.com.RetailInformationActivity;
 import retailmanager.spyhunter272.com.customview.MonthYearPickerDialog;
 import retailmanager.spyhunter272.com.databinding.FragmentDashbordHomeBinding;
 import retailmanager.spyhunter272.com.holder.DashbrodHolder;
-import retailmanager.spyhunter272.com.room.model.InvoiceOverview;
-import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 import retailmanager.spyhunter272.com.viewmodel.InvoiceViewModel;
 import retailmanager.spyhunter272.com.viewmodel.ProductViewModel;
 
-import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_EMAIL;
 import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_NAME;
-import static retailmanager.spyhunter272.com.utils.StaticInfoUtils.MONTH_LIST;
 
 
 public class DashbordHomeFragment extends Fragment implements View.OnClickListener {

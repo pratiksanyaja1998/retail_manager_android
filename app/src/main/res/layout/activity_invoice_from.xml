@@ -21,7 +21,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/actBackground"
-    tools:context=".activity.InvoiceFromActivity">
+    tools:context=".InvoiceFromActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -226,7 +226,6 @@
                     android:layout_marginBottom="5dp"
                     android:background="@color/colorTextGray" />
 
-
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -280,15 +279,6 @@
                                 android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
-                            <Spinner
-                                android:id="@+id/sp_gsttype"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-
-                                android:entries="@array/textype"
-                                android:layout_marginEnd="5dp"
-                                tools:ignore="RtlCompat" />
 
                             <TextView
 
@@ -321,102 +311,108 @@
 
                         </retailmanager.spyhunter272.com.customview.NestedListView>
 
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content">-->
-
-                            <!--<Button-->
-                                <!--android:id="@+id/btnaddnewpro"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="Add New Products"-->
-                                <!--android:onClick="onClick"-->
-                                <!--android:textColor="#fff"-->
-                                <!--android:textStyle="bold" />-->
-
-                        <!--</LinearLayout>-->
                     </LinearLayout>
                 </HorizontalScrollView>
 
+                <!--invoice detail gst descount-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-
-                    android:background="#fff">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:padding="8dp"
-                            android:text="Discount (%) : "
-                            android:textAlignment="textStart"
-                            android:textSize="18sp"
-                                android:layout_weight="1"
-                            tools:ignore="RtlCompat" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="end"
-                                android:padding="8dp"
-                                android:text="@{invoiceFromHolder.discount+``}"
-                                android:textAlignment="textStart"
-                                android:textSize="18sp"
-                                tools:ignore="RtlCompat" />
-
-
-                        </LinearLayout>
-
-                        <SeekBar
-                            android:id="@+id/seekbar_descount"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:max="100"
-                            android:onProgressChanged="@{(seekbar, progress, fromUser)-> invoiceFromHolder.setDiscount(progress)}"
-                            android:paddingVertical="8dp"
-                            />
-                        <!--<EditText-->
-                            <!--android:id="@+id/ed_descount"-->
-                            <!--android:layout_width="50dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:ems="10"-->
-                            <!--android:inputType="numberDecimal"-->
-                            <!--android:selectAllOnFocus="true"-->
-                            <!--android:text="@={invoiceFromHolder.discount+``}" />-->
-
-                    </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
 
                     <TextView
-                        android:id="@+id/tv_total_pro"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:gravity="end"
-                        android:padding="8dp"
-                        android:text="@={invoiceFromHolder.totalWithDiscount+``, default=Total}"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/fontDark"
+                        android:text="Discount (%) : "
+                        android:textAlignment="textStart"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="1"
+                        tools:ignore="RtlCompat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="@{invoiceFromHolder.discount+``}"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp"
+                        tools:ignore="RtlCompat" />
+
+
                 </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/seekbar_descount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:max="100"
+                    android:onProgressChanged="@{(seekbar, progress, fromUser)-> invoiceFromHolder.setDiscount(progress)}"
+                    android:padding="8dp"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/colorTextGray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    >
+
+                <Spinner
+                    android:id="@+id/sp_gsttype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/textype"
+                    tools:ignore="RtlCompat" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spinner_gst"
+                    android:gravity="end"
+                    android:layout_gravity="end"
+                    android:entries="@array/gst_integer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                </Spinner>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/colorTextGray" />
+
+                <TextView
+                    android:id="@+id/tv_total_pro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@={invoiceFromHolder.totalWithDiscount+``, default=Total}"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/fontDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -424,11 +420,26 @@
             android:layout_marginTop="10dp"
             android:layout_margin="5dp"
             app:cardCornerRadius="2dp"
-            app:cardElevation="2dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardElevation="2dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"

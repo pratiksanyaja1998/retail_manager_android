@@ -29,8 +29,6 @@
             android:summary="remove or add reverse charge"
             android:title="Tax in reverse charge" />
 
-
-
     </PreferenceCategory>
 
 </PreferenceScreen>

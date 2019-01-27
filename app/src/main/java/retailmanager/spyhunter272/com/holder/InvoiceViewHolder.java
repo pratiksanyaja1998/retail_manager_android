@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import retailmanager.spyhunter272.com.R;
-import retailmanager.spyhunter272.com.activity.InvoiceFromActivity;
+import retailmanager.spyhunter272.com.InvoiceFromActivity;
 
 public class InvoiceViewHolder extends BaseObservable {
 

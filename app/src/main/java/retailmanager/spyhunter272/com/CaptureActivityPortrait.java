@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.activity;
+package retailmanager.spyhunter272.com;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;

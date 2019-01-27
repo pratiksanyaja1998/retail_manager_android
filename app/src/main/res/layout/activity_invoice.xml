@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_root"
-    tools:context=".activity.InvoiceActivity"
+    tools:context=".InvoiceActivity"
     tools:layout="@layout/fragment_invoice_view">
 
 </FrameLayout>

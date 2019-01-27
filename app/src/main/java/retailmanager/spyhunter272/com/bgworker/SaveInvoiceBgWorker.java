@@ -76,7 +76,6 @@ public class SaveInvoiceBgWorker extends AsyncTask<Void,Void,Long> {
                     productList.get(i).getS_price(),
                     productList.get(i).getTotal(),
                     productList.get(i).getIn_stock_qty(),
-                    productList.get(i).getGst(),
                     invoiceId));
 
         }

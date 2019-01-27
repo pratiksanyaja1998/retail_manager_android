@@ -148,7 +148,6 @@
     <string name="label_hsn_code">HSN Code</string>
     <string name="label_barcode">Barcode</string>
     <string name="label_gst">GST(%)</string>
-    <string name="label_sell_price">Sell Price</string>
-    <string name="label_buy_price">Buy Price</string>
+    <string name="label_sell_price">Price</string>
     <string name="file_select_error">Please Select Vaild File</string>
 </resources>

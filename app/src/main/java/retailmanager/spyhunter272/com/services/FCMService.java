@@ -10,15 +10,12 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import retailmanager.spyhunter272.com.R;
-import retailmanager.spyhunter272.com.activity.HomeActivity;
-
-import static android.support.constraint.Constraints.TAG;
+import retailmanager.spyhunter272.com.HomeActivity;
 
 public class FCMService extends FirebaseMessagingService {
 

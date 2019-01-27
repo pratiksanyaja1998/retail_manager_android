@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.activity;
+package retailmanager.spyhunter272.com;
 
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -7,28 +7,25 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import retailmanager.spyhunter272.com.fragment.CustomerSettingPrefrenceFragment;
-import retailmanager.spyhunter272.com.fragment.CustomerViewFragment;
+import retailmanager.spyhunter272.com.fragment.InvoiceSettingPrefrenceFragment;
+import retailmanager.spyhunter272.com.fragment.InvoiceViewFragment;
 import retailmanager.spyhunter272.com.R;
 
-public class CustomerActivity extends AppCompatActivity {
+public class InvoiceActivity extends AppCompatActivity  {
 
-
-    private CustomerViewFragment customerViewFragment;
+    private InvoiceViewFragment invoiceViewFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer);
+        setContentView(R.layout.activity_invoice);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-
-        customerViewFragment = new CustomerViewFragment();
+        invoiceViewFragment = new InvoiceViewFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_root, customerViewFragment, "view");
+        fragmentTransaction.add(R.id.fragment_root, invoiceViewFragment, "view");
         fragmentTransaction.setCustomAnimations(R.animator.fade_out, R.animator.fade_in);
         fragmentTransaction.commit();
-
     }
 
     private SearchView searchView;
@@ -39,21 +36,23 @@ public class CustomerActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_settigns, menu);
         MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) myActionMenuItem.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (customerViewFragment.isVisible())
-                    customerViewFragment.searchOnQueryTextSubmit(query);
+                if (invoiceViewFragment.isVisible())
+                    invoiceViewFragment.searchOnQueryTextSubmit(query);
                 myActionMenuItem.collapseActionView();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if (customerViewFragment.isVisible())
-                    customerViewFragment.searchOnQueryTextSubmit(s);
+                if (invoiceViewFragment.isVisible())
+                    invoiceViewFragment.searchOnQueryTextSubmit(s);
                 return true;
             }
+
         });
 
         this.menu = menu;
@@ -67,17 +66,17 @@ public class CustomerActivity extends AppCompatActivity {
 
             if (!getSupportFragmentManager().popBackStackImmediate("settings", 0)) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_root, new CustomerSettingPrefrenceFragment(), "settings");
+                fragmentTransaction.replace(R.id.fragment_root, new InvoiceSettingPrefrenceFragment(), "settings");
                 fragmentTransaction.addToBackStack("settings");
                 fragmentTransaction.commit();
             }
 
 //             fragmentTransaction.setCustomAnimations( R.animator.card_flip_right_in,
-//                  R.animator.card_flip_right_out,
-//                  R.animator.card_flip_left_in,
-//                  R.animator.card_flip_left_out)
+//                        R.animator.card_flip_right_out,
+//                        R.animator.card_flip_left_in,
+//                        R.animator.card_flip_left_out)
 
-            setTitle("Customer Settings");
+            setTitle("Invoice Settings");
             menu.findItem(R.id.action_search).setVisible(false);
             item.setVisible(false);
 
@@ -90,37 +89,23 @@ public class CustomerActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-//        if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof CustomerViewFragment) {
-        setTitle(getResources().getString(R.string.customer));
+        setTitle(getResources().getString(R.string.invoice));
         menu.findItem(R.id.action_search).setVisible(true);
         menu.findItem(R.id.menu_settings).setVisible(true);
 
-            super.onBackPressed();
+
+
+        super.onBackPressed();
             overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
 
-//        }else {
 
-
-
-//            if (!getSupportFragmentManager().popBackStackImmediate("view", 0)) {
-//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.setCustomAnimations(R.animator.fade_out, R.animator.fade_in).replace(R.id.fragment_root, new CustomerViewFragment(), "settings");
-//                fragmentTransaction.addToBackStack("view");
-//                fragmentTransaction.commit();
-//            }
-//        }
 
     }
-
-
-
 
     public interface SearchViewDataChangeListner {
 
         void searchOnQueryTextSubmit(String query);
 
     }
-
-
 
 }

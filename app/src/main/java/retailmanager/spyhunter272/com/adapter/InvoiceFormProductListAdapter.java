@@ -28,11 +28,6 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         this.productListLiner = productListLiner;
     }
 
-    public void setProLists(List<Product> proLists) {
-        this.proLists = proLists;
-        notifyDataSetChanged();
-    }
-
     private void deleteProduct(int i){
         totalInvoice-=proLists.get(i).getTotal();
         productListLiner.updateTotal(totalInvoice);
@@ -42,7 +37,6 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
 
     public boolean addProduct(Product product) {
 
-
         for(int i = 0;i<proLists.size();i++){
             if(proLists.get(i).getId()==product.getId()){
                 return false;
@@ -51,10 +45,9 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
 
         product.setIn_stock_qty(1);
         float total = (float) (product.getIn_stock_qty()*product.getS_price());
-        total =total+((total*product.getGst())/100);
         totalInvoice+=total;
         productListLiner.updateTotal(totalInvoice);
-        product.setTotal(total);
+        product.setTotal(Math.round(total));
         proLists.add(product);
         notifyDataSetChanged();
         return true;
@@ -69,11 +62,10 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
                 totalInvoice-=proLists.get(i).getTotal();
 
                 float total = (float) (product.getIn_stock_qty()*product.getS_price());
-                total =total + ((total*product.getGst())/100);
                 totalInvoice+=total;
 
                 productListLiner.updateTotal(totalInvoice);
-                product.setTotal(total);
+                product.setTotal(Math.round(total));
                 proLists.set(i,product);
                 notifyDataSetChanged();
             }
@@ -120,7 +112,6 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
 
         binding.rowPname.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
 
-        binding.rowPtex.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
 
         return binding.getRoot();
 

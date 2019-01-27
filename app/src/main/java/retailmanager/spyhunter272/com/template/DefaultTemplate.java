@@ -138,8 +138,8 @@ public class DefaultTemplate {
         bf.append("<br><table class=\"border\">\n" +
                 "<tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td><td>HSN Code</td><td>RATE</td><td>QTY</td>");
 
-        if(invoice.getGsttype()==0)bf.append("<td>SGST</td><td>CGST</td>");
-        else bf.append("<td>IGST</td>");
+//        if(invoice.getGsttype()==0)bf.append("<td>SGST</td><td>CGST</td>");
+//        else bf.append("<td>IGST</td>");
 
         bf.append("<td>AMOUNT</td></tr>");
 
@@ -149,9 +149,9 @@ public class DefaultTemplate {
                     name= proLists.get(i).getName();
             double price = Math.round(proLists.get(i).getPrice());
 
-            Log.e("post",proLists.get(i).getGst()+" gst get ");
-
-            float gst = proLists.get(i).getGst();
+//            Log.e("post",proLists.get(i).getGst()+" gst get ");
+//
+//            float gst = proLists.get(i).getGst();
 
             if(hsn==null)
                 hsn="";
@@ -159,27 +159,27 @@ public class DefaultTemplate {
 
             bf.append("<tr><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
 
-            if(invoice.getGsttype()==0)
-                bf.append("<td>"+gst/2+"%</td><td>"+gst/2+"%</td>");
-            else
-                bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
+//            if(invoice.getGsttype()==0)
+//                bf.append("<td>"+gst/2+"%</td><td>"+gst/2+"%</td>");
+//            else
+//                bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
 
             bf.append("<td>"+(proLists.get(i).getTotal())+"</td></tr>");
         }
         //footer total desc more.. var
-        int i1=7,i2=6;
+//        int i1=7,i2=6;
 
-        if (invoice.getGsttype()==1){
-            i1=6;
-            i2=5;
-        }
+//        if (invoice.getGsttype()==1){
+//            i1=6;
+//            i2=5;
+//        }
 
         double amt=(invoice.getDiscount()*invoice.getTotal())/100;
 
 
-        bf.append("<tr class=\"bgcolor\"><td colspan=\""+i1+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td>\t\t\t\n" +
-                "</tr><tr class=\"bgcolor\"><td colspan=\""+i1+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()-amt))+" /-</td></tr>\n" +
-                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+i2+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal()-amt)) +"</td></tr>\n" +
+        bf.append("<tr class=\"bgcolor\"><td colspan=\""+5+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td>\t\t\t\n" +
+                "</tr><tr class=\"bgcolor\"><td colspan=\""+5+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()-amt))+" /-</td></tr>\n" +
+                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal()-amt)) +"</td></tr>\n" +
                 "</table>\n<br>");
 
         return bf.toString();

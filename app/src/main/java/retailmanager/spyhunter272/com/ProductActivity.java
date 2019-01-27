@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.activity;
+package retailmanager.spyhunter272.com;
 
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;

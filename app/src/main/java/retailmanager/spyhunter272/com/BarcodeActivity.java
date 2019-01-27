@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.activity;
+package retailmanager.spyhunter272.com;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,8 +20,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import retailmanager.spyhunter272.com.R;
-
 public class BarcodeActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int FLAG_SHOW_BARCODE = 5;
@@ -32,8 +30,6 @@ public class BarcodeActivity extends AppCompatActivity implements View.OnClickLi
 
     private ImageView barcodeImageView;
     private TextView contentTxt;
-    private Button btnOk, btnCancel, btnScan;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +40,6 @@ public class BarcodeActivity extends AppCompatActivity implements View.OnClickLi
 
         barcodeImageView = findViewById(R.id.img_barcode_view);
         contentTxt = findViewById(R.id.tv_barcode_content);
-
-        btnOk = findViewById(R.id.btn_ok_barcode);
-        btnOk.setOnClickListener(this);
-        btnCancel = findViewById(R.id.btn_cancel);
-        btnCancel.setOnClickListener(this::onClick);
-        btnScan = findViewById(R.id.btn_scan_again);
-        btnScan.setOnClickListener(this::onClick);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -324,8 +324,8 @@ public class ResponsiveTemplate {
                 "                <th>PRICE</th>\n" +
                 "                <th>QTY</th>");
 
-        if(invoice.getGsttype()==0)bf.append("<td>SGST</td><td>CGST</td>");
-        else bf.append("<td>IGST</td>");
+//        if(invoice.getGsttype()==0)bf.append("<td>SGST</td><td>CGST</td>");
+//        else bf.append("<td>IGST</td>");
 
         bf.append("<td>TOTAL</td></tr>");
 
@@ -340,24 +340,17 @@ public class ResponsiveTemplate {
 
             bf.append("<tr class=\"w3-custom-gray-text\" ><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
 
-            if(invoice.getGsttype()==0)
-                bf.append("<td>"+(proLists.get(i).getGst()/2)+"%</td><td>"+(proLists.get(i).getGst()/2)+"%</td>");
-            else
-                bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
+//            if(invoice.getGsttype()==0)
+//                bf.append("<td>"+(proLists.get(i).getGst()/2)+"%</td><td>"+(proLists.get(i).getGst()/2)+"%</td>");
+//            else
+//                bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
 
             bf.append("<td>"+(proLists.get(i).getTotal())+"</td></tr>");
         }
 
 
-        bf.append("        </table>\n");
+        bf.append("</table>\n");
 
-        //footer total desc more.. var
-        int i1=7,i2=6;
-
-        if (invoice.getGsttype()==1){
-            i1=6;
-            i2=5;
-        }
 
         double amt=(invoice.getDiscount()*invoice.getTotal())/100;
 

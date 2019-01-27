@@ -1,4 +1,4 @@
-package retailmanager.spyhunter272.com.activity;
+package retailmanager.spyhunter272.com;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,7 +27,6 @@ import com.webviewtopdf.PdfView;
 
 import java.io.File;
 
-import retailmanager.spyhunter272.com.R;
 import retailmanager.spyhunter272.com.bgworker.GetInvoiceBgWorker;
 import retailmanager.spyhunter272.com.room.RetailDatabase;
 import retailmanager.spyhunter272.com.room.table.Invoice;

@@ -23,7 +23,7 @@ public class InvoiceFromHolder extends BaseObservable {
     private boolean tprcharge,isUpdateCustomer,isShowCustomer,isShowtprcharge,isSHowDescription;
 
     private double totalInvoice,totalWithDiscount;
-    private int discount;
+    private int discount,gst;
     private Calendar calendar = Calendar.getInstance();
 
     private Context context;
@@ -63,6 +63,14 @@ public class InvoiceFromHolder extends BaseObservable {
                 break;
 
         }
+    }
+
+    public int getGst() {
+        return gst;
+    }
+
+    public void setGst(int gst) {
+        this.gst = gst;
     }
 
     public boolean isShowCustomer() {

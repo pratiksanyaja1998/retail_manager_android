@@ -31,10 +31,6 @@ public class Product extends BaseObservable {
 
     private String barcode;
 
-    private double b_price;
-
-    private int gst;
-
     private double s_price;
 
     private int in_stock_qty;
@@ -49,15 +45,13 @@ public class Product extends BaseObservable {
 
     }
 
-    public Product(String name, String hsn, double b_price, double s_price, int in_stock_qty, int category, String barcode,int gst) {
+    public Product(String name, String hsn, double s_price, int in_stock_qty, int category, String barcode) {
         this.name = name;
         this.hsn = hsn;
-        this.b_price = b_price;
         this.s_price = s_price;
         this.in_stock_qty = in_stock_qty;
         this.category = category;
         this.barcode = barcode;
-        this.gst = gst;
     }
 
     public boolean checkValidation(){
@@ -85,12 +79,10 @@ public class Product extends BaseObservable {
         bundle.putInt("id",id);
         bundle.putString("name",name);
         bundle.putString("hsn",hsn);
-        bundle.putDouble("bprice",b_price);
         bundle.putDouble("sprice",s_price);
         bundle.putInt("category",category);
         bundle.putInt("stock",in_stock_qty);
         bundle.putString("barcode",barcode);
-        bundle.putInt("gst",gst);
         return bundle;
     }
 
@@ -98,11 +90,10 @@ public class Product extends BaseObservable {
         Product product=  new Product(
         bundle.getString("name"),
          bundle.getString("hsn"),
-         bundle.getDouble("bprice"),
         bundle.getDouble("sprice"),
                 bundle.getInt("stock"),
          bundle.getInt("category"),
-                bundle.getString("barcode"),bundle.getInt("gst"));
+                bundle.getString("barcode"));
         product.id = bundle.getInt("id");
 
         return product;
@@ -145,9 +136,6 @@ public class Product extends BaseObservable {
         return hsn;
     }
 
-    public double getB_price() {
-        return b_price;
-    }
 
     public double getS_price() {
         return s_price;
@@ -165,57 +153,6 @@ public class Product extends BaseObservable {
         return barcode;
     }
 
-    public int getGst() {
-        return gst;
-    }
-
-    public void setGstFromNumber(){
-
-        int number = getGst();
-        if(number==0)
-            setGst(0);
-
-        else if(number==1)
-            setGst(5);
-
-        else if(number==2)
-            setGst(12);
-
-        else if(number==3)
-            setGst(18);
-
-        else if(number==4)
-            setGst(28);
-
-    }
-
-    public void setGstNumberToGst(){
-
-
-        int number = getGst();
-
-        if(number==0)
-            setGst(0);
-
-        else if(number==5)
-            setGst(1);
-
-        else if(number==12)
-            setGst(2);
-
-        else if(number==18)
-            setGst(3);
-
-        else if(number==28)
-            setGst(4);
-
-    }
-
-
-    public void setGst(int gst) {
-        this.gst = gst;
-    }
-
     public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
@@ -230,10 +167,6 @@ public class Product extends BaseObservable {
 
     public void setHsn(String hsn) {
         this.hsn = hsn;
-    }
-
-    public void setB_price(double b_price) {
-        this.b_price = b_price;
     }
 
     public void setS_price(double s_price) {
