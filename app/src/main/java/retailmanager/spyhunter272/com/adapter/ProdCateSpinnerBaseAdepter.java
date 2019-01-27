@@ -42,13 +42,29 @@ public class ProdCateSpinnerBaseAdepter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        ViewHolder viewHolder =null;
+        if(viewHolder==null) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_simple_spinner_textview, parent, false);
+            viewHolder  = new ViewHolder(view);
+            view.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_simple_spinner_textview,parent,false);
+        viewHolder.textView.setText(productCategories.get(position).getName());
 
-        TextView textView =  view.findViewById(R.id.row_tv_simple_list_text);
-        textView.setText(productCategories.get(position).getName());
+        return viewHolder.view;
+    }
 
-        return view;
+    class ViewHolder{
+        TextView textView;
+        View view;
+
+        public ViewHolder(View view) {
+            this.view = view;
+             textView =  view.findViewById(R.id.row_tv_simple_list_text);
+
+        }
     }
 
 

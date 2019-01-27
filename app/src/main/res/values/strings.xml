@@ -150,4 +150,10 @@
     <string name="label_gst">GST(%)</string>
     <string name="label_sell_price">Price</string>
     <string name="file_select_error">Please Select Vaild File</string>
+    <string name="label_discount">Discount (%) :</string>
+    <string name="label_product_name_form">PRODUCT NAME</string>
+    <string name="label_qty_form">QTY</string>
+    <string name="abel_rate_form">RATE</string>
+    <string name="label_total_form">TOTAL</string>
+    <string name="label_add_gst">+</string>
 </resources>

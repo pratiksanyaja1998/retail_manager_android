@@ -119,7 +119,7 @@ public class InvoiceViewHolder extends BaseObservable {
     }
 
     public interface InvoiceViewDataChangeLisn{
-        public void onFilterDataChage();
+         void onFilterDataChage();
 
     }
 

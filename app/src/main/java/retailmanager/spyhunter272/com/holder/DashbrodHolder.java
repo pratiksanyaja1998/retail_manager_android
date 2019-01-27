@@ -24,8 +24,6 @@ private float totalIncome;
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH)+1;
 
-        Log.e("post","dashbord "+mMonth);
-
         dateString =  MONTH_LIST[mMonth-1] + " "+mYear;
     }
 

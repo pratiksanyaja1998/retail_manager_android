@@ -72,11 +72,6 @@ public class CustomerActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
 
-//             fragmentTransaction.setCustomAnimations( R.animator.card_flip_right_in,
-//                  R.animator.card_flip_right_out,
-//                  R.animator.card_flip_left_in,
-//                  R.animator.card_flip_left_out)
-
             setTitle("Customer Settings");
             menu.findItem(R.id.action_search).setVisible(false);
             item.setVisible(false);
@@ -90,26 +85,12 @@ public class CustomerActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-//        if (getSupportFragmentManager().findFragmentById(R.id.fragment_root) instanceof CustomerViewFragment) {
         setTitle(getResources().getString(R.string.customer));
         menu.findItem(R.id.action_search).setVisible(true);
         menu.findItem(R.id.menu_settings).setVisible(true);
 
-            super.onBackPressed();
-            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-
-//        }else {
-
-
-
-//            if (!getSupportFragmentManager().popBackStackImmediate("view", 0)) {
-//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.setCustomAnimations(R.animator.fade_out, R.animator.fade_in).replace(R.id.fragment_root, new CustomerViewFragment(), "settings");
-//                fragmentTransaction.addToBackStack("view");
-//                fragmentTransaction.commit();
-//            }
-//        }
-
+        super.onBackPressed();
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
     }
 
 

@@ -64,7 +64,7 @@ public class RetailInformationHolder extends BaseObservable {
         editor.putString(SP_KEY_FOR_RETAIL_INFO_CITY,city);
         editor.putString(SP_KEY_FOR_RETAIL_INFO_PINCODE,pincode);
 
-        editor.commit();
+        editor.apply();
 
         return "";
 

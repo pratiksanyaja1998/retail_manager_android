@@ -43,12 +43,6 @@ public class CustomerDialog extends DialogFragment implements View.OnClickListen
 
     private boolean isUpdate;
 
-
-//    public CustomerDialog(Customer customer, boolean isUpdate) {
-//        this.customer = customer;
-//        this.isUpdate = isUpdate;
-//    }
-
     public CustomerDialog(){
 
     }
@@ -179,36 +173,6 @@ public class CustomerDialog extends DialogFragment implements View.OnClickListen
 
             }
         }
-
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if(context instanceof CustomerLisner){
-            customerLisner = (CustomerLisner) context;
-
-        }else {
-            customerLisner = null;
-        }
-
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        customerLisner = null;
-    }
-
-    private CustomerLisner customerLisner;
-
-    public interface CustomerLisner{
-
-        public void lisnCustomerFromDialog(Customer customer);
 
     }
 

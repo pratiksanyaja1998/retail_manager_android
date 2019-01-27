@@ -2,9 +2,12 @@ package retailmanager.spyhunter272.com.holder;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.BaseObservable;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 
 import java.text.SimpleDateFormat;
@@ -17,27 +20,23 @@ import retailmanager.spyhunter272.com.room.table.Customer;
 public class InvoiceFromHolder extends BaseObservable {
 
     private String description , dateForShow ;
-
     private Customer customer;
     private int paymethord;
-    private boolean tprcharge,isUpdateCustomer,isShowCustomer,isShowtprcharge,isSHowDescription;
-
-    private double totalInvoice,totalWithDiscount;
+    private boolean tprcharge,isUpdateCustomer,isShowCustomer,isShowtprcharge;
+    private double totalInvoice,productTotalAmt,discountAmt,gstAmt;
     private int discount,gst;
     private Calendar calendar = Calendar.getInstance();
-
     private Context context;
-    static final String myFormat = "MM/dd/yy"; //In which you need put here
-
+    static final String myFormat = "MM/dd/yy";
 
     public InvoiceFromHolder(Context context){
         this.context = context;
-
+        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(context);
+        setShowtprcharge(myPreference.getBoolean("tprcharge",true));
+        setShowCustomer(myPreference.getBoolean("customer",true));
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         setDateForShow(sdf.format(calendar.getTime()));
-
     }
-
 
     public void onClick(View v){
 
@@ -45,17 +44,14 @@ public class InvoiceFromHolder extends BaseObservable {
 
             case R.id.btn_open_dialog_date:
 
-                new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, month);
-                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                new DatePickerDialog(context, (view, year, month, dayOfMonth) -> {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                        setDateForShow(sdf.format(calendar.getTime()));
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                    setDateForShow(sdf.format(calendar.getTime()));
 
-                    }
                 }, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -71,6 +67,23 @@ public class InvoiceFromHolder extends BaseObservable {
 
     public void setGst(int gst) {
         this.gst = gst;
+        setTotalInvoice(productTotalAmt);
+    }
+
+    public double getDiscountAmt() {
+        return discountAmt;
+    }
+
+    public void setDiscountAmt(double discountAmt) {
+        this.discountAmt = discountAmt;
+    }
+
+    public double getGstAmt() {
+        return gstAmt;
+    }
+
+    public void setGstAmt(double gstAmt) {
+        this.gstAmt = gstAmt;
     }
 
     public boolean isShowCustomer() {
@@ -89,14 +102,6 @@ public class InvoiceFromHolder extends BaseObservable {
         isShowtprcharge = showtprcharge;
     }
 
-    public boolean isSHowDescription() {
-        return isSHowDescription;
-    }
-
-    public void setSHowDescription(boolean SHowDescription) {
-        isSHowDescription = SHowDescription;
-    }
-
     public Calendar getCalendar() {
         return calendar;
     }
@@ -113,39 +118,27 @@ public class InvoiceFromHolder extends BaseObservable {
         return description;
     }
 
-
-    public double getTotalWithDiscount() {
-        return totalWithDiscount;
-    }
-
-    public void setTotalWithDiscount(double totalWithDiscount) {
-        this.totalWithDiscount = totalWithDiscount;
-    }
-
     public double getTotalInvoice() {
         return totalInvoice;
     }
 
     public void setDiscount(int discount) {
         this.discount = discount;
-        this.totalWithDiscount = totalInvoice - ((discount*totalInvoice)/100);
-        notifyChange();
-
+        setTotalInvoice(productTotalAmt);
     }
 
     public float getDiscount() {
         return discount;
     }
 
-    public void setTotalInvoice(double totalInvoice) {
-        this.totalInvoice =Math.round( totalInvoice);
-        this.totalWithDiscount = Math.round(totalInvoice - ((discount*totalInvoice)/100));
+    public void setTotalInvoice(double productTotalAmt) {
+        this.productTotalAmt = productTotalAmt;
+        this.discountAmt = ((discount*productTotalAmt)/100);
+        this.gstAmt = ((gst*(productTotalAmt - discountAmt))/100);
+        this.totalInvoice = Math.round(productTotalAmt - discountAmt + gstAmt);
+        this.gstAmt = Math.round(gstAmt);
+        discountAmt = Math.round(discountAmt);
         notifyChange();
-    }
-
-
-    public void onChangeDiscount(){
-
     }
 
     public int getPaymethord() {
@@ -183,6 +176,27 @@ public class InvoiceFromHolder extends BaseObservable {
 
     public void setTprcharge(boolean tprcharge) {
         this.tprcharge = tprcharge;
+    }
+
+    public void onGstChange(AdapterView<?> parent, View view, int pos, long id){
+       switch (pos){
+           case 0:
+               gst = 0;
+               break;
+           case 1:
+               gst = 5;
+               break;
+           case 2:
+               gst = 12;
+               break;
+           case 3:
+               gst = 18;
+               break;
+           case 4:
+               gst = 28;
+               break;
+       }
+       setTotalInvoice(productTotalAmt);
     }
 
     public void setCustomer(Customer customer) {

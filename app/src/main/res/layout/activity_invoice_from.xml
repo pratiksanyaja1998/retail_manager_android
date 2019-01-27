@@ -25,9 +25,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -71,7 +70,6 @@
 
         </android.support.v7.widget.CardView>
 
-
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,14 +92,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:orientation="horizontal"
                 android:padding="5dp"
                 >
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -119,7 +117,7 @@
                     android:tint="@color/colorWhite"
                     android:onClick="onClick"
                     android:backgroundTint="@color/colorPrimary"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_person_add_black_24dp"/>
 
 
@@ -147,7 +145,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:textColor="@color/fontlight"
@@ -167,10 +165,10 @@
                         android:src="@drawable/edit_btn"/>
 
                 </LinearLayout>
+
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -183,24 +181,22 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <LinearLayout
                 android:id="@+id/linear_product_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:padding="5dp"
                     android:orientation="horizontal"
                     >
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
@@ -230,8 +226,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#fff"
-                    >
+                    android:background="#fff">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -240,7 +235,6 @@
                         android:paddingBottom="10dp">
 
                         <LinearLayout
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -255,7 +249,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:padding="3dp"
-                                android:text="PRODUCT NAME"
+                                android:text="@string/label_product_name_form"
                                 android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
@@ -265,7 +259,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:padding="3dp"
-                                android:text="QTY"
+                                android:text="@string/label_qty_form"
                                 android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
@@ -275,37 +269,34 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".8"
                                 android:padding="3dp"
-                                android:text="RATE"
+                                android:text="@string/abel_rate_form"
                                 android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
 
                             <TextView
-
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:padding="3dp"
-                                android:text="TOTAL"
+                                android:text="@string/label_total_form"
                                 android:textColor="@color/fontDark"
                                 android:textStyle="bold" />
 
 
-                            <ImageButton
+                            <View
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:background="@null"
                                 android:padding="3dp"
-                                android:textSize="18sp"
-                                android:src="@drawable/ic_delete_black_24dp"
                                  />
+
                         </LinearLayout>
 
 
                         <retailmanager.spyhunter272.com.customview.NestedListView
                             android:id="@+id/listproductholder"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="0dp"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
@@ -315,6 +306,7 @@
                 </HorizontalScrollView>
 
                 <!--invoice detail gst descount-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -324,32 +316,33 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="Discount (%) : "
-                        android:textAlignment="textStart"
+                        android:text="@string/label_discount"
                         android:textSize="18sp"
-                        android:layout_weight="1"
-                        tools:ignore="RtlCompat" />
+                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:text="@{invoiceFromHolder.discount+``}"
-                        android:textAlignment="textStart"
-                        android:textSize="18sp"
-                        tools:ignore="RtlCompat" />
+                        android:textSize="18sp" />
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@{`-`+invoiceFromHolder.discountAmt}"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="1"
+                        />
 
                 </LinearLayout>
 
                 <SeekBar
-                    android:id="@+id/seekbar_descount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="100"
                     android:onProgressChanged="@{(seekbar, progress, fromUser)-> invoiceFromHolder.setDiscount(progress)}"
-                    android:padding="8dp"
-                    />
+                    android:padding="8dp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -361,31 +354,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="8dp"
-                    >
+                    android:padding="8dp" >
 
-                <Spinner
-                    android:id="@+id/sp_gsttype"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/textype"
-                    tools:ignore="RtlCompat" />
-
-                    <Space
+                    <Spinner
+                        android:id="@+id/sp_gsttype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:entries="@array/textype"
+                        tools:ignore="RtlCompat" />
 
-                <Spinner
-                    android:id="@+id/spinner_gst"
-                    android:gravity="end"
-                    android:layout_gravity="end"
-                    android:entries="@array/gst_integer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_gravity="end"
+                        android:entries="@array/gst_integer"
+                        android:onItemSelected="@{(parent,view,pos,id)->invoiceFromHolder.onGstChange(parent,view,pos,id)}"
+                        />
 
-
-                </Spinner>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:text="@{`+`+invoiceFromHolder.gstAmt}"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -395,43 +387,24 @@
                     android:layout_marginBottom="5dp"
                     android:background="@color/colorTextGray" />
 
+
                 <TextView
-                    android:id="@+id/tv_total_pro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="8dp"
                     android:layout_marginTop="5dp"
-                    android:text="@={invoiceFromHolder.totalWithDiscount+``, default=Total}"
+                    android:text="@{invoiceFromHolder.totalInvoice+``, default=Total}"
                     android:textAlignment="textEnd"
                     android:textColor="@color/fontDark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="2dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:orientation="vertical">
-
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -447,27 +420,16 @@
                 android:orientation="vertical"
                 >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:paddingVertical="10dp"
-                        android:text="@string/other_details"
-                        android:textSize="18sp"
-                        android:textColor="@color/fontDark"
-                        />
-
-
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:padding="15dp"
+                    android:text="@string/other_details"
+                    android:textSize="18sp"
+                    android:textColor="@color/fontDark"
+                    />
 
                 <View
                     android:layout_width="match_parent"
@@ -519,28 +481,9 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-
-
-                <!--<EditText-->
-                    <!--android:id="@+id/eddesc"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginHorizontal="10dp"-->
-                    <!--android:layout_marginVertical="5dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:ems="10"-->
-                    <!--android:lines="5"-->
-                    <!--android:background="@drawable/bg_edt_border"-->
-                    <!--android:hint="description ..."-->
-                    <!--android:textColor="@color/fontGray"-->
-                    <!--android:text="@={invoiceFromHolder.description}"-->
-                    <!--android:maxLength="150"-->
-                    <!--android:inputType="textMultiLine" />-->
-
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
 
     </LinearLayout>
 

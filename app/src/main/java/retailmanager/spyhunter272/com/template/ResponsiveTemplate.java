@@ -327,7 +327,7 @@ public class ResponsiveTemplate {
 //        if(invoice.getGsttype()==0)bf.append("<td>SGST</td><td>CGST</td>");
 //        else bf.append("<td>IGST</td>");
 
-        bf.append("<td>TOTAL</td></tr>");
+        bf.append("<th>TOTAL</th></tr>");
 
         for (int i=0;i<proLists.size();i++) {
 

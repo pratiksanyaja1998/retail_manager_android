@@ -43,17 +43,12 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_from);
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-        SharedPreferences myPreference =PreferenceManager.getDefaultSharedPreferences(this);
-
         invoiceFromHolder = new InvoiceFromHolder(this);
-        invoiceFromHolder.setShowtprcharge(myPreference.getBoolean("tprcharge",true));
-        invoiceFromHolder.setShowCustomer(myPreference.getBoolean("customer",true));
         binding.setInvoiceFromHolder(invoiceFromHolder);
 
         listView  = findViewById(R.id.listproductholder);
         listAdapter = new InvoiceFormProductListAdapter(this);
         listView.setAdapter(listAdapter);
-
     }
 
     public void onClick(View view){
@@ -101,7 +96,7 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
         invoice.setMm(calendar.get(Calendar.MONTH)+1);
         invoice.setYyyy(calendar.get(Calendar.YEAR));
         invoice.setGst(invoiceFromHolder.getGst());
-        invoice.setTotal(invoiceFromHolder.getTotalWithDiscount());
+        invoice.setTotal(invoiceFromHolder.getTotalInvoice());
         invoice.setDiscount(invoiceFromHolder.getDiscount());
         invoice.setGsttype(binding.spGsttype.getSelectedItemPosition());
         invoice.setTprchage(invoiceFromHolder.isTprcharge());
@@ -140,7 +135,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.menu_print) {
-
             saveInvoice();
             return true;
         }
@@ -183,7 +177,6 @@ public class InvoiceFromActivity extends AppCompatActivity implements ProductInv
     public void updateTotal(double total) {
         invoiceFromHolder.setTotalInvoice(total);
     }
-
 
     @Override
     public void onBackPressed() {
