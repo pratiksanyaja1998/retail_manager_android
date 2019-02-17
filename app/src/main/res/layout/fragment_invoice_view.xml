@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,15 +9,31 @@
 
         <variable
             name="invoiceViewHolder"
-            type="retailmanager.spyhunter272.in.retailmanager.model.InvoiceViewHolder" />
+            type="retailmanager.spyhunter272.com.holder.InvoiceViewHolder" />
 
     </data>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.InvoiceViewFragment">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:id="@+id/linear_show_emty_list"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:scaleType="centerCrop"
+        android:visibility="@{invoiceViewHolder.noData ? View.VISIBLE:View.GONE}"
+        android:src="@drawable/not_found_bg"
+        />
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -38,12 +55,20 @@
             android:padding="@dimen/padding_root_layout_5"
             >
 
-            <ImageButton
+            <LinearLayout
                 android:id="@+id/btn_open_dialog_date"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:focusable="true">
+
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
                 android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/calender_ic" />
 
@@ -52,8 +77,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
                 android:text="@{invoiceViewHolder.date}"
-                android:layout_weight="1" />
+                 />
+
+
+            </LinearLayout>
+
 
             <Space
                 android:layout_width="wrap_content"
@@ -110,19 +141,7 @@
         android:paddingTop="70dp"
         tools:listitem="@layout/row_invoice" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:id="@+id/linear_show_emty_list"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:translationZ="-10dp"
-            android:visibility="@{invoiceViewHolder.noData ? View.VISIBLE:View.GONE}"
-            android:src="@drawable/not_found_bg"
-            />
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fbtn_add"
@@ -133,7 +152,6 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="@dimen/fab_margin"
         android:tint="@color/colorWhite"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_marginRight="@dimen/fab_margin"
         android:onClick="@{(v)->invoiceViewHolder.onClick(v)}"
         app:srcCompat="@drawable/ic_add_circle_black_24dp"

@@ -5,7 +5,7 @@
     android:id="@+id/fragment_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CustomerActivity"
+    tools:context=".CustomerActivity"
     tools:layout="@layout/fragment_customer_view">
 
 </FrameLayout>

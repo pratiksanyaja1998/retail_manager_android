@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingVertical="12dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     >
 
 <TextView
@@ -15,6 +16,7 @@
     android:fontFamily="@font/greycliff_medium"
     android:text="Product1 dfasd"
     android:layout_weight="1"
+    android:paddingVertical="14dp"
     >
 </TextView>
 
@@ -24,6 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_simple_row2"
         android:text="454450"
+        android:paddingVertical="14dp"
         android:textAlignment="textEnd"
         />
 

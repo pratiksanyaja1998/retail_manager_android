@@ -72,7 +72,6 @@
         tools:listitem="@layout/row_customer" />
 
 
-
         <ImageView
             android:id="@+id/image_bg_not_found"
             android:layout_width="match_parent"
@@ -97,9 +96,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="@dimen/fab_margin"
         android:tint="@color/colorWhite"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_marginRight="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+        android:src="@drawable/ic_add_circle_black_24dp" />
 
 
 </android.support.constraint.ConstraintLayout>

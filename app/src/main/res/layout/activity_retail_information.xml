@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    >
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,64 +9,60 @@
 
         <variable
             name="retailInfo"
-            type="retailmanager.spyhunter272.in.retailmanager.model.RetailInformationHolder" />
+            type="retailmanager.spyhunter272.com.holder.RetailInformationHolder" />
 
     </data>
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="@color/actBackground"
     android:layout_height="match_parent"
-    tools:context=".activity.RetailInformationActivity">
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_margin="15dp"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:padding="20dp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/image_logo"
-                android:layout_width="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/calender_ic"
-                android:layout_height="120dp" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/image_logo"
-                android:layout_alignEnd="@+id/image_logo"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/edit_btn" />
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    tools:context=".RetailInformationActivity">
 
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintBottom_toTopOf="@id/btn_save"
+            >
 
         <LinearLayout
+            android:id="@+id/root"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:padding="10dp"
             android:layout_margin="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="20dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_logo"
+                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_height="120dp" />
+
+                <ImageButton
+                    android:id="@+id/btn_change_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/image_logo"
+                    android:layout_alignEnd="@+id/image_logo"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onClick"
+                    android:src="@drawable/edit_btn" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,37 +76,91 @@
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.retailName}"
                 android:layout_marginTop="5dp"
-                android:background="@color/zxing_transparent"
                 />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/fontGray"></View>
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ADDRESS"
                 android:layout_marginTop="10dp"
-                />
+                android:text="AREA" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.address}"
-
                 android:layout_marginTop="5dp"
-                android:background="@color/zxing_transparent"
                 />
 
-            <View
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/fontGray"></View>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="CITY" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={retailInfo.city}"
+                        android:layout_marginTop="5dp"
+                        />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="STATE" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={retailInfo.state}"
+                        android:layout_marginTop="5dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="PINCODE" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={retailInfo.pincode}"
+                android:layout_marginTop="5dp"
+                android:inputType="number"
+                android:maxLength="6"
+                />
 
 
             <TextView
@@ -125,19 +174,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.gstin}"
-
                 android:layout_marginTop="5dp"
-                android:background="@color/zxing_transparent"
+                android:maxLength="15"
+                android:inputType="textCapCharacters"
                 />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/fontGray"></View>
-
-
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -150,19 +190,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.mobile}"
-
+                android:inputType="phone"
+                android:maxLength="10"
                 android:layout_marginTop="5dp"
-                android:background="@color/zxing_transparent"
                 />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/fontGray"></View>
-
-
-
 
 
             <TextView
@@ -176,28 +207,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={retailInfo.email}"
-
                 android:layout_marginTop="5dp"
-                android:background="@color/zxing_transparent"
+                android:layout_marginBottom="10dp"
                 />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/fontGray"></View>
-
-
-
 
         </LinearLayout>
 
         </ScrollView>
 
-    </android.support.v7.widget.CardView>
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/save"
+        android:layout_marginTop="@dimen/padding_root_layout_5"
+        android:onClick="onClick"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
 
 
 </layout>

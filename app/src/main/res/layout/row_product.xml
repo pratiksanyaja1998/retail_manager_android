@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<retailmanager.spyhunter272.in.retailmanager.customview.SwipeRevealLayout
+<retailmanager.spyhunter272.com.customview.SwipeRevealLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -26,14 +26,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="Info"
-                app:srcCompat="@drawable/ic_edit_black_24dp" />
+                android:src="@drawable/ic_edit_black_24dp" />
 
             <ImageButton
                 android:id="@+id/ibtn_delete"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:text="Edit"
-                app:srcCompat="@drawable/ic_delete_black_24dp" />
+                android:src="@drawable/ic_delete_black_24dp" />
 
         </LinearLayout>
     </FrameLayout>
@@ -90,19 +90,13 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_b_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Buy :" />
 
                     <TextView
                         android:id="@+id/tv_s_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Sell :" />
+                        android:text="Price :" />
 
                     <TextView
                         android:id="@+id/tv_qty"
@@ -121,7 +115,7 @@
         </android.support.v7.widget.CardView>
 
     </FrameLayout>
-</retailmanager.spyhunter272.in.retailmanager.customview.SwipeRevealLayout>
+</retailmanager.spyhunter272.com.customview.SwipeRevealLayout>
 
 
 

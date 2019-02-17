@@ -9,19 +9,17 @@
 
         <variable
             name="product"
-            type="retailmanager.spyhunter272.in.retailmanager.room.table.Product" />
+            type="retailmanager.spyhunter272.com.room.table.Product" />
 
         <variable
             name="productDialogHolder"
-            type="retailmanager.spyhunter272.in.retailmanager.model.ProductDialogHolder" />
+            type="retailmanager.spyhunter272.com.holder.ProductDialogHolder" />
 
     </data>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/dialog_root_padding"
     android:orientation="vertical">
 
 
@@ -56,8 +54,19 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
         android:background="#ccc" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="@dimen/dialog_root_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
 
     <FrameLayout
         android:id="@+id/relative_spinner_view"
@@ -79,10 +88,16 @@
             android:gravity="center"
             android:selectedItemPosition="@={product.category}"
             tools:listitem="@layout/row_simple_spinner_textview"
-            android:spinnerMode="dialog" />
+            android:spinnerMode="dropdown" />
 
 
     </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_product_name"
+        />
 
     <EditText
         android:id="@+id/ed_product_name"
@@ -92,16 +107,21 @@
         android:background="@drawable/bg_edt_border"
         android:padding="@dimen/ed_padding"
         android:layout_marginBottom="@dimen/components_margin_bottom"
-        android:hint="Product Name"
         android:text="@={product.name}"
         android:inputType="textCapWords" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/components_margin_bottom"
-        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/label_barcode"
+            android:visibility="@{productDialogHolder.barcode ? View.VISIBLE : View.GONE }"
+
+            />
+
+
+
 
     <TextView
         android:id="@+id/tv_product_barcode"
@@ -114,137 +134,106 @@
         android:layout_weight="1"
         android:visibility="@{productDialogHolder.barcode ? View.VISIBLE : View.GONE }"
         android:layout_marginRight="@dimen/components_margin_left_right"
-        android:hint="Product Barcode"
         android:text="@={product.barcode}"
         android:drawableTint="#ccc"
+        android:layout_marginBottom="@dimen/components_margin_bottom"
         android:drawableRight="@drawable/ic_dashboard_black_24dp"
          />
 
-        <FrameLayout
-            android:id="@+id/relative_spinner_view_gst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/spinner_border"
-            android:orientation="horizontal"
-            android:layout_marginLeft="5dp"
-            android:visibility="@{productDialogHolder.productGst ? View.VISIBLE : View.GONE }"
-            android:padding="5dp"
-            >
 
-        <Spinner
-            android:id="@+id/spinner_product_gst"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:spinnerMode="dropdown"
-            android:entries="@array/gst_integer"
-            android:selectedItemPosition="@={product.gst}"
-            android:paddingVertical="10dp"
-             />
 
-        </FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_hsn_code"
+        android:visibility="@{productDialogHolder.hsn ? View.VISIBLE : View.GONE }"
+        />
 
-    </LinearLayout>
+    <EditText
+        android:id="@+id/ed_hsn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edt_border"
+        android:ems="10"
+        android:layout_marginBottom="@dimen/components_margin_bottom"
+        android:visibility="@{productDialogHolder.hsn ? View.VISIBLE : View.GONE }"
+        android:text="@={product.hsn}"
+        android:inputType="textCapCharacters"
+        android:padding="@dimen/ed_padding" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_sell_price"
+                />
+
+            <EditText
+                android:id="@+id/ed_sell_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edt_border"
+                android:ems="10"
+                android:text="@={product.s_price+``,default=``}"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="@dimen/components_margin_bottom"
+                android:padding="@dimen/ed_padding" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/label_qty"
+                />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/components_margin_bottom"
+        android:gravity="center"
         >
 
-
-        <EditText
-            android:id="@+id/ed_hsn"
+        <ImageButton
+            android:id="@+id/ibtn_qty_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/components_margin_left_right"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edt_border"
-            android:ems="10"
-            android:hint="HSN Code"
-            android:visibility="@{productDialogHolder.hsn ? View.VISIBLE : View.GONE }"
-            android:text="@={product.hsn}"
-            android:inputType="textCapCharacters"
-            android:padding="@dimen/ed_padding" />
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/ic_add_24dp"
+            android:onClick="@{(v)->product.onClick(v)}"
+            />
 
         <EditText
             android:id="@+id/ed_qty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/components_margin_left_right"
-            android:layout_weight="1"
             android:background="@drawable/bg_edt_border"
             android:ems="10"
-            android:hint="Qty"
-            android:text="@={product.in_stock_qty+``}"
+            android:textAlignment="center"
+            android:text="@={product.in_stock_qty+``,default=``}"
             android:inputType="numberDecimal"
             android:padding="@dimen/ed_padding" />
 
-        <LinearLayout
-            android:id="@+id/linear_add_stock"
+        <ImageButton
+            android:id="@+id/ibtn_qty_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{productDialogHolder.update ? View.VISIBLE : View.GONE }"
-            android:layout_weight=".8">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:padding="5dp"
-            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:onClick="@{(v)->product.onClick(v)}"
+            android:backgroundTint="@color/colorAccent"
+            android:src="@drawable/ic_remove_24dp"
             />
 
-        <EditText
-            android:id="@+id/ed_qty_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/components_margin_left_right"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edt_border"
-            android:ems="10"
-            android:hint="Add Stock"
-            android:inputType="number"
-            android:padding="@dimen/ed_padding" />
+
+
+    </LinearLayout>
+
+
+
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/components_margin_bottom"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/ed_buy_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/components_margin_left_right"
-            android:layout_weight="1"
-            android:visibility="@{productDialogHolder.bprice ? View.VISIBLE : View.GONE }"
-            android:background="@drawable/bg_edt_border"
-            android:ems="10"
-            android:hint="Buy Price"
-            android:text="@={product.b_price+``}"
-            android:inputType="numberDecimal"
-            android:padding="@dimen/ed_padding" />
-
-        <EditText
-            android:id="@+id/ed_sell_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/components_margin_left_right"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edt_border"
-            android:ems="10"
-            android:text="@={product.s_price+``}"
-            android:hint="Sell Price"
-            android:inputType="numberDecimal"
-            android:padding="@dimen/ed_padding" />
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -256,9 +245,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
             android:textColor="@color/colorWhite"
             android:padding="@dimen/button_padding"
+            android:backgroundTint="@color/colorPrimary"
             android:text="save" />
 
         <Button
@@ -268,7 +257,7 @@
             android:layout_weight="1"
             android:textColor="@color/colorWhite"
             android:padding="@dimen/button_padding"
-            android:backgroundTint="@color/colorButtonCancel"
+            android:backgroundTint="@color/colorAccent"
             android:text="cancel" />
 
     </LinearLayout>

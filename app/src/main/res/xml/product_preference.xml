@@ -9,6 +9,7 @@
 
 
     <PreferenceCategory
+        android:iconSpaceReserved="false"
         android:title="Product View Settings">
 
         <CheckBoxPreference
@@ -25,20 +26,7 @@
             app:iconSpaceReserved="false"
             android:title="Barcode" />
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="bprice"
-            android:summary="remove or add buy price "
-            app:iconSpaceReserved="false"
-            android:title="Buy Price" />
 
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="productGst"
-            android:summary="remove or add GST"
-            app:iconSpaceReserved="false"
-            android:title="GST (%)" />
 
 
     </PreferenceCategory>

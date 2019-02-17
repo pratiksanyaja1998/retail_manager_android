@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="product"
+            type="retailmanager.spyhunter272.com.room.table.Product" />
+
+        <variable
+            name="productDialogHolder"
+            type="retailmanager.spyhunter272.com.holder.ProductDialogHolder" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ibtn_close_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:scaleType="center"
+                android:tint="#606060"
+                android:src="@drawable/ic_product_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Products Details"
+                android:textFontWeight="700"
+                android:textSize="22sp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ccc" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="@dimen/dialog_root_padding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_product_name"
+                    />
+
+                <TextView
+                    android:id="@+id/ed_product_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:background="@drawable/bg_edt_border"
+                    android:padding="@dimen/ed_padding"
+                    android:layout_marginBottom="@dimen/components_margin_bottom"
+                    android:text="@={product.name}"
+                    android:inputType="textCapWords" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_hsn_code"
+                    android:visibility="@{productDialogHolder.barcode ? View.VISIBLE : View.GONE }"
+                    />
+
+                <TextView
+                    android:id="@+id/ed_hsn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edt_border"
+                    android:ems="10"
+                    android:layout_marginBottom="@dimen/components_margin_bottom"
+                    android:visibility="@{productDialogHolder.hsn ? View.VISIBLE : View.GONE }"
+                    android:text="@={product.hsn}"
+                    android:inputType="textCapCharacters"
+                    android:padding="@dimen/ed_padding" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/label_sell_price"
+                    android:textAlignment="textEnd"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_sell_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="@dimen/components_margin_bottom"
+                    android:background="@drawable/bg_edt_border"
+                    android:ems="10"
+                    android:text="@={product.s_price+``,default=``}"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/ed_padding" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/label_qty"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/components_margin_bottom"
+                    android:gravity="center"
+                    >
+
+                    <ImageButton
+                        android:id="@+id/ibtn_qty_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:src="@drawable/ic_add_24dp"
+                        android:onClick="@{(v)->product.onClick(v)}"
+                        />
+
+                    <EditText
+                        android:id="@+id/ed_qty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edt_border"
+                        android:ems="10"
+                        android:textAlignment="center"
+                        android:text="@={product.in_stock_qty+``,default=``}"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/ed_padding" />
+
+                    <ImageButton
+                        android:id="@+id/ibtn_qty_remove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="@{(v)->product.onClick(v)}"
+                        android:backgroundTint="@color/colorAccent"
+                        android:src="@drawable/ic_remove_24dp"
+                        />
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_dialog_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"
+                android:padding="@dimen/button_padding"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="save" />
+
+            <Button
+                android:id="@+id/btn_dialog_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"
+                android:padding="@dimen/button_padding"
+                android:backgroundTint="@color/colorAccent"
+                android:text="cancel" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

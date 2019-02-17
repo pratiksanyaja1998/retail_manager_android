@@ -2,45 +2,32 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="mobile"
-        app:iconSpaceReserved="false"
-        android:summary="remove or add hsn from product database"
-        android:title="Mobile Number" />
-
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="email"
-        android:summary="remove or add barcode from product database"
-        app:iconSpaceReserved="false"
-        android:title="Email" />
 
     <PreferenceCategory
+        android:iconSpaceReserved="false"
         android:title="Invoice Form Settings">
 
+        <EditTextPreference
+            android:defaultValue="SNOO"
+            android:key="invoicePre"
+            app:iconSpaceReserved="false"
+            android:summary="Invoice Serial Number Prefix"
+            android:title="Invoice Number Prefix" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="customer"
+            app:iconSpaceReserved="false"
+            android:summary="invoice customer"
+            android:title="Customer" />
+
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="tprcharge"
             app:iconSpaceReserved="false"
             android:summary="remove or add reverse charge"
-            android:title="Payment Method " />
-
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="tprcharge"
-            app:iconSpaceReserved="false"
-            android:summary="remove or add reverse charge"
-            android:title="Tax in reverse charge " />
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="description"
-            android:summary="remove or add description "
-            app:iconSpaceReserved="false"
-            android:title="Description" />
-
+            android:title="Tax in reverse charge" />
 
     </PreferenceCategory>
 

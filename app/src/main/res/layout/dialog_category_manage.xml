@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/padding_root_layout_10"
+    android:background="@color/actBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,7 +28,7 @@
             android:background="@android:color/transparent"
             android:hint="Add Product Category"
             android:padding="10dp"
-
+            android:imeOptions="actionDone"
             />
 
         <ImageButton
@@ -36,11 +37,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:layout_marginLeft="10dp"
-            app:srcCompat="@drawable/ic_done_all_black_24dp" />
+            android:tint="@color/colorWhite"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/ic_done_all_black_24dp" />
 
     </LinearLayout>
-
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_product_category"
@@ -48,6 +49,18 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:listitem="@layout/row_product_category"
+        />
+
+    <TextView
+        android:id="@+id/iv_not_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:text="Category Not Found! \n Please Add Category"
+        android:scaleType="fitXY"
+        android:visibility="gone"
         />
 
 

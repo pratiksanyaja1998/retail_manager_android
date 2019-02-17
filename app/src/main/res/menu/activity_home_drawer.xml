@@ -68,13 +68,20 @@
 
 
                 <item
-                    android:id="@+id/action_about"
+                    android:id="@+id/nav_about"
                     android:icon="@drawable/about_ic"
                     android:orderInCategory="100"
                     android:title="@string/action_about" />
 
-                <item
-                    android:id="@+id/action_share"
+    <item
+        android:id="@+id/nav_feedback"
+        android:icon="@drawable/ic_email_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_feedback" />
+
+
+    <item
+                    android:id="@+id/nav_share"
                     android:icon="@drawable/share_ic"
                     android:orderInCategory="100"
                     android:title="@string/action_share" />

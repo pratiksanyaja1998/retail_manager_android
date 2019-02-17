@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-     >
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,11 +8,11 @@
 
         <variable
             name="customer"
-            type="retailmanager.spyhunter272.in.retailmanager.room.table.Customer" />
+            type="retailmanager.spyhunter272.com.room.table.Customer" />
 
         <variable
             name="customerDialogHolder"
-            type="retailmanager.spyhunter272.in.retailmanager.model.CustomerDialogHolder" />
+            type="retailmanager.spyhunter272.com.holder.CustomerDialogHolder" />
 
     </data>
 
@@ -79,9 +78,8 @@
             android:background="@drawable/bg_edt_border"
             android:ems="10"
             android:text="@={customer.name}"
-
             android:hint="Customer Name"
-            android:inputType="textCapWords"
+            android:inputType="textCapWords|textPersonName"
             android:padding="@dimen/ed_padding" />
 
 
@@ -99,8 +97,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:maxLength="10"
             android:hint="Customer Mobile Number"
-            android:inputType="number"
+            android:inputType="phone"
             android:layout_weight="1"
             android:text="@={customer.mobile}"
             android:background="#00000000"
@@ -111,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tint="@color/colorWhite"
-                android:backgroundTint="@color/colorButtonCancel"
+                android:backgroundTint="@color/colorPrimary"
                 android:src="@drawable/ic_person_add_black_24dp"
                 />
 
@@ -126,6 +125,7 @@
             android:ems="10"
             android:text="@={customer.gstin}"
             android:hint="GSTIN"
+            android:maxLength="15"
             android:inputType="textCapCharacters"
             android:padding="@dimen/ed_padding" />
 
@@ -180,7 +180,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/components_margin_bottom"
             android:orientation="horizontal">
 
@@ -194,7 +194,7 @@
                 android:ems="10"
                 android:text="@={customer.billing_address.city}"
                 android:hint="City"
-                android:inputType="textCapWords"
+                android:inputType="textCapWords|textPersonName"
                 android:padding="@dimen/ed_padding" />
 
             <EditText
@@ -207,18 +207,17 @@
                 android:ems="10"
                 android:hint="Pincode"
                 android:text="@={customer.billing_address.postCode}"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:padding="@dimen/ed_padding" />
 
         </LinearLayout>
 
-        <AutoCompleteTextView
+        <EditText
             android:id="@+id/ed_customer_b_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/components_margin_bottom"
             android:background="@drawable/bg_edt_border"
-            android:ems="10"
             android:hint="State"
             android:text="@={customer.billing_address.state}"
             android:inputType="textCapWords"
@@ -282,7 +281,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/components_margin_bottom"
             android:orientation="horizontal">
 
@@ -311,27 +310,24 @@
                 android:visibility="@{customer.is_same_b_s ?  View.GONE  : View.VISIBLE }"
                 android:hint="Pincode"
                 android:text="@={customer.shipping_address.postCode}"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:padding="@dimen/ed_padding" />
 
         </LinearLayout>
 
-        <AutoCompleteTextView
+        <EditText
             android:id="@+id/ed_customer_s_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/components_margin_bottom"
             android:background="@drawable/bg_edt_border"
-            android:ems="10"
             android:hint="State"
-            android:entries="@array/state_name"
             android:visibility="@{customer.is_same_b_s ?  View.GONE  : View.VISIBLE }"
             android:text="@={customer.shipping_address.state}"
             android:inputType="textCapWords"
             android:padding="@dimen/ed_padding" />
 
-
-</LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -343,7 +339,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="@color/colorPrimary"
                 android:padding="@dimen/button_padding"
                 android:text="save"
                 android:textColor="@color/colorWhite" />
@@ -354,8 +350,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/button_padding"
+                android:backgroundTint="@color/colorAccent"
                 android:text="cancel"
-                android:backgroundTint="@color/colorButtonCancel"
                 android:textColor="@color/colorWhite" />
 
         </LinearLayout>
