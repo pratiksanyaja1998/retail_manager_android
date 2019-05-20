@@ -354,33 +354,29 @@ public class ResponsiveTemplate {
 
         double amt=(invoice.getDiscount()*invoice.getTotal())/100;
 
-
+        String gstLabel =invoice.getGsttype()==0?"GST":"IGST";
 
         bf.append(" <div class=\" font-15 \" style=\"margin-top: 5px\">\n" +
-                "\n" +
-                "\n" +
                 "            <table class=\"font-15 w3-right w3-custom-gray-text\">\n" +
-//                "                <tr >\n" +
-//                "                    <td><b> (%) :-</b></td>\n" +
-//                "                    <td class=\"w3-right\"><b> "" %</b></td>\n" +
-//                "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td><b>DISCOUNT (%) :-</b></td>\n" +
                 "                    <td class=\"w3-right\"><b>"+ invoice.getDiscount()+" %</b></td>\n" +
+                "                </tr>\n" +
+                "                <tr >\n" +
+                "                    <td><b>"+gstLabel+" (%) :-</b></td>\n" +
+                "                    <td class=\"w3-right\"><b> "+invoice.getGst()+" %</b></td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td><b>TOTAL :-</b></td>\n" +
                 "                    <td class=\"w3-right\"><b>"+(Math.round(invoice.getTotal()-amt))+"  /-</b> </td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
-                "\n" +
                 "        </div>\n" +
                 "        <div class=\"w3-left\">\n" +
                 "            <small>\n" +
                 "                <b> "+NumberToWord.NTOW(Math.round(invoice.getTotal()-amt))+"</b>\n" +
                 "            </small>\n" +
                 "        </div>\n" +
-                "\n" +
                 "    </div>");
 
 

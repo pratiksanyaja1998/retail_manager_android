@@ -15,7 +15,7 @@ public class Invoice extends BaseObservable {
     private long customerId;
     private String name;
     private String mobile;
-    private int gsttype; //  for  0 None / 1 GST / 2 IGST
+    private int gsttype; //  for    0 GST / 1 IGST
     private int gst; // 0 5 12 18 28
     private double total;
     private float discount;

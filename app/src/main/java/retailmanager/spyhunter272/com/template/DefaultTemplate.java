@@ -118,13 +118,11 @@ public class DefaultTemplate {
 
             bf.append("\t<tr><td>Shipping Address :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getBilling_address().getStreet()+","+customer.getBilling_address().getCity()+", "+customer.getBilling_address().getState()+"-"+customer.getBilling_address().getPostCode()+"</td> </tr>\n");
 
-
         }
 
         if(customer.getGstin()!=null && !customer.getGstin().equals(""))bf.append("\t<tr><td>GSTIN Number :&nbsp;&nbsp;&nbsp;&nbsp;"+customer.getGstin()+"</td></tr>\n" );
 
-        bf.append("\t</table></td></tr>\n" +
-                "</table>");
+        bf.append("\t</table></td></tr></table>");
 
         return bf.toString();
     }
@@ -134,53 +132,39 @@ public class DefaultTemplate {
 
         StringBuffer bf = new StringBuffer();
 
-        //product header const
-        bf.append("<br><table class=\"border\">\n" +
-                "<tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td><td>HSN Code</td><td>RATE</td><td>QTY</td>");
-
-//        if(invoice.getGsttype()==0)bf.append("<td>SGST</td><td>CGST</td>");
-//        else bf.append("<td>IGST</td>");
+        bf.append("<br><table class=\"border\"><tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td><td>HSN Code</td><td>RATE</td><td>QTY</td>");
 
         bf.append("<td>AMOUNT</td></tr>");
 
         for (int i=0;i<proLists.size();i++) {
             //body var
-            String hsn = proLists.get(i).getHsn(),
-                    name= proLists.get(i).getName();
+            String hsn = proLists.get(i).getHsn(),name= proLists.get(i).getName();
             double price = Math.round(proLists.get(i).getPrice());
-
-//            Log.e("post",proLists.get(i).getGst()+" gst get ");
-//
-//            float gst = proLists.get(i).getGst();
 
             if(hsn==null)
                 hsn="";
 
 
             bf.append("<tr><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
-
-//            if(invoice.getGsttype()==0)
-//                bf.append("<td>"+gst/2+"%</td><td>"+gst/2+"%</td>");
-//            else
-//                bf.append("<td>"+(proLists.get(i).getGst())+"%</td>");
-
             bf.append("<td>"+(proLists.get(i).getTotal())+"</td></tr>");
         }
-        //footer total desc more.. var
-//        int i1=7,i2=6;
-
-//        if (invoice.getGsttype()==1){
-//            i1=6;
-//            i2=5;
-//        }
 
         double amt=(invoice.getDiscount()*invoice.getTotal())/100;
 
+        String gstrow ;
 
-        bf.append("<tr class=\"bgcolor\"><td colspan=\""+5+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td>\t\t\t\n" +
-                "</tr><tr class=\"bgcolor\"><td colspan=\""+5+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()-amt))+" /-</td></tr>\n" +
+        if(invoice.getGsttype()==0){
+            gstrow = "<tr class=\"bgcolor\"><td colspan=\""+5+"\">GST(%)</td><td> "+(invoice.getGst())+" %</td></tr>";
+        }else {
+            gstrow = "<tr class=\"bgcolor\"><td colspan=\""+5+"\">IGST(%)</td><td> "+invoice.getGst()+" %</td></tr>";
+        }
+
+
+        bf.append("<tr class=\"bgcolor\"><td colspan=\""+5+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td></tr>" +
+                 gstrow+
+                "<tr class=\"bgcolor\"><td colspan=\""+5+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()-amt))+" /-</td></tr>\n" +
                 "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal()-amt)) +"</td></tr>\n" +
-                "</table>\n<br>");
+                "</table><br>");
 
         return bf.toString();
     }
@@ -189,13 +173,12 @@ public class DefaultTemplate {
 
         SharedPreferences myPreference =PreferenceManager.getDefaultSharedPreferences(context);
 
-        String   retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
+        String retailName = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_NAME,"");
 
         return  "<table><tr class=\"bgcolor tcenter\"><td class=\"border\">Payment Mode</td><td class=\"border\">Electronic Reference Number</td></tr>\n" +
                 "<tr class=\"tcenter\"><td class=\"border\">"+invoice.getPaymentMethrd()+"</td><td class=\"border\">&nbsp;</td></tr></table>\n" +
                 "<table><tbody><tr class=\"bgcolor tcenter\"><td class=\"border\">TERM &amp; CONDITION</td><td class=\"border\">"+retailName+"</td></tr><tr class=\"tcenter\"><td class=\"border\">&nbsp; <br><br><br><br></td><td class=\"border\"><br><br>Signature:_______________</td></tr></table>\n" +
-                "</body>\n" +
-                "</html>";
+                "</body></html>";
     }
 
 
