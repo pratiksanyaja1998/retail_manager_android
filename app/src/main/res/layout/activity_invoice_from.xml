@@ -236,7 +236,7 @@
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="35dp"
                             android:orientation="horizontal"
                             android:paddingBottom="8dp"
                             android:paddingStart="5dp"
@@ -293,7 +293,7 @@
                         </LinearLayout>
 
 
-                        <ListView
+                        <retailmanager.spyhunter272.com.customview.NestedListView
                             android:id="@+id/listproductholder"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
