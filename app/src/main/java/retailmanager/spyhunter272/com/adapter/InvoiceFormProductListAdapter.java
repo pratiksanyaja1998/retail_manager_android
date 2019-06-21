@@ -109,8 +109,11 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         binding.setProduct(proLists.get(i));
 
         binding.rowIbtnprodelete.setOnClickListener(v -> deleteProduct(i));
-
+        binding.rowBtnEdit.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
         binding.rowPname.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
+        binding.rowPqty.setOnClickListener(v->productListLiner.openProduct(proLists.get(i)));
+        binding.rowPamt.setOnClickListener(v->productListLiner.openProduct(proLists.get(i)));
+        binding.rowPtotal.setOnClickListener(v->productListLiner.openProduct(proLists.get(i)));
 
 
         return binding.getRoot();

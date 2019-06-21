@@ -290,6 +290,12 @@
                                 android:padding="3dp"
                                  />
 
+                            <View
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:padding="3dp"
+                                />
+
                         </LinearLayout>
 
 
