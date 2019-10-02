@@ -16,7 +16,7 @@ import retailmanager.spyhunter272.com.room.table.Product;
 public class InvoiceFormProductListAdapter extends BaseAdapter {
 
     private List<Product> proLists = new ArrayList<>();
-    private float totalAmtProduct = 0;
+    private double totalAmtProduct = 0;
 
     private ProductListLiner productListLiner;
 
@@ -44,7 +44,7 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         }
 
         product.setIn_stock_qty(1);
-        float total = (float) (product.getIn_stock_qty()*product.getS_price());
+        double total =  product.getIn_stock_qty()*product.getS_price();
         totalAmtProduct+=total;
         productListLiner.updateTotal(totalAmtProduct);
         product.setTotal(Math.round(total));
@@ -61,7 +61,7 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
 
                 totalAmtProduct-=proLists.get(i).getTotal();
 
-                float total = (float) (product.getIn_stock_qty()*product.getS_price());
+                double total = product.getIn_stock_qty()*product.getS_price();
                 totalAmtProduct+=total;
 
                 productListLiner.updateTotal(totalAmtProduct);

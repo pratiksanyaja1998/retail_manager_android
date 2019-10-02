@@ -136,7 +136,7 @@
     <string name="product_duplicate_error">Product Already Exists !</string>
     <string name="retail_info_message">Are you sure wont to leave this page make sure you save your information by click save button otherwise your data may be loss ..!</string>
     <string name="save">save</string>
-    <string name="more_info"><u>more</u></string>
+    <string name="more_info"><u>edit</u></string>
 
     <string name="share_string_email">This invoice generate using retail manager app you can find into google play store click link :- https://play.google.com/store/apps/details?id=retailmanager.spyhunter272.com</string>
 

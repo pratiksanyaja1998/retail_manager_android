@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -16,7 +17,6 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.InvoiceViewFragment">
 
 
@@ -41,90 +41,79 @@
         android:id="@+id/relative_spinner_view"
         app:cardCornerRadius="2dp"
         app:cardElevation="2dp"
+        android:clickable="true"
         android:layout_margin="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right"
-            android:layout_marginHorizontal="10dp"
-            android:padding="@dimen/padding_root_layout_5"
-            >
 
             <LinearLayout
                 android:id="@+id/btn_open_dialog_date"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
-                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:focusable="true">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
                 android:layout_gravity="center"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/calender_ic" />
+                android:focusable="true"
+                android:padding="15dp"
+                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_show_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:text="@{invoiceViewHolder.date}"
-                 />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/calender_ic" />
+
+                <TextView
+                    android:id="@+id/tv_show_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="@{invoiceViewHolder.date}"
+                    android:textAlignment="center" />
 
 
             </LinearLayout>
 
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/ib_prev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/previews_iarrow_ic"
-                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
-                android:background="?android:attr/selectableItemBackground"
-                android:text="Filter" />
+            <!--            <ImageButton-->
+<!--                android:id="@+id/ib_prev"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/previews_iarrow_ic"-->
+<!--                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"-->
+<!--                android:background="?android:attr/selectableItemBackground"-->
+<!--                android:text="Filter" />-->
 
 
-            <EditText
-                android:id="@+id/ed_offset"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:inputType="numberSigned"
-                android:textAlignment="center"
-                android:backgroundTint="@color/zxing_transparent"
-                android:focusedByDefault="false"
-                android:text="@={invoiceViewHolder.offset+``}"
-                />
+<!--            <EditText-->
+<!--                android:id="@+id/ed_offset"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:inputType="numberSigned"-->
+<!--                android:textAlignment="center"-->
+<!--                android:backgroundTint="@color/zxing_transparent"-->
+<!--                android:focusedByDefault="false"-->
+<!--                android:text="@={invoiceViewHolder.offset+``}"-->
+<!--                />-->
 
-            <ImageButton
-                android:id="@+id/ib_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"
-                android:src="@drawable/next_arrow_ic"
-                android:background="?android:attr/selectableItemBackground"
-                android:text="Filter" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/ib_next"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:onClick="@{(v) ->invoiceViewHolder.onClick(v)}"-->
+<!--                android:src="@drawable/next_arrow_ic"-->
+<!--                android:background="?android:attr/selectableItemBackground"-->
+<!--                android:text="Filter" />-->
 
-        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
@@ -138,7 +127,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:clipToPadding="false"
         android:paddingBottom="80dp"
-        android:paddingTop="70dp"
+        android:paddingTop="60dp"
         tools:listitem="@layout/row_invoice" />
 
 
