@@ -89,28 +89,28 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
         recyclerView.setAdapter(rcProductAdepter);
 
         view.findViewById(R.id.fbtn_add).setOnClickListener(this);
-        iBtnNext =  view.findViewById(R.id.ib_next);
-                iBtnNext.setOnClickListener(this);
-        iBtnPrev = view.findViewById(R.id.ib_prev);
-        iBtnPrev.setOnClickListener(this);
-
-        edOffset = view
-                .findViewById(R.id.ed_offset);
-
-
-        edOffset.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    setOffSet( Integer.parseInt("0"+edOffset.getText().toString()));
-                    getProducts();
-                    return false;
-                }
-
-                return true;
-            }
-        });
-
+//        iBtnNext =  view.findViewById(R.id.ib_next);
+//                iBtnNext.setOnClickListener(this);
+//        iBtnPrev = view.findViewById(R.id.ib_prev);
+//        iBtnPrev.setOnClickListener(this);
+//
+//        edOffset = view
+//                .findViewById(R.id.ed_offset);
+//
+//
+//        edOffset.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                    setOffSet( Integer.parseInt("0"+edOffset.getText().toString()));
+//                    getProducts();
+//                    return false;
+//                }
+//
+//                return true;
+//            }
+//        });
+//
 
         spinnerProductCategory = view.findViewById(R.id.spinner_product_category);
         prodCateSpinnerBaseAdepter = new ProdCateSpinnerBaseAdepter();
@@ -121,7 +121,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                activeProductCategoryId =  prodCateSpinnerBaseAdepter.productCategories.get(position).getId();
                Log.e("select id",activeProductCategoryId+"");
-               setOffSet(0);
+//               setOffSet(0);
                getProducts();
             }
 
@@ -238,6 +238,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
     public void editProduct(Product product) {
        ProductDialog productDialog =  new ProductDialog();
+       product.setProductList(true);
        productDialog.setArguments(product.getBundle());
         productDialog.show(getFragmentManager(),null);
     }

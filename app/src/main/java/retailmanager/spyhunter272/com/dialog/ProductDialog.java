@@ -78,8 +78,11 @@ public class ProductDialog extends DialogFragment implements View.OnClickListene
 
         binding.setProduct(product);
         myPreference =PreferenceManager.getDefaultSharedPreferences(getContext());
-        productDialogHolder = new ProductDialogHolder(myPreference.getBoolean("hsn",true),myPreference.getBoolean("bprice",true),
-                myPreference.getBoolean("barcode",true),myPreference.getBoolean("productGst",true) );
+        productDialogHolder =
+                new ProductDialogHolder(myPreference.getBoolean("hsn",true),
+                    myPreference.getBoolean("bprice",true),
+                    myPreference.getBoolean("barcode",true),
+                    myPreference.getBoolean("productGst",true) );
         productDialogHolder.setUpdate(isUpdate);
         binding.setProductDialogHolder(productDialogHolder);
 

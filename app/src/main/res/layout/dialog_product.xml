@@ -185,13 +185,17 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:text="@string/label_qty"
+                android:visibility="@{product.isProductList ? View.GONE : View.VISIBLE }"
+
                 />
 
     <LinearLayout
+        android:id="@+id/linear_qty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/components_margin_bottom"
         android:gravity="center"
+        android:visibility="@{product.isProductList ? View.GONE : View.VISIBLE }"
         >
 
         <ImageButton

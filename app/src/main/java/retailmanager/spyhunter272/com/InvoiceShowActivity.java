@@ -52,13 +52,13 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         long id = getIntent().getLongExtra(KEY_INVOICE_ID,-1);
 
         if(id==-1){
-            Toast.makeText(this,"Invoice id is not valied",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Invoice id is not valid",Toast.LENGTH_SHORT).show();
             finish();
         }
 
         progressBar = findViewById(R.id.progress_circular);
         webView = findViewById(R.id.webview_preview_invoice);
-        spinnerTemplate = findViewById(R.id.sp_select_templete);
+//        spinnerTemplate = findViewById(R.id.sp_select_templete);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
@@ -92,7 +92,7 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
         progressBar.setVisibility(View.GONE);
         this.invoice=invoice;
 
-        spinnerTemplate.setOnItemSelectedListener(this);
+//        spinnerTemplate.setOnItemSelectedListener(this);
         webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
     }
 
@@ -109,23 +109,26 @@ public class InvoiceShowActivity extends AppCompatActivity implements GetInvoice
                 break;
 
             case 1:
-                webView.loadData(ResponsiveTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
+                webView.loadDataWithBaseURL(StaticInfoUtils.retailLogoFileBase(this).getAbsolutePath(), ResponsiveTemplate.getTemplateData(invoice,this),"text/html", "utf-8","");
+//                webView.loadData(ResponsiveTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
 //                webView.loadUrl("file:///android_asset/withImage.html");
 //                webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
                 break;
 
-            case  2:
-                webView.loadUrl("file:///android_asset/color.html");
+//            case  2:
+//                webView.loadUrl("file:///android_asset/color.html");
+//                break;
+//
+//            case 3:
+//                webView.loadUrl("file:///android_asset/widthLogo.html");
+//                break;
+//
+//            case 4:
+//                webView.loadUrl("file:///android_asset/simple.html");
+//                break;
+            default:
+                webView.loadData(DefaultTemplate.getTemplateData(invoice,this),"text/html", "UTF-8");
                 break;
-
-            case 3:
-                webView.loadUrl("file:///android_asset/widthLogo.html");
-                break;
-
-            case 4:
-                webView.loadUrl("file:///android_asset/simple.html");
-                break;
-
         }
 
     }

@@ -33,14 +33,20 @@ public interface ProductDao {
     @Query("SELECT * from product order by category desc")
     LiveData<List<Product>> getAllProducts();
 
-    @Query("select * from product LIMIT :limits OFFSET :offsets ")
-    LiveData<List<Product>> getProductsForList(int limits,int offsets);
+//    @Query("select * from product LIMIT :limits OFFSET :offsets ")
+    @Query("select * from product")
+    LiveData<List<Product>> getProductsForList();
 
-    @Query("select * from product where name like :filterNameHsn LIMIT :limits OFFSET :offsets ")
-    LiveData<List<Product>> getProductsForList(int limits,int offsets,String filterNameHsn);
+//    @Query("select * from product where name like :filterNameHsn LIMIT :limits OFFSET :offsets ")
+//        LiveData<List<Product>> getProductsForList(int limits,int offsets,String filterNameHsn);
+    @Query("select * from product where name like :filterNameHsn")
+    LiveData<List<Product>> getProductsForList(String filterNameHsn);
 
 
-    @Query("select * from product where category==:category LIMIT :limits OFFSET :offsets ")
-    LiveData<List<Product>> getProductsForList(int limits,int offsets,long category);
+//    @Query("select * from product where category==:category LIMIT :limits OFFSET :offsets ")
+//    LiveData<List<Product>> getProductsForList(int limits,int offsets,long category);
+
+    @Query("select * from product where category==:category")
+    LiveData<List<Product>> getProductsForList(long category);
 
 }

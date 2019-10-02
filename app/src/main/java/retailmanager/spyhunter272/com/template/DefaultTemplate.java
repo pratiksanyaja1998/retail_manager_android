@@ -30,7 +30,7 @@ public class DefaultTemplate {
         stringBuffer.append(header());
         stringBuffer.append(brandDetails(context,invoice));
         stringBuffer.append(customer(invoice));
-        stringBuffer.append(products(invoice));
+        stringBuffer.append(products(invoice,context));
         stringBuffer.append(footer(invoice,context));
         return stringBuffer.toString();
 
@@ -127,12 +127,17 @@ public class DefaultTemplate {
         return bf.toString();
     }
 
-    public static String products(Invoice invoice){
+    public static String products(Invoice invoice, Context context){
         List<InvoiceProduct> proLists = invoice.getInvoiceProducts();
-
+        boolean isHsn = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("hsn",true);
         StringBuffer bf = new StringBuffer();
 
-        bf.append("<br><table class=\"border\"><tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td><td>HSN Code</td><td>RATE</td><td>QTY</td>");
+        bf.append("<br><table class=\"border\"><tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td>");
+
+        if(isHsn)
+            bf.append("<td>HSN Code</td>");
+
+        bf.append("<td>RATE</td><td>QTY</td>");
 
         bf.append("<td>AMOUNT</td></tr>");
 
@@ -145,25 +150,33 @@ public class DefaultTemplate {
                 hsn="";
 
 
-            bf.append("<tr><td>"+(i+1)+"</td><td>"+name+"</td><td>"+hsn+"</td><td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
+            bf.append("<tr><td>"+(i+1)+"</td><td>"+name+"</td>");
+            if(isHsn)
+                bf.append("<td>"+hsn+"</td>");
+            bf.append("<td>"+price+"</td><td>"+proLists.get(i).getQty()+"</td>");
             bf.append("<td>"+(proLists.get(i).getTotal())+"</td></tr>");
         }
 
         double amt=(invoice.getDiscount()*invoice.getTotal())/100;
 
-        String gstrow ;
+        String gstrow, gstLabel, colspan="5" ;
 
         if(invoice.getGsttype()==0){
-            gstrow = "<tr class=\"bgcolor\"><td colspan=\""+5+"\">GST(%)</td><td> "+(invoice.getGst())+" %</td></tr>";
+            gstLabel = "GST";
         }else {
-            gstrow = "<tr class=\"bgcolor\"><td colspan=\""+5+"\">IGST(%)</td><td> "+invoice.getGst()+" %</td></tr>";
+            gstLabel = "IGST";
         }
 
+        if(!isHsn)
+            colspan="4";
 
-        bf.append("<tr class=\"bgcolor\"><td colspan=\""+5+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td></tr>" +
+        gstrow = "<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">"+gstLabel+"(%)</td><td> "+invoice.getGst()+" %</td></tr>";
+
+
+        bf.append("<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td></tr>" +
                  gstrow+
-                "<tr class=\"bgcolor\"><td colspan=\""+5+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()-amt))+" /-</td></tr>\n" +
-                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal()-amt)) +"</td></tr>\n" +
+                "<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()))+" /-</td></tr>\n" +
+                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal())) +"</td></tr>\n" +
                 "</table><br>");
 
         return bf.toString();
