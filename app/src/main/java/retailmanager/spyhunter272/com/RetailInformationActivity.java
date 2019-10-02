@@ -55,6 +55,11 @@ public class RetailInformationActivity extends AppCompatActivity  {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this,HomeActivity.class));
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
 

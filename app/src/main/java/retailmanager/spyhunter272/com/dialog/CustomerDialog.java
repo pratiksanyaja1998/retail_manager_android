@@ -36,7 +36,7 @@ import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 
 import retailmanager.spyhunter272.com.databinding.DialogCustomerBinding;
 
-public class CustomerDialog extends DialogFragment implements View.OnClickListener {
+public class CustomerDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
     private Customer customer;

@@ -29,7 +29,7 @@ import retailmanager.spyhunter272.com.room.table.Address;
 import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 
-public class CustomerInvoiceFormDialog extends DialogFragment implements View.OnClickListener {
+public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
     private Customer customer;

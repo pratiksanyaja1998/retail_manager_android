@@ -10,6 +10,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -36,7 +38,7 @@ import retailmanager.spyhunter272.com.databinding.DialogProductBinding;
 //https://stackoverflow.com/questions/44364240/android-room-get-the-id-of-new-inserted-row-with-auto-generate
 
 @SuppressLint("ValidFragment")
-public class ProductDialog extends DialogFragment implements View.OnClickListener {
+public class ProductDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private static int BARCODE_ACT_REQ_CODE = 55;
 
