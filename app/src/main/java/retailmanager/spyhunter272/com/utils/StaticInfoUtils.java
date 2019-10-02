@@ -14,12 +14,21 @@ public class StaticInfoUtils {
 
 
     public static File retailLogoFile(Context mcoContext){
-        File dir = new File(mcoContext.getFilesDir(),"retailInfo");
+//        File dir = new File(mcoContext.getFilesDir(),"retailInfo");
+        File dir = getRtManagerRootFolder();
         if(!dir.exists()){
             dir.mkdir();
         }
 
         return new File(dir,"retailLogo.png");
+    }
+
+    public static File retailLogoFileBase(Context mcoContext){
+        File dir = new File(mcoContext.getFilesDir(),"retailInfo");
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        return dir;
     }
 
     public static File getInvoiceDir(Context mcoContext, Invoice invoice){

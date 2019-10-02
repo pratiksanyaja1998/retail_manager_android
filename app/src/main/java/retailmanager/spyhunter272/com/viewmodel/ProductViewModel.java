@@ -73,13 +73,13 @@ public class ProductViewModel extends AndroidViewModel {
         if(!filterNameHsn.equals("")) {
             String temp = filterNameHsn;
             filterNameHsn = "%"+temp+"%";
-            return productDao.getProductsForList(limit, offset, filterNameHsn);
+            return productDao.getProductsForList(filterNameHsn);
         }
 
         if(category==0)
-            return productDao.getProductsForList(limit,offset);
+            return productDao.getProductsForList();
         else
-            return productDao.getProductsForList(limit,offset,category);
+            return productDao.getProductsForList(category);
 
     }
 

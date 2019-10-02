@@ -3,6 +3,7 @@ package retailmanager.spyhunter272.com.template;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import retailmanager.spyhunter272.com.room.table.Customer;
 import retailmanager.spyhunter272.com.room.table.Invoice;
 import retailmanager.spyhunter272.com.room.table.InvoiceProduct;
 import retailmanager.spyhunter272.com.utils.NumberToWord;
+import retailmanager.spyhunter272.com.utils.StaticInfoUtils;
 
 import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_ADDRESS;
 import static retailmanager.spyhunter272.com.holder.RetailInformationHolder.SP_KEY_FOR_RETAIL_INFO_CITY;
@@ -163,15 +165,20 @@ public class ResponsiveTemplate {
                 "        width: 100%;\n" +
                 "       \n" +
                 "    }\n" +
+                "   .img-logo{" +
+                "       position: absolute;" +
+                "       left: 40px;"+
+                "       "+
+                "}"+
                 "\n" +
                 "    </style>"+
                 "\n" +
 
                 "</head>\n" +
                 "\n" +
-                "<body  class=\"w3-light-grey\" >"+"<div class=\"w3-row w3-margin w3-card w3-padding w3-custom-gray-text\">\n";
+                "<body >"+"<div class=\"w3-row w3-margin w3-card w3-padding w3-custom-gray-text\">\n";
 
-    }
+     }
 
     public static String brandDetails(Context context,Invoice invoice) {
 
@@ -188,10 +195,12 @@ public class ResponsiveTemplate {
         String pincode = myPreference.getString(SP_KEY_FOR_RETAIL_INFO_PINCODE,"");
         String prefix = myPreference.getString("invoicePre","SNOO");
 
-
+        String filepath = StaticInfoUtils.retailLogoFileBase(context).getAbsolutePath().toString();
+        String imagePath = "file://"+ filepath + "/retailLogo.png";
 
         return  " <div class=\"w3-col l12 w3-custom-gray  w3-center w3-padding\">\n" +
                 "\n" +
+                "<img src=\""+imagePath+"\" width=\"80px\" alt=\"Logo\"  height=\"80px\"  class=\" img-logo \" />"+
                 "        <b><big>"+retailName+"</big>\n" +
                 "            <br/>\n" +
                 "            \n" +
@@ -352,9 +361,7 @@ public class ResponsiveTemplate {
         bf.append("</table>\n");
 
 
-//        double amt=(invoice.getDiscount()*invoice.getTotal())/100;
-        double amt = invoice.getTotal();
-
+        double amt=(invoice.getDiscount()*invoice.getTotal())/100;
 
         String gstLabel =invoice.getGsttype()==0?"GST":"IGST";
 
@@ -370,13 +377,13 @@ public class ResponsiveTemplate {
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td><b>TOTAL :-</b></td>\n" +
-                "                    <td class=\"w3-right\"><b>"+amt+"  /-</b> </td>\n" +
+                "                    <td class=\"w3-right\"><b>"+(Math.round(invoice.getTotal()))+"  /-</b> </td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
                 "        <div class=\"w3-left\">\n" +
                 "            <small>\n" +
-                "                <b> "+NumberToWord.NTOW(Math.round(amt))+"</b>\n" +
+                "                <b> "+NumberToWord.NTOW(Math.round(invoice.getTotal()))+"</b>\n" +
                 "            </small>\n" +
                 "        </div>\n" +
                 "    </div>");
@@ -393,45 +400,45 @@ public class ResponsiveTemplate {
             description="";
         }
 
-        return "    <div class=\"w3-col font-15 w3-margin-top\" >\n" +
-                "        <div class=\"w3-custom-gray w3-padding \">\n" +
-                "            <b>Other Details</b>\n" +
-                "        </div>\n" +
-                "        <div class=\"w3-padding\">\n" +
-                "            <b>Payment Methord :-</b> "+invoice.getPaymentMethrd()+"\n" +
-                "\n" +
-                "            <span >\n" +
-                "                <br/>\n" +
-                "                <b>Tax In Reverse Change :-</b> "+invoice.isTprchage()+"</span>\n" +
-                "\n" +
-                "            <span >\n" +
-                "                <br/><b>Desciption :-</b>"+description+"</span>\n" +
-                "\n" +
-                "        </div>\n" +
-                "    </div>\n" +
-                "\n" +
-                "\n" +
-                "    <div class=\"w3-col font-15  w3-margin-top\">\n" +
-                "        <div class=\"w3-custom-gray w3-padding \">\n" +
-                "            <b>Terms & Condition</b>\n" +
-                "        </div>\n" +
-                "        <div class=\"w3-custom-gray-text w3-padding\">\n" +
-                "            <small>\n" +
-                "                1 . Goods once sold will not be taken back.\n" +
-                "                <br/> 2 . Any breakage,leakage,damage,loss,expiry will not be returnable once sold.\n" +
-                "\n" +
-                "                <div class=\"w3-right\">\n" +
-                "                    <b>Sing.____________________</b>\n" +
-                "                </div>\n" +
-                "            </small>\n" +
-                "        </div>\n" +
-                "    </div>\n" +
-                "\n" +
-                "</div>\n" +
-                "\n" +
-                "</body>\n" +
-                "\n" +
-                "</html>";
+       return "    <div class=\"w3-col font-15 w3-margin-top\" >\n" +
+               "        <div class=\"w3-custom-gray w3-padding \">\n" +
+               "            <b>Other Details</b>\n" +
+               "        </div>\n" +
+               "        <div class=\"w3-padding\">\n" +
+               "            <b>Payment Methord :-</b> "+invoice.getPaymentMethrd()+"\n" +
+               "\n" +
+               "            <span >\n" +
+               "                <br/>\n" +
+               "                <b>Tax In Reverse Change :-</b> "+invoice.isTprchage()+"</span>\n" +
+               "\n" +
+               "            <span >\n" +
+               "                <br/><b>Desciption :-</b>"+description+"</span>\n" +
+               "\n" +
+               "        </div>\n" +
+               "    </div>\n" +
+               "\n" +
+               "\n" +
+               "    <div class=\"w3-col font-15  w3-margin-top\">\n" +
+               "        <div class=\"w3-custom-gray w3-padding \">\n" +
+               "            <b>Terms & Condition</b>\n" +
+               "        </div>\n" +
+               "        <div class=\"w3-custom-gray-text w3-padding\">\n" +
+               "            <small>\n" +
+               "                1 . Goods once sold will not be taken back.\n" +
+               "                <br/> 2 . Any breakage,leakage,damage,loss,expiry will not be returnable once sold.\n" +
+               "\n" +
+               "                <div class=\"w3-right\">\n" +
+               "                    <b>Sing.____________________</b>\n" +
+               "                </div>\n" +
+               "            </small>\n" +
+               "        </div>\n" +
+               "    </div>\n" +
+               "\n" +
+               "</div>\n" +
+               "\n" +
+               "</body>\n" +
+               "\n" +
+               "</html>";
 
     }
 

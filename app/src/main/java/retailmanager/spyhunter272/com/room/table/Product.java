@@ -41,8 +41,12 @@ public class Product extends BaseObservable {
     private double total;
 
     @Ignore
-    public Product(){
+    private boolean isProductList;
 
+//    is for temp show hide qty into product list or invoice product list
+    @Ignore
+    public Product(){
+        isProductList = true;
     }
 
     public Product(String name, String hsn, double s_price, int in_stock_qty, int category, String barcode) {
@@ -52,6 +56,14 @@ public class Product extends BaseObservable {
         this.in_stock_qty = in_stock_qty;
         this.category = category;
         this.barcode = barcode;
+    }
+
+    public boolean isProductList() {
+        return isProductList;
+    }
+
+    public void setProductList(boolean productList) {
+        isProductList = productList;
     }
 
     public boolean checkValidation(){
@@ -83,6 +95,7 @@ public class Product extends BaseObservable {
         bundle.putInt("category",category);
         bundle.putInt("stock",in_stock_qty);
         bundle.putString("barcode",barcode);
+        bundle.putBoolean("isProductList",isProductList);
         return bundle;
     }
 
@@ -95,7 +108,7 @@ public class Product extends BaseObservable {
          bundle.getInt("category"),
                 bundle.getString("barcode"));
         product.id = bundle.getInt("id");
-
+        product.isProductList = bundle.getBoolean("isProductList");
         return product;
 
     }

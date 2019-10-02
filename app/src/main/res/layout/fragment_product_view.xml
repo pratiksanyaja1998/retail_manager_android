@@ -46,38 +46,6 @@
                 android:textAlignment="center"
                 android:spinnerMode="dialog" />
 
-            <ImageButton
-                android:id="@+id/ib_prev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/previews_iarrow_ic"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_gravity="center"
-                 />
-
-
-            <EditText
-                android:id="@+id/ed_offset"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:inputType="numberSigned"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:background="@color/zxing_transparent"
-                android:focusedByDefault="false"
-                android:text="0"
-                />
-
-            <ImageButton
-                android:id="@+id/ib_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/next_arrow_ic"
-                android:layout_gravity="center"
-                />
-
 
         </LinearLayout>
 
