@@ -13,7 +13,7 @@ public class Invoice extends BaseObservable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long customerId;
-    private String name;
+    private String name="Unknown";
     private String mobile;
     private int gsttype; //  for    0 GST / 1 IGST
     private int gst; // 0 5 12 18 28
@@ -72,6 +72,8 @@ public class Invoice extends BaseObservable {
     }
 
     public void setName(String name) {
+        if(name=="" || name==null)
+            return;
         this.name = name;
     }
 

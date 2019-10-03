@@ -133,7 +133,14 @@ public class DefaultTemplate {
         boolean isHsn = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("hsn",true);
         StringBuffer bf = new StringBuffer();
 
-        bf.append("<br><table class=\"border\"><tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td>");
+//        Customer customer = invoice.getCustomer();
+
+        if(invoice.getCustomer()!=null){
+//            return "";
+            bf.append("<br/>");
+        }
+
+        bf.append("<table class=\"border\"><tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td>");
 
         if(isHsn)
             bf.append("<td>HSN Code</td>");

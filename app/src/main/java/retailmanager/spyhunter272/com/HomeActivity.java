@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_about:
-                Uri uri = Uri.parse("http://www.spyhunter272.in");
+                Uri uri = Uri.parse("http://www.spyhunter.in");
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
                 break;
 
