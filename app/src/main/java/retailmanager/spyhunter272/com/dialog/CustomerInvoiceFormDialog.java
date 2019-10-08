@@ -83,7 +83,7 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
 //      init view
         view.findViewById(R.id.btn_dialog_close).setOnClickListener(this);
         view.findViewById(R.id.btn_dialog_ok).setOnClickListener(this);
-        view.findViewById(R.id.ibtn_pic_contact).setOnClickListener(this::onClick);
+//        view.findViewById(R.id.ibtn_pic_contact).setOnClickListener(this::onClick);
 
     }
 
@@ -111,13 +111,13 @@ public class CustomerInvoiceFormDialog extends BottomSheetDialogFragment impleme
                 dismiss();
                 break;
 
-            case R.id.ibtn_pic_contact:
-                Uri uri = Uri.parse("content://contacts");
-                Intent intent = new Intent(Intent.ACTION_PICK, uri);
-                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-                startActivityForResult(intent, PICK_CONTACT);
-
-                break;
+//            case R.id.ibtn_pic_contact:
+//                Uri uri = Uri.parse("content://contacts");
+//                Intent intent = new Intent(Intent.ACTION_PICK, uri);
+//                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+//                startActivityForResult(intent, PICK_CONTACT);
+//
+//                break;
 
         }
     }
