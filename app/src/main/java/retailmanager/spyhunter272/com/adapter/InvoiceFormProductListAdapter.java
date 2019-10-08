@@ -1,6 +1,7 @@
 package retailmanager.spyhunter272.com.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,8 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         double total =  product.getIn_stock_qty()*product.getS_price();
         totalAmtProduct+=total;
         productListLiner.updateTotal(totalAmtProduct);
-        product.setTotal(Math.round(total));
+        product.setTotal(Math.round(total*100)/100D);
+//        Log.e("PRODUCT",total+" "+product.getIn_stock_qty()+" "+product.getS_price()+" "+(Math.round(total*100)/100D));
         proLists.add(product);
         notifyDataSetChanged();
         return true;
@@ -63,9 +65,9 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
 
                 double total = product.getIn_stock_qty()*product.getS_price();
                 totalAmtProduct+=total;
-
+//                Log.e("PRODUCT",total+" "+product.getIn_stock_qty()+" "+product.getS_price()+" "+(Math.round(total*100)/100D));
                 productListLiner.updateTotal(totalAmtProduct);
-                product.setTotal(Math.round(total));
+                product.setTotal(Math.round(total*100)/100D);
                 proLists.set(i,product);
                 notifyDataSetChanged();
             }

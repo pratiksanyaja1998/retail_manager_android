@@ -152,7 +152,7 @@ public class DefaultTemplate {
         for (int i=0;i<proLists.size();i++) {
             //body var
             String hsn = proLists.get(i).getHsn(),name= proLists.get(i).getName();
-            double price = Math.round(proLists.get(i).getPrice());
+            double price = proLists.get(i).getPrice();
 
             if(hsn==null)
                 hsn="";
@@ -183,8 +183,8 @@ public class DefaultTemplate {
 
         bf.append("<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td></tr>" +
                 gstrow+
-                "<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()))+" /-</td></tr>\n" +
-                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal())) +"</td></tr>\n" +
+                "<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">TOTAL</td><td>Rs. "+invoice.getTotal()+" /-</td></tr>\n" +
+                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(invoice.getTotal()) +"</td></tr>\n" +
                 "</table><br>");
 
         return bf.toString();

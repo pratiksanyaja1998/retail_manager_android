@@ -14,10 +14,13 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -38,7 +41,7 @@ import retailmanager.spyhunter272.com.databinding.DialogProductBinding;
 //https://stackoverflow.com/questions/44364240/android-room-get-the-id-of-new-inserted-row-with-auto-generate
 
 @SuppressLint("ValidFragment")
-public class ProductDialog extends BottomSheetDialogFragment implements View.OnClickListener {
+public class ProductDialog extends BottomSheetDialogFragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
     private static int BARCODE_ACT_REQ_CODE = 55;
 
@@ -101,6 +104,9 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
         dialog.findViewById(R.id.btn_dialog_ok).setOnClickListener(this);
 
         binding.tvProductBarcode.setOnClickListener(this::onClick);
+        binding.edProductName.setOnEditorActionListener(this);
+        binding.edSellPrice.setOnEditorActionListener(this::onEditorAction);
+        binding.edHsn.setOnEditorActionListener(this::onEditorAction);
 
         prodCateSpinnerBaseAdepter = new ProdCateSpinnerBaseAdepter();
         binding.spinnerProductCategory.setAdapter(prodCateSpinnerBaseAdepter);
@@ -168,31 +174,37 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
             break;
 
             case R.id.btn_dialog_ok:
-                product.setCategory( prodCateSpinnerBaseAdepter.productCategories.get(product.getCategory()).getId());
-
-                String error =product.isValied();
-                if(error!=null){
-                    Common.formErrorAnimation(getContext(),binding.getRoot(),error);
-                    return;
-
-                }
-
-
-                if (productDialogHolder.isUpdate() && product.checkValidation()) {
-
-                    productViewModel.update(product);
-
-                }else{
-
-                    productViewModel.insert(product);
-
-                }
-
-                dismiss();
+                saveUpdateProduct();
 
             break;
 
         }
+
+    }
+
+    private void saveUpdateProduct(){
+
+        product.setCategory( prodCateSpinnerBaseAdepter.productCategories.get(product.getCategory()).getId());
+
+        String error =product.isValied();
+        if(error!=null){
+            Common.formErrorAnimation(getContext(),binding.getRoot(),error);
+            return;
+
+        }
+
+
+        if (productDialogHolder.isUpdate() && product.checkValidation()) {
+
+            productViewModel.update(product);
+
+        }else{
+
+            productViewModel.insert(product);
+
+        }
+
+        dismiss();
 
     }
 
@@ -212,6 +224,18 @@ public class ProductDialog extends BottomSheetDialogFragment implements View.OnC
 
             }
 
+    }
+
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+        if(i== EditorInfo.IME_ACTION_DONE){
+            saveUpdateProduct();
+//            return true;
+
+        }
+
+        return false;
     }
 
 

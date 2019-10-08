@@ -133,11 +133,11 @@ public class InvoiceFromHolder extends BaseObservable {
 
     public void setTotalInvoice(double productTotalAmt) {
         this.productTotalAmt = productTotalAmt;
-        this.discountAmt = ((discount*productTotalAmt)/100);
-        this.gstAmt = ((gst*(productTotalAmt - discountAmt))/100);
-        this.totalInvoice = Math.round(productTotalAmt - discountAmt + gstAmt);
-        this.gstAmt = Math.round(gstAmt);
-        discountAmt = Math.round(discountAmt);
+        this.discountAmt = ((discount*productTotalAmt)/100D);
+        this.gstAmt = ((gst*(productTotalAmt - discountAmt))/100D);
+        this.totalInvoice = Math.round((productTotalAmt - discountAmt + gstAmt)*100)/100D;
+        this.gstAmt = Math.round(gstAmt*100)/100D;
+        discountAmt = Math.round(discountAmt*100)/100D;
         notifyChange();
     }
 
