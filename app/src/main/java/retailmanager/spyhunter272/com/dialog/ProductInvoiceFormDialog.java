@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -20,7 +21,7 @@ import retailmanager.spyhunter272.com.holder.ProductDialogHolder;
 import retailmanager.spyhunter272.com.room.table.Product;
 
 @SuppressLint("ValidFragment")
-public class ProductInvoiceFormDialog extends DialogFragment implements View.OnClickListener {
+public class ProductInvoiceFormDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
 
     private Product product;

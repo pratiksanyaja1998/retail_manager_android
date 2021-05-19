@@ -38,7 +38,7 @@ public class DefaultTemplate {
 
     public static String header(){
         //this block const
-       return  "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><meta charset=\"UTF-8\"><style type=\"text/css\" media=\"all\">\n" +
+        return  "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><meta charset=\"UTF-8\"><style type=\"text/css\" media=\"all\">\n" +
                 "    \ttd{padding: 5px;}table{width: 100%;}.bgcolor{background-color: #dbdde0 !important;}.tcenter{text-align: center;}\n" +
                 "    \tbody{-webkit-print-color-adjust:exact;}@page {size: auto;margin: 0; }.error{color: red;}.btnprint{margin: 10px;padding: 10px;}.border{border: 1px solid #a6a7a8;}.ucase {text-transform: uppercase;}</style>\n" +
                 "</head><body style=\"width:95%\">";
@@ -76,13 +76,14 @@ public class DefaultTemplate {
         return  "<table class=\"border bgcolor\">\n" +
                 "\t<tr><td width=\"70%\" align=\"center\"><span class=\"ucase\"><b><h1 style=\"margin-bottom:-10px \">"+retailName+"</h1></b></span><small><br>"+address+
                 ",&nbsp;"+city+",&nbsp;"+state+"&nbsp;-&nbsp;"+pincode+"<br>" +
-                 gstin +
+                gstin +
                 "</td></tr>\n" +
 
                 "</table>\n" +
                 "<table class=\"border\">\n" +
                 "\t<tr><td>Mobile Number : "+mobile+"</td><td align=\"right\">Invoice Date : "+invoice.getDd()+"-"+invoice.getMm()+"-"+invoice.getYyyy()+"</td></tr>\n" +
-                "\t<tr><td>Invoice Serial Number: "+prefix+invoice.getId()+"</td><td align=\"right\">Tax Is Payable On Reverse Charge: "+((invoice.isTprchage())?"Yes" : "No") +"</td></tr>\n" +
+                "\t<tr><td>Invoice Serial Number: "+prefix+invoice.getId()+"</td>"+
+                (invoice.isTprchage() ? "<td align=\"right\">Tax Is Payable On Reverse Charge: "+((invoice.isTprchage())?"Yes" : "No") +"</td>":"")+"</tr>\n" +
                 "</table><br>";
     }
 
@@ -132,7 +133,14 @@ public class DefaultTemplate {
         boolean isHsn = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("hsn",true);
         StringBuffer bf = new StringBuffer();
 
-        bf.append("<br><table class=\"border\"><tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td>");
+//        Customer customer = invoice.getCustomer();
+
+        if(invoice.getCustomer()!=null){
+//            return "";
+            bf.append("<br/>");
+        }
+
+        bf.append("<table class=\"border\"><tr class=\"bgcolor\"><td>S.No</td><td>Description of Goods</td>");
 
         if(isHsn)
             bf.append("<td>HSN Code</td>");
@@ -144,7 +152,7 @@ public class DefaultTemplate {
         for (int i=0;i<proLists.size();i++) {
             //body var
             String hsn = proLists.get(i).getHsn(),name= proLists.get(i).getName();
-            double price = Math.round(proLists.get(i).getPrice());
+            double price = proLists.get(i).getPrice();
 
             if(hsn==null)
                 hsn="";
@@ -157,7 +165,7 @@ public class DefaultTemplate {
             bf.append("<td>"+(proLists.get(i).getTotal())+"</td></tr>");
         }
 
-        double amt=(invoice.getDiscount()*invoice.getTotal())/100;
+        double amt=invoice.getTotal();
 
         String gstrow, gstLabel, colspan="5" ;
 
@@ -174,9 +182,9 @@ public class DefaultTemplate {
 
 
         bf.append("<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">DISSCOUNT(%)</td><td> "+invoice.getDiscount()+" %</td></tr>" +
-                 gstrow+
-                "<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">TOTAL</td><td>Rs. "+(Math.round(invoice.getTotal()))+" /-</td></tr>\n" +
-                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(Math.round(invoice.getTotal())) +"</td></tr>\n" +
+                gstrow+
+                "<tr class=\"bgcolor\"><td colspan=\""+colspan+"\">TOTAL</td><td>Rs. "+invoice.getTotal()+" /-</td></tr>\n" +
+                "<tr class=\"bgcolor\"><td colspan=\"2\">TOTAL(in words)</td><td colspan=\""+4+"\">"+NumberToWord.NTOW(invoice.getTotal()) +"</td></tr>\n" +
                 "</table><br>");
 
         return bf.toString();

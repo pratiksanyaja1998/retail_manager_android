@@ -27,6 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -54,11 +56,11 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginHorizontal="10dp"
         android:background="#ccc" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -193,7 +195,6 @@
         android:id="@+id/linear_qty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/components_margin_bottom"
         android:gravity="center"
         android:visibility="@{product.isProductList ? View.GONE : View.VISIBLE }"
         >
@@ -242,6 +243,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="7dp"
         android:orientation="horizontal">
 
         <Button

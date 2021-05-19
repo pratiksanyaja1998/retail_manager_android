@@ -1,6 +1,7 @@
 package retailmanager.spyhunter272.com.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import retailmanager.spyhunter272.com.room.table.Product;
 public class InvoiceFormProductListAdapter extends BaseAdapter {
 
     private List<Product> proLists = new ArrayList<>();
-    private float totalAmtProduct = 0;
+    private double totalAmtProduct = 0;
 
     private ProductListLiner productListLiner;
 
@@ -44,10 +45,11 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         }
 
         product.setIn_stock_qty(1);
-        float total = (float) (product.getIn_stock_qty()*product.getS_price());
+        double total =  product.getIn_stock_qty()*product.getS_price();
         totalAmtProduct+=total;
         productListLiner.updateTotal(totalAmtProduct);
-        product.setTotal(Math.round(total));
+        product.setTotal(Math.round(total*100)/100D);
+//        Log.e("PRODUCT",total+" "+product.getIn_stock_qty()+" "+product.getS_price()+" "+(Math.round(total*100)/100D));
         proLists.add(product);
         notifyDataSetChanged();
         return true;
@@ -61,11 +63,11 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
 
                 totalAmtProduct-=proLists.get(i).getTotal();
 
-                float total = (float) (product.getIn_stock_qty()*product.getS_price());
+                double total = product.getIn_stock_qty()*product.getS_price();
                 totalAmtProduct+=total;
-
+//                Log.e("PRODUCT",total+" "+product.getIn_stock_qty()+" "+product.getS_price()+" "+(Math.round(total*100)/100D));
                 productListLiner.updateTotal(totalAmtProduct);
-                product.setTotal(Math.round(total));
+                product.setTotal(Math.round(total*100)/100D);
                 proLists.set(i,product);
                 notifyDataSetChanged();
             }
@@ -109,8 +111,11 @@ public class InvoiceFormProductListAdapter extends BaseAdapter {
         binding.setProduct(proLists.get(i));
 
         binding.rowIbtnprodelete.setOnClickListener(v -> deleteProduct(i));
-
+        binding.rowBtnEdit.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
         binding.rowPname.setOnClickListener(v -> productListLiner.openProduct(proLists.get(i)));
+        binding.rowPqty.setOnClickListener(v->productListLiner.openProduct(proLists.get(i)));
+        binding.rowPamt.setOnClickListener(v->productListLiner.openProduct(proLists.get(i)));
+        binding.rowPtotal.setOnClickListener(v->productListLiner.openProduct(proLists.get(i)));
 
 
         return binding.getRoot();

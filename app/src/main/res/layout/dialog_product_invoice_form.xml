@@ -27,6 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -54,6 +56,7 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginHorizontal="10dp"
             android:background="#ccc" />
 
         <ScrollView
@@ -93,7 +96,6 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="@string/label_hsn_code"
-                    android:visibility="@{productDialogHolder.barcode ? View.VISIBLE : View.GONE }"
                     />
 
                 <TextView
@@ -104,7 +106,6 @@
                     android:background="@drawable/bg_edt_border"
                     android:ems="10"
                     android:layout_marginBottom="@dimen/components_margin_bottom"
-                    android:visibility="@{productDialogHolder.hsn ? View.VISIBLE : View.GONE }"
                     android:text="@={product.hsn}"
                     android:inputType="textCapCharacters"
                     android:padding="@dimen/ed_padding" />
@@ -142,7 +143,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/components_margin_bottom"
                     android:gravity="center"
                     >
 
@@ -194,6 +194,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="7dp"
             android:orientation="horizontal">
 
             <Button

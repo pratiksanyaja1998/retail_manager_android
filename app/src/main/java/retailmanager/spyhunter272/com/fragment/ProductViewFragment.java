@@ -302,18 +302,18 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
         public void onBindViewHolder(@NonNull VHolder vHolder, int i) {
             Product product = products.get(i);
 
-            if(product.getIn_stock_qty()<=0){
-                vHolder.qty.setBackgroundResource(R.drawable.oval_less_0);
-            }else if(product.getIn_stock_qty()<=5){
-                vHolder.qty.setBackgroundResource( R.drawable.oval_less_5);
-            }else {
-                vHolder.qty.setBackgroundResource(R.drawable.oval);
-            }
+//            if(product.getIn_stock_qty()<=0){
+//                vHolder.qty.setBackgroundResource(R.drawable.oval_less_0);
+//            }else if(product.getIn_stock_qty()<=5){
+//                vHolder.qty.setBackgroundResource( R.drawable.oval_less_5);
+//            }else {
+////                vHolder.qty.setBackgroundResource(R.drawable.oval);
+//            }
 
             vHolder.p_name.setText(product.getName());
             vHolder.hsn.setText(product.getHsn());
             vHolder.s_price.setText( "Price: "+product.getS_price());
-            vHolder.qty.setText(""+product.getIn_stock_qty());
+//            vHolder.qty.setText(""+product.getIn_stock_qty());
             vHolder.btnDelete.setOnClickListener(v -> deleteProduct(product));
 
             vHolder.btnEdit.setOnClickListener(v -> editProduct(product));
@@ -334,7 +334,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
         class VHolder extends RecyclerView.ViewHolder{
 
-            TextView p_name,hsn,s_price,qty;
+            TextView p_name,hsn,s_price;
             ImageButton btnEdit,btnDelete;
 
             public VHolder(@NonNull View itemView) {
@@ -342,7 +342,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
                 p_name  = itemView.findViewById(R.id.tv_product_name);
                 hsn = itemView.findViewById(R.id.tv_hsn);
                 s_price = itemView.findViewById(R.id.tv_s_price);
-                qty = itemView.findViewById(R.id.tv_qty);
+//                qty = itemView.findViewById(R.id.tv_qty);
                 btnEdit = itemView.findViewById(R.id.ibtn_edit);
                 btnDelete  =itemView.findViewById(R.id.ibtn_delete);
             }

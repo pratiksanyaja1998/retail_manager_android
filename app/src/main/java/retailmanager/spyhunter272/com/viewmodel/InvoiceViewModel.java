@@ -77,11 +77,11 @@ public class InvoiceViewModel extends AndroidViewModel {
 
         if(query!=null && !query.equals("")) {
             query = "%" + query + "%";
-            return invoiceProductDao.getInvoiceForList(limit,offset,mDay,mMonth,mYear,query);
+            return invoiceProductDao.getInvoiceForList(mDay,mMonth,mYear,query);
         }
 
 
-        return invoiceProductDao.getInvoiceForList(limit,offset,mDay,mMonth,mYear);
+        return invoiceProductDao.getInvoiceForList(mDay,mMonth,mYear);
 
 
     }

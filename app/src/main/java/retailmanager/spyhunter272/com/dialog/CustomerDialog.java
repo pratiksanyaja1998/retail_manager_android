@@ -36,7 +36,7 @@ import retailmanager.spyhunter272.com.viewmodel.CustomerViewModel;
 
 import retailmanager.spyhunter272.com.databinding.DialogCustomerBinding;
 
-public class CustomerDialog extends DialogFragment implements View.OnClickListener {
+public class CustomerDialog extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private SharedPreferences myPreference;
     private Customer customer;
@@ -94,7 +94,7 @@ public class CustomerDialog extends DialogFragment implements View.OnClickListen
 
         binding.btnDialogClose.setOnClickListener(this);
         binding.btnDialogOk.setOnClickListener(this);
-        binding.ibtnPicContact.setOnClickListener(this);
+//        binding.ibtnPicContact.setOnClickListener(this);
 
     }
 
@@ -132,13 +132,13 @@ public class CustomerDialog extends DialogFragment implements View.OnClickListen
                 dismiss();
                 break;
 
-            case R.id.ibtn_pic_contact:
-                Uri uri = Uri.parse("content://contacts");
-                Intent intent = new Intent(Intent.ACTION_PICK, uri);
-                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-                startActivityForResult(intent, PICK_CONTACT);
-
-                break;
+//            case R.id.ibtn_pic_contact:
+//                Uri uri = Uri.parse("content://contacts");
+//                Intent intent = new Intent(Intent.ACTION_PICK, uri);
+//                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+//                startActivityForResult(intent, PICK_CONTACT);
+//
+//                break;
 
         }
     }
